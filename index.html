@@ -1,0 +1,3014 @@
+<title>DetailScales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ============================================================
+   DetailScales, light identity.
+   Ground: spray-booth white, biased cool, not cream.
+   Ink: graphite. The one accent is chrome, a highlight
+   travelling across the type the way it travels across paint.
+   ============================================================ */
+:root{
+  /* Light Liquid Glass, cinematic lighting kept. Bright ground with
+     raking light across it, light translucent panels that catch that
+     light on their edges. Two moods: A is the lit feature glass,
+     B is the calm neutral frost for reading. */
+  --void:       #F4F6F9;
+  --void-2:     #FFFFFF;
+  --paper:      var(--void);
+  --paper-2:    #FFFFFF;
+  --paper-3:    #E9ECF1;
+  --ink:        #14161B;
+  --ink-2:      #52565E;
+  --ink-3:      #6B7079;
+
+  --blue:       #3F6BE0;
+  --blue-soft:  #7D9CF0;
+
+  --page-tx:    var(--ink);
+  --page-tx-2:  var(--ink-2);
+  --page-tx-3:  var(--ink-3);
+
+  --rule:       rgba(20,22,27,.18);
+  --spark:      #14161B;
+  --tx:         var(--page-tx);
+  --tx-2:       var(--page-tx-2);
+  --tx-3:       var(--page-tx-3);
+  --chrome:     #97A0AE;
+  --leak:       #B0492F;
+  --line:       rgba(20,22,27,.1);
+  --line-2:     rgba(20,22,27,.18);
+  --lift:       0 1px 2px rgba(20,22,27,.05), 0 16px 40px -14px rgba(20,22,27,.18);
+
+  /* MOOD B, the calm frost: neutral metallic grey, light frost */
+  --gloss:      linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,.06) 44%,rgba(255,255,255,0) 70%);
+  --frost:      var(--gloss), linear-gradient(180deg,rgba(255,255,255,.46),rgba(252,253,255,.34));
+  --frost-deep: var(--gloss), linear-gradient(180deg,rgba(255,255,255,.58),rgba(252,253,255,.46));
+  --frost-thin: var(--gloss), linear-gradient(180deg,rgba(255,255,255,.32),rgba(252,253,255,.22));
+
+  --glass:      var(--frost-deep);
+  --glass-clear:var(--frost);
+  --glass-soft: var(--frost);
+  --glass-thin: var(--frost-thin);
+  --glass-float:var(--frost);
+
+  --blur:       blur(28px) saturate(1.6) brightness(1.08);
+  --blur-clear: blur(28px) saturate(1.6) brightness(1.08);
+  --blur-float: blur(26px) saturate(1.6) brightness(1.08);
+  --blur-deep:  blur(32px) saturate(1.6) brightness(1.08);
+
+  --rim:        1px solid rgba(255,255,255,.75);
+  --rim-glow:   inset 0 1px 0 rgba(255,255,255,.95);
+  --glass-cast: inset 0 1px 0 rgba(255,255,255,.95),
+                inset 1px 0 0 rgba(255,255,255,.6),
+                0 1px 2px rgba(20,22,27,.05),
+                0 24px 54px -20px rgba(20,22,27,.22);
+
+  /* the single accent: chrome travelling across light type */
+  --sheen: linear-gradient(100deg,
+      var(--ink) 0%, var(--ink) 26%, #7B828F 40%,
+      #C2C9D4 50%, #7B828F 60%, var(--ink) 74%, var(--ink) 100%);
+  --sheen-ink: var(--sheen);
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gut: clamp(20px, 5vw, 64px);
+  --max: 1220px;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--tx);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* fine tooth so the flat white reads like a panel, not a screen */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+section{position:relative;z-index:1}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+h1{
+  font-size:clamp(2.55rem, 7vw, 5.4rem);
+  font-weight:800;font-stretch:112%;
+  line-height:.97;letter-spacing:-.035em;
+}
+h2{
+  font-size:clamp(1.95rem, 4.4vw, 3.4rem);
+  font-weight:800;font-stretch:108%;
+  line-height:1.03;letter-spacing:-.03em;
+}
+h3{font-size:1.3rem;font-weight:700;font-stretch:104%;letter-spacing:-.018em;line-height:1.22}
+p{margin:0}
+.lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:var(--tx-2);max-width:62ch;line-height:1.6}
+
+/* mono eyebrow, the spec-sheet voice */
+.eyebrow{
+  font-family:var(--mono);font-size:.68rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--tx-3);
+  display:flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--rule);flex:none}
+.eyebrow.solo::before{display:none}
+
+/* chrome highlight travelling across the word */
+.sheen{
+  background:var(--sheen);background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sweep 7s linear infinite;
+}
+@keyframes sweep{to{background-position:-280% 0}}
+
+/* ---------- brand lockups ----------
+   Source art is bone-on-black. invert() flips it to graphite-on-white,
+   contrast() drives the leftover glow to pure white, and multiply
+   drops that white so only the mark sits on the page.            */
+/* Pre-keyed to transparent ink at build time, no blend modes, which
+   break inside anything that sets backdrop-filter. Set --h, the width
+   follows the artwork's 2.6493 : 1 ratio.                            */
+.lockup{
+  --h:40px;
+  height:var(--h);width:calc(var(--h) * 2.6493);
+  background-image:url("assets/logo-wordmark.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:left center;
+  flex:none;
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--display);font-weight:700;font-stretch:104%;
+  font-size:.95rem;letter-spacing:-.01em;
+  padding:.92em 1.5em;border-radius:2px;
+  transition:transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.btn-primary{background:var(--ink);color:var(--paper-2);position:relative;overflow:hidden}
+.btn-primary::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);transition:left .5s ease;
+}
+.btn-primary:hover::after{left:120%}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--lift)}
+.btn-ghost{
+  color:var(--tx);border:var(--rim);
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--rim-glow);
+}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:var(--lift)}
+.btn-lg{font-size:1.02rem;padding:1.05em 1.9em}
+
+.proof{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;
+  color:var(--tx-3);text-transform:uppercase;line-height:1.7;
+}
+
+/* ---------- nav, floats above the page, does not sit on it ---------- */
+.nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+  padding-top:14px;padding-bottom:2px;
+}
+.nav-in{
+  display:flex;align-items:center;gap:1.5rem;
+  height:60px;padding-inline:10px 10px;
+  background:linear-gradient(140deg,rgba(255,255,255,.8),rgba(255,255,255,.52));
+  backdrop-filter:blur(22px) saturate(1.9);
+  -webkit-backdrop-filter:blur(22px) saturate(1.9);
+  border:1px solid rgba(255,255,255,.72);border-radius:999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(255,255,255,.4),
+    0 1px 2px rgba(20,22,26,.04);
+  transition:box-shadow .3s ease, background .3s ease, transform .3s ease;
+}
+.nav.is-stuck .nav-in{
+  background:linear-gradient(152deg,rgba(250,251,253,.76),rgba(244,245,248,.52));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(255,255,255,.45),
+    0 2px 6px rgba(20,22,26,.06),
+    0 20px 44px -24px rgba(20,22,26,.34);
+}
+.nav .lockup{margin-left:12px}
+.nav-links{display:flex;gap:1.9rem;margin-left:auto;font-size:.88rem;color:var(--tx-2)}
+.nav-links a{transition:color .16s ease}
+.nav-links a:hover{color:var(--tx)}
+.nav .btn{padding:.6em 1.3em;font-size:.85rem;border-radius:999px}
+@media(max-width:880px){.nav-links{display:none}.nav .btn{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{
+  padding-block:clamp(52px,8vw,96px) clamp(44px,6vw,76px);
+  overflow:hidden;position:relative;
+}
+.hero-in{position:relative;z-index:2}
+.hero h1{margin-block:1.3rem 1.4rem;max-width:19ch}
+.hero .lede{margin-bottom:2.3rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;margin-bottom:1.4rem}
+
+/* ambient layer, dust drifting in bay light, and two slow specular pools */
+.ambient{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.9}
+.orb-a{
+  width:min(620px,86vw);height:min(620px,86vw);top:-32%;right:-12%;
+  background:radial-gradient(circle,rgba(158,186,232,.3),transparent 68%);
+  animation:drift-a 26s ease-in-out infinite;
+}
+.orb-b{
+  width:min(460px,70vw);height:min(460px,70vw);bottom:-30%;left:-10%;
+  background:radial-gradient(circle,rgba(204,212,226,.38),transparent 68%);
+  animation:drift-b 32s ease-in-out infinite;
+}
+@keyframes drift-a{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-42px,32px) scale(1.09)}
+}
+@keyframes drift-b{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(38px,-28px) scale(1.12)}
+}
+.mote{
+  position:absolute;border-radius:50%;
+  background:var(--chrome);
+  animation:mote-drift var(--dur,9s) ease-in-out var(--delay,0s) infinite;
+}
+@keyframes mote-drift{
+  0%,100%{transform:translate(0,0) scale(1);opacity:.18}
+  25%{transform:translate(6px,-12px) scale(1.12);opacity:.4}
+  50%{transform:translate(-5px,-6px) scale(.9);opacity:.5}
+  75%{transform:translate(9px,-18px) scale(1.15);opacity:.26}
+}
+
+/* pipeline, light travelling down the path a job takes */
+.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:2.8rem}
+.pipe-step{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx-2);border:var(--rim);
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  padding:.55em .85em;border-radius:999px;
+  box-shadow:var(--rim-glow), 0 1px 2px rgba(20,22,26,.04);
+}
+.pipe-link{
+  position:relative;flex:none;width:30px;height:1px;
+  background:var(--rule);overflow:hidden;border-radius:1px;
+}
+.pipe-link::after{
+  content:"";position:absolute;top:0;left:0;width:14px;height:100%;
+  background:linear-gradient(90deg,transparent,var(--spark),transparent);
+  animation:travel 2.6s cubic-bezier(.5,0,.5,1) var(--delay,0s) infinite;
+}
+@keyframes travel{
+  0%{transform:translateX(-16px);opacity:0}
+  35%{opacity:1}
+  70%{opacity:1}
+  100%{transform:translateX(32px);opacity:0}
+}
+@media(max-width:560px){.pipe-link{width:18px}}
+
+/* ---------- section shell ---------- */
+.sec{padding-block:clamp(60px,7.5vw,104px);border-top:1px solid rgba(255,255,255,.1)}
+.sec-head{max-width:70ch;display:grid;gap:1.05rem;margin-bottom:clamp(34px,4.2vw,54px)}
+
+/* ---------- marquee strip ---------- */
+.strip{
+  border-block:1px solid var(--line);overflow:hidden;padding-block:17px;
+  background:var(--glass-thin);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--rim-glow);
+}
+.strip-track{display:flex;gap:3.2rem;width:max-content;animation:roll 36s linear infinite}
+.strip-item{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tx-3);white-space:nowrap;display:flex;align-items:center;gap:3.2rem;
+}
+.strip-item::after{content:"";width:4px;height:4px;background:var(--line-2);border-radius:50%;flex:none}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* ---------- the call wall ----------
+   The source art sits on black, so the panel is black too and the two
+   merge with no seam. It reads as a screen, which is what it is. */
+.callwall{
+  margin:0;position:relative;overflow:hidden;
+  padding:clamp(12px,1.8vw,22px);
+}
+.callwall img{width:100%;height:auto;display:block}
+.callwall-note{
+  margin-top:1.4rem;text-align:center;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tx-3);
+}
+
+/* ---------- calculator ---------- */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);align-items:start}
+@media(max-width:900px){.calc{grid-template-columns:1fr}}
+.panel{
+  padding:clamp(22px,3vw,34px);
+  position:relative;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);border-radius:22px;
+  box-shadow:var(--glass-cast);
+}
+.panel-title{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tx-3);padding-bottom:1.3rem;margin-bottom:1.6rem;border-bottom:1px solid var(--line);
+}
+.field{margin-bottom:1.9rem}
+.field:last-child{margin-bottom:0}
+.field-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.85rem}
+.field-label{font-size:.9rem;color:var(--tx-2)}
+.field-val{
+  font-family:var(--display);font-weight:700;font-stretch:108%;font-size:1.28rem;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:2px;
+  background:var(--line-2);border-radius:2px;outline-offset:6px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;
+  background:var(--ink);border:3px solid var(--paper-2);
+  box-shadow:0 0 0 1px var(--line-2), 0 2px 6px rgba(20,22,26,.2);cursor:grab;
+}
+input[type=range]::-moz-range-thumb{
+  width:16px;height:16px;border-radius:50%;background:var(--ink);
+  border:3px solid var(--paper-2);box-shadow:0 0 0 1px var(--line-2);cursor:grab;
+}
+.field-range{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.64rem;color:var(--tx-3);margin-top:.55rem}
+.assume{font-family:var(--mono);font-size:.66rem;line-height:1.75;color:var(--tx-3);margin-top:1.9rem;padding-top:1.3rem;border-top:1px solid var(--line)}
+
+.results{
+  display:grid;border-radius:22px;overflow:hidden;position:relative;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);
+  box-shadow:var(--glass-cast);
+}
+.res{
+  background:transparent;border-bottom:1px solid var(--line);
+  padding:clamp(18px,2.4vw,26px) clamp(20px,2.6vw,30px);
+}
+.res:last-child{border-bottom:0}
+.res-label{font-family:var(--mono);font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+.res-num{
+  font-family:var(--display);font-weight:800;font-stretch:110%;
+  font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.1;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;margin-top:.35rem;
+}
+.res-note{font-size:.85rem;color:var(--tx-2);margin-top:.3rem}
+.res.leak{background:rgba(226,231,236,.55)}
+.res.leak .res-num{color:var(--leak)}
+/* the one dark block on the page, it earns it */
+.res.total{background:var(--ink);color:var(--paper-2)}
+.res.total .res-label{color:rgba(245,247,248,.6)}
+.res.total .res-note{color:rgba(245,247,248,.75)}
+.res.total .res-num{color:var(--paper-2)}
+
+/* ---------- glass ----------
+   Needs something behind it to be worth anything, so every glass
+   panel sits over an ambient field. Rim highlight on the top edge,
+   saturation lift through the blur, and one slow specular pass.   */
+.glass{
+  position:relative;overflow:hidden;
+  background:linear-gradient(140deg,rgba(255,255,255,.78),rgba(255,255,255,.42));
+  backdrop-filter:blur(28px) saturate(1.9);
+  -webkit-backdrop-filter:blur(28px) saturate(1.9);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:24px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(255,255,255,.45),
+    0 2px 6px rgba(20,22,26,.05),
+    0 34px 64px -30px rgba(20,22,26,.32);
+}
+.glass::before{
+  content:"";position:absolute;top:-60%;height:220%;width:42%;left:-45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);
+  transform:rotate(14deg);pointer-events:none;
+  animation:glass-sweep 11s ease-in-out infinite;
+}
+@keyframes glass-sweep{
+  0%{left:-45%;opacity:0}
+  14%{opacity:1}
+  56%{opacity:1}
+  72%,100%{left:118%;opacity:0}
+}
+
+/* the working variant, more opaque, so long copy stays crisp on it */
+.glass-card{
+  position:relative;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);
+  border-radius:22px;
+  box-shadow:var(--glass-cast);
+}
+
+/* one colour field behind the entire page, so every panel has
+   something to refract no matter where it sits */
+/* Out of focus colour blooms on a near white ground. Cool silver, a
+   faint blue, a whisper of warm chrome. They are deliberately soft:
+   the frost reads them as shifting colour rather than as shapes. */
+.page-ambient{
+  position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  background:
+    radial-gradient(130% 85% at 50% -12%,#FFFFFF 0%,transparent 62%),
+    linear-gradient(180deg,var(--void-2) 0%,var(--void) 52%,#EDF0F5 100%);
+}
+.page-ambient .orb{opacity:1}
+
+/* Raking light across a bright surface. On a light ground the light is
+   read through the shade it casts, so pass A lays soft cool shadow
+   bands and pass B lays the bright highlight between them. */
+/* ---- the detail the frost eats ----
+   A 28px blur annihilates anything finer than about 30px, so the ground
+   carries real high frequency structure: brushed hairlines at 7px and a
+   measured grid at 88px. Crisp on the open page, completely dissolved
+   under every panel. That difference IS the glass. */
+.weave{
+  position:absolute;inset:-25%;pointer-events:none;
+  background:
+    repeating-linear-gradient(64deg,rgba(20,22,27,.055) 0 1px,transparent 1px 7px),
+    repeating-linear-gradient(64deg,rgba(20,22,27,.035) 0 1px,transparent 1px 23px);
+  mask-image:radial-gradient(125% 105% at 50% 22%,#000 38%,rgba(0,0,0,.55) 74%,rgba(0,0,0,.2) 100%);
+  -webkit-mask-image:radial-gradient(125% 105% at 50% 22%,#000 38%,rgba(0,0,0,.55) 74%,rgba(0,0,0,.2) 100%);
+}
+.grid{
+  position:absolute;inset:-25%;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,rgba(20,22,27,.05) 0 1px,transparent 1px 88px),
+    repeating-linear-gradient(90deg,rgba(20,22,27,.05) 0 1px,transparent 1px 88px),
+    repeating-linear-gradient(0deg,rgba(20,22,27,.022) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(20,22,27,.022) 0 1px,transparent 1px 22px);
+  mask-image:radial-gradient(115% 95% at 50% 28%,#000 30%,rgba(0,0,0,.4) 72%,transparent 100%);
+  -webkit-mask-image:radial-gradient(115% 95% at 50% 28%,#000 30%,rgba(0,0,0,.4) 72%,transparent 100%);
+}
+
+/* These streaks stay CRISP on purpose. Frost is only visible where it
+   destroys detail, so if the light is already blurred before the glass
+   sees it the backdrop-filter has nothing left to do. Sharp outside the
+   panel, soft inside: that transition at the edge is the whole effect. */
+.rake{position:absolute;inset:-25%;pointer-events:none}
+.rake-a{
+  background:repeating-linear-gradient(64deg,
+    transparent 0 86px,
+    rgba(104,128,170,.22) 86px 103px,
+    transparent 103px 126px,
+    rgba(104,128,170,.11) 126px 135px,
+    transparent 135px 250px);
+  filter:blur(1.5px);
+  animation:rake-drift 42s ease-in-out infinite;
+}
+.rake-b{
+  background:repeating-linear-gradient(58deg,
+    transparent 0 196px,
+    rgba(255,255,255,.95) 196px 222px,
+    transparent 222px 430px);
+  filter:blur(2px);
+  animation:rake-drift 64s ease-in-out infinite reverse;
+}
+/* one soft pass underneath for glow, this one may stay blurred */
+.rake-c{
+  background:repeating-linear-gradient(64deg,
+    transparent 0 150px,
+    rgba(150,178,228,.16) 150px 180px,
+    transparent 180px 360px);
+  filter:blur(40px);
+  animation:rake-drift 52s ease-in-out infinite;
+}
+@keyframes rake-drift{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(5%,-4%,0)}
+}
+/* the hero and founder keep their own pools, which scroll, so they
+   sit lighter than the fixed field they layer over */
+.hero .orb,.founder .orb{opacity:.55}
+.orb-p1{
+  width:min(820px,94vw);height:min(820px,94vw);top:-22%;left:-14%;
+  background:radial-gradient(circle,rgba(150,180,235,.42),rgba(186,205,240,.14) 44%,transparent 70%);
+  animation:drift-a 38s ease-in-out infinite;
+}
+.orb-p2{
+  width:min(700px,88vw);height:min(700px,88vw);top:32%;right:-18%;
+  background:radial-gradient(circle,rgba(196,206,222,.5),transparent 68%);
+  animation:drift-b 46s ease-in-out infinite;
+}
+.orb-p3{
+  width:min(640px,82vw);height:min(640px,82vw);bottom:-16%;left:14%;
+  background:radial-gradient(circle,rgba(214,208,198,.34),transparent 68%);
+  animation:drift-b 34s ease-in-out infinite;
+}
+/* the cold specular core */
+.orb-p4{
+  width:min(760px,92vw);height:min(460px,52vh);top:-6%;left:30%;
+  background:radial-gradient(circle,rgba(255,255,255,.9),rgba(226,236,252,.3) 44%,transparent 72%);
+  animation:drift-a 30s ease-in-out infinite;
+  filter:blur(90px);
+}
+
+/* ---------- founder letter ---------- */
+.founder{position:relative;overflow:hidden}
+.orb-c{
+  width:min(560px,80vw);height:min(560px,80vw);top:6%;left:-14%;
+  background:radial-gradient(circle,rgba(220,214,204,.3),transparent 66%);
+  animation:drift-b 30s ease-in-out infinite;
+}
+.orb-d{
+  width:min(520px,76vw);height:min(520px,76vw);bottom:-16%;right:-12%;
+  background:radial-gradient(circle,rgba(176,196,230,.26),transparent 66%);
+  animation:drift-a 24s ease-in-out infinite;
+}
+
+.founder > .wrap{position:relative;z-index:2}
+.letter-card{padding:clamp(26px,4.2vw,56px)}
+.letter-body{
+  display:grid;gap:1.15rem;max-width:64ch;margin-inline:auto;
+  font-size:1.03rem;color:var(--tx-2);position:relative;z-index:1;
+}
+.letter-body strong{color:var(--tx);font-weight:600}
+
+/* the line that carries the turn gets set in ink */
+.mark{
+  background:var(--ink);color:var(--paper-2);
+  padding:.14em .42em;border-radius:3px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  font-weight:600;
+}
+
+.burn{display:grid;gap:.55rem;margin-block:.5rem;padding-left:0;list-style:none}
+.burn li{display:flex;gap:.8rem;align-items:flex-start;font-size:.97rem}
+.burn li::before{content:"\00D7";font-family:var(--mono);color:var(--leak);line-height:1.6;flex:none}
+.need li::before{content:"\2192";color:var(--tx)}
+
+.letter-cta{
+  display:grid;justify-items:center;gap:.9rem;text-align:center;
+  margin-top:2.8rem;padding-top:2.4rem;border-top:1px solid var(--line);
+}
+.sign{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:.6rem 1.8rem;
+  margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line);
+}
+.sign-name{
+  font-family:var(--display);font-weight:800;font-stretch:108%;
+  font-size:clamp(1.3rem,2.4vw,1.7rem);letter-spacing:-.03em;color:var(--tx);
+}
+.sign-role{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--tx-3);line-height:1.9;
+}
+.ps{
+  margin-top:1.8rem;padding:1.15rem 1.35rem;border-radius:20px;
+  border:1px solid rgba(255,255,255,.6);
+  background:var(--frost-thin);
+  backdrop-filter:blur(16px) saturate(1.45);
+  -webkit-backdrop-filter:blur(12px) saturate(1.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  font-size:.95rem;color:var(--tx-2);
+}
+.ps strong{color:var(--tx)}
+
+/* ---------- video testimonials ----------
+   Poster is brand-drawn, not a YouTube thumbnail, so the card looks
+   right before anything loads. The real thumbnail sits underneath and
+   shows through when it is available. Nothing loads from YouTube until
+   someone presses play.                                              */
+/* ---------- the loop diagram ----------
+   The five cards below are the detail. This is the shape of the thing
+   at a glance: existing demand feeds the response layer, the job
+   produces a review and a referral, and that lands back at the start.
+   Ads inject new people into a loop that already closes. */
+.flow{
+  padding:clamp(20px,3vw,32px) clamp(20px,3vw,34px);
+  border-radius:26px;
+  margin-bottom:clamp(22px,3.2vw,38px);
+  display:grid;gap:clamp(14px,2vw,20px);
+}
+.flow-title{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--tx-3);
+}
+/* Ring plus key. The ring stays compact so it renders at every width
+   rather than being swapped out for a list on small screens, which is
+   where most people will see it. */
+.flow-grid{
+  display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);
+  gap:clamp(18px,3vw,38px);align-items:center;
+}
+@media(max-width:700px){
+  .flow-grid{grid-template-columns:1fr;gap:20px}
+  .flow-ring{max-width:300px}
+}
+.flow-ring{width:100%;height:auto;display:block;margin-inline:auto;overflow:visible}
+/* The marker is a pseudo element rather than a grid column. A bare
+   text node beside an element inside a grid becomes its own anonymous
+   grid item, which blows the first column out to full width and throws
+   every label to the far edge. */
+.flow-key{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.flow-key li{
+  position:relative;padding-left:1.55rem;
+  font-size:.93rem;line-height:1.55;color:var(--tx-2);
+}
+.flow-key li::before{
+  content:"";position:absolute;left:0;top:.52em;
+  width:9px;height:9px;border-radius:50%;background:var(--tx);
+  box-shadow:0 0 0 4px rgba(20,22,27,.09);
+}
+.flow-key b{color:var(--tx);font-weight:600;margin-right:.3rem}
+
+.flow-node rect{
+  fill:rgba(255,255,255,.62);
+  stroke:rgba(20,22,27,.14);
+  stroke-width:1;
+}
+.flow-n{
+  font-family:var(--display);font-weight:700;font-size:16px;
+  letter-spacing:-.01em;fill:var(--tx);
+}
+.flow-s{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;fill:var(--tx-3);
+}
+.flow-ring .mid{text-anchor:middle}
+.flow-ring .end{text-anchor:end}
+.flow-core-k{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;fill:var(--tx-3);
+}
+.flow-core-v{
+  font-family:var(--display);font-weight:800;font-size:19px;
+  letter-spacing:-.02em;fill:var(--tx);
+}
+
+/* the stations on the ring */
+.flow-dot circle{fill:var(--tx)}
+.flow-dot .flow-halo{fill:rgba(20,22,27,.09)}
+
+.flow-note{
+  font-size:.92rem;color:var(--tx-2);line-height:1.55;max-width:74ch;
+  padding-top:.2rem;
+}
+
+/* one at a time, stepped through. The stage keeps a fixed height so
+   the page does not jump between a portrait clip and a landscape one;
+   each poster scales to fit inside it and stays centred. */
+.reel{display:grid;gap:clamp(14px,2vw,20px)}
+.reel-stage{
+  position:relative;
+  height:clamp(380px,56vh,620px);
+  border-radius:30px;overflow:hidden;
+  display:grid;place-items:center;
+  padding:clamp(14px,2vw,24px);
+}
+.reel-slide{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  padding:inherit;
+  opacity:0;visibility:hidden;transform:scale(.97);
+  transition:opacity .38s ease,transform .5s cubic-bezier(.22,.7,.3,1),visibility 0s .4s;
+}
+.reel-slide.is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.reel-media{
+  position:relative;display:block;
+  max-width:100%;max-height:100%;
+  border-radius:18px;overflow:hidden;
+  background:#0C0E13;
+  box-shadow:0 1px 2px rgba(20,22,27,.16),0 22px 48px -18px rgba(20,22,27,.42);
+}
+/* In the reel the poster is the element that gives the box its size,
+   so it has to stay in flow. It was absolutely positioned for the old
+   card layout, which collapsed the media box to nothing. */
+.reel-media .vid-poster{
+  position:static;inset:auto;z-index:auto;opacity:1;
+  width:auto;height:auto;object-fit:contain;
+}
+.reel-media img{
+  display:block;width:auto;height:auto;
+  max-width:100%;max-height:calc(clamp(380px,56vh,620px) - clamp(28px,4vw,48px));
+}
+/* a real frame is showing now, so the overlay is just a scrim for the
+   text rather than a drawn poster of its own */
+.reel-media .vid-play{
+  background:linear-gradient(180deg,rgba(8,10,14,0) 38%,rgba(8,10,14,.55) 72%,rgba(8,10,14,.88) 100%);
+}
+.reel-media wistia-player{display:block;width:100%;height:100%}
+.reel-warn{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  margin:0;padding:.7rem 1rem;text-align:center;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:#FFFFFF;background:rgba(8,10,14,.8);
+}
+.reel-media .vid-play{position:absolute;inset:0;width:100%;height:100%}
+
+.reel-context{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:clamp(16px,2.6vw,32px);
+  padding:clamp(18px,2.6vw,26px) clamp(20px,2.8vw,30px);
+  border-radius:22px;
+}
+.reel-context[hidden]{display:none}
+.reel-ctx-col[hidden]{display:none}
+.reel-ctx-body{font-size:.96rem;color:var(--tx-2);line-height:1.55;max-width:52ch}
+.reel-trade{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tx-3);
+}
+
+.reel-bar{
+  display:flex;align-items:center;gap:clamp(10px,2vw,18px);
+  flex-wrap:wrap;
+}
+.reel-meta{display:grid;gap:.1rem;margin-right:auto;min-width:0}
+.reel-name{font-family:var(--display);font-weight:700;font-stretch:104%;font-size:1rem}
+.reel-role{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--tx-3);
+}
+.reel-nav{
+  display:inline-flex;align-items:center;gap:.5rem;flex:none;
+  min-height:44px;padding:.6em 1.1em;border-radius:999px;
+  font-family:var(--display);font-weight:700;font-stretch:104%;font-size:.88rem;
+  background:var(--frost-deep);border:var(--rim);color:var(--tx);
+  backdrop-filter:var(--blur-float);-webkit-backdrop-filter:var(--blur-float);
+  box-shadow:var(--float-edge);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1),box-shadow .24s ease,opacity .24s ease;
+}
+.reel-nav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.reel-nav:hover{transform:translateY(-2px)}
+.reel-nav.next{background:linear-gradient(180deg,#2B2E36,#14161B);color:#FFFFFF;border-color:rgba(255,255,255,.1)}
+.reel-nav[disabled]{opacity:.35;pointer-events:none}
+.reel-out{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--tx-3);white-space:nowrap;flex:none;
+  border-bottom:1px solid var(--rule);padding-bottom:1px;
+  transition:color .16s ease,border-color .16s ease;
+}
+.reel-out:hover{color:var(--tx);border-color:var(--tx)}
+.reel-dots{display:flex;gap:.45rem;flex:none}
+.reel-dot{
+  width:8px;height:8px;border-radius:50%;padding:0;
+  background:rgba(20,22,27,.2);border:0;cursor:pointer;
+  transition:background .24s ease,transform .24s ease;
+}
+.reel-dot.is-on{background:var(--ink);transform:scale(1.25)}
+@media(max-width:620px){
+  .reel-stage{height:clamp(340px,62vh,520px)}
+  .reel-media img{max-height:calc(clamp(340px,62vh,520px) - clamp(28px,4vw,48px))}
+  .reel-media .vid-play{padding:clamp(14px,4vw,18px)}
+  .reel-meta{order:3;width:100%;margin-right:0}
+  .reel-nav.next span{display:inline}
+}
+
+.vid{display:grid;gap:.95rem}
+.vid-frame{
+  position:relative;aspect-ratio:9/16;max-width:100%;
+  border-radius:14px;overflow:hidden;
+  background:var(--ink);border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(20,22,26,.05);
+  transition:box-shadow .32s ease;
+}
+.vid.wide .vid-frame{aspect-ratio:16/9}
+.vid:hover .vid-frame{box-shadow:var(--lift)}
+.vid-frame iframe,.vid-frame wistia-player{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+
+.vid-play{
+  position:absolute;inset:0;width:100%;height:100%;padding:0;
+  display:grid;align-content:end;justify-items:start;gap:.5rem;
+  text-align:left;cursor:pointer;
+  background:
+    linear-gradient(180deg,rgba(20,22,26,.25) 0%,rgba(20,22,26,.86) 74%),
+    radial-gradient(120% 90% at 70% 8%,rgba(120,128,140,.4),transparent 62%),
+    var(--ink);
+  padding:clamp(16px,2.2vw,22px);
+}
+.vid-poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:-1;opacity:.85;
+}
+.vid-claim{
+  font-family:var(--display);font-weight:800;font-stretch:108%;
+  font-size:clamp(1.05rem,1.9vw,1.4rem);letter-spacing:-.028em;line-height:1.15;
+  color:var(--paper-2);max-width:18ch;
+}
+.vid-cue i{font-style:normal;opacity:.75;margin-left:.15em}
+.vid-cue{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(245,247,248,.72);display:flex;align-items:center;gap:.55rem;
+}
+.vid-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(140deg,rgba(255,255,255,.96),rgba(255,255,255,.78));
+  backdrop-filter:var(--blur-deep);
+  -webkit-backdrop-filter:var(--blur-deep);
+  border:1px solid rgba(255,255,255,.9);
+  display:grid;place-items:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1), 0 6px 24px -6px rgba(20,22,26,.55);
+  transition:transform .28s cubic-bezier(.2,.7,.3,1);
+}
+.vid-btn::before{ /* light spreading off the button, like a ring on paint */
+  content:"";position:absolute;inset:-1px;border-radius:50%;
+  border:1px solid rgba(245,247,248,.55);
+  animation:ring 3s ease-out infinite;
+}
+@keyframes ring{
+  0%{transform:scale(1);opacity:.6}
+  70%{transform:scale(1.65);opacity:0}
+  100%{transform:scale(1.65);opacity:0}
+}
+.vid-btn svg{width:20px;height:20px;fill:var(--ink);margin-left:3px}
+.vid-play:hover .vid-btn{transform:translate(-50%,-50%) scale(1.09)}
+.vid-play:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.vid-by{display:flex;gap:1rem;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.vid-name{font-family:var(--display);font-weight:700;font-stretch:104%;font-size:1rem}
+.vid-role{font-family:var(--mono);font-size:.65rem;letter-spacing:.11em;text-transform:uppercase;color:var(--tx-3)}
+.vid-out{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--tx-3);white-space:nowrap;border-bottom:1px solid var(--rule);
+  padding-bottom:1px;transition:color .16s ease, border-color .16s ease;
+}
+.vid-out:hover{color:var(--tx);border-color:var(--ink)}
+
+/* ---------- testimonials ---------- */
+.quotes-label{
+  font-family:var(--mono);font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--tx-3);margin:clamp(30px,4vw,46px) 0 1.2rem;
+}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:clamp(14px,1.8vw,20px)}
+.quote{
+  padding:clamp(22px,2.8vw,30px);display:grid;gap:1.3rem;align-content:start;
+  position:relative;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);border-radius:22px;
+  box-shadow:var(--glass-cast);
+}
+.quote-text{font-size:1.04rem;line-height:1.5;letter-spacing:-.012em}
+.quote-by{display:grid;gap:.15rem;margin-top:auto}
+.quote-name{font-family:var(--display);font-weight:700;font-stretch:104%;font-size:.98rem}
+.quote-role{font-family:var(--mono);font-size:.65rem;letter-spacing:.11em;text-transform:uppercase;color:var(--tx-3)}
+
+/* ---------- the system, one card per stage, wired together ---------- */
+.steps{display:grid}
+
+.step{
+  position:relative;overflow:hidden;border-radius:24px;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);
+  box-shadow:var(--glass-cast);
+  transition:box-shadow .32s ease, transform .32s ease;
+}
+.step:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 2px 6px rgba(20,22,26,.05),
+    0 30px 58px -26px rgba(20,22,26,.34);
+}
+
+/* header band, this is your system talking, so it wears the ink */
+.step-head{
+  background:var(--ink);color:var(--paper-2);
+  padding:clamp(18px,2.4vw,24px) clamp(18px,2.6vw,28px);
+  display:flex;align-items:center;gap:1.1rem;position:relative;overflow:hidden;
+}
+.step-head::after{ /* a highlight sitting on the band, like light on a wet panel */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,transparent 42%,rgba(255,255,255,.07) 50%,transparent 58%);
+}
+.step-icon{
+  flex:none;width:46px;height:46px;border-radius:12px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);
+  display:grid;place-items:center;color:var(--paper-2);
+}
+.step-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.step-no{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,247,248,.55);margin-bottom:.2rem;
+}
+.step-head h3{color:var(--paper-2);font-size:clamp(1.15rem,2vw,1.42rem)}
+.step-sub{font-size:.9rem;color:rgba(245,247,248,.68);margin-top:.15rem}
+
+.step-body{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(20px,3vw,40px);
+  padding:clamp(20px,2.8vw,30px) clamp(18px,2.6vw,28px);
+}
+@media(max-width:760px){.step-body{grid-template-columns:1fr;gap:26px}}
+.col-label{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--tx-3);padding-bottom:.8rem;margin-bottom:1rem;border-bottom:1px solid var(--line);
+}
+.step-list{list-style:none;padding:0;margin:0;display:grid;gap:.65rem}
+.step-list li{display:flex;gap:.75rem;font-size:.92rem;color:var(--tx-2);line-height:1.55}
+.step-list li::before{
+  content:"\2713";font-family:var(--mono);font-size:.78rem;
+  color:var(--tx);flex:none;line-height:1.7;
+}
+
+/* the mock, what the thing actually looks like when it fires */
+.mock{display:grid;gap:.7rem}
+.bubble-from{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3);
+}
+.bubble{
+  background:var(--ink);color:var(--paper-2);
+  padding:.85rem 1rem;border-radius:14px 14px 14px 4px;
+  font-size:.89rem;line-height:1.5;
+}
+.bubble.them{
+  background:var(--glass-soft);color:var(--tx);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);box-shadow:var(--rim-glow);
+  border-radius:14px 14px 4px 14px;
+}
+.rows{display:grid;gap:0;margin:0}
+.rows div{
+  display:flex;gap:1rem;justify-content:space-between;align-items:baseline;
+  padding-block:.62rem;border-bottom:1px solid var(--line);
+}
+.rows div:first-child{padding-top:0}
+.rows div:last-child{border-bottom:0;padding-bottom:0}
+.rows dt{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tx-3);flex:none;
+}
+.rows dd{margin:0;font-size:.88rem;color:var(--tx);text-align:right}
+
+/* the joint between two stages, same travelling light as the hero pipeline */
+.join{position:relative;height:56px;display:grid;place-items:center}
+.join::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;margin-left:-.5px;
+  background:var(--rule);
+}
+.join::after{
+  content:"";position:absolute;left:50%;margin-left:-1.5px;width:3px;height:16px;border-radius:2px;
+  background:linear-gradient(180deg,transparent,var(--spark),transparent);
+  animation:fall 3s cubic-bezier(.5,0,.5,1) var(--delay,0s) infinite;
+}
+@keyframes fall{
+  0%{top:-16px;opacity:0}
+  25%{opacity:.55}
+  75%{opacity:.55}
+  100%{top:56px;opacity:0}
+}
+.join-dot{
+  position:relative;z-index:2;width:30px;height:30px;border-radius:50%;
+  background:var(--glass);border:var(--rim);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  display:grid;place-items:center;color:var(--tx-2);font-size:.75rem;
+  box-shadow:var(--rim-glow), 0 1px 3px rgba(20,22,26,.07);
+}
+
+.loop{
+  margin-top:2.4rem;padding:1.5rem clamp(1.5rem,2.4vw,2rem);border-radius:24px;
+  display:flex;flex-wrap:wrap;gap:.9rem 1.4rem;align-items:center;justify-content:space-between;
+  position:relative;
+  background:linear-gradient(140deg,rgba(255,255,255,.72),rgba(255,255,255,.4));
+  backdrop-filter:blur(18px) saturate(1.7);
+  -webkit-backdrop-filter:blur(18px) saturate(1.7);
+  border:1px dashed rgba(20,22,26,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.loop-text{font-family:var(--display);font-weight:700;font-stretch:106%;font-size:1.05rem;letter-spacing:-.02em}
+.loop-note{font-family:var(--mono);font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
+
+/* ---------- comparison ---------- */
+.table-scroll{
+  overflow-x:auto;border-radius:24px;position:relative;
+  padding:clamp(8px,1.2vw,14px) clamp(12px,1.8vw,22px);
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);
+  box-shadow:var(--glass-cast);
+}
+.cmp{width:100%;border-collapse:collapse;min-width:580px}
+.cmp th,.cmp td{text-align:left;padding:1.05rem 1.2rem;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp thead th{
+  font-family:var(--mono);font-size:.67rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--tx-3);font-weight:500;padding-bottom:.9rem;
+}
+.cmp tbody th{font-family:var(--body);font-size:.92rem;font-weight:500;color:var(--tx-2);width:22%}
+.cmp td{font-size:.95rem;color:var(--tx-3)}
+.cmp .col-us{background:rgba(250,251,253,.48);color:var(--tx);font-weight:500;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.cmp thead .col-us{color:var(--tx);background:rgba(250,251,253,.48)}
+.cmp tbody tr:last-child td,.cmp tbody tr:last-child th{border-bottom:0}
+.cmp-line{
+  margin-top:2.2rem;font-family:var(--display);font-weight:700;font-stretch:106%;
+  font-size:clamp(1.1rem,2.1vw,1.5rem);letter-spacing:-.025em;line-height:1.35;max-width:46ch;
+}
+
+/* ---------- process ---------- */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(14px,1.8vw,20px)}
+.phase{
+  padding:clamp(22px,2.8vw,30px);display:grid;gap:.9rem;align-content:start;
+  position:relative;
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);border-radius:22px;
+  box-shadow:var(--glass-cast);
+}
+.phase-idx{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--tx-3)}
+.phase p{font-size:.93rem;color:var(--tx-2)}
+.phase-when{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);margin-top:.3rem}
+
+/* ---------- investment ---------- */
+.invest{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(22px,3vw,44px);align-items:start}
+@media(max-width:900px){.invest{grid-template-columns:1fr}}
+.factors{list-style:none;padding:0;margin:1.4rem 0 0;display:grid;gap:.7rem}
+.factors li{display:flex;gap:.8rem;font-size:.97rem;color:var(--tx-2)}
+.factors li::before{content:"\2192";color:var(--tx-3);flex:none}
+
+/* ---------- faq ---------- */
+.faq{
+  border-radius:24px;position:relative;
+  padding-inline:clamp(18px,2.6vw,30px);
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  border:var(--rim);
+  box-shadow:var(--glass-cast);
+}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{
+  list-style:none;cursor:pointer;padding-block:1.3rem;
+  display:flex;gap:1.5rem;align-items:baseline;justify-content:space-between;
+  font-family:var(--display);font-weight:600;font-stretch:104%;
+  font-size:clamp(1rem,1.7vw,1.15rem);letter-spacing:-.018em;transition:color .16s ease;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--tx-2)}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--tx-3);font-size:1.05rem;flex:none;transition:transform .2s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq-a{padding-bottom:1.5rem;max-width:66ch;color:var(--tx-2);font-size:.98rem}
+
+/* ---------- final cta ---------- */
+.final{
+  position:relative;overflow:hidden;text-align:center;
+  padding-block:clamp(56px,7vw,96px);border-top:1px solid rgba(255,255,255,.1);
+}
+.final-in{
+  position:relative;display:grid;gap:1.6rem;justify-items:center;
+  padding:clamp(34px,5vw,64px) clamp(22px,4vw,56px);
+  border-radius:26px;overflow:hidden;
+  background:linear-gradient(140deg,rgba(255,255,255,.78),rgba(255,255,255,.42));
+  backdrop-filter:blur(28px) saturate(1.9);
+  -webkit-backdrop-filter:blur(28px) saturate(1.9);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(255,255,255,.45),
+    0 2px 6px rgba(20,22,26,.05),
+    0 34px 64px -30px rgba(20,22,26,.32);
+}
+.final-in::before{
+  content:"";position:absolute;top:-60%;height:220%;width:42%;left:-45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);
+  transform:rotate(14deg);pointer-events:none;
+  animation:glass-sweep 13s ease-in-out infinite;
+}
+.final-in > *{position:relative;z-index:1}
+.final h2{max-width:18ch}
+.final .lede{margin-inline:auto}
+.final-cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:.6rem}
+
+/* the booking calendar, loaded only when someone reaches it */
+.booker{width:100%;max-width:860px;margin-inline:auto;display:grid;gap:.9rem}
+.booker-frame{
+  min-width:320px;width:100%;height:700px;
+  border-radius:20px;overflow:hidden;background:#FFFFFF;
+  border:1px solid rgba(20,22,27,.1);
+  box-shadow:var(--float-edge);
+}
+.booker-fallback{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tx-3);text-align:center;
+}
+.booker-fallback a{text-decoration:underline;color:var(--tx)}
+@media(max-width:720px){.booker-frame{height:1040px;border-radius:16px}}
+.badges{display:flex;flex-wrap:wrap;gap:2.4rem;justify-content:center;margin-top:2.6rem}
+.badge{display:grid;gap:.15rem;text-align:center}
+.badge-t{font-family:var(--display);font-weight:700;font-stretch:106%;font-size:.98rem}
+.badge-s{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
+
+/* ---------- footer ---------- */
+.foot{
+  border-top:1px solid var(--line);padding-block:clamp(40px,5vw,60px);
+  background:var(--glass-soft);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--rim-glow);
+}
+.foot-in{display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;justify-content:space-between}
+.foot-links{display:flex;flex-wrap:wrap;gap:1.6rem;font-size:.88rem;color:var(--tx-2)}
+.foot-links a:hover{color:var(--tx)}
+.foot-legal{width:100%;margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;color:var(--tx-3);
+  display:flex;flex-wrap:wrap;gap:.8rem 2rem;justify-content:space-between}
+
+/* ---------- hover: surfaces catch the light ---------- */
+.panel,.quote,.phase{transition:box-shadow .32s ease, transform .32s ease, background .24s ease}
+.panel:hover{box-shadow:var(--lift)}
+.quote:hover,.phase:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 2px 6px rgba(20,22,26,.05),
+    0 26px 52px -26px rgba(20,22,26,.34);
+}
+.res{transition:background .24s ease}
+
+/* the primary CTA breathes, the way a coated panel holds light */
+.btn-primary.btn-lg{animation:breathe 4.4s ease-in-out infinite}
+@keyframes breathe{
+  0%,100%{box-shadow:0 2px 10px -4px rgba(20,22,26,.4)}
+  50%{box-shadow:0 10px 30px -8px rgba(20,22,26,.42)}
+}
+.btn-primary.btn-lg:hover{animation:none}
+
+/* figures shimmer once as they land */
+.res-num{background-size:280% 100%}
+/* background-image, never the background shorthand: the shorthand
+   resets background-clip to border-box and the gradient then paints
+   as a solid block behind the digits instead of inside them. */
+.res-num.is-landing{
+  background-image:var(--sheen);background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;animation:sweep 1.4s linear 1;
+}
+
+/* ---------- hero load-in: rises into place, ends visible ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-in > *{animation:rise .62s cubic-bezier(.2,.7,.3,1) both}
+.hero-in > *:nth-child(1){animation-delay:.02s}
+.hero-in > *:nth-child(2){animation-delay:.08s}
+.hero-in > *:nth-child(3){animation-delay:.14s}
+.hero-in > *:nth-child(4){animation-delay:.2s}
+.hero-in > *:nth-child(5){animation-delay:.26s}
+.hero-in > *:nth-child(6){animation-delay:.32s}
+.hero-in > *:nth-child(7){animation-delay:.38s}
+
+/* ---------- scroll reveals ----------
+   Default state is VISIBLE. Script only hides what is already below
+   the fold, so the page never loads as a blank sheet.            */
+.reveal{transition:opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1)}
+html.js-anim .reveal.is-pending{opacity:0;transform:translateY(28px)}
+html.js-anim .reveal.from-left.is-pending{transform:translateX(-34px)}
+/* small glass controls keep their own positioning context */
+.pipe-step,.join-dot,.btn-ghost{position:relative}
+.res.leak{background:rgba(176,180,188,.3)}
+
+/* ============================================================
+   THE SLAB, one material, every section.
+   Matched to the iOS notification reference: a thick frosted sheet,
+   greyed rather than white, heavy blur, large radius, and an edge
+   that is a light catch rather than a drawn border.
+   ============================================================ */
+:root{
+  /* MOOD B slab: the calm one, used for everything you read */
+  --slab: linear-gradient(180deg,rgba(255,255,255,.46) 0%,rgba(252,253,255,.34) 100%);
+  --slab-blur: blur(28px) saturate(1.6) brightness(1.08);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 1px 0 0 rgba(255,255,255,.6),
+    inset -1px -1px 0 rgba(255,255,255,.35),
+    0 1px 2px rgba(20,22,27,.05),
+    0 24px 54px -20px rgba(20,22,27,.22);
+
+  /* one step up in the stack: pills, readouts, controls */
+  --float-edge:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 1px 2px rgba(20,22,27,.05),
+    0 10px 24px -8px rgba(20,22,27,.2);
+
+  /* MOOD A slab: the feature glass, catching blue off the light source */
+  --slab-a: linear-gradient(168deg,rgba(255,255,255,.6) 0%,rgba(250,252,255,.44) 58%,rgba(246,249,255,.4) 100%);
+  --slab-a-edge:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 1px 0 0 rgba(214,228,255,.9),
+    inset 0 22px 44px -26px rgba(120,160,240,.3),
+    inset -1px -1px 0 rgba(255,255,255,.5),
+    0 1px 2px rgba(20,22,27,.05),
+    0 30px 66px -22px rgba(20,22,27,.26),
+    0 0 54px -22px rgba(80,120,220,.3);
+}
+
+.panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,
+.letter-card,.final-in,.nav-in,.ps,.strip,.foot,.callwall,.reel-stage,.reel-context,.flow{
+  background:var(--slab);
+  backdrop-filter:var(--slab-blur);
+  -webkit-backdrop-filter:var(--slab-blur);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:var(--slab-edge);
+}
+
+/* Inside a slab the ground is light, so the ink ramp comes back.
+   Everything nested inherits it, no per-element overrides needed. */
+.panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,
+.letter-card,.final-in,.nav-in,.ps,.strip,.foot,.callwall,.reel-stage,.reel-context,.flow,
+.pipe-step,.join-dot,.btn-ghost,.vid-btn,.reel-nav{
+  --tx:var(--ink);
+  --tx-2:var(--ink-2);
+  --tx-3:var(--ink-3);
+  --rule:var(--line-2);
+  --spark:var(--ink);
+  color:var(--tx);
+}
+.panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,.letter-card,.callwall{
+  border-radius:26px;
+}
+.final-in{border-radius:30px}
+.ps{border-radius:20px}
+.nav-in{border-radius:999px}
+.strip,.foot{border-radius:0;border-inline:0}
+.foot{border-bottom:0;border-top:1px solid rgba(255,255,255,.12);border-inline:0}
+.strip{border-block:1px solid rgba(255,255,255,.12)}
+
+/* stage cards lose the ink band, the reference has no dark blocks,
+   so the label and title sit straight on the glass */
+.step-head{
+  background:transparent;color:var(--tx);
+  border-bottom:1px solid var(--line);
+}
+.step-head::after{display:none}
+.step-head h3{color:var(--tx)}
+.step-no{color:var(--tx-3)}
+.step-sub{color:var(--tx-2)}
+.step-icon{
+  background:rgba(22,23,26,.055);
+  border:1px solid rgba(255,255,255,.6);
+  color:var(--tx);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+/* the recoverable total is glass too, it holds its weight through
+   type size, not through a black box */
+.res.total{
+  background:linear-gradient(180deg,rgba(252,253,255,.86) 0%,rgba(242,244,247,.74) 100%);
+  color:var(--tx);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1);
+}
+.res.total .res-label{color:var(--tx-3)}
+.res.total .res-note{color:var(--tx-2)}
+.res.total .res-num{color:var(--tx)}
+
+/* ============================================================
+   DEPTH, CONTROLS, MOTION
+   Three planes: the ground, the panels that float on it, and the
+   small controls that float on the panels.
+   ============================================================ */
+
+/* plane 3: pills, readouts, icon tiles */
+.field-val,.res.total,.pipe-step,.join-dot,.step-icon,.vid-btn{
+  box-shadow:var(--float-edge);
+}
+.field-val{
+  background:var(--frost-deep);
+  backdrop-filter:blur(12px) saturate(1.4);
+  -webkit-backdrop-filter:blur(12px) saturate(1.4);
+  border:var(--rim);border-radius:999px;
+  padding:.16em .7em;
+}
+.res.total{
+  background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.72));
+  border:var(--rim);
+  border-radius:20px;
+  margin:clamp(10px,1.4vw,16px);
+}
+.step-icon{background:var(--frost-deep);border:var(--rim)}
+
+/* controls */
+.btn{border-radius:999px;transition:transform .26s cubic-bezier(.2,.7,.3,1),box-shadow .26s ease,background .26s ease,border-color .26s ease}
+.btn-primary{
+  background:linear-gradient(180deg,#2B2D33 0%,#16171A 100%);
+  color:#FFFFFF;border:1px solid rgba(255,255,255,.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    0 1px 2px rgba(22,23,26,.16),
+    0 10px 26px -10px rgba(22,23,26,.55);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    0 2px 4px rgba(22,23,26,.16),
+    0 18px 38px -12px rgba(22,23,26,.5);
+}
+.btn-ghost{
+  background:var(--frost-deep);
+  backdrop-filter:var(--blur-float);
+  -webkit-backdrop-filter:var(--blur-float);
+  border:var(--rim);color:var(--ink);
+  box-shadow:var(--float-edge);
+}
+.btn-ghost:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,255,255,.95);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 14px 30px -10px rgba(22,23,26,.26);
+}
+
+/* motion: short, eased out, never bouncy */
+.reveal{transition:opacity .38s cubic-bezier(.22,.7,.3,1),transform .38s cubic-bezier(.22,.7,.3,1)}
+html.js-anim .reveal.is-pending{opacity:0;transform:translateY(18px)}
+html.js-anim .reveal.from-left.is-pending{transform:translateX(-22px)}
+html.js-anim .reveal.from-right.is-pending{transform:translateX(22px)}
+.hero-in > *{animation-duration:.42s}
+.sheen{animation-duration:9s}
+.glass::before,.final-in::before{animation-duration:16s}
+.quote:hover:not(.tilt),.phase:hover:not(.tilt),.step:hover:not(.tilt){transform:translateY(-3px)}
+
+/* ============================================================
+   MOOD A and MOOD B
+   B is the default slab: neutral metallic frost, for everything you
+   read. A is the feature glass: it sits in the blue light, its rim
+   picks up the tint on the side facing the source, and it carries an
+   inner glow just inside that edge.
+   ============================================================ */
+/* Mood B panels get a faint dark hairline as well as the white inset
+   rim. Without it the boundary vanishes on a light ground, and the
+   boundary is exactly where the eye reads sharp turning to soft. */
+.panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,
+.letter-card,.nav-in,.ps,.strip,.foot,.callwall,.reel-stage,.reel-context,.flow{
+  border:1px solid rgba(20,22,27,.08);
+}
+.nav-in,.final-in,#leak .panel,#leak .results{
+  background:var(--slab-a);
+  box-shadow:var(--slab-a-edge);
+  border:1px solid rgba(20,22,27,.07);
+}
+.final-in,#leak .panel,#leak .results{position:relative}
+/* the local light source each feature panel is lit by */
+#leak .panel::before,#leak .results::before,.final-in::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(90% 60% at 12% -8%,rgba(255,255,255,.75),transparent 62%);
+}
+
+/* corners, iOS widget scale */
+.panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,.letter-card,.callwall{
+  border-radius:30px;
+}
+.final-in{border-radius:34px}
+.ps,.res.total{border-radius:22px}
+.step-icon{border-radius:15px}
+
+/* ---- surfaces, tuned for the bright ground ---- */
+body{background:var(--void)}
+.step-icon{background:rgba(20,22,27,.05);border:1px solid rgba(255,255,255,.8)}
+.step-icon svg{stroke:var(--ink)}
+.field-val{
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(248,250,253,.8));
+  border:1px solid rgba(255,255,255,.95);color:var(--ink);
+}
+.res.leak{background:rgba(20,22,27,.035)}
+.res.total{
+  background:linear-gradient(168deg,rgba(255,255,255,.95),rgba(246,249,255,.8));
+  border:1px solid rgba(255,255,255,1);
+  box-shadow:var(--float-edge), inset 0 18px 40px -24px rgba(140,170,230,.4);
+}
+.res.total .res-num{color:var(--ink)}
+.cmp .col-us,.cmp thead .col-us{background:rgba(255,255,255,.72);color:var(--ink)}
+.demo-msg,.bubble.them{
+  background:rgba(20,22,27,.05);color:var(--ink);
+  border:1px solid rgba(255,255,255,.7);
+}
+.bubble{
+  background:linear-gradient(180deg,#22252C,#14161B);
+  color:#FFFFFF;border:1px solid rgba(255,255,255,.12);
+}
+.mark{background:var(--ink);color:#FFFFFF;border:1px solid rgba(255,255,255,.1)}
+.callwall{padding:clamp(12px,1.8vw,22px)}
+.vid-frame{background:#0C0E13;border:1px solid rgba(20,22,27,.12)}
+.pipe-step,.join-dot,.btn-ghost{border:1px solid rgba(255,255,255,.85)}
+.strip,.foot{border-color:rgba(20,22,27,.1)}
+.sec,.final{border-top:1px solid rgba(20,22,27,.08)}
+input[type=range]{background:rgba(20,22,27,.16)}
+input[type=range]::-webkit-slider-thumb{background:var(--ink);border:3px solid #FFFFFF;box-shadow:0 0 0 1px rgba(20,22,27,.12),0 2px 8px rgba(20,22,27,.3)}
+input[type=range]::-moz-range-thumb{background:var(--ink);border:3px solid #FFFFFF}
+
+/* ---- controls on a bright ground ---- */
+.btn-primary{
+  background:linear-gradient(180deg,#2B2E36 0%,#14161B 100%);
+  color:#FFFFFF;border:1px solid rgba(255,255,255,.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 1px 2px rgba(20,22,27,.16),
+    0 14px 30px -12px rgba(20,22,27,.5);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.3),
+    0 2px 4px rgba(20,22,27,.16),
+    0 22px 42px -14px rgba(20,22,27,.45);
+}
+.btn-primary::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent)}
+.btn-ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(250,252,255,.62));
+  color:var(--ink);border:1px solid rgba(255,255,255,.95);
+}
+.btn-ghost:hover{
+  border-color:#FFFFFF;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 14px 30px -12px rgba(20,22,27,.24);
+}
+.btn-primary.btn-lg{animation:none}
+
+/* grain sits back down on a bright ground */
+body::before{opacity:.22;mix-blend-mode:normal}
+
+/* ============================================================
+   MOTION SYSTEM
+   Everything is transform and opacity only, so it stays on the
+   compositor. All of it switches off under reduced motion.
+   ============================================================ */
+
+/* scroll progress, riding the bottom edge of the nav bar */
+.scrollbar{
+  position:fixed;top:0;left:0;right:0;height:2px;z-index:80;
+  overflow:hidden;pointer-events:none;
+}
+.scrollbar i{
+  display:block;height:100%;width:100%;
+  transform:scaleX(var(--p,0));transform-origin:0 50%;
+  background:linear-gradient(90deg,rgba(20,22,27,.15),var(--ink));
+  transition:transform .12s linear;
+}
+
+/* hero headline rises a word at a time */
+.w{display:inline-block;will-change:transform,opacity}
+html.js-anim .w{opacity:0;transform:translateY(22px) rotate(1.2deg)}
+html.js-anim .hero-lit .w{
+  opacity:1;transform:none;
+  transition:opacity .5s cubic-bezier(.22,.7,.3,1),transform .58s cubic-bezier(.22,.7,.3,1);
+  transition-delay:calc(var(--i,0) * 55ms);
+}
+
+/* the eyebrow rule draws itself */
+.eyebrow::before{transform-origin:0 50%;transform:scaleX(var(--e,1));transition:transform .5s cubic-bezier(.22,.7,.3,1) .1s}
+html.js-anim .eyebrow.is-pending::before{transform:scaleX(0)}
+
+/* background layers drift against the scroll */
+.weave,.grid{will-change:transform}
+.weave{transform:translate3d(0,calc(var(--sy,0px) * .04),0)}
+.grid{transform:translate3d(0,calc(var(--sy,0px) * .07),0)}
+
+/* the stage spine fills as you scroll it */
+.join::before{transform-origin:50% 0;transform:scaleY(1)}
+.join-fill{
+  position:absolute;top:0;left:50%;width:1px;margin-left:-.5px;height:100%;
+  background:linear-gradient(180deg,var(--ink),rgba(20,22,27,.2));
+  transform-origin:50% 0;transform:scaleY(var(--f,0));
+  transition:transform .5s cubic-bezier(.22,.7,.3,1);
+}
+
+/* table rows arrive in sequence */
+.cmp tbody tr{transition:opacity .42s ease-out,transform .42s cubic-bezier(.22,.7,.3,1)}
+html.js-anim .cmp tbody tr.is-pending{opacity:0;transform:translateY(14px)}
+
+/* faq opens and closes on a real height transition */
+.faq-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.22,.7,.3,1)}
+.faq-wrap > div{overflow:hidden;min-height:0}
+details[open] .faq-wrap{grid-template-rows:1fr}
+html.js-anim .faq details[open] .faq-wrap{grid-template-rows:0fr}
+html.js-anim .faq details.is-open .faq-wrap{grid-template-rows:1fr}
+html.js-anim .faq details[open]:not(.is-open) summary::after{transform:none}
+html.js-anim .faq details.is-open summary::after{transform:rotate(45deg)}
+.faq summary::after{transition:transform .34s cubic-bezier(.22,.7,.3,1)}
+
+/* cards tilt a little toward the pointer, desktop only */
+@media (hover:hover) and (pointer:fine){
+  .tilt{
+    transform:
+      perspective(1100px)
+      rotateX(calc(var(--ty,0) * -3.2deg))
+      rotateY(calc(var(--tx,0) * 3.2deg))
+      translateY(var(--tz,0px));
+    transition:transform .4s cubic-bezier(.22,.7,.3,1);
+    transform-style:preserve-3d;
+  }
+  .tilt.is-live{transition:transform .14s ease-out}
+}
+
+/* call wall opens like a shutter */
+.callwall img{transform-origin:50% 50%}
+html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
+.callwall img{transition:transform .9s cubic-bezier(.22,.7,.3,1),opacity .7s ease-out}
+
+/* nav marks where you are */
+.nav-links a{position:relative}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;
+  background:var(--ink);transform:scaleX(0);transform-origin:50% 50%;
+  transition:transform .3s cubic-bezier(.22,.7,.3,1);
+}
+.nav-links a:hover::after,.nav-links a.is-here::after{transform:scaleX(1)}
+
+/* glass is GPU work, so ease off on phones and keep scrolling smooth */
+@media(max-width:760px){
+  .glass,.glass-card,.panel,.results,.quote,.phase,.step,
+  .loop,.table-scroll,.faq,.final-in,.nav-in,.ps,.callwall{
+    backdrop-filter:blur(24px) saturate(1.55) brightness(1.07);
+    -webkit-backdrop-filter:blur(24px) saturate(1.55) brightness(1.07);
+  }
+  .glass::before,.final-in::before{display:none}
+  .rake-c{display:none}
+  .weave{background:repeating-linear-gradient(64deg,rgba(20,22,27,.06) 0 1px,transparent 1px 9px)}
+  .grid{background:
+    repeating-linear-gradient(0deg,rgba(20,22,27,.05) 0 1px,transparent 1px 64px),
+    repeating-linear-gradient(90deg,rgba(20,22,27,.05) 0 1px,transparent 1px 64px)}
+}
+
+/* ============================================================
+   MOBILE
+   Phone first fixes, not just a narrower desktop.
+   ============================================================ */
+@media(max-width:720px){
+  /* the comparison table stops being a table and becomes cards.
+     A side scrolling table on a phone is a table nobody reads. */
+  .table-scroll{overflow:visible;padding:clamp(14px,4vw,20px)}
+  .cmp{min-width:0;display:block}
+  .cmp thead{display:none}
+  .cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp tbody tr{padding-block:1.1rem;border-bottom:1px solid var(--line)}
+  .cmp tbody tr:last-child{border-bottom:0;padding-bottom:0}
+  .cmp tbody th{
+    width:auto;padding:0 0 .85rem;border:0;
+    font-family:var(--mono);font-size:.64rem;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--tx-3);
+  }
+  .cmp td{padding:.5rem 0 .5rem .95rem;border:0;font-size:.93rem;color:var(--tx-2)}
+  .cmp td::before{
+    content:attr(data-label);display:block;margin-bottom:.15rem;
+    font-family:var(--mono);font-size:.57rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--tx-3);
+  }
+  .cmp .col-us,.cmp thead .col-us{
+    background:transparent;border:0;border-left:2px solid var(--ink);
+    color:var(--tx);font-weight:500;
+  }
+
+  /* label and value stop fighting for one line */
+  .rows div{display:grid;gap:.15rem;justify-items:start}
+  .rows dd{text-align:left}
+  .field-top{flex-wrap:wrap;gap:.3rem .8rem}
+
+  /* the wall sits whole, no sideways scrolling */
+  .callwall{padding:10px}
+
+  /* type and rhythm */
+  .hero h1{font-size:clamp(2.2rem,10vw,2.9rem);max-width:none}
+  .hero .lede,.lede{font-size:1rem}
+  .sec{padding-block:clamp(48px,11vw,68px)}
+  .sec-head{margin-bottom:26px}
+
+  /* pipeline reads as a compact list, not a squeezed row */
+  .pipe{gap:.4rem;margin-top:2rem}
+  .pipe-step{font-size:.62rem;padding:.5em .7em}
+  .pipe-link{width:14px}
+
+  /* two up instead of a ragged wrap */
+  .badges{grid-template-columns:repeat(2,1fr);display:grid;gap:1.4rem;width:100%}
+  .final-in{padding-inline:clamp(18px,5vw,26px)}
+
+  /* thumbs need something to hit */
+  .nav .btn{padding:.78em 1.15em;font-size:.82rem}
+  .btn{min-height:46px}
+  .vid-out{padding-block:.35rem}
+  .faq summary{padding-block:1.15rem;gap:1rem}
+
+  /* softer corners read better at small sizes */
+  .panel,.results,.quote,.phase,.step,.table-scroll,.faq,.loop,
+  .letter-card,.callwall{border-radius:22px}
+  .final-in{border-radius:24px}
+
+  .letter-card{padding:clamp(20px,5vw,28px)}
+  .step-body{padding:clamp(16px,4.5vw,22px)}
+  .step-head{padding:clamp(16px,4.5vw,20px)}
+  .step-icon{width:40px;height:40px}
+  .step-head h3{font-size:1.08rem}
+}
+
+/* the pieces added after the first mobile pass */
+@media(max-width:720px){
+  /* the ring takes the full column and its labels scale up with it,
+     since a 460 unit viewBox squeezed to 300px renders 16px type at 10 */
+  .flow{padding:clamp(18px,4.6vw,24px)}
+  .flow-ring{max-width:none;width:100%}
+  .flow-ring .flow-n{font-size:18px}
+  .flow-key li{font-size:.91rem;padding-left:1.4rem}
+  .flow-note{font-size:.89rem}
+
+  .reel-context{padding:clamp(16px,4.6vw,22px);gap:18px}
+  .reel-nav{padding:.6em .95em;font-size:.83rem}
+  .reel-name{font-size:.95rem}
+
+  .sign{gap:.35rem 1rem}
+  .sign-name{font-size:1.25rem}
+  .letter-cta{margin-top:2rem;padding-top:1.9rem}
+  .quotes-label{margin-top:26px}
+  .cmp-line{font-size:1.05rem}
+  .loop{padding:1.2rem 1.3rem;border-radius:22px}
+  .loop-text{font-size:.98rem}
+}
+
+@media(max-width:380px){
+  .hero h1{font-size:2.05rem}
+  .badges{gap:1.1rem}
+  .strip-item{font-size:.66rem}
+}
+
+/* nothing may push the page sideways */
+html,body{max-width:100%;overflow-x:hidden}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  /* no sheen sweep, no drift, no scroll reveals: content sits still */
+  .sheen{color:var(--tx);background:none;-webkit-text-fill-color:currentColor}
+  html.js-anim .reveal.is-pending{opacity:1;transform:none}
+  .glass::before,.final-in::before{display:none}
+  .page-ambient .orb,.ambient .orb,.rake{animation:none}
+  .ambient{display:none}
+  .mote{display:none}
+  .btn-primary.btn-lg{animation:none}
+  .vid-btn::before{display:none}
+  .pipe-link::after,.join::after{animation:none;opacity:.4}
+  .quote:hover,.phase:hover,.step:hover,.tilt{transform:none !important}
+  .w{opacity:1 !important;transform:none !important}
+  .weave,.grid{transform:none !important}
+  .cmp tbody tr.is-pending{opacity:1;transform:none}
+  .eyebrow::before{transform:scaleX(1) !important}
+  .callwall img{transform:none;opacity:1}
+}
+</style>
+
+<!-- Ground, bottom to top: colour blooms, then the surface texture the
+     frost has to destroy, then light raking across that surface. -->
+<div class="page-ambient" aria-hidden="true">
+  <div class="orb orb-p1"></div>
+  <div class="orb orb-p2"></div>
+  <div class="orb orb-p4"></div>
+  <div class="orb orb-p3"></div>
+  <div class="grid"></div>
+  <div class="weave"></div>
+  <div class="rake rake-c"></div>
+  <div class="rake rake-a"></div>
+  <div class="rake rake-b"></div>
+</div>
+
+<span class="scrollbar" aria-hidden="true"><i></i></span>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a href="#top" class="lockup" aria-label="DetailScales home"></a>
+      <nav class="nav-links">
+        <a href="#proof">Clients</a>
+        <a href="#leak">Revenue Leak</a>
+        <a href="#results">Results</a>
+        <a href="#system">The System</a>
+        <a href="#guarantee">Guarantee</a>
+        <a href="#pricing">Investment</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#book" class="btn btn-primary">Book a Strategy Call</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="ambient" id="ambient" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+  </div>
+  <div class="wrap hero-in">
+    <p class="eyebrow solo">For ceramic coating and detail shops</p>
+    <h1>Build the System That Turns Demand Into <span class="sheen">Booked Jobs</span>.</h1>
+    <p class="lede">A complete growth system for detailing businesses: from acquiring new customers to recovering missed opportunities and bringing past customers back.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn btn-primary btn-lg">Book a Strategy Call</a>
+      <a href="#leak" class="btn btn-ghost btn-lg">See what you are leaking</a>
+    </div>
+    <p class="proof">$10,000 in added revenue in 90 days, or we refund your fee and keep working free until you get there</p>
+    <div class="pipe" aria-label="The five parts of the system, in order">
+      <span class="pipe-step">Recover</span><span class="pipe-link" style="--delay:0s"></span>
+      <span class="pipe-step">Reactivate</span><span class="pipe-link" style="--delay:.3s"></span>
+      <span class="pipe-step">Review</span><span class="pipe-link" style="--delay:.6s"></span>
+      <span class="pipe-step">Respond</span><span class="pipe-link" style="--delay:.9s"></span>
+      <span class="pipe-step">Then ads</span>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span class="strip-item">Ceramic coatings</span>
+    <span class="strip-item">Paint correction</span>
+    <span class="strip-item">Mobile detailing</span>
+    <span class="strip-item">Interior deep cleans</span>
+    <span class="strip-item">PPF</span>
+    <span class="strip-item">Maintenance plans</span>
+    <span class="strip-item">Fleet accounts</span>
+    <span class="strip-item">Ceramic coatings</span>
+    <span class="strip-item">Paint correction</span>
+    <span class="strip-item">Mobile detailing</span>
+    <span class="strip-item">Interior deep cleans</span>
+    <span class="strip-item">PPF</span>
+    <span class="strip-item">Maintenance plans</span>
+    <span class="strip-item">Fleet accounts</span>
+  </div>
+</div>
+
+<section class="sec" id="proof" style="border-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">On the calls</p>
+      <h2>Real owners. Real calls. No stock photos.</h2>
+      <p class="lede">Strategy calls, onboarding sessions and check-ins with the people paying us to fill their calendars. Every face on this wall booked a call the same way you would.</p>
+    </div>
+
+    <figure class="callwall reveal">
+      <img src="assets/calls.png" alt="A grid of twelve video calls between DetailScales and client business owners" width="1400" height="788" loading="lazy" decoding="async">
+    </figure>
+
+    <p class="callwall-note reveal">Different trades, same system. It is now pointed at one industry.</p>
+  </div>
+</section>
+
+<section class="sec" id="leak">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Revenue leak calculator</p>
+      <h2>The jobs you already paid for, and never booked.</h2>
+      <p class="lede">Every missed call is a detail someone else is doing today. Move the sliders to your real numbers.</p>
+    </div>
+
+    <div class="calc">
+      <div class="panel">
+        <p class="panel-title">Your numbers</p>
+
+        <div class="field">
+          <div class="field-top">
+            <label class="field-label" for="missed">Missed calls &amp; unanswered DMs per month</label>
+            <span class="field-val" id="missed-v">25</span>
+          </div>
+          <input type="range" id="missed" min="1" max="100" step="1" value="25">
+          <div class="field-range"><span>1</span><span>100</span></div>
+        </div>
+
+        <div class="field">
+          <div class="field-top">
+            <label class="field-label" for="past">Past customers who have not rebooked</label>
+            <span class="field-val" id="past-v">250</span>
+          </div>
+          <input type="range" id="past" min="10" max="1000" step="10" value="250">
+          <div class="field-range"><span>10</span><span>1,000</span></div>
+        </div>
+
+        <div class="field">
+          <div class="field-top">
+            <label class="field-label" for="ticket">Average ticket</label>
+            <span class="field-val" id="ticket-v">$450</span>
+          </div>
+          <input type="range" id="ticket" min="75" max="2500" step="25" value="450">
+          <div class="field-range"><span>$75</span><span>$2,500</span></div>
+        </div>
+
+        <p class="assume">
+          ASSUMPTIONS, 50% of missed enquiries recovered by a 60-second reply.
+          8% of your past customer list rebooks in a given month.
+          40% of finished jobs produce a referral, half of which close.
+          Estimates only. Your close rate and your paint decide the rest.
+        </p>
+      </div>
+
+      <div class="results reveal from-right">
+        <div class="res leak">
+          <p class="res-label">Walking out the door now</p>
+          <p class="res-num" id="r-leak">$11,250</p>
+          <p class="res-note" id="r-leak-note">25 unanswered enquiries a month at your average ticket</p>
+        </div>
+        <div class="res">
+          <p class="res-label">Recovered by instant reply</p>
+          <p class="res-num" id="r-rec">$5,625</p>
+          <p class="res-note" id="r-rec-note">13 jobs that answered a text at 11pm</p>
+        </div>
+        <div class="res">
+          <p class="res-label">Reactivated from your old list</p>
+          <p class="res-num" id="r-react">$9,000</p>
+          <p class="res-note" id="r-react-note">20 past customers brought back this month</p>
+        </div>
+        <div class="res">
+          <p class="res-label">Referrals those jobs create</p>
+          <p class="res-num" id="r-ref">$2,925</p>
+          <p class="res-note" id="r-ref-note">7 jobs from customers who told a friend</p>
+        </div>
+        <div class="res total">
+          <p class="res-label">Recoverable every month</p>
+          <p class="res-num" id="r-total">$17,550</p>
+          <p class="res-note" id="r-total-note">That is $210,600 a year</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec founder">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-c"></div>
+    <div class="orb orb-d"></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:2.4rem">
+      <p class="eyebrow">A note from the founder</p>
+      <h2>Detailers do not need brand awareness. They need booked bays.</h2>
+    </div>
+
+    <div class="glass letter-card reveal">
+      <div class="letter-body">
+        <p><strong>Dear detailer,</strong></p>
+        <p>I spent two years inside marketing agencies. I watched them burn through more than $500,000 of small business budgets in a single year and hand back almost nothing.</p>
+        <p>Here is what they sold:</p>
+        <ul class="burn">
+          <li class="reveal">Guaranteed leads they could not deliver</li>
+          <li class="reveal">Six month contracts with zero accountability</li>
+          <li class="reveal">$5,000 setup fees for work that took an afternoon</li>
+          <li class="reveal">The same generic playbook for every client in every trade</li>
+        </ul>
+        <p><strong>They get paid whether your phone rings or not.</strong></p>
+        <p><span class="mark">So I built the opposite, and I pointed it at one trade.</span></p>
+        <p>Detailing. Because detailing has a problem nobody else was fixing: the work happens with your hands in a wheel well. You cannot answer the phone at 2pm on a correction. By the time you call back at 7, the customer booked the guy who answered.</p>
+        <p>That is not a lead problem. <strong>That is a response problem. And it is fixable.</strong></p>
+        <p>DetailScales builds you a system that:</p>
+        <ul class="burn need">
+          <li class="reveal">Brings in people ready to pay for coatings, not $40 washes</li>
+          <li class="reveal">Replies in under 60 seconds, every time, day or night</li>
+          <li class="reveal">Keeps following up while you are under a hood</li>
+          <li class="reveal">Turns every finished car into a review and a referral</li>
+        </ul>
+        <p>I know the tricks agencies use, because I watched them up close. That is exactly why this one works differently.</p>
+
+        <div class="letter-cta">
+          <a href="#book" class="btn btn-primary btn-lg">Book Your Free Strategy Call</a>
+          <p class="proof">Built by the team behind BotLeads &middot; $145,000 in revenue generated for clients</p>
+        </div>
+
+        <div class="sign">
+          <p class="sign-name">Zai Miana</p>
+          <p class="sign-role">Founder, DetailScales<br>Former agency insider</p>
+        </div>
+
+        <p class="ps"><strong>P.S.</strong> If you are running one ad, doing your own follow-up, and wondering why the leads feel cheap, that is the whole problem. Let us look at your numbers together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="results">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Proof</p>
+      <h2>The same system, proven in other trades. Now built only for detailing.</h2>
+      <p class="lede">We will not show you detailer numbers we have not earned yet. What we can show you is where this system came from, and the owners who have already run it.</p>
+    </div>
+
+    <div class="reel" id="reel">
+      <div class="reel-stage reveal">
+        <article class="reel-slide is-on" data-wistia="ouexm6gg5c"
+                 data-name="Sirvontes" data-role="Med spa owner, zero new staff added" data-len="1:09"
+                 data-trade="Med spa" data-did="Ran the ad campaigns, then automated the follow up across text, email and voice so every enquiry got answered without the front desk. Confirmed bookings land straight on the calendar." data-result="Monthly revenue went from $20K to $35K inside 60 days, with no new staff hired.">
+          <div class="reel-media">
+            <img class="vid-poster" src="assets/poster-ouexm6gg5c.jpg" alt="Sirvontes, med spa owner, on camera" width="560" height="996" decoding="async">
+            <button class="vid-play" type="button" aria-label="Play testimonial from Sirvontes, med spa owner, 1 minute 9 seconds">
+              <span class="vid-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vid-claim">$20K to $35K in 60 days</span>
+              <span class="vid-cue">Watch <i>1:09</i></span>
+            </button>
+          </div>
+        </article>
+
+        <article class="reel-slide wide" data-wistia="77l1d9adco"
+                 data-name="Eric Aumen" data-role="Unscripted interview" data-len="2:12"
+                 data-did="Built out his integrations, from simple connections through to custom API and HTTP request work, with progress updates at every stage rather than silence between deliveries."
+                 data-result="An extra $6.25K generated while managing 10+ clients, with operations running smoother across the board.">
+          <div class="reel-media">
+            <img class="vid-poster" src="assets/poster-77l1d9adco.jpg" alt="A client speaking on a recorded call" width="960" height="540" loading="lazy" decoding="async">
+            <button class="vid-play" type="button" aria-label="Play testimonial from Eric Aumen, 2 minutes 12 seconds">
+              <span class="vid-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vid-claim">Honest feedback, no script</span>
+              <span class="vid-cue">Watch <i>2:12</i></span>
+            </button>
+          </div>
+        </article>
+
+        <article class="reel-slide" data-wistia="bc3vcjiscw"
+                 data-name="Ali" data-role="Renoir, agency for roofing and home improvement" data-len="5:11"
+                 data-did="Built the lead capture and qualification, the appointment setting and the scheduling, with conditional workflow automation running behind it 24/7."
+                 data-result="Went from 15 to 28 jobs a month, without adding workload or extra staff.">
+          <div class="reel-media">
+            <img class="vid-poster" src="assets/poster-bc3vcjiscw.jpg" alt="A client speaking on a recorded call" width="560" height="996" loading="lazy" decoding="async">
+            <button class="vid-play" type="button" aria-label="Play client success interview, 5 minutes 11 seconds">
+              <span class="vid-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vid-claim">Client success</span>
+              <span class="vid-cue">Watch <i>5:11</i></span>
+            </button>
+          </div>
+        </article>
+
+        <article class="reel-slide wide" data-wistia="3o2iops5il"
+                 data-name="@orukanaman" data-role="Full interview" data-len="6:09"
+                 data-did="Ran backend operations across his 500,000 follower brand, his car rental business and his agency, then built AI voice callers and web chat widgets into his own client accounts and helped implement his business in a box systems."
+                 data-result="Got back 30+ hours he would have spent building systems he did not know how to build, with three businesses already competing for his time. His own clients came out happier for it.">
+          <div class="reel-media">
+            <img class="vid-poster" src="assets/poster-3o2iops5il.jpg" alt="A client speaking on a recorded call" width="960" height="540" loading="lazy" decoding="async">
+            <button class="vid-play" type="button" aria-label="Play testimonial from orukanaman, 6 minutes 9 seconds">
+              <span class="vid-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vid-claim">Client success</span>
+              <span class="vid-cue">Watch <i>6:09</i></span>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Renders only for slides that carry real data. A slide with no
+           data-did or data-result shows nothing rather than a placeholder. -->
+      <div class="reel-context" hidden>
+        <div class="reel-ctx-col" data-slot="did" hidden>
+          <p class="col-label">What we did</p>
+          <p class="reel-ctx-body"></p>
+        </div>
+        <div class="reel-ctx-col" data-slot="result" hidden>
+          <p class="col-label">What results</p>
+          <p class="reel-ctx-body"></p>
+        </div>
+      </div>
+
+      <div class="reel-bar reveal">
+        <button class="reel-nav" type="button" data-dir="-1" aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <p class="reel-meta">
+          <span class="reel-name"></span>
+          <span class="reel-role"></span>
+        </p>
+        <a class="reel-out" href="#" target="_blank" rel="noopener">Open video &#8599;</a>
+        <div class="reel-dots" role="tablist" aria-label="Choose a testimonial"></div>
+        <button class="reel-nav next" type="button" data-dir="1" aria-label="Next testimonial">
+          <span>Next</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel reveal" style="margin-top:clamp(20px,3vw,32px)">
+      <p class="panel-title">Where the track record comes from</p>
+      <div class="letter-body" style="gap:.9rem;font-size:.99rem;max-width:72ch">
+        <p>DetailScales is built by the team behind BotLeads, who have generated <strong>$145,000 in revenue for clients</strong> running paid acquisition and booking systems for service businesses.</p>
+        <p>The owners in these interviews are not detailers. They run a med spa, a roofing operation, a contractor services agency and a coaching business. Everything they say is their own words, unscripted.</p>
+        <p><strong>That is the honest position.</strong> The machinery is proven. Pointing it at one trade, with detailing creative and detailing qualification, is the new part. When we have detailer numbers worth showing, they go here.</p>
+      </div>
+      <div style="margin-top:1.6rem">
+        <a href="#book" class="btn btn-primary">Book a Strategy Call</a>
+      </div>
+    </div>
+
+    <p class="quotes-label reveal">Owners in other trades, in their own words</p>
+    <div class="quotes">
+      <figure class="quote reveal" style="margin:0">
+        <blockquote class="quote-text" style="margin:0">&ldquo;I went from $20K to $35K in 60 days. Zero new staff added.&rdquo;</blockquote>
+        <figcaption class="quote-by">
+          <span class="quote-name">Sirvontes</span>
+          <span class="quote-role">Med spa owner</span>
+        </figcaption>
+      </figure>
+      <figure class="quote reveal" style="margin:0">
+        <blockquote class="quote-text" style="margin:0">&ldquo;Scaled from 15 to 28 monthly jobs without adding extra workload or extra staff.&rdquo;</blockquote>
+        <figcaption class="quote-by">
+          <span class="quote-name">Ali</span>
+          <span class="quote-role">Roofing</span>
+        </figcaption>
+      </figure>
+      <figure class="quote reveal" style="margin:0">
+        <blockquote class="quote-text" style="margin:0">&ldquo;Helped me manage 10+ clients and generate an additional $6.25K while making operations smoother.&rdquo;</blockquote>
+        <figcaption class="quote-by">
+          <span class="quote-name">Eric</span>
+          <span class="quote-role">Contractor services</span>
+        </figcaption>
+      </figure>
+      <figure class="quote reveal" style="margin:0">
+        <blockquote class="quote-text" style="margin:0">&ldquo;Running a 500,000+ follower brand requires solid backend systems. Zai made that easier.&rdquo;</blockquote>
+        <figcaption class="quote-by">
+          <span class="quote-name">Gianmarco</span>
+          <span class="quote-role">Coach &middot; Car rental owner</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="system">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The mechanism, five parts in order</p>
+      <h2>The order is the mechanism. Everyone else starts at part five.</h2>
+      <p class="lede">Nothing here is theory. This is the exact path a job takes once your system is live.</p>
+    </div>
+
+    <div class="flow reveal">
+      <p class="flow-title">How it actually runs</p>
+
+      <div class="flow-grid">
+        <svg class="flow-ring" viewBox="0 0 460 460" role="img"
+             aria-label="A closed loop of five stations that feed each other in order: your list, the AI responding and closing, the job booked and done, the review and referral, then new ads, which returns to your list.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--tx-3)"/>
+            </marker>
+          </defs>
+
+          <g class="flow-arc" fill="none" stroke="var(--tx-3)" stroke-width="1.6" stroke-linecap="round">
+            <path d="M256.6,115 A118,118 0 0 1 331.1,169.2" marker-end="url(#ah)"/>
+            <path d="M347.5,219.7 A118,118 0 0 1 319.1,307.4" marker-end="url(#ah)"/>
+            <path d="M276.1,338.6 A118,118 0 0 1 183.9,338.6" marker-end="url(#ah)"/>
+            <path d="M140.9,307.4 A118,118 0 0 1 112.5,219.7" marker-end="url(#ah)"/>
+            <path d="M128.9,169.2 A118,118 0 0 1 203.4,115" marker-end="url(#ah)"/>
+          </g>
+
+          <g class="flow-dot">
+            <circle class="flow-halo" cx="230" cy="112" r="15"/><circle cx="230" cy="112" r="7.5"/>
+            <circle class="flow-halo" cx="342.2" cy="193.5" r="15"/><circle cx="342.2" cy="193.5" r="7.5"/>
+            <circle class="flow-halo" cx="299.4" cy="325.5" r="15"/><circle cx="299.4" cy="325.5" r="7.5"/>
+            <circle class="flow-halo" cx="160.6" cy="325.5" r="15"/><circle cx="160.6" cy="325.5" r="7.5"/>
+            <circle class="flow-halo" cx="117.8" cy="193.5" r="15"/><circle cx="117.8" cy="193.5" r="7.5"/>
+          </g>
+
+          <g class="flow-label">
+            <text class="flow-n mid" x="230" y="80">Your list</text>
+            <text class="flow-n" x="366" y="198">AI closes</text>
+            <text class="flow-n" x="324" y="364">Job done</text>
+            <text class="flow-n end" x="136" y="364">Referral</text>
+            <text class="flow-n end" x="94" y="198">New ads</text>
+          </g>
+
+          <g class="flow-core">
+            <text class="flow-core-k mid" x="230" y="222">The closed loop</text>
+            <text class="flow-core-v mid" x="230" y="250">Each turn feeds the next</text>
+          </g>
+        </svg>
+
+        <ul class="flow-key">
+          <li><b>Your list</b> Old quotes that never closed, and past detail, wash and coating customers.</li>
+          <li><b>AI closes</b> Calls them back, qualifies the job, books it on your calendar.</li>
+          <li><b>Job done</b> Another detail, or the coating upsell.</li>
+          <li><b>Referral</b> Asked automatically, and that referral is a lead you now own. Straight back to the top.</li>
+          <li><b>New ads</b> New customers added into a loop that is already closing jobs. Part five, switched on last.</li>
+        </ul>
+      </div>
+
+      <p class="flow-note">The referral lands back at the start as a lead you already own, so the loop gets cheaper every time it turns. Ads are the only part that costs new money, which is exactly why they go on last.</p>
+    </div>
+
+    <div class="steps">
+
+      <article class="step reveal">
+        <header class="step-head">
+          <span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8.2V20l-4 1.6v-8.4z"/></svg></span>
+          <div>
+            <p class="step-no">Part 1 of 5</p>
+            <h3>Dead lead recovery</h3>
+            <p class="step-sub">Every unclosed quote gets worked, not archived</p>
+          </div>
+        </header>
+        <div class="step-body">
+          <div>
+            <p class="col-label">Example</p>
+            <div class="mock">
+              <p class="bubble-from">Quotes sitting in your phone</p>
+              <dl class="rows">
+                <div><dt>Quoted</dt><dd>$1,800 coating, 6 weeks ago</dd></div>
+                <div><dt>Status</dt><dd>No reply, never chased</dd></div>
+                <div><dt>Worked</dt><dd>Text, call, then a second offer</dd></div>
+                <div><dt>Result</dt><dd>Back on the calendar</dd></div>
+              </dl>
+            </div>
+          </div>
+          <div>
+            <p class="col-label">Why it goes first</p>
+            <ul class="step-list">
+              <li>These people already asked you for a price</li>
+              <li>Nothing changed except nobody followed up</li>
+              <li>Fastest cash in the system, because the demand already exists</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="join" aria-hidden="true" style="--delay:0s"><span class="join-dot">&darr;</span></div>
+
+      <article class="step reveal">
+        <header class="step-head">
+          <span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.6"/><circle cx="17.5" cy="6" r="2.6"/><circle cx="17.5" cy="18" r="2.6"/><path d="M8.4 10.8 15.2 7.3M8.4 13.2l6.8 3.5"/></svg></span>
+          <div>
+            <p class="step-no">Part 2 of 5</p>
+            <h3>Customer reactivation</h3>
+            <p class="step-sub">Past detail, wash and coating customers brought back by text</p>
+          </div>
+        </header>
+        <div class="step-body">
+          <div>
+            <p class="col-label">Example</p>
+            <div class="mock">
+              <p class="bubble-from">Sent to your existing list</p>
+              <p class="bubble">Hey Marcus, it has been a while since the RS5 was in. Paint still holding up? We have two coating slots left this month if you want it locked in properly.</p>
+            </div>
+          </div>
+          <div>
+            <p class="col-label">Why it works</p>
+            <ul class="step-list">
+              <li>They already paid you and they trust the work</li>
+              <li>Warmest audience you will ever sell to</li>
+              <li>Your detail list is the best coating audience that exists</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="join" aria-hidden="true" style="--delay:.4s"><span class="join-dot">&darr;</span></div>
+
+      <article class="step reveal">
+        <header class="step-head">
+          <span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.7 5.6 6.1.9-4.4 4.3 1 6.2-5.4-2.9-5.4 2.9 1-6.2-4.4-4.3 6.1-.9z"/></svg></span>
+          <div>
+            <p class="step-no">Part 3 of 5</p>
+            <h3>Reviews, referrals and maintenance</h3>
+            <p class="step-sub">Automated after every job, with the maintenance work billed instead of forgotten</p>
+          </div>
+        </header>
+        <div class="step-body">
+          <div>
+            <p class="col-label">Example</p>
+            <div class="mock">
+              <p class="bubble-from">11 months after a coating</p>
+              <dl class="rows">
+                <div><dt>Trigger</dt><dd>Annual decontamination due</dd></div>
+                <div><dt>Sent</dt><dd>Reminder plus booking link</dd></div>
+                <div><dt>Also asks</dt><dd>Review, then a referral</dd></div>
+                <div><dt>Second car</dt><dd>Offered at the same time</dd></div>
+              </dl>
+            </div>
+          </div>
+          <div>
+            <p class="col-label">Why it works</p>
+            <ul class="step-list">
+              <li>Coating creates maintenance work on its own</li>
+              <li>Decontamination, inspections, second vehicles</li>
+              <li>Most shops never bill a cent of it</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="join" aria-hidden="true" style="--delay:.8s"><span class="join-dot">&darr;</span></div>
+
+      <article class="step reveal">
+        <header class="step-head">
+          <span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15a2 2 0 0 1-2 2H8l-4 3V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg></span>
+          <div>
+            <p class="step-no">Part 4 of 5</p>
+            <h3>Instant lead response</h3>
+            <p class="step-sub">An AI voice agent calls every inquiry inside 60 seconds, whatever the source</p>
+          </div>
+        </header>
+        <div class="step-body">
+          <div>
+            <p class="col-label">Example</p>
+            <div class="mock">
+              <p class="bubble-from">Inquiry received 11:42 PM</p>
+              <dl class="rows">
+                <div><dt>Came from</dt><dd>Reactivation text, part 2</dd></div>
+                <div><dt>Vehicle</dt><dd>2021 Audi RS5</dd></div>
+                <div><dt>Called back</dt><dd>41 seconds later</dd></div>
+                <div><dt>Outcome</dt><dd>Booked for Thursday</dd></div>
+              </dl>
+            </div>
+          </div>
+          <div>
+            <p class="col-label">Why it goes here</p>
+            <ul class="step-list">
+              <li>By now parts 1 to 3 are producing leads, and part 5 is about to add more</li>
+              <li>This is the layer that catches all of them, from every source</li>
+              <li>A coating buyer is pricing up three shops, and the first callback usually takes the job</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="join" aria-hidden="true" style="--delay:1.2s"><span class="join-dot">&darr;</span></div>
+
+      <article class="step reveal">
+        <header class="step-head">
+          <span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
+          <div>
+            <p class="step-no">Part 5 of 5</p>
+            <h3>New customer acquisition</h3>
+            <p class="step-sub">Paid ads for coating and detailing, added last on purpose</p>
+          </div>
+        </header>
+        <div class="step-body">
+          <div>
+            <p class="col-label">Example</p>
+            <div class="mock">
+              <p class="bubble-from">Only switched on once parts 1 to 4 are live</p>
+              <dl class="rows">
+                <div><dt>Creative</dt><dd>Your own before and afters</dd></div>
+                <div><dt>Targeting</dt><dd>Your real service radius</dd></div>
+                <div><dt>Every lead</dt><dd>Lands in the system above</dd></div>
+                <div><dt>Ad spend</dt><dd>Paid direct to the platform, never to us</dd></div>
+              </dl>
+            </div>
+          </div>
+          <div>
+            <p class="col-label">Why it goes last</p>
+            <ul class="step-list">
+              <li>Ads only pay off once the follow-up catches what they bring</li>
+              <li>Run them first and you are filling a bucket with holes in it</li>
+              <li>By the time they start, nothing that arrives gets dropped</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="loop reveal">
+      <p class="loop-text">Close the leaks first, then add traffic on top. Not the other way round.</p>
+      <p class="loop-note">Run ads into a leaking calendar and you pay twice</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The difference</p>
+      <h2>Lead sellers hand you a phone number. We hand you a booked bay.</h2>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Typical lead seller</th>
+            <th scope="col" class="col-us">DetailScales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">What you receive</th><td data-label="Typical lead seller">A name and a number</td><td class="col-us" data-label="DetailScales">A qualified job on your calendar</td></tr>
+          <tr><th scope="row">Lead quality</th><td data-label="Typical lead seller">Price shoppers and wash enquiries</td><td class="col-us" data-label="DetailScales">Filtered for coating and correction budgets</td></tr>
+          <tr><th scope="row">Response time</th><td data-label="Typical lead seller">Whenever you get out from under the car</td><td class="col-us" data-label="DetailScales">Under 60 seconds, 24/7</td></tr>
+          <tr><th scope="row">Follow-up</th><td data-label="Typical lead seller">Yours to do, if you remember</td><td class="col-us" data-label="DetailScales">14 days, automated, watched by a human</td></tr>
+          <tr><th scope="row">Show rate</th><td data-label="Typical lead seller">Whatever it happens to be</td><td class="col-us" data-label="DetailScales">Confirmed twice before you load the van</td></tr>
+          <tr><th scope="row">Reviews and referrals</th><td data-label="Typical lead seller">Rarely captured</td><td class="col-us" data-label="DetailScales">Asked for after every finished car</td></tr>
+          <tr><th scope="row">Exclusivity</th><td data-label="Typical lead seller">The same lead sold to three detailers</td><td class="col-us" data-label="DetailScales">Your leads are yours</td></tr>
+          <tr><th scope="row">Who it is built for</th><td data-label="Typical lead seller">Any trade with a budget</td><td class="col-us" data-label="DetailScales">Detailing only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-line reveal">Most agencies just run ads. We start by getting jobs out of the demand you already have, then add new leads on top of a system that actually follows up.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Getting started</p>
+      <h2>Live in 7 to 14 days.</h2>
+    </div>
+    <div class="phases">
+      <div class="phase reveal">
+        <p class="phase-idx">01</p>
+        <h3>Strategy call</h3>
+        <p>We go through your actual numbers. Jobs per month, average ticket, where enquiries currently die. You leave with a clear read on what is possible, whether you hire us or not.</p>
+        <p class="phase-when">45 minutes</p>
+      </div>
+      <div class="phase reveal">
+        <p class="phase-idx">02</p>
+        <h3>We build it</h3>
+        <p>Ads, landing page, instant reply, follow-up, calendar, reminders, review and referral requests. Connected, tested end to end with a real test enquiry before a cent of ad spend runs.</p>
+        <p class="phase-when">Days 1 &ndash; 10</p>
+      </div>
+      <div class="phase reveal">
+        <p class="phase-idx">03</p>
+        <h3>Launch and tune</h3>
+        <p>Traffic goes live and bookings start landing. We watch cost per booked job, kill what is not working, and scale what is. You get a plain English report, not a dashboard you never open.</p>
+        <p class="phase-when">Ongoing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pricing">
+  <div class="wrap invest">
+    <div>
+      <div class="sec-head reveal" style="margin-bottom:1.4rem">
+        <p class="eyebrow">Investment</p>
+        <h2>Priced against the jobs it books, not the hours it takes.</h2>
+      </div>
+      <p class="lede">There is no single number on this page because there is no single detailer. A one van mobile operator in a small market and a three bay shop competing in a city do not need the same build or the same ad budget.</p>
+      <p class="lede" style="margin-top:1rem">What we will tell you on the call is exactly what it costs, what it includes, and what it would take to make it pay for itself. If the numbers do not work, we will say so.</p>
+      <ul class="factors">
+        <li>Your market and how many detailers are competing in it</li>
+        <li>Your average ticket and the services you want more of</li>
+        <li>What you already have running versus what needs building</li>
+        <li>How fast you want to fill the calendar</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <p class="panel-title">What every build includes</p>
+      <ul class="step-list" style="gap:.8rem">
+        <li>Dead quote recovery across every lead you never closed</li>
+        <li>Reactivation campaigns across your full past customer list</li>
+        <li>Review and referral requests after every completed job</li>
+        <li>Coating maintenance reminders, so the annual work gets billed</li>
+        <li>AI voice agent calling every inquiry inside 60 seconds, from any source</li>
+        <li>Calendar booking with the vehicle, service and quote attached</li>
+        <li>No-show reminders and confirmations</li>
+        <li>Paid ads for coating and detailing, switched on last</li>
+        <li>Tracking that shows revenue produced, not just clicks</li>
+      </ul>
+      <p class="assume">Ad spend is paid direct to the platform, never through us. No $5,000 setup fee.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="guarantee">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">The guarantee</p>
+      <h2>$10,000 in added revenue in 90 days. Miss it and we refund you, then keep working free.</h2>
+      <p class="lede">Not a number of leads, not impressions, not a dashboard. Revenue you can count, in a window you can hold us to.</p>
+    </div>
+
+    <div class="invest">
+      <div>
+        <div class="letter-body" style="gap:1.05rem;font-size:1.02rem;max-width:62ch">
+          <p><strong>Best case:</strong> more than $10,000 in new revenue inside 90 days, and a system that keeps producing after you stop paying us.</p>
+          <p><strong>Worst case:</strong> we fall short, we refund every cent you paid us, and we keep working free until we hit it. You keep every asset either way.</p>
+          <p>Two routes to the same number, so you can check the maths against your own shop. Six coatings at $1,800 is $10,800. Or three coatings at $1,800 plus twenty five details at $200 is $10,400.</p>
+          <p><span class="mark">Six coatings in 90 days is two a month.</span></p>
+          <p class="ps" style="margin-top:.6rem">We will not call this risk free, because it is not. Our fee comes back to you, but your ad budget went to the platform and your time was your own. Neither of those is ours to return, and anyone telling you a marketing engagement carries no risk at all is making a claim they cannot defend.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <p class="panel-title">What we need from you</p>
+        <ul class="step-list" style="gap:.8rem">
+          <li>Your full customer and lead database at onboarding</li>
+          <li>Access to the systems we are building on</li>
+          <li>A reply to booked calls and quote requests inside 24 hours</li>
+          <li>Availability kept open on the calendar</li>
+          <li>The follow-up left running as built, without pulling messages</li>
+          <li>The capacity to actually fulfil the jobs it books</li>
+          <li>The agreed minimum ad spend maintained</li>
+        </ul>
+        <p class="assume">These are not small print. A revenue guarantee only survives if the inputs are covered, and every one of these is an input you control and we do not.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Straight answers.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>I already run ads. Why would this be different?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">Most detailers running ads have a response problem, not a traffic problem. The enquiries come in and sit there for six hours while you are working. Instant reply plus fourteen days of follow-up usually recovers more revenue than doubling the ad budget ever would, and it costs less.</p></div></div>
+      </details>
+      <details>
+        <summary>Will the AI make my business sound cheap?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">It is written in your voice, using your pricing logic and your service names, and you approve every message before it goes live. It handles the first reply and the qualification. The moment a real conversation starts, it hands over to you. If it ever sounds off, we rewrite it.</p></div></div>
+      </details>
+      <details>
+        <summary>I mostly want ceramic and correction work, not washes. Can you filter for that?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">That is the point of the qualification stage. Creative is aimed at coating and correction buyers, and the questions surface budget and paint condition before anything reaches your calendar. Wash enquiries get handled and closed out without eating your day.</p></div></div>
+      </details>
+      <details>
+        <summary>How fast do bookings start?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">The build takes seven to fourteen days. Once traffic is live, first enquiries usually arrive within days. How fast they turn into booked jobs depends on your market, your pricing, and your close rate on the phone.</p></div></div>
+      </details>
+      <details>
+        <summary>What do you need from me?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">Access to your ad accounts and your calendar, your pricing, and your existing photos and videos. Most detailers already have years of before and afters sitting on their phone. That footage is the best creative you own, and it is free.</p></div></div>
+      </details>
+      <details>
+        <summary>Do you work with more than one detailer in my area?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">No. We do not run two clients against each other in the same service radius. Your leads are yours, and they are not resold.</p></div></div>
+      </details>
+      <details>
+        <summary>What if it does not work?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">There is no six month contract holding you in. We will tell you on the strategy call if we do not think your numbers support this yet, and we would rather say that up front than take a build fee and disappoint you.</p></div></div>
+      </details>
+      <details>
+        <summary>What exactly is guaranteed?</summary>
+        <div class="faq-wrap"><div><p class="faq-a">$10,000 in added revenue inside 90 days. If we miss it, we refund every cent you paid us and keep working free until we hit it. It is a revenue number rather than a lead count because revenue is the thing you actually care about. It comes with conditions, listed openly above, and they exist because we cannot guarantee an outcome while the inputs stay outside our control. We still will not call it risk free. Our fee comes back, but your ad budget went to the platform and your time was your own.</p></div></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="book">
+  <div class="wrap final-in">
+    <p class="eyebrow solo">Book your strategy call</p>
+    <h2>Stop losing jobs to the detailer who answered first.</h2>
+    <p class="lede" style="text-align:center">Forty five minutes on your numbers. We will show you where the revenue is leaking and exactly what it takes to close the gap. No pitch deck.</p>
+    <div class="booker" id="booker">
+      <div class="calendly-inline-widget booker-frame"
+           data-url="https://calendly.com/zaimiana0/detailing-lead-flow-call"></div>
+      <p class="booker-fallback" hidden>
+        The calendar could not load on this connection.
+        <a href="https://calendly.com/zaimiana0/detailing-lead-flow-call" target="_blank" rel="noopener">Open it in a new tab</a>
+      </p>
+    </div>
+
+    <p class="proof">Built by the team behind BotLeads &middot; $145,000 in revenue generated for clients</p>
+    <div class="badges reveal">
+      <div class="badge"><span class="badge-t">$10,000</span><span class="badge-s">In 90 days, or your money back</span></div>
+      <div class="badge"><span class="badge-t">Under 60 sec</span><span class="badge-s">Reply time</span></div>
+      <div class="badge"><span class="badge-t">One per area</span><span class="badge-s">No shared leads</span></div>
+      <div class="badge"><span class="badge-t">Ad spend</span><span class="badge-s">Paid direct, never through us</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div style="display:grid;gap:1.1rem">
+      <div class="lockup" style="--h:52px"></div>
+      <p class="proof" style="max-width:34ch;text-transform:none;letter-spacing:.02em;font-size:.78rem">Paid ads and booking systems built for one trade. Detailing.</p>
+    </div>
+    <nav class="foot-links">
+      <a href="#proof">Clients</a>
+        <a href="#leak">Revenue Leak</a>
+      <a href="#results">Results</a>
+      <a href="#system">The System</a>
+      <a href="#guarantee">Guarantee</a>
+        <a href="#pricing">Investment</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book">Book a Call</a>
+    </nav>
+    <div class="foot-legal">
+      <span>&copy; 2026 DetailScales</span>
+      <span>Results shown are from named clients and are not a guarantee of your own</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var missed = document.getElementById('missed');
+  var past   = document.getElementById('past');
+  var ticket = document.getElementById('ticket');
+  if(!missed || !past || !ticket) return;
+
+  var REPLY_RECOVERY = 0.50;  // share of missed enquiries an instant reply saves
+  var REACTIVATION   = 0.08;  // share of a dormant list that rebooks in a month
+  var REFERRAL_RATE  = 0.40;  // finished jobs that produce a referral
+  var REFERRAL_CLOSE = 0.50;  // referrals that turn into work
+
+  var money = function(n){
+    return '$' + Math.round(n).toLocaleString('en-US');
+  };
+  var jobs = function(n){ return Math.round(n); };
+  var plural = function(n, one, many){ return jobs(n) === 1 ? one : many; };
+
+  function paint(){
+    var m = +missed.value, p = +past.value, t = +ticket.value;
+
+    var recoveredJobs   = m * REPLY_RECOVERY;
+    var reactivatedJobs = p * REACTIVATION;
+    var referralJobs    = (recoveredJobs + reactivatedJobs) * REFERRAL_RATE * REFERRAL_CLOSE;
+
+    var leak      = m * t;
+    var recovered = recoveredJobs * t;
+    var react     = reactivatedJobs * t;
+    var referral  = referralJobs * t;
+    var total     = recovered + react + referral;
+
+    document.getElementById('missed-v').textContent = m;
+    document.getElementById('past-v').textContent   = p.toLocaleString('en-US');
+    document.getElementById('ticket-v').textContent = money(t);
+
+    document.getElementById('r-leak').textContent  = money(leak);
+    document.getElementById('r-rec').textContent   = money(recovered);
+    document.getElementById('r-react').textContent = money(react);
+    document.getElementById('r-ref').textContent   = money(referral);
+    document.getElementById('r-total').textContent = money(total);
+
+    document.getElementById('r-leak-note').textContent =
+      m + ' unanswered ' + plural(m,'enquiry','enquiries') + ' a month at your average ticket';
+    document.getElementById('r-rec-note').textContent =
+      jobs(recoveredJobs) + ' ' + plural(recoveredJobs,'job','jobs') + ' saved by answering while they were still deciding';
+    document.getElementById('r-react-note').textContent =
+      jobs(reactivatedJobs) + ' past ' + plural(reactivatedJobs,'customer','customers') + ' brought back this month';
+    document.getElementById('r-ref-note').textContent =
+      jobs(referralJobs) + ' ' + plural(referralJobs,'job','jobs') + ' from customers who told a friend';
+    document.getElementById('r-total-note').textContent =
+      'That is ' + money(total * 12) + ' a year';
+  }
+
+  [missed, past, ticket].forEach(function(el){
+    el.addEventListener('input', paint);
+  });
+  paint();
+})();
+
+/* ---------- motion ---------- */
+(function(){
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js-anim');
+
+  /* nav lifts off the page once you leave the hero */
+  var nav = document.getElementById('nav');
+  if(nav){
+    var onScroll = function(){
+      nav.classList.toggle('is-stuck', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
+
+  /* dust drifting in bay light */
+  var ambient = document.getElementById('ambient');
+  if(ambient && !calm){
+    var frag = document.createDocumentFragment();
+    for(var i = 0; i < 26; i++){
+      var m = document.createElement('span');
+      var size = (Math.random() * 3.2 + 1.6).toFixed(1);
+      m.className = 'mote';
+      m.style.width = size + 'px';
+      m.style.height = size + 'px';
+      m.style.left = (Math.random() * 100).toFixed(2) + '%';
+      m.style.top = (Math.random() * 100).toFixed(2) + '%';
+      m.style.setProperty('--dur', (Math.random() * 7 + 7).toFixed(1) + 's');
+      m.style.setProperty('--delay', (Math.random() * -9).toFixed(1) + 's');
+      frag.appendChild(m);
+    }
+    ambient.appendChild(frag);
+  }
+
+  /* reveals, only hide what is already below the fold */
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if(items.length && 'IntersectionObserver' in window && !calm){
+    var below = items.filter(function(el){
+      return el.getBoundingClientRect().top > window.innerHeight * 0.88;
+    });
+    below.forEach(function(el){ el.classList.add('is-pending'); });
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target;
+        /* cards sharing a row come in one after another; stacked
+           blocks arrive on their own, so they get no delay */
+        if(!el.classList.contains('step')){
+          var sibs = [].slice.call(el.parentNode.children).filter(function(n){
+            return n.classList.contains('reveal');
+          });
+          var idx = Math.max(0, sibs.indexOf(el));
+          el.style.transitionDelay = Math.min(idx * 70, 280) + "ms";
+        }
+        el.classList.remove('is-pending');
+        io.unobserve(el);
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+
+    below.forEach(function(el){ io.observe(el); });
+  }
+
+  /* load a script once, however many players ask for it */
+  var loaded = {};
+  function loadScript(src, type){
+    if(loaded[src]) return;
+    loaded[src] = true;
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    if(type) s.type = type;
+    document.head.appendChild(s);
+  }
+
+  /* ---- the testimonial reel ----
+     One slide on screen, stepped with Next. Whatever was playing gets
+     torn down on the way out, so audio never follows you. */
+  (function(){
+    var reel = document.getElementById('reel');
+    if(!reel) return;
+    var slides = [].slice.call(reel.querySelectorAll('.reel-slide'));
+    var dots = reel.querySelector('.reel-dots');
+    var navs = [].slice.call(reel.querySelectorAll('.reel-nav'));
+    var nameEl = reel.querySelector('.reel-name');
+    var roleEl = reel.querySelector('.reel-role');
+    var at = 0;
+
+    slides.forEach(function(s, k){
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'reel-dot' + (k === 0 ? ' is-on' : '');
+      d.setAttribute('role', 'tab');
+      d.setAttribute('aria-label', 'Testimonial ' + (k + 1) + ' of ' + slides.length);
+      d.addEventListener('click', function(){ go(k); });
+      dots.appendChild(d);
+    });
+
+    function teardown(slide){
+      var player = slide.querySelector('wistia-player');
+      if(player && slide._btn){
+        player.parentNode.replaceChild(slide._btn, player);
+        var img = slide.querySelector('.vid-poster');
+        if(img) img.style.display = '';
+        slide.querySelector('.reel-media').style.width = '';
+        slide.querySelector('.reel-media').style.height = '';
+      }
+    }
+
+    function go(k){
+      k = (k + slides.length) % slides.length;
+      if(k === at) return;
+      teardown(slides[at]);
+      slides[at].classList.remove('is-on');
+      at = k;
+      slides[at].classList.add('is-on');
+      paintMeta();
+    }
+
+    var ctx = reel.querySelector('.reel-context');
+    var ctxCols = ctx ? [].slice.call(ctx.querySelectorAll('.reel-ctx-col')) : [];
+
+    function paintContext(s){
+      if(!ctx) return;
+      var any = false;
+      ctxCols.forEach(function(col){
+        var val = s.getAttribute('data-' + col.getAttribute('data-slot'));
+        col.querySelector('.reel-ctx-body').textContent = val || '';
+        col.hidden = !val;
+        if(val) any = true;
+      });
+      ctx.hidden = !any;
+    }
+
+    var outEl = reel.querySelector('.reel-out');
+
+    function paintMeta(){
+      var s = slides[at];
+      /* a plain link that always works, whatever blocks the embed */
+      if(outEl) outEl.href = 'https://fast.wistia.net/embed/iframe/' + s.getAttribute('data-wistia');
+      if(nameEl) nameEl.textContent = s.getAttribute('data-name') || '';
+      if(roleEl) roleEl.textContent = (s.getAttribute('data-role') || '') +
+        (s.getAttribute('data-len') ? '  ' + s.getAttribute('data-len') : '');
+      paintContext(s);
+      [].slice.call(dots.children).forEach(function(d, i){
+        d.classList.toggle('is-on', i === at);
+        d.setAttribute('aria-selected', i === at ? 'true' : 'false');
+      });
+    }
+
+    navs.forEach(function(b){
+      b.addEventListener('click', function(){ go(at + (+b.getAttribute('data-dir'))); });
+    });
+
+    reel.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight') { go(at + 1); }
+      else if(e.key === 'ArrowLeft') { go(at - 1); }
+    });
+
+    /* swipe */
+    var x0 = null;
+    reel.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+    reel.addEventListener('touchend', function(e){
+      if(x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if(Math.abs(dx) > 48) go(at + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, {passive:true});
+
+    paintMeta();
+  })();
+
+  /* the booking calendar loads as it comes into range, not on arrival,
+     so the page is not paying for a third party embed nobody scrolled to */
+  var booker = document.getElementById('booker');
+  if(booker && 'IntersectionObserver' in window){
+    var bObs = new IntersectionObserver(function(entries){
+      if(!entries[0].isIntersecting) return;
+      bObs.disconnect();
+      loadScript('https://assets.calendly.com/assets/external/widget.js');
+      setTimeout(function(){
+        if(booker.querySelector('iframe')) return;
+        var fb = booker.querySelector('.booker-fallback');
+        var frame = booker.querySelector('.booker-frame');
+        if(fb) fb.hidden = false;
+        if(frame) frame.style.height = '0';
+      }, 6000);
+    }, {rootMargin:'500px 0px'});
+    bObs.observe(booker);
+  }
+
+  /* video testimonials, nothing loads until someone presses play */
+  document.addEventListener('click', function(e){
+    var play = e.target.closest ? e.target.closest('.vid-play') : null;
+    if(!play) return;
+    var slide = play.closest('.reel-slide');
+    var id = slide && slide.getAttribute('data-wistia');
+    if(!id) return;
+
+    /* Wistia loads only once someone actually presses play, so a page
+       with five testimonials on it still costs nothing to arrive at. */
+    loadScript('https://fast.wistia.com/player.js');
+    loadScript('https://fast.wistia.com/embed/' + id + '.js', 'module');
+
+    /* lock the box to what the poster is already occupying, so nothing
+       reflows when the player takes its place */
+    var media = play.closest('.reel-media');
+    media.style.width = media.offsetWidth + 'px';
+    media.style.height = media.offsetHeight + 'px';
+    var img = media.querySelector('.vid-poster');
+    if(img) img.style.display = 'none';
+
+    var player = document.createElement('wistia-player');
+    player.setAttribute('media-id', id);
+    player.setAttribute('aspect', slide.classList.contains('wide') ? '1.7777777777777777' : '0.5625');
+    player.setAttribute('autoplay', 'true');
+
+    slide._btn = play;
+    media.replaceChild(player, play);
+
+    /* If Wistia cannot load (blocked network, offline, strict CSP) the
+       custom element never upgrades and the box just sits there black.
+       Give it a few seconds, then put the poster back and say so. */
+    if(window.customElements && customElements.whenDefined){
+      var settled = false;
+      customElements.whenDefined('wistia-player').then(function(){ settled = true; });
+      setTimeout(function(){
+        if(settled || !player.parentNode) return;
+        media.style.width = '';
+        media.style.height = '';
+        if(img) img.style.display = '';
+        media.replaceChild(play, player);
+        var warn = media.querySelector('.reel-warn') || document.createElement('p');
+        warn.className = 'reel-warn';
+        warn.textContent = "Player blocked here. Use the Open video link below.";
+        if(!warn.parentNode) media.appendChild(warn);
+      }, 2500);
+    }
+  });
+
+  /* hero headline: split to words, then let them rise in sequence */
+  var h1 = document.querySelector('.hero h1');
+  if(h1 && !calm){
+    var i = 0;
+    var split = function(node){
+      [].slice.call(node.childNodes).forEach(function(child){
+        if(child.nodeType === 3){
+          var frag = document.createDocumentFragment();
+          child.nodeValue.split(/(\s+)/).forEach(function(part){
+            if(!part) return;
+            if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+            var s = document.createElement('span');
+            s.className = 'w';
+            s.style.setProperty('--i', i++);
+            s.textContent = part;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, child);
+        } else if(child.nodeType === 1){
+          /* Animate an inline element whole, never its contents. The
+             sheen span paints its text from a clipped background, and
+             any child span inside it would just inherit the
+             transparent colour and vanish. */
+          child.classList.add('w');
+          child.style.setProperty('--i', i++);
+        }
+      });
+    };
+    split(h1);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ h1.classList.add('hero-lit'); });
+    });
+  }
+
+  /* scroll progress, background parallax, and the nav section marker,
+     all off one rAF-throttled scroll pass */
+  var bar = document.querySelector('.scrollbar i');
+  var navLinks = [].slice.call(document.querySelectorAll('.nav-links a'));
+  var targets = navLinks.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  });
+  var ticking = false;
+
+  function frame(){
+    ticking = false;
+    var y = window.scrollY || 0;
+    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+
+    if(bar) bar.style.setProperty('--p', Math.min(1, y / max).toFixed(4));
+    if(!calm) document.documentElement.style.setProperty('--sy', y + 'px');
+
+    var hit = -1;
+    for(var k = 0; k < targets.length; k++){
+      var t = targets[k];
+      if(t && t.getBoundingClientRect().top <= window.innerHeight * 0.4) hit = k;
+    }
+    navLinks.forEach(function(a, k){ a.classList.toggle('is-here', k === hit); });
+  }
+  function onScrollFrame(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener('scroll', onScrollFrame, {passive:true});
+  window.addEventListener('resize', onScrollFrame, {passive:true});
+  frame();
+
+  /* the spine between stages fills as it passes the middle of the screen */
+  var joins = [].slice.call(document.querySelectorAll('.join'));
+  if(joins.length && !calm){
+    joins.forEach(function(j){
+      var fill = document.createElement('span');
+      fill.className = 'join-fill';
+      j.insertBefore(fill, j.firstChild);
+    });
+    var fillFrame = function(){
+      joins.forEach(function(j){
+        var r = j.getBoundingClientRect();
+        var mid = window.innerHeight * 0.62;
+        var p = (mid - r.top) / Math.max(1, r.height);
+        j.querySelector('.join-fill').style.setProperty('--f', Math.max(0, Math.min(1, p)).toFixed(3));
+      });
+    };
+    var fillTick = false;
+    window.addEventListener('scroll', function(){
+      if(fillTick) return;
+      fillTick = true;
+      requestAnimationFrame(function(){ fillTick = false; fillFrame(); });
+    }, {passive:true});
+    fillFrame();
+  }
+
+  /* comparison rows arrive one after another */
+  var rows = [].slice.call(document.querySelectorAll('.cmp tbody tr'));
+  if(rows.length && 'IntersectionObserver' in window && !calm){
+    rows.forEach(function(r){
+      if(r.getBoundingClientRect().top > window.innerHeight * .9) r.classList.add('is-pending');
+    });
+    var rowObs = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var idx = rows.indexOf(e.target);
+        e.target.style.transitionDelay = (idx % 8) * 55 + 'ms';
+        e.target.classList.remove('is-pending');
+        rowObs.unobserve(e.target);
+      });
+    }, {threshold:.2});
+    rows.forEach(function(r){ rowObs.observe(r); });
+  }
+
+  /* eyebrow rules draw themselves in */
+  var brows = [].slice.call(document.querySelectorAll('.eyebrow'));
+  if(brows.length && 'IntersectionObserver' in window && !calm){
+    brows.forEach(function(b){
+      if(b.getBoundingClientRect().top > window.innerHeight * .9) b.classList.add('is-pending');
+    });
+    var browObs = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.remove('is-pending');
+        browObs.unobserve(e.target);
+      });
+    }, {threshold:.6});
+    brows.forEach(function(b){ browObs.observe(b); });
+  }
+
+  /* faq: animate the open and close instead of snapping */
+  [].slice.call(document.querySelectorAll('.faq details')).forEach(function(d){
+    var sum = d.querySelector('summary');
+    if(!sum) return;
+    var wrap = d.querySelector('.faq-wrap');
+    sum.addEventListener('click', function(e){
+      if(calm || !wrap) return;
+      e.preventDefault();
+      if(d.classList.contains('is-open')){
+        /* closing: collapse first, drop the open attribute after */
+        d.classList.remove('is-open');
+        var done = function(ev){
+          if(ev.propertyName !== 'grid-template-rows') return;
+          wrap.removeEventListener('transitionend', done);
+          d.open = false;
+        };
+        wrap.addEventListener('transitionend', done);
+      } else {
+        /* opening: put it in flow, then expand on the next frame */
+        d.open = true;
+        requestAnimationFrame(function(){ d.classList.add('is-open'); });
+      }
+    });
+  });
+
+  /* cards lean toward the pointer */
+  if(!calm && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    [].slice.call(document.querySelectorAll('.step,.quote,.phase')).forEach(function(card){
+      card.classList.add('tilt');
+      card.addEventListener('pointermove', function(ev){
+        var r = card.getBoundingClientRect();
+        card.classList.add('is-live');
+        card.style.setProperty('--tx', (((ev.clientX - r.left) / r.width) - .5).toFixed(3));
+        card.style.setProperty('--ty', (((ev.clientY - r.top) / r.height) - .5).toFixed(3));
+        card.style.setProperty('--tz', '-3px');
+      });
+      card.addEventListener('pointerleave', function(){
+        card.classList.remove('is-live');
+        card.style.setProperty('--tx', 0);
+        card.style.setProperty('--ty', 0);
+        card.style.setProperty('--tz', '0px');
+      });
+    });
+  }
+
+  /* the figures count up the first time you reach them */
+  var results = document.querySelector('.results');
+  if(results && 'IntersectionObserver' in window && !calm){
+    var counted = false;
+    var countObs = new IntersectionObserver(function(entries){
+      if(counted || !entries[0].isIntersecting) return;
+      counted = true;
+      countObs.disconnect();
+
+      [].slice.call(results.querySelectorAll('.res-num')).forEach(function(node, i){
+        var finalText = node.textContent;
+        var target = parseFloat(finalText.replace(/[^0-9.]/g, ''));
+        if(!isFinite(target)) return;
+
+        node.classList.add('is-landing');
+        var start = performance.now();
+        var dur = 1100 + i * 90;
+
+        var tick = function(now){
+          var p = Math.min((now - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          if(p < 1){
+            node.textContent = '$' + Math.round(target * eased).toLocaleString('en-US');
+            requestAnimationFrame(tick);
+          } else {
+            node.textContent = finalText;
+            setTimeout(function(){ node.classList.remove('is-landing'); }, 500);
+          }
+        };
+        requestAnimationFrame(tick);
+      });
+    }, {threshold:0.3});
+    countObs.observe(results);
+  }
+})();
+</script>
