@@ -1,4 +1,70 @@
-<title>DetailScales</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>DetailScales | Booking and Lead Systems for Car Detailers</title>
+<meta name="description" content="The closed-loop booking system for car detailers. Recover dead quotes, reactivate past customers, answer every inquiry in 60 seconds, then add paid ads.">
+<link rel="canonical" href="https://detailscales.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#F7F8FA">
+
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/icon.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DetailScales">
+<meta property="og:url" content="https://detailscales.com/">
+<meta property="og:title" content="Booking and Lead Systems for Car Detailers">
+<meta property="og:description" content="The closed-loop booking system for car detailers. Recover dead quotes, reactivate past customers, answer every inquiry in 60 seconds, then add paid ads.">
+<meta property="og:image" content="https://detailscales.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DetailScales">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Booking and Lead Systems for Car Detailers">
+<meta name="twitter:description" content="The closed-loop booking system for car detailers. Recover dead quotes, reactivate past customers, answer every inquiry in 60 seconds, then add paid ads.">
+<meta name="twitter:image" content="https://detailscales.com/assets/og.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://detailscales.com/#org",
+      "name": "DetailScales",
+      "url": "https://detailscales.com/",
+      "logo": "https://detailscales.com/assets/og.jpg",
+      "description": "Paid acquisition and booking systems built only for ceramic coating and detailing businesses.",
+      "founder": { "@type": "Person", "name": "Zai Miana" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://detailscales.com/#site",
+      "url": "https://detailscales.com/",
+      "name": "DetailScales",
+      "publisher": { "@id": "https://detailscales.com/#org" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Service",
+      "name": "The Closed-Loop Booking System",
+      "serviceType": "Lead recovery and booking automation for detailing businesses",
+      "provider": { "@id": "https://detailscales.com/#org" },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Ceramic coating shops and mobile detailing businesses"
+      },
+      "description": "Dead lead recovery, past customer reactivation, review and referral generation, instant lead response, and paid acquisition, delivered in that order."
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -194,8 +260,8 @@ p{margin:0}
   display:flex;align-items:center;gap:1.5rem;
   height:60px;padding-inline:10px 10px;
   background:linear-gradient(140deg,rgba(255,255,255,.8),rgba(255,255,255,.52));
-  backdrop-filter:blur(22px) saturate(1.9);
-  -webkit-backdrop-filter:blur(22px) saturate(1.9);
+  backdrop-filter:blur(14px) saturate(1.7);
+  -webkit-backdrop-filter:blur(14px) saturate(1.7);
   border:1px solid rgba(255,255,255,.72);border-radius:999px;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.95),
@@ -230,16 +296,42 @@ p{margin:0}
 
 /* ambient layer, dust drifting in bay light, and two slow specular pools */
 .ambient{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.9}
+.orb{position:absolute;border-radius:50%;opacity:.85}
+/* The hero light moves with intent. Nothing frosted sits over it, so it
+   can travel properly, unlike the page field behind all the panels. */
 .orb-a{
-  width:min(620px,86vw);height:min(620px,86vw);top:-32%;right:-12%;
-  background:radial-gradient(circle,rgba(158,186,232,.3),transparent 68%);
-  animation:drift-a 26s ease-in-out infinite;
+  width:min(680px,92vw);height:min(680px,92vw);top:-34%;right:-14%;
+  background:radial-gradient(circle,rgba(142,178,236,.42),rgba(186,208,244,.14) 46%,transparent 70%);
+  animation:hero-a 15s cubic-bezier(.45,.05,.55,.95) infinite;
 }
 .orb-b{
-  width:min(460px,70vw);height:min(460px,70vw);bottom:-30%;left:-10%;
-  background:radial-gradient(circle,rgba(204,212,226,.38),transparent 68%);
-  animation:drift-b 32s ease-in-out infinite;
+  width:min(520px,76vw);height:min(520px,76vw);bottom:-32%;left:-12%;
+  background:radial-gradient(circle,rgba(198,210,230,.5),transparent 68%);
+  animation:hero-b 18s cubic-bezier(.45,.05,.55,.95) infinite;
+}
+.orb-e{
+  width:min(430px,62vw);height:min(430px,62vw);top:18%;left:32%;
+  background:radial-gradient(circle,rgba(226,214,198,.4),transparent 66%);
+  animation:hero-c 22s cubic-bezier(.45,.05,.55,.95) infinite;
+}
+@keyframes hero-a{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  28%{transform:translate3d(-11%,9%,0) scale(1.22)}
+  56%{transform:translate3d(6%,16%,0) scale(.88)}
+  80%{transform:translate3d(-7%,4%,0) scale(1.12)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes hero-b{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  32%{transform:translate3d(14%,-10%,0) scale(.86)}
+  64%{transform:translate3d(-5%,-17%,0) scale(1.25)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes hero-c{
+  0%{transform:translate3d(0,0,0) scale(.92);opacity:.45}
+  38%{transform:translate3d(-15%,-8%,0) scale(1.18);opacity:.9}
+  72%{transform:translate3d(10%,8%,0) scale(1);opacity:.6}
+  100%{transform:translate3d(0,0,0) scale(.92);opacity:.45}
 }
 @keyframes drift-a{
   0%,100%{transform:translate(0,0) scale(1)}
@@ -260,6 +352,18 @@ p{margin:0}
   50%{transform:translate(-5px,-6px) scale(.9);opacity:.5}
   75%{transform:translate(9px,-18px) scale(1.15);opacity:.26}
 }
+
+/* the chips drop in after the headline settles */
+html.js-anim .pipe-step{
+  animation:chip .55s cubic-bezier(.22,.7,.3,1) both;
+  animation-delay:calc(.9s + var(--d,0) * .085s);
+}
+@keyframes chip{from{opacity:0;transform:translateY(12px) scale(.95)}to{opacity:1;transform:none}}
+.pipe-step:nth-child(1){--d:0}
+.pipe-step:nth-child(3){--d:1}
+.pipe-step:nth-child(5){--d:2}
+.pipe-step:nth-child(7){--d:3}
+.pipe-step:nth-child(9){--d:4}
 
 /* pipeline, light travelling down the path a job takes */
 .pipe{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:2.8rem}
@@ -288,6 +392,32 @@ p{margin:0}
   100%{transform:translateX(32px);opacity:0}
 }
 @media(max-width:560px){.pipe-link{width:18px}}
+
+/* ---------- hero light ----------
+   A specular bar that rakes across the hero the way light travels over
+   a polished panel, plus a soft highlight that follows the pointer.
+   Both are transform and opacity only, and neither runs during scroll. */
+.hero-fx{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.hero-flare{
+  position:absolute;top:-45%;left:0;width:22%;height:190%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.9) 45%,rgba(214,230,255,.55) 55%,transparent);
+  transform:rotate(15deg) translate3d(-70vw,0,0);
+  animation:flare 9.5s cubic-bezier(.4,0,.35,1) 1.1s infinite;
+}
+@keyframes flare{
+  0%{transform:rotate(15deg) translate3d(-70vw,0,0);opacity:0}
+  6%{opacity:.85}
+  34%{opacity:.85}
+  44%,100%{transform:rotate(15deg) translate3d(150vw,0,0);opacity:0}
+}
+.hero-cursor{
+  position:absolute;top:0;left:0;width:560px;height:560px;
+  margin:-280px 0 0 -280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(132,168,232,.3),rgba(180,205,245,.12) 42%,transparent 70%);
+  transform:translate3d(var(--mx,50vw),var(--my,42vh),0);
+  opacity:0;transition:opacity .5s ease;
+}
+.hero.is-lit .hero-cursor{opacity:1}
 
 /* ---------- section shell ---------- */
 .sec{padding-block:clamp(60px,7.5vw,104px);border-top:1px solid rgba(255,255,255,.1)}
@@ -398,8 +528,8 @@ input[type=range]::-moz-range-thumb{
 .glass{
   position:relative;overflow:hidden;
   background:linear-gradient(140deg,rgba(255,255,255,.78),rgba(255,255,255,.42));
-  backdrop-filter:blur(28px) saturate(1.9);
-  -webkit-backdrop-filter:blur(28px) saturate(1.9);
+  backdrop-filter:blur(16px) saturate(1.7);
+  -webkit-backdrop-filter:blur(16px) saturate(1.7);
   border:1px solid rgba(255,255,255,.7);
   border-radius:24px;
   box-shadow:
@@ -495,15 +625,6 @@ input[type=range]::-moz-range-thumb{
   filter:blur(2px);
   animation:rake-drift 64s ease-in-out infinite reverse;
 }
-/* one soft pass underneath for glow, this one may stay blurred */
-.rake-c{
-  background:repeating-linear-gradient(64deg,
-    transparent 0 150px,
-    rgba(150,178,228,.16) 150px 180px,
-    transparent 180px 360px);
-  filter:blur(40px);
-  animation:rake-drift 52s ease-in-out infinite;
-}
 @keyframes rake-drift{
   0%,100%{transform:translate3d(0,0,0)}
   50%{transform:translate3d(5%,-4%,0)}
@@ -531,7 +652,6 @@ input[type=range]::-moz-range-thumb{
   width:min(760px,92vw);height:min(460px,52vh);top:-6%;left:30%;
   background:radial-gradient(circle,rgba(255,255,255,.9),rgba(226,236,252,.3) 44%,transparent 72%);
   animation:drift-a 30s ease-in-out infinite;
-  filter:blur(90px);
 }
 
 /* ---------- founder letter ---------- */
@@ -998,8 +1118,8 @@ input[type=range]::-moz-range-thumb{
   display:flex;flex-wrap:wrap;gap:.9rem 1.4rem;align-items:center;justify-content:space-between;
   position:relative;
   background:linear-gradient(140deg,rgba(255,255,255,.72),rgba(255,255,255,.4));
-  backdrop-filter:blur(18px) saturate(1.7);
-  -webkit-backdrop-filter:blur(18px) saturate(1.7);
+  backdrop-filter:blur(14px) saturate(1.6);
+  -webkit-backdrop-filter:blur(14px) saturate(1.6);
   border:1px dashed rgba(20,22,26,.22);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
 }
@@ -1088,8 +1208,8 @@ input[type=range]::-moz-range-thumb{
   padding:clamp(34px,5vw,64px) clamp(22px,4vw,56px);
   border-radius:26px;overflow:hidden;
   background:linear-gradient(140deg,rgba(255,255,255,.78),rgba(255,255,255,.42));
-  backdrop-filter:blur(28px) saturate(1.9);
-  -webkit-backdrop-filter:blur(28px) saturate(1.9);
+  backdrop-filter:blur(16px) saturate(1.7);
+  -webkit-backdrop-filter:blur(16px) saturate(1.7);
   border:1px solid rgba(255,255,255,.7);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.95),
@@ -1470,12 +1590,14 @@ body::before{opacity:.22;mix-blend-mode:normal}
 }
 
 /* hero headline rises a word at a time */
-.w{display:inline-block;will-change:transform,opacity}
-html.js-anim .w{opacity:0;transform:translateY(22px) rotate(1.2deg)}
+.w{display:inline-block}
+html.js-anim .w{opacity:0;transform:translateY(32px) scale(.94);filter:blur(12px)}
 html.js-anim .hero-lit .w{
-  opacity:1;transform:none;
-  transition:opacity .5s cubic-bezier(.22,.7,.3,1),transform .58s cubic-bezier(.22,.7,.3,1);
-  transition-delay:calc(var(--i,0) * 55ms);
+  opacity:1;transform:none;filter:blur(0);
+  transition:opacity .62s cubic-bezier(.22,.7,.3,1),
+             transform .78s cubic-bezier(.22,.7,.3,1),
+             filter .62s ease-out;
+  transition-delay:calc(var(--i,0) * 72ms);
 }
 
 /* the eyebrow rule draws itself */
@@ -1483,7 +1605,6 @@ html.js-anim .hero-lit .w{
 html.js-anim .eyebrow.is-pending::before{transform:scaleX(0)}
 
 /* background layers drift against the scroll */
-.weave,.grid{will-change:transform}
 .weave{transform:translate3d(0,calc(var(--sy,0px) * .04),0)}
 .grid{transform:translate3d(0,calc(var(--sy,0px) * .07),0)}
 
@@ -1512,16 +1633,15 @@ html.js-anim .faq details.is-open summary::after{transform:rotate(45deg)}
 
 /* cards tilt a little toward the pointer, desktop only */
 @media (hover:hover) and (pointer:fine){
-  .tilt{
+  .tilt{transition:transform .4s cubic-bezier(.22,.7,.3,1)}
+  .tilt.is-live{
     transform:
       perspective(1100px)
       rotateX(calc(var(--ty,0) * -3.2deg))
       rotateY(calc(var(--tx,0) * 3.2deg))
       translateY(var(--tz,0px));
-    transition:transform .4s cubic-bezier(.22,.7,.3,1);
-    transform-style:preserve-3d;
+    transition:transform .14s ease-out;
   }
-  .tilt.is-live{transition:transform .14s ease-out}
 }
 
 /* call wall opens like a shutter */
@@ -1542,11 +1662,10 @@ html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
 @media(max-width:760px){
   .glass,.glass-card,.panel,.results,.quote,.phase,.step,
   .loop,.table-scroll,.faq,.final-in,.nav-in,.ps,.callwall{
-    backdrop-filter:blur(24px) saturate(1.55) brightness(1.07);
-    -webkit-backdrop-filter:blur(24px) saturate(1.55) brightness(1.07);
+    backdrop-filter:blur(13px) saturate(1.5) brightness(1.06);
+    -webkit-backdrop-filter:blur(13px) saturate(1.5) brightness(1.06);
   }
   .glass::before,.final-in::before{display:none}
-  .rake-c{display:none}
   .weave{background:repeating-linear-gradient(64deg,rgba(20,22,27,.06) 0 1px,transparent 1px 9px)}
   .grid{background:
     repeating-linear-gradient(0deg,rgba(20,22,27,.05) 0 1px,transparent 1px 64px),
@@ -1655,6 +1774,24 @@ html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
 /* nothing may push the page sideways */
 html,body{max-width:100%;overflow-x:hidden}
 
+/* While the page is moving, freeze the drifting background. Every frosted
+   panel has to resample its backdrop whenever what is behind it changes,
+   so an animated backdrop under 20 panels means constant recompositing
+   exactly when the browser is busiest. Resumes 140ms after scrolling stops. */
+html.is-scrolling .orb,
+html.is-scrolling .rake,
+html.is-scrolling .mote,
+html.is-scrolling .sheen,
+html.is-scrolling .glass::before,
+html.is-scrolling .final-in::before,
+html.is-scrolling .pipe-link::after,
+html.is-scrolling .join::after,
+html.is-scrolling .vid-btn::before,
+html.is-scrolling .hero-flare,
+html.is-scrolling .btn-primary.btn-lg{
+  animation-play-state:paused;
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{
     animation-duration:.001ms !important;
@@ -1678,8 +1815,12 @@ html,body{max-width:100%;overflow-x:hidden}
   .cmp tbody tr.is-pending{opacity:1;transform:none}
   .eyebrow::before{transform:scaleX(1) !important}
   .callwall img{transform:none;opacity:1}
+  .hero-flare{display:none}
+  .hero-cursor{display:none}
 }
 </style>
+</head>
+<body>
 
 <!-- Ground, bottom to top: colour blooms, then the surface texture the
      frost has to destroy, then light raking across that surface. -->
@@ -1690,7 +1831,6 @@ html,body{max-width:100%;overflow-x:hidden}
   <div class="orb orb-p3"></div>
   <div class="grid"></div>
   <div class="weave"></div>
-  <div class="rake rake-c"></div>
   <div class="rake rake-a"></div>
   <div class="rake rake-b"></div>
 </div>
@@ -1719,22 +1859,29 @@ html,body{max-width:100%;overflow-x:hidden}
   <div class="ambient" id="ambient" aria-hidden="true">
     <div class="orb orb-a"></div>
     <div class="orb orb-b"></div>
+    <div class="orb orb-e"></div>
   </div>
-  <div class="wrap hero-in">
-    <p class="eyebrow solo">For ceramic coating and detail shops</p>
-    <h1>Build the System That Turns Demand Into <span class="sheen">Booked Jobs</span>.</h1>
-    <p class="lede">A complete growth system for detailing businesses: from acquiring new customers to recovering missed opportunities and bringing past customers back.</p>
-    <div class="hero-cta">
-      <a href="#book" class="btn btn-primary btn-lg">Book a Strategy Call</a>
-      <a href="#leak" class="btn btn-ghost btn-lg">See what you are leaking</a>
-    </div>
-    <p class="proof">$10,000 in added revenue in 90 days, or we refund your fee and keep working free until you get there</p>
-    <div class="pipe" aria-label="The five parts of the system, in order">
-      <span class="pipe-step">Recover</span><span class="pipe-link" style="--delay:0s"></span>
-      <span class="pipe-step">Reactivate</span><span class="pipe-link" style="--delay:.3s"></span>
-      <span class="pipe-step">Review</span><span class="pipe-link" style="--delay:.6s"></span>
-      <span class="pipe-step">Respond</span><span class="pipe-link" style="--delay:.9s"></span>
-      <span class="pipe-step">Then ads</span>
+  <div class="hero-fx" aria-hidden="true">
+    <span class="hero-flare"></span>
+    <span class="hero-cursor"></span>
+  </div>
+  <div class="wrap">
+    <div class="hero-in">
+      <p class="eyebrow solo">For ceramic coating and detail shops</p>
+      <h1>Build the System That Turns Demand Into <span class="sheen">Booked Jobs</span>.</h1>
+      <p class="lede">A complete growth system for detailing businesses: from acquiring new customers to recovering missed opportunities and bringing past customers back.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-primary btn-lg">Book a Strategy Call</a>
+        <a href="#leak" class="btn btn-ghost btn-lg">See what you are leaking</a>
+      </div>
+      <p class="proof">$10,000 in added revenue in 90 days, or we refund your fee and keep working free until you get there</p>
+      <div class="pipe" aria-label="The five parts of the system, in order">
+        <span class="pipe-step">Recover</span><span class="pipe-link" style="--delay:0s"></span>
+        <span class="pipe-step">Reactivate</span><span class="pipe-link" style="--delay:.3s"></span>
+        <span class="pipe-step">Review</span><span class="pipe-link" style="--delay:.6s"></span>
+        <span class="pipe-step">Respond</span><span class="pipe-link" style="--delay:.9s"></span>
+        <span class="pipe-step">Then ads</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1767,7 +1914,7 @@ html,body{max-width:100%;overflow-x:hidden}
     </div>
 
     <figure class="callwall reveal">
-      <img src="assets/calls.png" alt="A grid of twelve video calls between DetailScales and client business owners" width="1400" height="788" loading="lazy" decoding="async">
+      <img src="assets/calls.png" alt="A grid of twelve video calls between DetailScales and client business owners" width="1000" height="563" loading="lazy" decoding="async">
     </figure>
 
     <p class="callwall-note reveal">Different trades, same system. It is now pointed at one industry.</p>
@@ -2570,15 +2717,9 @@ html,body{max-width:100%;overflow-x:hidden}
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js-anim');
 
-  /* nav lifts off the page once you leave the hero */
+  /* nav lifts off the page once you leave the hero.
+     No listener of its own: everything scroll driven runs in one pass. */
   var nav = document.getElementById('nav');
-  if(nav){
-    var onScroll = function(){
-      nav.classList.toggle('is-stuck', window.scrollY > 24);
-    };
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
-  }
 
   /* dust drifting in bay light */
   var ambient = document.getElementById('ambient');
@@ -2839,6 +2980,30 @@ html,body{max-width:100%;overflow-x:hidden}
     });
   }
 
+  /* a soft highlight that follows the pointer across the hero, the way a
+     light source moves over paint. Pointer driven, so it costs nothing
+     while scrolling, and desktop only. */
+  var hero = document.querySelector('.hero');
+  var heroCursor = document.querySelector('.hero-cursor');
+  if(hero && heroCursor && !calm &&
+     window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var hx = 0, hy = 0, hTick = false;
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect();
+      hx = e.clientX - r.left;
+      hy = e.clientY - r.top;
+      if(hTick) return;
+      hTick = true;
+      requestAnimationFrame(function(){
+        hTick = false;
+        heroCursor.style.setProperty('--mx', hx + 'px');
+        heroCursor.style.setProperty('--my', hy + 'px');
+      });
+    }, {passive:true});
+    hero.addEventListener('pointerenter', function(){ hero.classList.add('is-lit'); });
+    hero.addEventListener('pointerleave', function(){ hero.classList.remove('is-lit'); });
+  }
+
   /* scroll progress, background parallax, and the nav section marker,
      all off one rAF-throttled scroll pass */
   var bar = document.querySelector('.scrollbar i');
@@ -2848,54 +3013,79 @@ html,body{max-width:100%;overflow-x:hidden}
   });
   var ticking = false;
 
+  /* Parallax targets are written directly. Setting a custom property on
+     documentElement instead invalidates style for the whole document on
+     every single scroll frame, which is what was making this crawl. */
+  var weave = document.querySelector('.weave');
+  var grid  = document.querySelector('.grid');
+  var joins = [];
+  var stuck = null;
+  var marked = null;
+  var idleTimer = null;
+  var root = document.documentElement;
+
   function frame(){
     ticking = false;
     var y = window.scrollY || 0;
-    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    var vh = window.innerHeight;
+    var max = Math.max(1, root.scrollHeight - vh);
 
     if(bar) bar.style.setProperty('--p', Math.min(1, y / max).toFixed(4));
-    if(!calm) document.documentElement.style.setProperty('--sy', y + 'px');
+
+    var isStuck = y > 24;
+    if(nav && isStuck !== stuck){
+      stuck = isStuck;
+      nav.classList.toggle('is-stuck', isStuck);
+    }
+
+    if(!calm){
+      for(var j = 0; j < joins.length; j++){
+        var r = joins[j].el.getBoundingClientRect();
+        var p = (vh * 0.62 - r.top) / Math.max(1, r.height);
+        joins[j].fill.style.setProperty('--f', Math.max(0, Math.min(1, p)).toFixed(3));
+      }
+    }
 
     var hit = -1;
     for(var k = 0; k < targets.length; k++){
       var t = targets[k];
-      if(t && t.getBoundingClientRect().top <= window.innerHeight * 0.4) hit = k;
+      if(t && t.getBoundingClientRect().top <= vh * 0.4) hit = k;
     }
-    navLinks.forEach(function(a, k){ a.classList.toggle('is-here', k === hit); });
+    /* only touch the DOM when the active section actually changes */
+    if(hit !== marked){
+      marked = hit;
+      navLinks.forEach(function(a, k){ a.classList.toggle('is-here', k === hit); });
+    }
   }
+
   function onScrollFrame(){
+    /* the drifting background is paused mid scroll: while it animates,
+       every frosted panel above it has to resample its backdrop */
+    if(!calm && !idleTimer) root.classList.add('is-scrolling');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function(){
+      idleTimer = null;
+      root.classList.remove('is-scrolling');
+    }, 140);
+
     if(ticking) return;
     ticking = true;
     requestAnimationFrame(frame);
   }
   window.addEventListener('scroll', onScrollFrame, {passive:true});
   window.addEventListener('resize', onScrollFrame, {passive:true});
-  frame();
 
-  /* the spine between stages fills as it passes the middle of the screen */
-  var joins = [].slice.call(document.querySelectorAll('.join'));
-  if(joins.length && !calm){
-    joins.forEach(function(j){
-      var fill = document.createElement('span');
-      fill.className = 'join-fill';
+  /* the spine between stages fills as it passes the middle of the screen.
+     Measured inside the shared scroll pass, not on a listener of its own. */
+  if(!calm){
+    [].slice.call(document.querySelectorAll(".join")).forEach(function(j){
+      var fill = document.createElement("span");
+      fill.className = "join-fill";
       j.insertBefore(fill, j.firstChild);
+      joins.push({ el: j, fill: fill });
     });
-    var fillFrame = function(){
-      joins.forEach(function(j){
-        var r = j.getBoundingClientRect();
-        var mid = window.innerHeight * 0.62;
-        var p = (mid - r.top) / Math.max(1, r.height);
-        j.querySelector('.join-fill').style.setProperty('--f', Math.max(0, Math.min(1, p)).toFixed(3));
-      });
-    };
-    var fillTick = false;
-    window.addEventListener('scroll', function(){
-      if(fillTick) return;
-      fillTick = true;
-      requestAnimationFrame(function(){ fillTick = false; fillFrame(); });
-    }, {passive:true});
-    fillFrame();
   }
+  frame();
 
   /* comparison rows arrive one after another */
   var rows = [].slice.call(document.querySelectorAll('.cmp tbody tr'));
@@ -3012,3 +3202,6 @@ html,body{max-width:100%;overflow-x:hidden}
   }
 })();
 </script>
+
+</body>
+</html>
