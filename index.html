@@ -296,14 +296,62 @@ p{margin:0}
     0 20px 44px -24px rgba(20,22,26,.34);
 }
 .nav .lockup{margin-left:12px}
-.nav-links{display:flex;gap:1.9rem;margin-left:auto;font-size:.88rem;color:var(--tx-2)}
+.nav-in{position:relative}
+.nav-links{
+  display:flex;align-items:center;gap:1.9rem;margin-left:auto;
+  font-size:.88rem;color:var(--tx-2);
+}
 .nav-links a{transition:color .16s ease}
-.nav-links a:hover{color:var(--tx)}
+.nav-links a:not(.nav-cta):hover{color:var(--tx)}
 .nav .btn{padding:.6em 1.3em;font-size:.85rem;border-radius:999px}
+
+/* the burger, hidden until the links no longer fit */
+.burger{
+  display:none;place-items:center;flex:none;position:relative;
+  width:38px;height:38px;border-radius:50%;padding:0;cursor:pointer;
+  background:var(--frost-deep);border:var(--rim);
+  backdrop-filter:var(--blur-float);-webkit-backdrop-filter:var(--blur-float);
+  box-shadow:var(--float-edge);
+}
+.burger span{
+  position:absolute;left:11px;width:16px;height:1.7px;border-radius:2px;
+  background:var(--tx);
+  transition:transform .3s cubic-bezier(.22,.7,.3,1);
+}
+.burger span:nth-child(1){transform:translateY(-3.5px)}
+.burger span:nth-child(2){transform:translateY(3.5px)}
+.nav.is-open .burger span:nth-child(1){transform:rotate(45deg)}
+.nav.is-open .burger span:nth-child(2){transform:rotate(-45deg)}
+
 @media(max-width:880px){
-  .nav-links{display:none}
+  .burger{display:inline-grid}
   .theme-btn{margin-left:auto}
-  .nav-in{gap:.6rem}
+  .nav-in{gap:.55rem}
+
+  /* the same nav, restyled as a sheet under the bar */
+  .nav-links{
+    position:absolute;top:calc(100% + 12px);left:0;right:0;
+    margin-left:0;flex-direction:column;align-items:stretch;gap:.15rem;
+    padding:.55rem;border-radius:24px;
+    background:var(--frost-deep);
+    backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+    border:var(--rim);box-shadow:var(--glass-cast);
+    opacity:0;visibility:hidden;transform:translateY(-10px) scale(.97);
+    transform-origin:100% 0;
+    transition:opacity .22s ease,
+               transform .3s cubic-bezier(.22,.7,.3,1),
+               visibility 0s .3s;
+  }
+  .nav.is-open .nav-links{
+    opacity:1;visibility:visible;transform:none;transition-delay:0s;
+  }
+  .nav-links a{
+    padding:.92rem 1rem;border-radius:16px;font-size:1rem;color:var(--tx);
+  }
+  .nav-links a:not(.nav-cta):active{background:rgba(128,128,128,.14)}
+  .nav-links .nav-cta{
+    margin-top:.45rem;justify-content:center;font-size:.95rem;padding:1em 1.2em;
+  }
 }
 
 /* ---------- hero ---------- */
@@ -1672,13 +1720,13 @@ html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
 .callwall img{transition:transform .9s cubic-bezier(.22,.7,.3,1),opacity .7s ease-out}
 
 /* nav marks where you are */
-.nav-links a{position:relative}
-.nav-links a::after{
+.nav-links a:not(.nav-cta){position:relative}
+.nav-links a:not(.nav-cta)::after{
   content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;
   background:var(--ink);transform:scaleX(0);transform-origin:50% 50%;
   transition:transform .3s cubic-bezier(.22,.7,.3,1);
 }
-.nav-links a:hover::after,.nav-links a.is-here::after{transform:scaleX(1)}
+.nav-links a:not(.nav-cta):hover::after,.nav-links a:not(.nav-cta).is-here::after{transform:scaleX(1)}
 
 /* glass is GPU work, so ease off on phones and keep scrolling smooth */
 @media(max-width:760px){
@@ -1747,7 +1795,6 @@ html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
   .final-in{padding-inline:clamp(18px,5vw,26px)}
 
   /* thumbs need something to hit */
-  .nav .btn{padding:.78em 1.15em;font-size:.82rem}
   .btn{min-height:46px}
   .vid-out{padding-block:.35rem}
   .faq summary{padding-block:1.15rem;gap:1rem}
@@ -2107,7 +2154,9 @@ html.is-scrolling .btn-primary.btn-lg{
   <div class="wrap">
     <div class="nav-in">
       <a href="#top" class="lockup" aria-label="DetailScales home"></a>
-      <nav class="nav-links">
+      <!-- One set of links. On a phone this same nav becomes the dropdown,
+           so nothing is duplicated for screen readers or search. -->
+      <nav class="nav-links" id="navmenu">
         <a href="#proof">Clients</a>
         <a href="#leak">Revenue Leak</a>
         <a href="#results">Results</a>
@@ -2115,12 +2164,16 @@ html.is-scrolling .btn-primary.btn-lg{
         <a href="#guarantee">Guarantee</a>
         <a href="#pricing">Investment</a>
         <a href="#faq">FAQ</a>
+        <a href="#book" class="btn btn-primary nav-cta">Book a Strategy Call</a>
       </nav>
       <button class="theme-btn" type="button" id="theme" aria-label="Switch to dark theme">
         <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
         <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
       </button>
-      <a href="#book" class="btn btn-primary">Book a Strategy Call</a>
+      <button class="burger" type="button" id="burger"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navmenu">
+        <span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
@@ -3250,6 +3303,37 @@ html.is-scrolling .btn-primary.btn-lg{
     });
   }
 
+  /* the mobile menu */
+  var burger = document.getElementById('burger');
+  var navEl = document.getElementById('nav');
+  var navMenu = document.getElementById('navmenu');
+  if(burger && navEl && navMenu){
+    var setMenu = function(open){
+      navEl.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    burger.addEventListener('click', function(e){
+      e.stopPropagation();
+      setMenu(!navEl.classList.contains('is-open'));
+    });
+    /* a tap on any destination closes it */
+    navMenu.addEventListener('click', function(e){
+      if(e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('click', function(e){
+      if(!navEl.classList.contains('is-open')) return;
+      if(!navEl.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') setMenu(false);
+    });
+    /* never leave it stuck open when the layout goes back to desktop */
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 880) setMenu(false);
+    }, {passive:true});
+  }
+
   /* theme switch. The head script already set the starting theme before
      first paint, so this only handles the change and remembers it. */
   var themeBtn = document.getElementById('theme');
@@ -3292,7 +3376,7 @@ html.is-scrolling .btn-primary.btn-lg{
   /* scroll progress, background parallax, and the nav section marker,
      all off one rAF-throttled scroll pass */
   var bar = document.querySelector('.scrollbar i');
-  var navLinks = [].slice.call(document.querySelectorAll('.nav-links a'));
+  var navLinks = [].slice.call(document.querySelectorAll('.nav-links a:not(.nav-cta)'));
   var targets = navLinks.map(function(a){
     return document.querySelector(a.getAttribute('href'));
   });
