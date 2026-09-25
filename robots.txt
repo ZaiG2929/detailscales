@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://detailscales.com/sitemap.xml
+Sitemap: https://www.detailscales.com/sitemap.xml
