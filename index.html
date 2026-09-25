@@ -1648,16 +1648,6 @@ body::before{opacity:.22;mix-blend-mode:normal}
    ============================================================ */
 
 /* scroll progress, riding the bottom edge of the nav bar */
-.scrollbar{
-  position:fixed;top:0;left:0;right:0;height:2px;z-index:80;
-  overflow:hidden;pointer-events:none;
-}
-.scrollbar i{
-  display:block;height:100%;width:100%;
-  transform:scaleX(var(--p,0));transform-origin:0 50%;
-  background:linear-gradient(90deg,rgba(20,22,27,.15),var(--ink));
-  transition:transform .12s linear;
-}
 
 /* hero headline rises a word at a time */
 .w{display:inline-block}
@@ -1960,7 +1950,6 @@ html,body{max-width:100%;overflow-x:hidden}
 :root[data-theme="dark"] .hero-flare{
   background:linear-gradient(100deg,transparent,rgba(196,218,255,.5) 45%,rgba(140,180,255,.3) 55%,transparent);
 }
-:root[data-theme="dark"] .scrollbar i{background:linear-gradient(90deg,rgba(255,255,255,.18),var(--ink))}
 
 /* panels and their edges */
 :root[data-theme="dark"] .panel,
@@ -2147,8 +2136,6 @@ html.is-scrolling .btn-primary.btn-lg{
   <div class="rake rake-a"></div>
   <div class="rake rake-b"></div>
 </div>
-
-<span class="scrollbar" aria-hidden="true"><i></i></span>
 
 <header class="nav" id="nav">
   <div class="wrap">
@@ -3375,7 +3362,6 @@ html.is-scrolling .btn-primary.btn-lg{
 
   /* scroll progress, background parallax, and the nav section marker,
      all off one rAF-throttled scroll pass */
-  var bar = document.querySelector('.scrollbar i');
   var navLinks = [].slice.call(document.querySelectorAll('.nav-links a:not(.nav-cta)'));
   var targets = navLinks.map(function(a){
     return document.querySelector(a.getAttribute('href'));
@@ -3397,10 +3383,6 @@ html.is-scrolling .btn-primary.btn-lg{
     ticking = false;
     var y = window.scrollY || 0;
     var vh = window.innerHeight;
-    var max = Math.max(1, root.scrollHeight - vh);
-
-    if(bar) bar.style.setProperty('--p', Math.min(1, y / max).toFixed(4));
-
     var isStuck = y > 24;
     if(nav && isStuck !== stuck){
       stuck = isStuck;
