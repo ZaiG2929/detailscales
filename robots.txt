@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Assistants are welcome to read and describe this site.
+# A plain-language summary lives at /llms.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.detailscales.com/sitemap.xml
