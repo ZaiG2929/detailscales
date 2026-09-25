@@ -10,6 +10,23 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#F7F8FA">
 
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem("ds-theme");
+    var dark = saved ? saved === "dark"
+                     : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    if(dark){
+      var m = document.querySelector("meta[name=theme-color]");
+      if(m) m.setAttribute("content", "#07080B");
+    }
+  }catch(e){
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+})();
+</script>
+
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/assets/icon.png" sizes="512x512" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -282,7 +299,11 @@ p{margin:0}
 .nav-links a{transition:color .16s ease}
 .nav-links a:hover{color:var(--tx)}
 .nav .btn{padding:.6em 1.3em;font-size:.85rem;border-radius:999px}
-@media(max-width:880px){.nav-links{display:none}.nav .btn{margin-left:auto}}
+@media(max-width:880px){
+  .nav-links{display:none}
+  .theme-btn{margin-left:auto}
+  .nav-in{gap:.6rem}
+}
 
 /* ---------- hero ---------- */
 .hero{
@@ -1774,6 +1795,250 @@ html.js-anim .callwall.is-pending img{transform:scale(1.06);opacity:.4}
 /* nothing may push the page sideways */
 html,body{max-width:100%;overflow-x:hidden}
 
+/* ============================================================
+   DARK THEME
+   Same material, inverted ground. Tokens carry most of it; the rest
+   are surfaces that had to be written as literal colours.
+   Applies on an explicit choice, or on a system preference when the
+   visitor has not chosen.
+   ============================================================ */
+:root[data-theme="dark"]{
+  --void:       #07080B;
+  --void-2:     #0C0E12;
+  --paper:      var(--void);
+  --paper-2:    #F2F4F8;
+  --paper-3:    #171A20;
+  --ink:        #EDEFF3;
+  --ink-2:      #A6ACB8;
+  --ink-3:      #7C8392;
+
+  --page-tx:    var(--ink);
+  --page-tx-2:  var(--ink-2);
+  --page-tx-3:  var(--ink-3);
+
+  --rule:       rgba(255,255,255,.16);
+  --spark:      #FFFFFF;
+  --chrome:     #7E8698;
+  --leak:       #FF8163;
+  --line:       rgba(255,255,255,.1);
+  --line-2:     rgba(255,255,255,.18);
+  --lift:       0 1px 2px rgba(0,0,0,.45), 0 16px 40px -14px rgba(0,0,0,.72);
+
+  --gloss:      linear-gradient(180deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.02) 44%,rgba(255,255,255,0) 70%);
+  --frost:      var(--gloss), linear-gradient(180deg,rgba(24,29,38,.52),rgba(13,16,22,.6));
+  --frost-deep: var(--gloss), linear-gradient(180deg,rgba(28,34,44,.62),rgba(15,18,25,.68));
+  --frost-thin: var(--gloss), linear-gradient(180deg,rgba(24,29,38,.34),rgba(13,16,22,.4));
+
+  --rim:        1px solid rgba(255,255,255,.14);
+  --rim-glow:   inset 0 1px 0 rgba(255,255,255,.5);
+  --glass-cast: inset 0 1px 0 rgba(255,255,255,.5),
+                inset 1px 0 0 rgba(255,255,255,.12),
+                0 1px 2px rgba(0,0,0,.5),
+                0 24px 56px -22px rgba(0,0,0,.8);
+
+  --sheen: linear-gradient(100deg,
+      #7C8496 0%, #7C8496 24%, #D8DEEA 42%,
+      #FFFFFF 50%, #D8DEEA 58%, #7C8496 76%, #7C8496 100%);
+  --sheen-ink: var(--sheen);
+
+  --slab: linear-gradient(180deg,rgba(26,31,40,.54) 0%,rgba(13,16,22,.62) 100%);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 1px 0 0 rgba(255,255,255,.12),
+    0 1px 2px rgba(0,0,0,.5),
+    0 24px 56px -22px rgba(0,0,0,.78);
+  --float-edge:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    0 1px 2px rgba(0,0,0,.45),
+    0 10px 24px -8px rgba(0,0,0,.6);
+  --slab-a: linear-gradient(168deg,rgba(30,42,74,.5) 0%,rgba(14,18,27,.6) 58%,rgba(11,14,20,.62) 100%);
+  --slab-a-edge:
+    inset 0 1px 0 rgba(198,216,255,.55),
+    inset 1px 0 0 rgba(120,160,255,.26),
+    inset 0 22px 44px -26px rgba(90,140,255,.42),
+    0 1px 2px rgba(0,0,0,.5),
+    0 28px 64px -22px rgba(0,0,0,.84);
+}
+
+/* the wordmark is baked art, so it swaps file rather than colour */
+:root[data-theme="dark"] .lockup{background-image:url("assets/logo-wordmark-dark.png")}
+
+:root[data-theme="dark"] body::before{opacity:.3;mix-blend-mode:screen}
+
+/* ground, texture and light */
+:root[data-theme="dark"] .page-ambient{
+  background:
+    radial-gradient(130% 85% at 50% -12%,#121826 0%,transparent 62%),
+    linear-gradient(180deg,var(--void-2) 0%,var(--void) 52%,#050609 100%);
+}
+:root[data-theme="dark"] .weave{
+  background:
+    repeating-linear-gradient(64deg,rgba(255,255,255,.055) 0 1px,transparent 1px 7px),
+    repeating-linear-gradient(64deg,rgba(255,255,255,.035) 0 1px,transparent 1px 23px);
+}
+:root[data-theme="dark"] .grid{
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 88px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 88px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 22px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 22px);
+}
+:root[data-theme="dark"] .rake-a{
+  background:repeating-linear-gradient(64deg,
+    transparent 0 86px,
+    rgba(120,150,220,.16) 86px 103px,
+    transparent 103px 126px,
+    rgba(120,150,220,.08) 126px 135px,
+    transparent 135px 250px);
+}
+:root[data-theme="dark"] .rake-b{
+  background:repeating-linear-gradient(58deg,
+    transparent 0 196px,
+    rgba(180,205,255,.14) 196px 222px,
+    transparent 222px 430px);
+}
+:root[data-theme="dark"] .orb-p1{background:radial-gradient(circle,rgba(46,84,180,.4),rgba(30,52,120,.12) 44%,transparent 70%)}
+:root[data-theme="dark"] .orb-p2{background:radial-gradient(circle,rgba(70,86,120,.42),transparent 68%)}
+:root[data-theme="dark"] .orb-p3{background:radial-gradient(circle,rgba(96,84,66,.34),transparent 68%)}
+:root[data-theme="dark"] .orb-p4{background:radial-gradient(circle,rgba(150,180,240,.2),rgba(80,110,190,.07) 44%,transparent 72%)}
+:root[data-theme="dark"] .orb-a{background:radial-gradient(circle,rgba(52,92,190,.45),rgba(60,100,200,.14) 46%,transparent 70%)}
+:root[data-theme="dark"] .orb-b{background:radial-gradient(circle,rgba(78,94,130,.5),transparent 68%)}
+:root[data-theme="dark"] .orb-e{background:radial-gradient(circle,rgba(110,92,68,.42),transparent 66%)}
+:root[data-theme="dark"] .orb-c{background:radial-gradient(circle,rgba(56,90,170,.34),transparent 66%)}
+:root[data-theme="dark"] .orb-d{background:radial-gradient(circle,rgba(74,88,116,.4),transparent 66%)}
+:root[data-theme="dark"] .hero-cursor{
+  background:radial-gradient(circle,rgba(86,132,230,.34),rgba(120,160,240,.12) 42%,transparent 70%);
+}
+:root[data-theme="dark"] .hero-flare{
+  background:linear-gradient(100deg,transparent,rgba(196,218,255,.5) 45%,rgba(140,180,255,.3) 55%,transparent);
+}
+:root[data-theme="dark"] .scrollbar i{background:linear-gradient(90deg,rgba(255,255,255,.18),var(--ink))}
+
+/* panels and their edges */
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .results,
+:root[data-theme="dark"] .quote,
+:root[data-theme="dark"] .phase,
+:root[data-theme="dark"] .step,
+:root[data-theme="dark"] .table-scroll,
+:root[data-theme="dark"] .faq,
+:root[data-theme="dark"] .loop,
+:root[data-theme="dark"] .letter-card,
+:root[data-theme="dark"] .nav-in,
+:root[data-theme="dark"] .ps,
+:root[data-theme="dark"] .strip,
+:root[data-theme="dark"] .foot,
+:root[data-theme="dark"] .callwall,
+:root[data-theme="dark"] .reel-stage,
+:root[data-theme="dark"] .reel-context,
+:root[data-theme="dark"] .flow{border:1px solid rgba(255,255,255,.1)}
+
+:root[data-theme="dark"] .nav-in,
+:root[data-theme="dark"] .final-in,
+:root[data-theme="dark"] #leak .panel,
+:root[data-theme="dark"] #leak .results{border:1px solid rgba(150,184,255,.16)}
+:root[data-theme="dark"] #leak .panel::before,
+:root[data-theme="dark"] #leak .results::before,
+:root[data-theme="dark"] .final-in::after{
+  background:radial-gradient(90% 60% at 12% -8%,rgba(96,140,255,.2),transparent 62%);
+}
+:root[data-theme="dark"] .sec,
+:root[data-theme="dark"] .final{border-top:1px solid rgba(255,255,255,.07)}
+:root[data-theme="dark"] .strip,
+:root[data-theme="dark"] .foot{border-color:rgba(255,255,255,.1)}
+:root[data-theme="dark"] .quote:hover,
+:root[data-theme="dark"] .phase:hover,
+:root[data-theme="dark"] .step:hover{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 6px rgba(0,0,0,.5),0 26px 52px -26px rgba(0,0,0,.85);
+}
+
+/* the smaller surfaces that carried literal colours */
+:root[data-theme="dark"] .step-icon{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+:root[data-theme="dark"] .field-val{
+  background:linear-gradient(180deg,rgba(42,50,66,.72),rgba(19,23,31,.72));
+  border:1px solid rgba(255,255,255,.14);
+}
+:root[data-theme="dark"] .res.leak{background:rgba(255,255,255,.035)}
+:root[data-theme="dark"] .res.total{
+  background:linear-gradient(168deg,rgba(42,62,120,.55),rgba(15,19,29,.6));
+  border:1px solid rgba(150,184,255,.22);
+  box-shadow:var(--float-edge), inset 0 18px 40px -24px rgba(110,160,255,.5);
+}
+:root[data-theme="dark"] .cmp .col-us,
+:root[data-theme="dark"] .cmp thead .col-us{background:rgba(255,255,255,.05)}
+:root[data-theme="dark"] .demo-msg,
+:root[data-theme="dark"] .bubble.them{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+}
+:root[data-theme="dark"] .bubble{
+  background:linear-gradient(180deg,rgba(48,96,255,.88),rgba(32,66,200,.88));
+  border:1px solid rgba(150,184,255,.3);
+}
+:root[data-theme="dark"] .mark{
+  background:rgba(58,104,255,.22);color:#DCE6FF;border:1px solid rgba(150,184,255,.32);
+}
+:root[data-theme="dark"] .pipe-step,
+:root[data-theme="dark"] .join-dot,
+:root[data-theme="dark"] .btn-ghost{border:1px solid rgba(255,255,255,.14)}
+:root[data-theme="dark"] .vid-frame,
+:root[data-theme="dark"] .reel-media{background:#05060A;border:1px solid rgba(255,255,255,.1)}
+:root[data-theme="dark"] input[type=range]{background:rgba(255,255,255,.18)}
+:root[data-theme="dark"] input[type=range]::-webkit-slider-thumb{
+  background:#FFFFFF;border:3px solid rgba(19,23,31,.9);
+  box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 16px rgba(96,140,255,.6);
+}
+:root[data-theme="dark"] input[type=range]::-moz-range-thumb{background:#FFFFFF;border:3px solid rgba(19,23,31,.9)}
+:root[data-theme="dark"] .flow-node rect{fill:rgba(255,255,255,.08);stroke:rgba(255,255,255,.16)}
+:root[data-theme="dark"] .flow-key li::before{box-shadow:0 0 0 4px rgba(255,255,255,.09)}
+
+/* the call wall art is dark tiles on transparency, so it needs a lift
+   to separate from the ground */
+:root[data-theme="dark"] .callwall{background:var(--frost-deep)}
+
+/* controls invert: the primary becomes the light one */
+:root[data-theme="dark"] .btn-primary{
+  background:linear-gradient(180deg,#F7F9FC 0%,#D9DFEA 100%);
+  color:#0A0B0E;border:1px solid rgba(255,255,255,.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 1px 2px rgba(0,0,0,.5),
+    0 14px 30px -12px rgba(0,0,0,.8);
+}
+:root[data-theme="dark"] .btn-primary:hover{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 2px 4px rgba(0,0,0,.5),
+    0 22px 42px -14px rgba(0,0,0,.8),
+    0 0 50px -14px rgba(96,140,255,.45);
+}
+:root[data-theme="dark"] .btn-primary::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent)}
+:root[data-theme="dark"] .btn-ghost{
+  background:linear-gradient(180deg,rgba(30,36,48,.6),rgba(15,18,26,.62));
+  color:var(--ink);
+}
+:root[data-theme="dark"] .btn-ghost:hover{
+  border-color:rgba(150,184,255,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 14px 32px -12px rgba(0,0,0,.7);
+}
+:root[data-theme="dark"] .reel-nav.next{
+  background:linear-gradient(180deg,#F7F9FC,#D9DFEA);color:#0A0B0E;border-color:rgba(255,255,255,.7);
+}
+
+/* the theme switch itself */
+.theme-btn{
+  display:inline-grid;place-items:center;flex:none;
+  width:38px;height:38px;border-radius:50%;padding:0;cursor:pointer;
+  background:var(--frost-deep);border:var(--rim);color:var(--tx);
+  backdrop-filter:var(--blur-float);-webkit-backdrop-filter:var(--blur-float);
+  box-shadow:var(--float-edge);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1),box-shadow .24s ease;
+}
+.theme-btn:hover{transform:translateY(-1px) rotate(-12deg)}
+.theme-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-btn .t-sun{display:none}
+:root[data-theme="dark"] .theme-btn .t-sun{display:block}
+:root[data-theme="dark"] .theme-btn .t-moon{display:none}
+
 /* While the page is moving, freeze the drifting background. Every frosted
    panel has to resample its backdrop whenever what is behind it changes,
    so an animated backdrop under 20 panels means constant recompositing
@@ -1850,6 +2115,10 @@ html.is-scrolling .btn-primary.btn-lg{
         <a href="#pricing">Investment</a>
         <a href="#faq">FAQ</a>
       </nav>
+      <button class="theme-btn" type="button" id="theme" aria-label="Switch to dark theme">
+        <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+      </button>
       <a href="#book" class="btn btn-primary">Book a Strategy Call</a>
     </div>
   </div>
@@ -2977,6 +3246,21 @@ html.is-scrolling .btn-primary.btn-lg{
     split(h1);
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){ h1.classList.add('hero-lit'); });
+    });
+  }
+
+  /* theme switch. The head script already set the starting theme before
+     first paint, so this only handles the change and remembers it. */
+  var themeBtn = document.getElementById('theme');
+  if(themeBtn){
+    themeBtn.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try{ localStorage.setItem('ds-theme', next); }catch(e){}
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if(meta) meta.setAttribute('content', next === 'dark' ? '#07080B' : '#F7F8FA');
+      themeBtn.setAttribute('aria-label',
+        next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
     });
   }
 
