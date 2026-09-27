@@ -2072,6 +2072,17 @@ html,body{max-width:100%;overflow-x:hidden}
   background:linear-gradient(180deg,#F7F9FC,#D9DFEA);color:#0A0B0E;border-color:rgba(255,255,255,.7);
 }
 
+/* Theme change. The default is a cross fade, which would fight the
+   expanding circle, so both snapshots hold still and the new theme is
+   simply revealed over the old one from the button outward. */
+::view-transition-old(root),
+::view-transition-new(root){
+  animation:none;
+  mix-blend-mode:normal;
+}
+::view-transition-old(root){z-index:1}
+::view-transition-new(root){z-index:9999}
+
 /* the theme switch itself */
 .theme-btn{
   display:inline-grid;place-items:center;flex:none;
@@ -3336,14 +3347,44 @@ html.is-scrolling .btn-primary.btn-lg{
      first paint, so this only handles the change and remembers it. */
   var themeBtn = document.getElementById('theme');
   if(themeBtn){
-    themeBtn.addEventListener('click', function(){
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var applyTheme = function(next){
       document.documentElement.setAttribute('data-theme', next);
       try{ localStorage.setItem('ds-theme', next); }catch(e){}
       var meta = document.querySelector('meta[name="theme-color"]');
       if(meta) meta.setAttribute('content', next === 'dark' ? '#07080B' : '#F7F8FA');
       themeBtn.setAttribute('aria-label',
         next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    };
+
+    themeBtn.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+
+      /* The new theme grows out of the button that triggered it. Needs the
+         View Transitions API; anywhere without it the theme just swaps. */
+      if(!document.startViewTransition || calm){
+        applyTheme(next);
+        return;
+      }
+
+      var r = themeBtn.getBoundingClientRect();
+      var cx = r.left + r.width / 2;
+      var cy = r.top + r.height / 2;
+      /* reach to the farthest corner so the circle covers the viewport */
+      var reach = Math.hypot(
+        Math.max(cx, window.innerWidth - cx),
+        Math.max(cy, window.innerHeight - cy)
+      );
+
+      var vt = document.startViewTransition(function(){ applyTheme(next); });
+      vt.ready.then(function(){
+        document.documentElement.animate(
+          { clipPath: ['circle(0px at ' + cx + 'px ' + cy + 'px)',
+                       'circle(' + reach + 'px at ' + cx + 'px ' + cy + 'px)'] },
+          { duration: 620,
+            easing: 'cubic-bezier(.22,.7,.3,1)',
+            pseudoElement: '::view-transition-new(root)' }
+        );
+      }).catch(function(){});
     });
   }
 
