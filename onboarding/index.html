@@ -240,6 +240,22 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .vid-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:0 4px;font-size:.84rem;color:var(--tx-3)}
 .vid-foot a{color:var(--tx-2)}
 
+.bizid{display:grid;grid-template-columns:auto 1fr auto;gap:1rem 1.4rem;align-items:center;padding:clamp(18px,2.4vw,26px);border-radius:24px;position:relative;overflow:hidden}
+.bizid::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
+@media(max-width:700px){.bizid{grid-template-columns:1fr}}
+.bizid .big{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink)}
+.bizid .big svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bizid .num{font-family:var(--mono);font-weight:500;font-size:clamp(1.3rem,3vw,2rem);letter-spacing:.06em;color:var(--tx);word-break:break-all;line-height:1.2}
+.bizid p{font-size:.88rem;color:var(--tx-2)}
+.copy-btn.is-copied{color:var(--ok);border-color:var(--ok)}
+.fb-steps{list-style:none;margin:.3rem 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:900px){.fb-steps{grid-template-columns:1fr}}
+.fb-steps li{display:grid;gap:.5rem;align-content:start;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--art-bg);font-size:.88rem;color:var(--tx-2);line-height:1.45}
+@media(max-width:900px){.fb-steps li{grid-template-columns:auto 1fr;align-items:center}}
+.fb-steps b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--on-ink);font-family:var(--mono);font-size:.72rem;font-weight:500}
+.fb-steps .cfg{font-size:.84rem;word-break:normal;white-space:nowrap}
+.bizid .copy-btn{justify-self:start}
+
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .tile{
   position:relative;overflow:hidden;padding:18px 18px 20px;border-radius:22px;min-height:146px;
@@ -468,7 +484,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
     <ol class="roadmap rise" data-roadmap>
       <li><button type="button" data-go="1"><span class="n">01 <span class="tick">&#10003; done</span></span><span class="h4">Your shop</span><small>Business, ads, access, goals</small></button></li>
       <li><button type="button" data-go="2"><span class="n">02 <span class="tick">&#10003; done</span></span><span class="h4">Your voice</span><small>A one minute recording</small></button></li>
-      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span></span><span class="h4">Your list</span><small>Past customers, old quotes, access</small></button></li>
+      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span></span><span class="h4">Your list</span><small>Past customers, old quotes, Facebook access</small></button></li>
       <li><button type="button" data-go="4"><span class="n">04 <span class="tick">&#10003; done</span></span><span class="h4">Kickoff call</span><small>45 minutes, plan locked</small></button></li>
       <li><button type="button" data-go="5"><span class="n">05 <span class="tick">&#10003; done</span></span><span class="h4">Go live</span><small>What we build, in order</small></button></li>
     </ol>
@@ -701,20 +717,51 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
       </div>
 
       <div class="head" style="margin-top:16px">
-        <p class="eyebrow">Then give us access</p>
-        <p class="lede">Invite us through each platform's own access settings. You stay the owner, you can remove us any time, and nobody needs your password. Invite: <span data-access></span></p>
+        <p class="eyebrow">Then give us access on Facebook</p>
+        <p class="lede">Share your Facebook Page, Instagram, ad account and pixel with our business. You stay the owner, you can remove us any time, and nobody needs your password.</p>
       </div>
-      <div class="cards">
-        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><h4>Google Business Profile</h4>
-          <ol><li>Search your business on Google while signed in</li><li>Three dot menu, Business Profile settings</li><li>People and access, then Add</li><li>Our address, Manager role</li></ol></div>
-        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><h4>Meta: Facebook and Instagram</h4>
-          <ol><li>business.facebook.com, then Settings</li><li>Partners, then Add</li><li>"Give a partner access to your assets"</li><li>Our Business ID: <span data-meta></span></li><li>Share Page, Instagram, ad account and dataset</li></ol></div>
-        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><h4>Google Ads</h4>
-          <ol><li>Only if you run it or plan to</li><li>Admin, Access and security, plus button</li><li>Our address, Standard access</li></ol></div>
-        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg></span><h4>Website and booking app</h4>
-          <ol><li>Add our address as an admin or staff user</li><li>No website or software? Say so on the call</li></ol></div>
+      <div class="bizid slab">
+        <span class="big"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 6V4h8v2M3 12h18"/></svg></span>
+        <div style="display:grid;gap:.3rem;min-width:0">
+          <span class="mono">Our Meta Business ID</span>
+          <span class="num" data-meta-big></span>
+          <p>Paste this when Meta asks for your partner's business portfolio ID.</p>
+        </div>
+        <button class="check-btn copy-btn" type="button" data-copy-meta>Copy ID</button>
       </div>
-      <div class="note"><strong>Put a payment method on your ad account now.</strong> Ad spend is billed by Meta or Google straight to your card, never through us. A declined card is the easiest launch delay to avoid.</div>
+      <div class="vids">
+        <div class="vid slab">
+          <div class="vid-label"><span class="big"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><span style="display:grid;gap:.1rem"><span class="h4">Watch this if you're in Facebook or Meta Business Suite</span><span class="mono">Page, Instagram, pixel</span></span></div>
+          <div class="vid-frame" data-yt="HgWhYjM2yN4">
+            <button class="vid-play" type="button" aria-label="Play: Watch this if you're in Facebook or Meta Business Suite">
+              <img src="https://i.ytimg.com/vi/HgWhYjM2yN4/hqdefault.jpg" alt="" loading="lazy">
+              <span class="ring"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+            </button>
+          </div>
+          <div class="vid-foot"><span>Share with a partner using our ID</span><a href="https://www.youtube.com/watch?v=HgWhYjM2yN4" target="_blank" rel="noopener">Open on YouTube &#8599;</a></div>
+        </div>
+        <div class="vid slab">
+          <div class="vid-label"><span class="big"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><span style="display:grid;gap:.1rem"><span class="h4">Watch this if you're in Ads Manager</span><span class="mono">Ad account</span></span></div>
+          <div class="vid-frame" data-yt="PDBuA6EBaBA">
+            <button class="vid-play" type="button" aria-label="Play: Watch this if you're in Ads Manager">
+              <img src="https://i.ytimg.com/vi/PDBuA6EBaBA/hqdefault.jpg" alt="" loading="lazy">
+              <span class="ring"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+            </button>
+          </div>
+          <div class="vid-foot"><span>Share your ad account with us</span><a href="https://www.youtube.com/watch?v=PDBuA6EBaBA" target="_blank" rel="noopener">Open on YouTube &#8599;</a></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:.8rem"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><h4>The steps, in writing</h4></div>
+        <ol class="fb-steps">
+          <li><b>1</b><span>Go to business.facebook.com and open Settings</span></li>
+          <li><b>2</b><span>Under Users, choose Partners, then Add</span></li>
+          <li><b>3</b><span>Pick "Give a partner access to your assets"</span></li>
+          <li><b>4</b><span>Paste our Business ID: <span data-meta></span></span></li>
+          <li><b>5</b><span>Tick your Page, Instagram, ad account and dataset (pixel), then save</span></li>
+        </ol>
+      </div>
+      <div class="note"><strong>Put a payment method on your ad account now.</strong> Ad spend is billed by Meta straight to your card, never through us. A declined card is the easiest launch delay to avoid.</div>
     </div>
   </div>
 </section>
@@ -851,8 +898,7 @@ var CONFIG = {
   },
   calendly: 'https://calendly.com/zaimiana0',
   uploadUrl: '',       // private upload link for the customer list
-  accessEmail: '',     // address clients invite into their platforms
-  metaBusinessId: '',  // Meta Business Portfolio ID
+  metaBusinessId: '4355775974654336',  // DetailScales Meta Business Portfolio ID
   helpLine: ''         // e.g. 'Stuck? Text Zai on (555) 555 5555'
 };
 
@@ -940,8 +986,25 @@ var CONFIG = {
     else slot.appendChild(el('span', {'class':'pending'}, fallback));
   }
   fill('[data-upload]', CONFIG.uploadUrl, 'Upload link comes from your onboarding lead', true);
-  fill('[data-access]', CONFIG.accessEmail, 'the address your onboarding lead sends you');
   fill('[data-meta]', CONFIG.metaBusinessId, 'sent by your onboarding lead');
+  (function(){
+    var big = $('[data-meta-big]'), btn = $('[data-copy-meta]');
+    if(!CONFIG.metaBusinessId){ big.textContent = 'Sent by your onboarding lead'; btn.remove(); return; }
+    big.textContent = CONFIG.metaBusinessId;
+    btn.addEventListener('click', function(){
+      var done = function(){ btn.textContent = 'Copied'; btn.classList.add('is-copied');
+        setTimeout(function(){ btn.textContent = 'Copy ID'; btn.classList.remove('is-copied'); }, 2000); };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(CONFIG.metaBusinessId).then(done, function(){ selectId(); });
+      }else{ selectId(); }
+    });
+    /* no clipboard access: select the number so a long-press or Ctrl+C copies it */
+    function selectId(){
+      var r = document.createRange(); r.selectNodeContents(big);
+      var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      btn.textContent = 'Selected, now copy';
+    }
+  })();
   if(CONFIG.helpLine) $('[data-help]').textContent = CONFIG.helpLine;
 
   /* ---------- welcome art: five stations along the road ---------- */
