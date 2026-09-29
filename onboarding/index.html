@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>Client Onboarding | DetailScales</title>
-<meta name="description" content="Everything a new DetailScales client needs to do to get the Closed-Loop Booking System live: kickoff call, shop details, customer list, access and calendar.">
+<meta name="description" content="Five short videos taking new DetailScales clients from signed to live.">
 <!-- For paying clients only. Kept out of search and out of the sitemap. -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#F7F8FA">
+<meta name="theme-color" content="#07080B">
 
 <script>
 (function(){
@@ -17,12 +17,12 @@
     var dark = saved ? saved === "dark"
                      : window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
-    if(dark){
+    if(!dark){
       var m = document.querySelector("meta[name=theme-color]");
-      if(m) m.setAttribute("content", "#07080B");
+      if(m) m.setAttribute("content", "#F7F8FA");
     }
   }catch(e){
-    document.documentElement.setAttribute("data-theme", "light");
+    document.documentElement.setAttribute("data-theme", "dark");
   }
 })();
 </script>
@@ -37,34 +37,39 @@
 
 <style>
 /* ============================================================
-   DetailScales client onboarding.
-   Same material as the landing page: spray-booth ground,
-   graphite ink, frosted slabs, chrome as the only accent.
+   DetailScales client onboarding. A click-through deck.
+   One slide on screen at a time, Next and Back move it. The page
+   never scrolls: a slide taller than the stage scrolls inside its
+   own area, so nothing runs under the bars.
+   Same material as the landing page: graphite ink, frosted slabs,
+   chrome as the only accent.
    ============================================================ */
 :root{
-  --void:#F4F6F9; --paper:var(--void); --paper-2:#FFFFFF; --paper-3:#E9ECF1;
+  --void:#F4F6F9; --paper:var(--void); --paper-2:#FFFFFF;
   --ink:#14161B; --ink-2:#52565E; --ink-3:#6B7079; --on-ink:#FFFFFF;
   --tx:var(--ink); --tx-2:var(--ink-2); --tx-3:var(--ink-3);
   --rule:rgba(20,22,27,.18);
   --line:rgba(20,22,27,.1); --line-2:rgba(20,22,27,.18);
-  --leak:#B0492F; --ok:#2F7A4F;
+  --ok:#2F7A4F; --leak:#B0492F;
+  --glow:rgba(63,107,224,.28);
   --lift:0 1px 2px rgba(20,22,27,.05), 0 16px 40px -14px rgba(20,22,27,.18);
 
-  --slab:linear-gradient(180deg,rgba(255,255,255,.46) 0%,rgba(252,253,255,.34) 100%);
-  --slab-blur:blur(28px) saturate(1.6) brightness(1.08);
+  --slab:linear-gradient(180deg,rgba(255,255,255,.62) 0%,rgba(252,253,255,.46) 100%);
+  --slab-blur:blur(26px) saturate(1.6) brightness(1.06);
+  --slab-rim:rgba(255,255,255,.7);
   --slab-edge:
     inset 0 1px 0 rgba(255,255,255,.95),
     inset 1px 0 0 rgba(255,255,255,.6),
-    inset -1px -1px 0 rgba(255,255,255,.35),
     0 1px 2px rgba(20,22,27,.05),
     0 24px 54px -20px rgba(20,22,27,.22);
-  --slab-rim:rgba(255,255,255,.55);
-  --float:linear-gradient(180deg,rgba(255,255,255,.58),rgba(252,253,255,.46));
+  --float:linear-gradient(180deg,rgba(255,255,255,.7),rgba(252,253,255,.55));
   --float-edge:
     inset 0 1px 0 rgba(255,255,255,.98),
     0 1px 2px rgba(20,22,27,.05),
     0 10px 24px -8px rgba(20,22,27,.2);
-  --field:rgba(255,255,255,.62);
+  --art-bg:linear-gradient(160deg,#FFFFFF 0%,#EEF1F6 100%);
+  --art-a:#14161B; --art-b:#8A93A1; --art-c:#DDE1E8; --art-hi:#3F6BE0; --art-card:#FFFFFF;
+  --spark:40,52,80;
 
   --sheen:linear-gradient(100deg,
       var(--ink) 0%, var(--ink) 26%, #7B828F 40%,
@@ -73,32 +78,33 @@
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
-
-  --gut:clamp(16px,5vw,64px);
-  --max:1100px;
+  --gut:clamp(16px,4vw,48px);
   color-scheme:light;
 }
 :root[data-theme="dark"]{
-  --void:#07080B; --paper-2:#F2F4F8; --paper-3:#171A20;
+  --void:#07080B; --paper-2:#F2F4F8;
   --ink:#EDEFF3; --ink-2:#A6ACB8; --ink-3:#7C8392; --on-ink:#0A0B0E;
   --rule:rgba(255,255,255,.16);
   --line:rgba(255,255,255,.1); --line-2:rgba(255,255,255,.18);
-  --leak:#FF8163; --ok:#6FD39B;
+  --ok:#6FD39B; --leak:#FF8163;
+  --glow:rgba(96,140,255,.34);
   --lift:0 1px 2px rgba(0,0,0,.45), 0 16px 40px -14px rgba(0,0,0,.72);
 
-  --slab:linear-gradient(180deg,rgba(26,31,40,.54) 0%,rgba(13,16,22,.62) 100%);
+  --slab:linear-gradient(180deg,rgba(26,31,40,.6) 0%,rgba(13,16,22,.66) 100%);
+  --slab-rim:rgba(255,255,255,.12);
   --slab-edge:
-    inset 0 1px 0 rgba(255,255,255,.5),
-    inset 1px 0 0 rgba(255,255,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.45),
+    inset 1px 0 0 rgba(255,255,255,.1),
     0 1px 2px rgba(0,0,0,.5),
     0 24px 56px -22px rgba(0,0,0,.78);
-  --slab-rim:rgba(255,255,255,.12);
-  --float:linear-gradient(180deg,rgba(28,34,44,.62),rgba(15,18,25,.68));
+  --float:linear-gradient(180deg,rgba(30,36,48,.66),rgba(15,18,25,.7));
   --float-edge:
-    inset 0 1px 0 rgba(255,255,255,.44),
+    inset 0 1px 0 rgba(255,255,255,.4),
     0 1px 2px rgba(0,0,0,.45),
     0 10px 24px -8px rgba(0,0,0,.6);
-  --field:rgba(10,12,16,.55);
+  --art-bg:linear-gradient(160deg,#141821 0%,#0A0C11 100%);
+  --art-a:#EDEFF3; --art-b:#7C8496; --art-c:#2A303C; --art-hi:#8FB0FF; --art-card:#161A22;
+  --spark:216,224,238;
 
   --sheen:linear-gradient(100deg,
       #7C8496 0%, #7C8496 24%, #D8DEEA 42%,
@@ -107,71 +113,153 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px}
+html,body{height:100%;overflow:hidden}
 body{
   margin:0;background:var(--paper);color:var(--tx);
-  font-family:var(--body);font-size:16px;line-height:1.62;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
 }
-body::before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-}
-:root[data-theme="dark"] body::before{opacity:.3;mix-blend-mode:screen}
-
-/* raking light across the ground, fixed so it never repaints on scroll */
-.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.ambient i{position:absolute;border-radius:50%;filter:blur(40px)}
-.ambient .a1{width:70vw;height:70vw;left:-20vw;top:-30vw;background:radial-gradient(circle,rgba(125,156,240,.28),transparent 65%)}
-.ambient .a2{width:60vw;height:60vw;right:-22vw;top:30vh;background:radial-gradient(circle,rgba(151,160,174,.3),transparent 66%)}
-:root[data-theme="dark"] .ambient .a1{background:radial-gradient(circle,rgba(46,84,180,.36),transparent 66%)}
-:root[data-theme="dark"] .ambient .a2{background:radial-gradient(circle,rgba(70,86,120,.36),transparent 66%)}
-
 img{max-width:100%;display:block}
 a{color:inherit}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
-.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
-main,section,header,footer{position:relative;z-index:1}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+h2:focus{outline:none}
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:#fff;color:#14161B;padding:12px 18px;font-weight:700}
+.skip:focus{left:12px;top:12px}
 
-/* ---------- type ---------- */
 h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
-h1{font-size:clamp(2.3rem,6.2vw,4.6rem);font-weight:800;font-stretch:112%;line-height:.98;letter-spacing:-.035em}
-h2{font-size:clamp(1.7rem,3.8vw,2.8rem);font-weight:800;font-stretch:108%;line-height:1.05;letter-spacing:-.03em}
-h3{font-size:1.28rem;font-weight:700;font-stretch:104%;letter-spacing:-.018em;line-height:1.22}
-h4,.h4{font-family:var(--display);font-size:1rem;font-weight:700;font-stretch:104%;letter-spacing:-.01em;line-height:1.3}
+h2.title{font-size:clamp(2.1rem,4.8vw,3.9rem);font-weight:800;font-stretch:112%;line-height:.98;letter-spacing:-.035em}
+h3{font-size:1.3rem;font-weight:700;font-stretch:104%;letter-spacing:-.018em;line-height:1.22}
+h4,.h4{font-family:var(--display);font-size:1rem;font-weight:700;font-stretch:104%;letter-spacing:-.01em;line-height:1.3;color:var(--tx)}
 p{margin:0}
-.lede{font-size:clamp(1.02rem,1.5vw,1.17rem);color:var(--tx-2);max-width:62ch;line-height:1.6}
+.lede{font-size:clamp(1rem,1.4vw,1.14rem);color:var(--tx-2);max-width:56ch;line-height:1.6}
 .eyebrow{
   font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.2em;
   text-transform:uppercase;color:var(--tx-3);display:flex;align-items:center;gap:.7em;
 }
 .eyebrow::before{content:"";width:22px;height:1px;background:var(--rule);flex:none}
+.mono{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
 .sheen{
   background:var(--sheen);background-size:280% 100%;
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:sweep 7s linear infinite;
 }
 @keyframes sweep{to{background-position:-280% 0}}
-.mono{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
-.mark{background:var(--ink);color:var(--on-ink);padding:.12em .4em;border-radius:3px;font-weight:600;
-  box-decoration-break:clone;-webkit-box-decoration-break:clone}
 strong{font-weight:600;color:var(--tx)}
 
-/* ---------- brand lockup ---------- */
+/* ---------- app frame ---------- */
+.app{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.glowfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.glowfield i{position:absolute;border-radius:50%;filter:blur(60px);transition:transform 1.4s cubic-bezier(.22,.7,.3,1)}
+.glowfield .g1{width:60vmax;height:60vmax;left:-18vmax;top:-26vmax;background:radial-gradient(circle,var(--glow),transparent 64%)}
+.glowfield .g2{width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;background:radial-gradient(circle,rgba(151,160,174,.3),transparent 66%)}
+canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+.rail{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:var(--line)}
+.rail span{display:block;height:100%;width:0;background:var(--ink);transition:width .6s cubic-bezier(.22,.7,.3,1)}
+
+.topbar{
+  position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
+  padding:calc(12px + env(safe-area-inset-top,0px)) var(--gut) 10px;
+}
 .lockup{
-  --h:36px;height:var(--h);width:calc(var(--h) * 2.6493);flex:none;display:block;
+  --h:32px;height:var(--h);width:calc(var(--h) * 2.6493);flex:none;display:block;
   background:url("/assets/logo-wordmark.png") no-repeat left center/contain;
 }
 :root[data-theme="dark"] .lockup{background-image:url("/assets/logo-wordmark-dark.png")}
+.step-of{margin-left:auto;display:flex;align-items:center;gap:.45rem;white-space:nowrap;min-width:0}
+.step-of b{font-family:var(--display);font-weight:700;font-stretch:106%;font-size:.95rem;color:var(--tx);letter-spacing:0}
+.step-of .lbl{overflow:hidden;text-overflow:ellipsis}
+@media(max-width:560px){.step-of .lbl{display:none}}
+.theme-btn{
+  display:inline-grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;
+  background:var(--float);border:1px solid var(--slab-rim);color:var(--tx);box-shadow:var(--float-edge);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1);
+}
+.theme-btn:hover{transform:rotate(-12deg)}
+.theme-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-btn .t-sun{display:none}
+:root[data-theme="dark"] .theme-btn .t-sun{display:block}
+:root[data-theme="dark"] .theme-btn .t-moon{display:none}
+
+/* ---------- stage and slides ---------- */
+.stage{position:relative;z-index:1;min-height:0}
+.slide{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+  visibility:hidden;opacity:0;transform:translateX(40px);
+  transition:opacity .45s ease, transform .6s cubic-bezier(.22,.7,.3,1), visibility 0s linear .6s;
+  scrollbar-width:thin;
+}
+.slide.from-left{transform:translateX(-40px)}
+.slide.is-active{visibility:visible;opacity:1;transform:none;transition:opacity .45s ease .05s, transform .6s cubic-bezier(.22,.7,.3,1), visibility 0s}
+.slide-inner{max-width:1240px;margin-inline:auto;padding:clamp(12px,2.4vw,32px) var(--gut) clamp(28px,4vw,56px);display:grid;gap:clamp(22px,3vw,36px)}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(20px,3.4vw,48px);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.head{display:grid;gap:1.1rem;align-content:start}
+.side{display:grid;gap:14px}
+
+/* entrance: blocks in the active slide rise in order */
+.slide .rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .7s cubic-bezier(.22,.7,.3,1)}
+.slide.is-active .rise{opacity:1;transform:none}
+.slide.is-active .rise:nth-child(2){transition-delay:.08s}
+.slide.is-active .rise:nth-child(3){transition-delay:.16s}
+.slide.is-active .rise:nth-child(4){transition-delay:.24s}
+.slide.is-active .rise:nth-child(5){transition-delay:.32s}
+
+.slab{
+  background:var(--slab);
+  backdrop-filter:var(--slab-blur);-webkit-backdrop-filter:var(--slab-blur);
+  border:1px solid var(--slab-rim);border-radius:26px;box-shadow:var(--slab-edge);
+}
+
+/* ---------- video ---------- */
+.video{position:relative;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#05060A;box-shadow:var(--slab-edge);border:1px solid var(--slab-rim)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-ph{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#EDEFF3;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(96,140,255,.35), transparent 55%),
+    radial-gradient(90% 80% at 100% 100%, rgba(151,160,174,.28), transparent 60%),
+    linear-gradient(160deg,#141821,#07080B);
+}
+.video-ph::before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,255,255,.035) 38px 39px);
+}
+.video-ph::after{
+  content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);
+  animation:rake 5.5s ease-in-out infinite;
+}
+@keyframes rake{0%{left:-40%}60%,100%{left:120%}}
+.video-ph .play{
+  position:relative;z-index:1;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(180deg,#F7F9FC,#D9DFEA);box-shadow:0 0 0 10px rgba(255,255,255,.08),0 20px 50px -10px rgba(0,0,0,.8);
+  animation:pulse 2.6s ease-in-out infinite;
+}
+.video-ph .play svg{width:26px;height:26px;margin-left:4px;fill:#0A0B0E}
+@keyframes pulse{50%{box-shadow:0 0 0 18px rgba(255,255,255,.04),0 20px 50px -10px rgba(0,0,0,.8)}}
+.video-ph .cap{position:absolute;z-index:1;left:18px;bottom:16px;right:18px;display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,239,243,.7)}
+.video-ph .cap b{color:#fff;font-weight:500}
+.video-ph .brandmark{position:absolute;z-index:1;top:16px;left:18px;width:74px;height:26px;background:url("/assets/logo-wordmark-dark.png") no-repeat left center/contain;opacity:.85}
+
+/* ---------- the "one thing" card ---------- */
+.job{padding:clamp(18px,2.4vw,26px);display:grid;gap:.9rem}
+.job-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.job-top .mono{color:var(--tx)}
+.job p{color:var(--tx-2);font-size:.95rem}
+.job-actions{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);padding:.4rem .7rem;border-radius:999px;border:1px solid var(--line-2);white-space:nowrap}
 
 /* ---------- buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.6em;
   font-family:var(--display);font-weight:700;font-stretch:104%;font-size:.95rem;letter-spacing:-.01em;
-  padding:.92em 1.5em;border-radius:2px;text-decoration:none;
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  padding:.85em 1.4em;border-radius:999px;text-decoration:none;white-space:nowrap;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, opacity .2s ease;
 }
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .btn-primary{background:var(--ink);color:var(--on-ink);position:relative;overflow:hidden}
 .btn-primary::after{
   content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
@@ -180,725 +268,552 @@ strong{font-weight:600;color:var(--tx)}
 }
 .btn-primary:hover::after{left:120%}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--lift)}
-/* dark: controls invert, the primary becomes the light one */
 :root[data-theme="dark"] .btn-primary{
-  background:linear-gradient(180deg,#F7F9FC 0%,#D9DFEA 100%);
-  color:#0A0B0E;border:1px solid rgba(255,255,255,.7);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 1px 2px rgba(0,0,0,.5),0 14px 30px -12px rgba(0,0,0,.8);
+  background:linear-gradient(180deg,#F7F9FC 0%,#D9DFEA 100%);color:#0A0B0E;border:1px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(0,0,0,.5),0 14px 30px -12px rgba(0,0,0,.8);
 }
-:root[data-theme="dark"] .btn-primary::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent)}
-:root[data-theme="dark"] .mark{background:rgba(58,104,255,.22);color:#DCE6FF;border:1px solid rgba(150,184,255,.32)}
+:root[data-theme="dark"] .btn-primary:hover{box-shadow:inset 0 1px 0 #fff,0 22px 42px -14px rgba(0,0,0,.8),0 0 50px -14px rgba(96,140,255,.5)}
 .btn-ghost{color:var(--tx);border:1px solid var(--line-2);background:var(--float);box-shadow:var(--float-edge)}
 .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
-.btn-lg{font-size:1.02rem;padding:1.05em 1.9em}
-.btn[disabled]{opacity:.55;pointer-events:none}
-
-/* ---------- surfaces ---------- */
-.slab{
-  background:var(--slab);
-  backdrop-filter:var(--slab-blur);-webkit-backdrop-filter:var(--slab-blur);
-  border:1px solid var(--slab-rim);border-radius:26px;box-shadow:var(--slab-edge);
-}
-
-/* ---------- nav ---------- */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;padding-top:14px}
-.nav-in{
-  display:flex;align-items:center;gap:1rem;height:60px;padding-inline:14px 10px;border-radius:999px;
-}
-.nav-meter{margin-left:auto;display:flex;align-items:center;gap:.8rem;min-width:0}
-.nav-meter .mono{white-space:nowrap}
-.bar{width:clamp(70px,16vw,180px);height:4px;border-radius:4px;background:var(--line-2);overflow:hidden;flex:none}
-.bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:4px;transition:width .5s cubic-bezier(.22,.7,.3,1)}
-.theme-btn{
-  display:inline-grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;
-  background:var(--float);border:1px solid var(--slab-rim);color:var(--tx);box-shadow:var(--float-edge);
-  transition:transform .24s cubic-bezier(.2,.7,.3,1);
-}
-.theme-btn:hover{transform:translateY(-1px) rotate(-12deg)}
-.theme-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.theme-btn .t-sun{display:none}
-:root[data-theme="dark"] .theme-btn .t-sun{display:block}
-:root[data-theme="dark"] .theme-btn .t-moon{display:none}
-@media(max-width:520px){ .nav-meter .bar{display:none} .lockup{--h:30px} }
-
-/* ---------- hero ---------- */
-.hero{padding-block:clamp(48px,8vw,96px) clamp(36px,5vw,56px)}
-.hero-in{display:grid;gap:1.4rem;max-width:860px}
-.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;margin-top:.6rem}
-.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
-.chip{
-  display:inline-flex;align-items:baseline;gap:.5rem;padding:.55rem .95rem;border-radius:999px;
-  background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);font-size:.86rem;color:var(--tx-2);
-}
-.chip b{font-family:var(--display);font-weight:700;font-stretch:106%;color:var(--tx);letter-spacing:-.01em}
-
-/* ---------- sections ---------- */
-.sec{padding-block:clamp(44px,6vw,80px)}
-.sec-head{max-width:70ch;display:grid;gap:1rem;margin-bottom:clamp(26px,3.6vw,44px)}
-
-/* guarantee link, why every step matters */
-.why{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(18px,3vw,36px);padding:clamp(22px,3.4vw,40px);align-items:start}
-@media(max-width:820px){.why{grid-template-columns:1fr}}
-.why-copy{margin-top:.9rem;color:var(--tx-2);font-size:.98rem}
-.map{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
-.map li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline;font-size:.9rem;color:var(--tx-2);
-  padding-bottom:.55rem;border-bottom:1px solid var(--line)}
-.map li:last-child{border-bottom:0;padding-bottom:0}
-.map .mono{font-size:.62rem;letter-spacing:.1em;white-space:nowrap}
-
-/* ---------- steps ---------- */
-.steps{display:grid;gap:clamp(16px,2vw,22px);counter-reset:step}
-.step{padding:clamp(22px,3.2vw,38px);display:grid;gap:1.3rem;transition:box-shadow .3s ease}
-.step-top{display:grid;grid-template-columns:auto 1fr auto;gap:1rem 1.2rem;align-items:start}
-@media(max-width:640px){.step-top{grid-template-columns:auto 1fr}.step-time{grid-column:2}}
-.step-num{
-  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none;
-  font-family:var(--mono);font-size:.8rem;border:1px solid var(--line-2);background:var(--float);box-shadow:var(--float-edge);
-  transition:background .3s ease,color .3s ease,border-color .3s ease;
-}
-.step-num .tick{display:none}
-.step.is-done .step-num{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
-.step.is-done .step-num .n{display:none}
-.step.is-done .step-num .tick{display:block}
-.step-title{display:grid;gap:.4rem}
-.step-title p{color:var(--tx-2);font-size:.97rem;max-width:64ch}
-.step-time{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);white-space:nowrap;padding-top:.4rem}
-.step-body{display:grid;gap:1.2rem;padding-left:calc(46px + 1.2rem)}
-@media(max-width:640px){.step-body{padding-left:0}}
-.step-body > p,.step-body li{color:var(--tx-2);font-size:.95rem}
-.step-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.2rem;padding-top:1.1rem;border-top:1px solid var(--line)}
-.done-btn{
+.btn[disabled]{opacity:.35;pointer-events:none}
+.check-btn{
   display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;
-  border:1px solid var(--line-2);font-size:.86rem;color:var(--tx-2);background:var(--float);
+  border:1px solid var(--line-2);font-size:.88rem;color:var(--tx-2);background:var(--float);
   transition:border-color .2s ease,color .2s ease;
 }
-.done-btn:hover{border-color:var(--ink);color:var(--tx)}
-.done-btn .box{width:16px;height:16px;border-radius:4px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.7rem;line-height:1}
-.done-btn[aria-pressed="true"]{color:var(--ok);border-color:var(--ok)}
-.done-btn[aria-pressed="true"] .box::after{content:"\2713"}
-.why-line{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;line-height:1.7;color:var(--tx-3)}
+.check-btn:hover{border-color:var(--ink);color:var(--tx)}
+.check-btn .box{width:17px;height:17px;border-radius:5px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.72rem;line-height:1}
+.check-btn[aria-pressed="true"]{color:var(--ok);border-color:var(--ok)}
+.check-btn[aria-pressed="true"] .box::after{content:"\2713"}
 
-.checks{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
-.checks li{display:flex;gap:.75rem;line-height:1.55}
-.checks li::before{content:"\2713";font-family:var(--mono);font-size:.78rem;color:var(--tx);flex:none;line-height:1.75}
-.arrows li::before{content:"\2192"}
+/* ---------- art panels ---------- */
+.art{position:relative;border-radius:26px;overflow:hidden;background:var(--art-bg);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);aspect-ratio:5/4}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.art .t{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:var(--art-b)}
+.art .ta{fill:var(--art-a)}
+.art .ti{fill:var(--on-ink)}
+.art .tb{font-family:var(--display);font-weight:700;font-size:15px;fill:var(--art-a);letter-spacing:-.01em}
+.art .tn{font-family:var(--display);font-weight:800;fill:var(--art-a);letter-spacing:-.03em}
+.art .s-a{stroke:var(--art-a)} .art .s-b{stroke:var(--art-b)} .art .s-c{stroke:var(--art-c)} .art .s-hi{stroke:var(--art-hi)}
+.art .f-a{fill:var(--art-a)} .art .f-b{fill:var(--art-b)} .art .f-c{fill:var(--art-c)} .art .f-hi{fill:var(--art-hi)}
+.art .f-card{fill:var(--art-card)}
+.art-tag{position:absolute;z-index:1;left:18px;top:16px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3);display:flex;align-items:center;gap:.5rem}
+.art-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 22%,transparent)}
 
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
-@media(max-width:760px){.cols{grid-template-columns:1fr}}
-.card{
-  padding:1.2rem 1.3rem;border-radius:18px;border:1px solid var(--line);
-  background:var(--float);box-shadow:var(--float-edge);display:grid;gap:.7rem;align-content:start;
+/* draw-on paths and pop-ins, played when the slide becomes active */
+.draw{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 1.6s cubic-bezier(.22,.7,.3,1) .3s}
+.slide.is-active .draw{stroke-dashoffset:0}
+.pop{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.7);transition:opacity .5s ease, transform .6s cubic-bezier(.3,1.5,.5,1)}
+.slide.is-active .pop{opacity:1;transform:none}
+.slide.is-active .d1{transition-delay:.3s}.slide.is-active .d2{transition-delay:.5s}
+.slide.is-active .d3{transition-delay:.7s}.slide.is-active .d4{transition-delay:.9s}
+.slide.is-active .d5{transition-delay:1.1s}.slide.is-active .d6{transition-delay:1.3s}
+.grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);transition:transform 1s cubic-bezier(.22,.7,.3,1)}
+.slide.is-active .grow{transform:none}
+.bar-anim{transform-box:fill-box;transform-origin:center;animation:wave 1.2s ease-in-out infinite}
+@keyframes wave{50%{transform:scaleY(.35)}}
+.flow-dot{animation:travel 3s linear infinite}
+@keyframes travel{from{offset-distance:0%}to{offset-distance:100%}}
+.blink{animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- content bits ---------- */
+.roadmap{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:760px){.roadmap{grid-template-columns:1fr 1fr}}
+.roadmap button{
+  width:100%;height:100%;text-align:left;padding:14px 14px 16px;border-radius:18px;display:grid;gap:.35rem;align-content:start;
+  background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);
+  transition:transform .2s ease,border-color .2s ease;
 }
-.card ol{margin:0;padding-left:1.15rem;display:grid;gap:.35rem;font-size:.9rem;color:var(--tx-2)}
-.card p{font-size:.9rem;color:var(--tx-2)}
-.card .mono{font-size:.6rem}
-.note{
-  padding:1rem 1.2rem;border-radius:14px;border:1px dashed var(--line-2);font-size:.9rem;color:var(--tx-2)
-}
+.roadmap button:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.roadmap .n{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--tx-3);display:flex;justify-content:space-between}
+.roadmap .n .tick{color:var(--ok);display:none}
+.roadmap .is-done{border-color:color-mix(in srgb,var(--ok) 55%,transparent)}
+.roadmap .is-done .n .tick{display:inline}
+.roadmap small{font-size:.8rem;color:var(--tx-3);line-height:1.4}
+
+.stats{display:flex;flex-wrap:wrap;gap:.6rem}
+.stat{display:inline-flex;align-items:baseline;gap:.5rem;padding:.55rem .95rem;border-radius:999px;background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);font-size:.86rem;color:var(--tx-2)}
+.stat b{font-family:var(--display);font-weight:700;font-stretch:106%;color:var(--tx)}
+
+.formwrap{padding:0;overflow:hidden;border-radius:24px}
+.formbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:14px 18px;border-bottom:1px solid var(--line)}
+.formbar a{font-size:.85rem;color:var(--tx-2)}
+.formframe{display:block;width:100%;height:min(1400px,max(72vh,620px));border:0;background:#fff}
+.calframe{display:block;width:100%;height:min(1000px,max(74vh,660px));border:0}
+.frame-ph{display:grid;place-items:center;min-height:200px;color:var(--tx-3);font-size:.92rem;text-align:center;padding:24px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.card{padding:18px 18px 20px;border-radius:20px;border:1px solid var(--slab-rim);background:var(--float);box-shadow:var(--float-edge);display:grid;gap:.6rem;align-content:start}
+.card ol{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:.88rem;color:var(--tx-2)}
+.card p{font-size:.88rem;color:var(--tx-2)}
+.card .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink)}
+.card .ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card.wide{grid-template-columns:1fr auto;align-items:center;gap:1rem}
+@media(max-width:600px){.card.wide{grid-template-columns:1fr}}
+.note{padding:14px 16px;border-radius:16px;border:1px dashed var(--line-2);font-size:.9rem;color:var(--tx-2)}
 .note.warn{border-style:solid;border-color:color-mix(in srgb,var(--leak) 45%,transparent)}
 .note.warn strong{color:var(--leak)}
 .cfg{font-family:var(--mono);font-size:.82rem;word-break:break-all;color:var(--tx)}
 .pending{color:var(--tx-3);font-style:italic}
 
-/* kickoff calendar */
-.booker{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--paper-2);min-height:0}
-.booker iframe{display:block;width:100%;height:700px;border:0}
+.commit{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.commit label{cursor:pointer;display:grid;gap:.5rem;align-content:start;padding:16px 18px;border-radius:20px;border:1px solid var(--slab-rim);background:var(--float);box-shadow:var(--float-edge);transition:border-color .2s ease}
+.commit label:has(input:checked){border-color:var(--ok)}
+.commit .row{display:flex;gap:.65rem;align-items:flex-start}
+.commit input{margin-top:.18rem;width:17px;height:17px;accent-color:var(--ok);flex:none}
+.commit p{font-size:.86rem;color:var(--tx-2)}
 
-/* ---------- intake form ---------- */
-.intake{display:grid;gap:1.6rem}
-fieldset{border:0;margin:0;padding:0;display:grid;gap:1rem}
-legend{padding:0;margin-bottom:.4rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx-3)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
-@media(max-width:640px){.grid2{grid-template-columns:1fr}}
-.f{display:grid;gap:.4rem}
-.f label,.f .lbl{font-size:.88rem;color:var(--tx);font-weight:500}
-.f small{font-size:.8rem;color:var(--tx-3);line-height:1.45}
-.req{color:var(--leak)}
-input[type=text],input[type=email],input[type=tel],input[type=url],input[type=number],select,textarea{
-  width:100%;font:inherit;font-size:.95rem;color:var(--tx);
-  padding:.72rem .85rem;border-radius:10px;border:1px solid var(--line-2);background:var(--field);
-  transition:border-color .18s ease, box-shadow .18s ease;
+.summary{padding:clamp(20px,2.6vw,30px);display:grid;gap:.8rem;justify-items:start}
+.summary.is-complete{box-shadow:var(--slab-edge),0 0 0 1px var(--ok)}
+.summary .meter{width:100%;height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+.summary .meter i{display:block;height:100%;width:0;background:var(--ok);border-radius:6px;transition:width .6s cubic-bezier(.22,.7,.3,1)}
+
+/* ---------- bottom bar ---------- */
+.botbar{
+  position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
+  padding:12px var(--gut) calc(14px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--line);
+  background:var(--slab);backdrop-filter:var(--slab-blur);-webkit-backdrop-filter:var(--slab-blur);
 }
-textarea{min-height:92px;resize:vertical;line-height:1.5}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 14%,transparent)}
-input:user-invalid,textarea:user-invalid,select:user-invalid{border-color:var(--leak)}
-.opts{display:flex;flex-wrap:wrap;gap:.5rem}
-.opt{position:relative}
-.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.opt span{
-  display:inline-block;padding:.45rem .85rem;border-radius:999px;border:1px solid var(--line-2);
-  font-size:.86rem;color:var(--tx-2);background:var(--field);transition:all .16s ease;
-}
-.opt input:checked + span{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
-.opt input:focus-visible + span{outline:2px solid var(--ink);outline-offset:2px}
-.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.2rem}
-.saved{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-3)}
-.status{font-size:.92rem}
-.status.ok{color:var(--ok)}
-.status.err{color:var(--leak)}
+.dots{display:flex;gap:8px;margin-inline:auto}
+.dots button{width:9px;height:9px;border-radius:9px;background:var(--line-2);transition:width .3s ease, background .3s ease}
+.dots button.is-done{background:var(--ok)}
+.dots button[aria-current="step"]{width:28px;background:var(--ink)}
+@media(max-width:560px){ .btn-nav .long{display:none} .botbar .btn{padding:.8em 1.05em} }
 
-/* ---------- timeline ---------- */
-.timeline{list-style:none;margin:0;padding:0;display:grid;gap:0;position:relative}
-.timeline::before{content:"";position:absolute;left:11px;top:10px;bottom:10px;width:1px;background:var(--line-2)}
-.tl{display:grid;grid-template-columns:24px 1fr;gap:1.1rem;padding-bottom:clamp(18px,2.4vw,28px)}
-.tl:last-child{padding-bottom:0}
-.tl-dot{width:23px;height:23px;border-radius:50%;background:var(--paper);border:1px solid var(--line-2);position:relative;margin-top:.15rem}
-.tl-dot::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--ink)}
-.tl-body{padding:clamp(18px,2.4vw,26px);display:grid;gap:.55rem}
-.tl-body p{color:var(--tx-2);font-size:.94rem}
-.tl-when{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
-
-/* ---------- FAQ ---------- */
-.faq{display:grid;gap:.7rem}
-.faq details{padding:0;border-radius:18px}
-.faq summary{
-  list-style:none;cursor:pointer;padding:1.1rem 1.3rem;display:flex;justify-content:space-between;gap:1rem;
-  font-family:var(--display);font-weight:700;font-stretch:104%;letter-spacing:-.01em;font-size:1.02rem;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-family:var(--mono);color:var(--tx-3);transition:transform .2s ease}
-.faq details[open] summary::after{transform:rotate(45deg)}
-.faq details p{padding:0 1.3rem 1.2rem;color:var(--tx-2);font-size:.95rem;max-width:72ch}
-
-/* ---------- finish ---------- */
-.finish{padding:clamp(28px,4.4vw,56px);text-align:center;display:grid;gap:1rem;justify-items:center;border-radius:30px}
-.finish .lede{margin-inline:auto}
-.finish.is-complete{box-shadow:var(--slab-edge),0 0 0 1px var(--ok)}
-
-/* ---------- footer ---------- */
-.foot{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line);padding-block:clamp(32px,4vw,48px)}
-.foot-in{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between}
-.foot-in .mono{font-size:.62rem;letter-spacing:.09em;text-transform:none}
-.foot a{text-decoration:none;color:var(--tx-2)}
-.foot a:hover{color:var(--tx)}
-
-/* ---------- motion ---------- */
-.reveal{transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
-html.js-anim .reveal.is-pending{opacity:0;transform:translateY(22px)}
 @media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  .sheen{animation:none}
-  .reveal,.bar i{transition:none}
-  html.js-anim .reveal.is-pending{opacity:1;transform:none}
-}
-@media print{
-  .nav,.ambient,.theme-btn,.booker,.done-btn{display:none!important}
-  .slab{box-shadow:none;backdrop-filter:none;border:1px solid #ccc}
+  .slide,.slide.is-active,.slide .rise,.draw,.pop,.grow{transition:none!important}
+  .sheen,.bar-anim,.flow-dot,.blink,.spin,.video-ph .play,.video-ph::after{animation:none!important}
+  .draw{stroke-dashoffset:0}
+  .pop,.slide .rise{opacity:1;transform:none}
+  .grow{transform:none}
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#s1">Skip to content</a>
 
-<div class="ambient" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
+<div class="glowfield" aria-hidden="true"><i class="g1" data-g1></i><i class="g2" data-g2></i></div>
+<canvas class="specks" data-specks aria-hidden="true"></canvas>
+<div class="rail" aria-hidden="true"><span data-rail></span></div>
 
-<header class="nav" id="nav">
-  <div class="wrap">
-    <div class="nav-in slab">
-      <a href="/" class="lockup" aria-label="DetailScales home"></a>
-      <div class="nav-meter" aria-live="polite">
-        <span class="mono" id="meter-label">0 of 5 done</span>
-        <span class="bar" aria-hidden="true"><i id="meter-bar"></i></span>
-      </div>
-      <button class="theme-btn" type="button" id="theme" aria-label="Switch to dark theme">
-        <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
-        <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
-      </button>
-    </div>
-  </div>
+<div class="app">
+
+<header class="topbar">
+  <a href="/" class="lockup" aria-label="DetailScales home"></a>
+  <span class="step-of mono" aria-live="polite"><b data-cur>01</b> / <span data-tot>06</span><span class="lbl" data-lbl></span></span>
+  <button class="theme-btn" type="button" id="theme" aria-label="Switch to light theme">
+    <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+    <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+  </button>
 </header>
 
-<main>
+<main class="stage" data-stage>
 
-<!-- ============ HERO: future pace, then one next step ============ -->
-<section class="hero">
-  <div class="wrap hero-in">
-    <p class="eyebrow">Client onboarding</p>
-    <h1><span id="greet">Welcome in.</span> Let's get your first <span class="sheen">dead quote booked</span>.</h1>
-    <p class="lede">You bought a system that works in a set order, starting with the money already sitting in old quotes and past customers. It cannot start until we have five things from you. This page walks you through all five, and it remembers where you got to.</p>
-    <div class="hero-cta">
-      <a href="#step-1" class="btn btn-primary btn-lg">Start with step one</a>
-      <span class="mono">About 40 minutes, plus your kickoff call</span>
-    </div>
-    <div class="chips">
-      <span class="chip"><b>5 steps</b> on your side</span>
-      <span class="chip"><b>7 to 14 days</b> to fully live</span>
-      <span class="chip"><b>Paid ads</b> switched on last</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHY: each step is a guarantee input ============ -->
-<section class="sec" style="padding-top:0">
-  <div class="wrap">
-    <div class="why slab reveal">
-      <div>
-        <div class="sec-head" style="margin-bottom:1.2rem">
-          <p class="eyebrow">Why this matters</p>
-          <h2>Every step here is one of your guarantee conditions.</h2>
+<!-- ============ 1. WELCOME ============ -->
+<section class="slide" id="s1" data-label="Welcome" aria-labelledby="h-s1">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Video 1 of 5</p>
+        <h2 class="title rise" id="h-s1" tabindex="-1"><span data-greet>Welcome in.</span> Let's get your first <span class="sheen">dead quote booked</span>.</h2>
+        <p class="lede rise">Five short videos take you from signed to live. Watch them in order and do the one thing each one asks. This page remembers where you got to.</p>
+        <div class="stats rise">
+          <span class="stat"><b>5</b> videos</span>
+          <span class="stat"><b>~45 min</b> of your time</span>
+          <span class="stat"><b>7 to 14 days</b> to fully live</span>
         </div>
-        <p class="why-copy">The $10,000 in 90 days guarantee holds because it rests on inputs you control and we do not. This page is where those inputs get handed over.</p>
-        <p class="why-copy">Skip one and the guarantee does not fail loudly. It just quietly stops being ours to hold. <span class="mark">Finish all five and the clock is fully on us.</span></p>
       </div>
-      <ul class="map" aria-label="Which step covers which condition">
-        <li><span class="mono">Step 1</span><span>We agree the plan, the minimum ad spend and what "added revenue" is measured against</span></li>
-        <li><span class="mono">Step 2</span><span>The voice agent and follow-up quote your real prices, not guesses</span></li>
-        <li><span class="mono">Step 3</span><span>Your full customer and lead database at onboarding</span></li>
-        <li><span class="mono">Step 4</span><span>Access to the systems we are building on</span></li>
-        <li><span class="mono">Step 5</span><span>Calendar space, 24 hour replies, follow-up left running, capacity to do the work</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ THE FIVE STEPS ============ -->
-<section class="sec" id="steps" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Your side</p>
-      <h2>Five steps. Do them in order.</h2>
-      <p class="lede">Tick each one off as you go. Your progress is saved on this device, so you can close the page and come back.</p>
+      <div class="video rise" data-video="0"></div>
     </div>
 
-    <div class="steps">
-
-      <!-- STEP 1 -->
-      <article class="step slab reveal" id="step-1" data-step="1">
-        <div class="step-top">
-          <div class="step-num" aria-hidden="true"><span class="n">01</span><span class="tick">&#10003;</span></div>
-          <div class="step-title">
-            <h3>Book your kickoff call</h3>
-            <p>Forty five minutes with the person building your system. We lock the plan so nothing gets built twice.</p>
-          </div>
-          <span class="step-time">5 min to book</span>
-        </div>
-        <div class="step-body">
-          <div class="cols">
-            <div class="card">
-              <p class="mono">What we cover</p>
-              <ul class="checks">
-                <li>Your numbers: jobs a month, average ticket, which service you want more of</li>
-                <li>The baseline we measure added revenue against</li>
-                <li>Your minimum monthly ad spend, paid direct to the platform</li>
-                <li>Business texting registration, which carriers require before any message sends</li>
-                <li>Anything from steps 3 and 4 you got stuck on</li>
-              </ul>
-            </div>
-            <div class="card">
-              <p class="mono">Have these to hand</p>
-              <ul class="checks arrows">
-                <li>Your legal business name and EIN, for the texting registration</li>
-                <li>Rough revenue for the last 3 months, so the baseline is honest</li>
-                <li>Whoever answers your phone today, if that is not you</li>
-                <li>Your price list, even if it lives in your head</li>
-              </ul>
-            </div>
-          </div>
-          <div id="kickoff-slot"></div>
-          <div class="step-foot">
-            <button class="done-btn" type="button" data-done="1" aria-pressed="false"><span class="box" aria-hidden="true"></span>My kickoff call is booked</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- STEP 2 -->
-      <article class="step slab reveal" id="step-2" data-step="2">
-        <div class="step-top">
-          <div class="step-num" aria-hidden="true"><span class="n">02</span><span class="tick">&#10003;</span></div>
-          <div class="step-title">
-            <h3>Tell us about the shop</h3>
-            <p>Everything the voice agent and follow-up messages need to sound like your business. Quick answers beat perfect ones.</p>
-          </div>
-          <span class="step-time">15 min</span>
-        </div>
-        <div class="step-body">
-          <form class="intake" id="intake" novalidate>
-
-            <fieldset>
-              <legend>The business</legend>
-              <div class="grid2">
-                <div class="f"><label for="biz">Business name <span class="req">*</span></label><input type="text" id="biz" name="business_name" required autocomplete="organization"></div>
-                <div class="f"><label for="owner">Your name <span class="req">*</span></label><input type="text" id="owner" name="owner_name" required autocomplete="name"></div>
-                <div class="f"><label for="mobile">Mobile <span class="req">*</span></label><input type="tel" id="mobile" name="mobile" required autocomplete="tel"></div>
-                <div class="f"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" required autocomplete="email"></div>
-                <div class="f"><label for="site">Website</label><input type="url" id="site" name="website" placeholder="https://" autocomplete="url"></div>
-                <div class="f"><label for="ig">Instagram handle</label><input type="text" id="ig" name="instagram" placeholder="@"></div>
-              </div>
-              <div class="f">
-                <span class="lbl" id="model-l">How do you work? <span class="req">*</span></span>
-                <div class="opts" role="radiogroup" aria-labelledby="model-l">
-                  <label class="opt"><input type="radio" name="business_model" value="Shop" required><span>Shop or studio</span></label>
-                  <label class="opt"><input type="radio" name="business_model" value="Mobile"><span>Mobile</span></label>
-                  <label class="opt"><input type="radio" name="business_model" value="Both"><span>Both</span></label>
-                </div>
-              </div>
-              <div class="grid2">
-                <div class="f"><label for="area">Service area <span class="req">*</span></label><input type="text" id="area" name="service_area" required placeholder="City, plus how far you travel"><small>Ads and the voice agent use this to turn away jobs you cannot reach.</small></div>
-                <div class="f"><label for="hours">Working hours</label><input type="text" id="hours" name="hours" placeholder="Mon to Sat, 8am to 6pm"></div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>What you sell</legend>
-              <div class="f"><label for="coating">Ceramic coating and correction packages, with prices <span class="req">*</span></label><textarea id="coating" name="coating_packages" required placeholder="e.g. 3 year coating from $1,500, 5 year from $2,200, single stage correction $650"></textarea></div>
-              <div class="f"><label for="details">Regular detail and wash services, with prices <span class="req">*</span></label><textarea id="details" name="detail_packages" required placeholder="e.g. Maintenance wash $85, full interior $220, full detail $300"></textarea></div>
-              <div class="grid2">
-                <div class="f"><label for="brand">Coating brand you use</label><input type="text" id="brand" name="coating_brand" placeholder="e.g. Gtechniq, Ceramic Pro, System X"></div>
-                <div class="f"><label for="ticket">Average ticket across all jobs</label><input type="text" id="ticket" name="average_ticket" placeholder="$"></div>
-              </div>
-              <div class="f"><label for="want">Which job do you want more of, and why?</label><input type="text" id="want" name="want_more_of" placeholder="e.g. Full coatings. Best margin, and I have bay space Tuesday to Thursday"></div>
-              <div class="f"><label for="maint">Do you sell a coating maintenance plan or annual top up?</label><input type="text" id="maint" name="maintenance_plan" placeholder="What it includes and what it costs, or 'no'"></div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Where enquiries come from</legend>
-              <div class="f">
-                <span class="lbl" id="src-l">Tick every place people contact you</span>
-                <div class="opts" role="group" aria-labelledby="src-l">
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Phone calls"><span>Phone calls</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Texts"><span>Texts</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Instagram DMs"><span>Instagram DMs</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Facebook"><span>Facebook</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Google Business Profile"><span>Google Business Profile</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Website form"><span>Website form</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Referrals"><span>Referrals</span></label>
-                  <label class="opt"><input type="checkbox" name="lead_sources" value="Dealerships or partners"><span>Dealers or partners</span></label>
-                </div>
-              </div>
-              <div class="grid2">
-                <div class="f"><label for="volume">Roughly how many enquiries a month?</label><input type="number" id="volume" name="enquiries_per_month" min="0" inputmode="numeric"></div>
-                <div class="f"><label for="who">Who answers them today?</label><input type="text" id="who" name="who_answers" placeholder="e.g. Me, between jobs"></div>
-              </div>
-              <div class="grid2">
-                <div class="f"><label for="software">Booking or CRM software</label><input type="text" id="software" name="booking_software" placeholder="e.g. Urable, Square, Jobber, or pen and paper"></div>
-                <div class="f"><label for="phone">The number customers call</label><input type="tel" id="phone" name="business_phone"><small>Mobile, landline or a tracking number. We build around it, you keep it.</small></div>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Capacity</legend>
-              <div class="grid2">
-                <div class="f"><label for="cap-coat">Coating jobs you could add a month <span class="req">*</span></label><input type="number" id="cap-coat" name="extra_coatings_capacity" min="0" inputmode="numeric" required></div>
-                <div class="f"><label for="cap-det">Details you could add a week <span class="req">*</span></label><input type="number" id="cap-det" name="extra_details_capacity" min="0" inputmode="numeric" required></div>
-              </div>
-              <div class="f"><label for="slots">When can new jobs be booked?</label><input type="text" id="slots" name="bookable_slots" placeholder="e.g. Coatings drop off Mon or Tue, details any weekday 9am"></div>
-            </fieldset>
-
-            <fieldset>
-              <legend>How you sound</legend>
-              <div class="f"><label for="diff">Why do customers pick you over the shop down the road?</label><textarea id="diff" name="differentiator" placeholder="The real reasons, in your words. Warranty, the way you prep, a review customers keep mentioning."></textarea></div>
-              <div class="f"><label for="obj">What do people push back on before they book?</label><textarea id="obj" name="common_objections" placeholder="e.g. 'Is coating worth it', 'Another shop quoted $900', 'I'll wait till spring'"></textarea></div>
-              <div class="f"><label for="never">Anything the voice agent must never say or promise?</label><input type="text" id="never" name="never_say" placeholder="e.g. Never quote a correction price without seeing the car"></div>
-              <div class="f"><label for="offer">Any offer running now, or one you would be happy to run?</label><input type="text" id="offer" name="current_offer" placeholder="e.g. Free interior with any coating this month"></div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Reviews</legend>
-              <div class="grid2">
-                <div class="f"><label for="rev-link">Google review link</label><input type="url" id="rev-link" name="google_review_link" placeholder="https://g.page/r/..."><small>In your Business Profile, "Ask for reviews" gives you this link.</small></div>
-                <div class="f"><label for="rev-count">Current Google reviews and rating</label><input type="text" id="rev-count" name="google_reviews" placeholder="e.g. 48 reviews, 4.9"></div>
-              </div>
-            </fieldset>
-
-            <div class="form-foot">
-              <button type="submit" class="btn btn-primary" id="intake-send">Send my shop details</button>
-              <span class="saved" id="saved" aria-live="polite">Answers save as you type</span>
-            </div>
-            <p class="status" id="intake-status" role="status" hidden></p>
-          </form>
-          <div class="step-foot">
-            <button class="done-btn" type="button" data-done="2" aria-pressed="false"><span class="box" aria-hidden="true"></span>My shop details are sent</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- STEP 3 -->
-      <article class="step slab reveal" id="step-3" data-step="3">
-        <div class="step-top">
-          <div class="step-num" aria-hidden="true"><span class="n">03</span><span class="tick">&#10003;</span></div>
-          <div class="step-title">
-            <h3>Send your customer and lead list</h3>
-            <p>This is the step that matters most. The fastest money in the whole system comes from people who already paid you or already asked for a price.</p>
-          </div>
-          <span class="step-time">10 to 20 min</span>
-        </div>
-        <div class="step-body">
-          <div class="note warn"><strong>Messy is fine. Missing is not.</strong> A spreadsheet with half the emails blank is worth more than a clean one you never get round to sending. We clean it, dedupe it and sort it. Send what you have.</div>
-          <div class="cols">
-            <div class="card">
-              <p class="mono">What to send</p>
-              <ul class="checks">
-                <li><strong>Past customers.</strong> Anyone who has paid you for a wash, detail or coating</li>
-                <li><strong>Unclosed quotes.</strong> Anyone who asked for a price and never booked</li>
-                <li><strong>Coating customers</strong> with the date it went on, for maintenance reminders</li>
-                <li>Name and phone at minimum. Email, vehicle, last service and date if you have them</li>
-              </ul>
-            </div>
-            <div class="card">
-              <p class="mono">Where it probably lives</p>
-              <ul class="checks arrows">
-                <li><strong>Booking software:</strong> the Customers or Clients list usually has an Export or Download CSV option</li>
-                <li><strong>iPhone contacts:</strong> icloud.com, Contacts, select all, then Export vCard</li>
-                <li><strong>Android or Gmail:</strong> contacts.google.com, then Export, then Google CSV</li>
-                <li><strong>Instagram DMs and texts:</strong> screenshots of the conversations that never booked are fine</li>
-                <li><strong>Invoices or a notebook:</strong> photos work. We will type it up</li>
-              </ul>
-            </div>
-          </div>
-          <div class="card">
-            <p class="mono">Where to send it</p>
-            <div id="upload-slot"></div>
-            <p>Use the upload link rather than email or text where you can. It is your customers' contact details, so it should travel the private way.</p>
-          </div>
-          <p class="why-line">Your list is only ever used to message your own customers, on your behalf, in wording you approve before anything goes out.</p>
-          <div class="step-foot">
-            <button class="done-btn" type="button" data-done="3" aria-pressed="false"><span class="box" aria-hidden="true"></span>My list is sent</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- STEP 4 -->
-      <article class="step slab reveal" id="step-4" data-step="4">
-        <div class="step-top">
-          <div class="step-num" aria-hidden="true"><span class="n">04</span><span class="tick">&#10003;</span></div>
-          <div class="step-title">
-            <h3>Give us access</h3>
-            <p>Invite us through each platform's own access settings. You stay the owner, you can remove us at any time, and nobody ever needs your password.</p>
-          </div>
-          <span class="step-time">10 min</span>
-        </div>
-        <div class="step-body">
-          <div class="note">Invite this address wherever a platform asks for one: <span id="access-slot"></span></div>
-          <div class="cols">
-            <div class="card">
-              <h4>Google Business Profile</h4>
-              <p class="mono">Reviews, calls and messages</p>
-              <ol>
-                <li>Search your business name on Google while signed in</li>
-                <li>Open the three dot menu, then Business Profile settings</li>
-                <li>Choose People and access, then Add</li>
-                <li>Enter our address and pick the Manager role</li>
-              </ol>
-            </div>
-            <div class="card">
-              <h4>Meta: Facebook and Instagram</h4>
-              <p class="mono">Ads, pixel, Page and DMs</p>
-              <ol>
-                <li>Go to business.facebook.com and open Settings</li>
-                <li>Under Users, choose Partners, then Add</li>
-                <li>Pick "Give a partner access to your assets"</li>
-                <li>Enter our Business ID: <span id="meta-slot"></span></li>
-                <li>Share your Page, Instagram account, ad account and dataset (pixel)</li>
-              </ol>
-            </div>
-            <div class="card">
-              <h4>Google Ads</h4>
-              <p class="mono">Only if you run it or plan to</p>
-              <ol>
-                <li>Open Google Ads, then Admin</li>
-                <li>Choose Access and security, then the plus button</li>
-                <li>Enter our address with Standard access</li>
-              </ol>
-            </div>
-            <div class="card">
-              <h4>Website and booking software</h4>
-              <p class="mono">Tracking, forms and the calendar link</p>
-              <ol>
-                <li>Add our address as an admin or staff user in your site builder</li>
-                <li>Do the same in your booking or CRM software</li>
-                <li>No website or no software? Say so on the kickoff call. We work around it</li>
-              </ol>
-            </div>
-          </div>
-          <div class="note"><strong>Ad accounts need a payment method on file.</strong> Ad spend is billed by Meta or Google straight to your card, never through us. Add it now so launch day is not held up by a declined card.</div>
-          <div class="step-foot">
-            <button class="done-btn" type="button" data-done="4" aria-pressed="false"><span class="box" aria-hidden="true"></span>Access is sent</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- STEP 5 -->
-      <article class="step slab reveal" id="step-5" data-step="5">
-        <div class="step-top">
-          <div class="step-num" aria-hidden="true"><span class="n">05</span><span class="tick">&#10003;</span></div>
-          <div class="step-title">
-            <h3>Get the shop ready for the jobs</h3>
-            <p>The system books work. These are the four things that decide whether a booking turns into revenue. Tick each one when it is true.</p>
-          </div>
-          <span class="step-time">5 min</span>
-        </div>
-        <div class="step-body">
-          <div class="cols" id="commit">
-            <label class="card" style="cursor:pointer">
-              <span style="display:flex;gap:.7rem;align-items:flex-start"><input type="checkbox" data-commit="cal" style="margin-top:.35rem;accent-color:var(--ink)"><span class="h4">Slots are open on the calendar</span></span>
-              <p>A coating buyer who is offered a date three weeks out goes to the next shop. Block real, bookable time for new jobs.</p>
-            </label>
-            <label class="card" style="cursor:pointer">
-              <span style="display:flex;gap:.7rem;align-items:flex-start"><input type="checkbox" data-commit="reply" style="margin-top:.35rem;accent-color:var(--ink)"><span class="h4">Someone replies inside 24 hours</span></span>
-              <p>Booked calls and quote requests get a human reply within a day. Decide now who that is if it is not you.</p>
-            </label>
-            <label class="card" style="cursor:pointer">
-              <span style="display:flex;gap:.7rem;align-items:flex-start"><input type="checkbox" data-commit="run" style="margin-top:.35rem;accent-color:var(--ink)"><span class="h4">The follow-up stays running</span></span>
-              <p>Once you approve the messages, they run as built. If something feels off, tell us and we change it. Pulling it quietly is the one thing that breaks the system.</p>
-            </label>
-            <label class="card" style="cursor:pointer">
-              <span style="display:flex;gap:.7rem;align-items:flex-start"><input type="checkbox" data-commit="cap" style="margin-top:.35rem;accent-color:var(--ink)"><span class="h4">The capacity is real</span></span>
-              <p>The numbers you gave in step two are the numbers you can actually fulfil, with products in stock and hands to do the work.</p>
-            </label>
-          </div>
-          <div class="step-foot">
-            <span class="why-line" id="commit-count">0 of 4 ticked. This step completes itself when all four are.</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ OUR SIDE: timeline in mechanism order ============ -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Our side</p>
-      <h2>What we build while you do that. In this order, on purpose.</h2>
-      <p class="lede">Most agencies start with ads. We start with the revenue you already have, so the ads land on a system that catches what they bring in.</p>
-    </div>
-    <ol class="timeline">
-      <li class="tl reveal">
-        <span class="tl-dot" aria-hidden="true"></span>
-        <div class="tl-body slab">
-          <p class="tl-when">Days 1 to 3</p>
-          <h3>Your list, cleaned. Your messages, written.</h3>
-          <p>We import and dedupe your list, split it into unclosed quotes, past customers and coating owners, and write the recovery and reactivation messages. You see and approve every word before a single one sends. Business texting registration is submitted the day we have your details. Carriers can take a few days to clear it.</p>
-        </div>
-      </li>
-      <li class="tl reveal">
-        <span class="tl-dot" aria-hidden="true"></span>
-        <div class="tl-body slab">
-          <p class="tl-when">Days 3 to 7</p>
-          <h3>Dead leads and past customers get worked.</h3>
-          <p>Dead lead recovery goes live, then reactivation to your past detail, wash and coating customers. Review and referral requests switch on after every finished job, with coating maintenance reminders behind them. This is usually where the first recovered jobs come from.</p>
-        </div>
-      </li>
-      <li class="tl reveal">
-        <span class="tl-dot" aria-hidden="true"></span>
-        <div class="tl-body slab">
-          <p class="tl-when">Days 7 to 10</p>
-          <h3>Every enquiry answered inside 60 seconds.</h3>
-          <p>The AI voice agent is trained on your prices, your area and the objections you gave us, then connected to your calendar. We send a real test enquiry end to end and you hear exactly what your customers will hear before it goes live.</p>
-        </div>
-      </li>
-      <li class="tl reveal">
-        <span class="tl-dot" aria-hidden="true"></span>
-        <div class="tl-body slab">
-          <p class="tl-when">Days 10 to 14</p>
-          <h3>Paid ads, switched on last.</h3>
-          <p>Coating and detailing campaigns go live at the ad spend we agreed on the kickoff call, into a system that now follows up on every click.</p>
-        </div>
-      </li>
-      <li class="tl reveal">
-        <span class="tl-dot" aria-hidden="true"></span>
-        <div class="tl-body slab">
-          <p class="tl-when">Every week after</p>
-          <h3>A plain English report.</h3>
-          <p>Jobs booked, revenue produced, cost per booked job, and what we are changing next. Not a dashboard you never open.</p>
-        </div>
-      </li>
+    <ol class="roadmap rise" data-roadmap>
+      <li><button type="button" data-go="1"><span class="n">01 <span class="tick">&#10003; done</span></span><span class="h4">Your shop</span><small>Business, ads, access, goals</small></button></li>
+      <li><button type="button" data-go="2"><span class="n">02 <span class="tick">&#10003; done</span></span><span class="h4">Your voice</span><small>Prices and answers for the AI</small></button></li>
+      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span></span><span class="h4">Your list</span><small>Past customers, old quotes, access</small></button></li>
+      <li><button type="button" data-go="4"><span class="n">04 <span class="tick">&#10003; done</span></span><span class="h4">Kickoff call</span><small>45 minutes, plan locked</small></button></li>
+      <li><button type="button" data-go="5"><span class="n">05 <span class="tick">&#10003; done</span></span><span class="h4">Go live</span><small>What we build, in order</small></button></li>
     </ol>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Onboarding questions</p>
-      <h2>The things new clients ask first.</h2>
+<!-- ============ 2. YOUR SHOP: core onboarding form ============ -->
+<section class="slide" id="s2" data-label="Your shop" aria-labelledby="h-s2">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Video 2 of 5</p>
+        <h2 class="title rise" id="h-s2" tabindex="-1">Tell us about <span class="sheen">the shop</span>.</h2>
+        <p class="lede rise">Who you serve, where, what you charge, and what winning looks like in 90 days. This is the brief every ad, message and report gets built from.</p>
+        <div class="video rise" data-video="1"></div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="Your answers become a shop profile that feeds ads, follow-up and reporting">
+          <span class="art-tag">Building your shop profile</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <defs><linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--art-hi)"/><stop offset="1" stop-color="var(--art-b)"/></linearGradient></defs>
+            <g class="pop d1">
+              <rect class="f-card s-c" x="36" y="56" width="272" height="300" rx="20" stroke-width="1"/>
+              <circle class="f-c" cx="78" cy="100" r="22"/>
+              <path class="s-a" d="M68 101l7 7 13-14" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect class="f-a" x="114" y="88" width="124" height="10" rx="5"/>
+              <rect class="f-b" x="114" y="106" width="80" height="8" rx="4" opacity=".6"/>
+            </g>
+            <g class="pop d2">
+              <text class="t" x="58" y="160">Services</text>
+              <rect class="f-c" x="58" y="170" width="78" height="26" rx="13"/><rect class="f-c" x="142" y="170" width="100" height="26" rx="13"/>
+              <text class="t ta" x="72" y="187" style="font-size:9px">Coating</text><text class="t ta" x="156" y="187" style="font-size:9px">Correction</text>
+            </g>
+            <g class="pop d3">
+              <text class="t" x="58" y="226">Service area</text>
+              <circle class="s-hi spin" cx="96" cy="266" r="26" fill="none" stroke-width="1.5" stroke-dasharray="3 5"/>
+              <circle class="f-hi" cx="96" cy="266" r="5"/>
+              <rect class="f-c" x="140" y="250" width="140" height="9" rx="4.5"/><rect class="f-c" x="140" y="268" width="100" height="9" rx="4.5"/>
+            </g>
+            <g class="pop d4">
+              <text class="t" x="58" y="322">Offer</text>
+              <rect class="f-a" x="112" y="309" width="170" height="22" rx="11"/>
+              <text class="t ti" x="126" y="324" style="font-size:9px">Free interior + coating</text>
+            </g>
+            <g class="pop d3">
+              <circle cx="404" cy="134" r="58" fill="none" class="s-c" stroke-width="11"/>
+              <circle cx="404" cy="134" r="58" fill="none" stroke="url(#ringg)" stroke-width="11" stroke-linecap="round" class="draw" pathLength="100" style="--len:100;stroke-dasharray:100" transform="rotate(-90 404 134)"/>
+              <text class="tn" x="404" y="142" text-anchor="middle" font-size="30">15</text>
+              <text class="t" x="404" y="162" text-anchor="middle">minutes</text>
+            </g>
+            <path class="s-b draw" d="M308 250 C 340 250, 344 230, 372 230" fill="none" stroke-width="1.5" style="--len:80"/>
+            <path class="s-b draw" d="M308 272 C 340 272, 344 280, 372 280" fill="none" stroke-width="1.5" style="--len:80"/>
+            <path class="s-b draw" d="M308 294 C 340 294, 344 330, 372 330" fill="none" stroke-width="1.5" style="--len:90"/>
+            <g class="pop d5"><rect class="f-card s-c" x="372" y="214" width="100" height="32" rx="16"/><text class="t ta" x="422" y="234" text-anchor="middle">Ads</text></g>
+            <g class="pop d5"><rect class="f-card s-c" x="372" y="264" width="100" height="32" rx="16"/><text class="t ta" x="422" y="284" text-anchor="middle">Follow-up</text></g>
+            <g class="pop d6"><rect class="f-card s-c" x="372" y="314" width="100" height="32" rx="16"/><text class="t ta" x="422" y="334" text-anchor="middle">Reports</text></g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">About 15 min</span></div>
+          <p><strong>Fill in the onboarding form below.</strong> Quick answers beat perfect ones. Unsure of something? Write "ask me on the call".</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#form-core">Open the form <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="1" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've sent it</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="faq">
-      <details class="slab reveal">
-        <summary>My customer list is a mess. Should I tidy it first?</summary>
-        <p>No. Send it as it is. Tidying it is our job, and every day it sits on your laptop is a day the unclosed quotes in it get colder.</p>
-      </details>
-      <details class="slab reveal">
-        <summary>I don't really have a list. Most of it is in my phone.</summary>
-        <p>That is the most common answer we get. Export your phone contacts using the steps in step three, and send screenshots of any DM or text threads where someone asked for a price. That is a list.</p>
-      </details>
-      <details class="slab reveal">
-        <summary>Won't texting old customers annoy them?</summary>
-        <p>These are people who already paid you or asked you for a price. The messages read like they came from you, they are sent at sensible hours, and anyone who replies stop is removed automatically. You approve the wording before anything sends.</p>
-      </details>
-      <details class="slab reveal">
-        <summary>Do I need a new phone number?</summary>
-        <p>No. Customers keep calling the number they already have. We go through how the voice agent picks up missed and after-hours calls on the kickoff call.</p>
-      </details>
-      <details class="slab reveal">
-        <summary>When do I start paying for ads?</summary>
-        <p>Not until the follow-up is live, usually in the second week. Ad spend is billed by Meta or Google straight to your card, never through us.</p>
-      </details>
-      <details class="slab reveal">
-        <summary>What if I get stuck on a step?</summary>
-        <p>Skip it, finish the rest, and bring it to the kickoff call. A half-finished step four is far better than steps three and five waiting on it.</p>
-      </details>
+    <div class="formwrap slab" id="form-core">
+      <div class="formbar"><span class="mono">Client onboarding form</span><a data-form-link="core" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-form="core"></div>
     </div>
   </div>
 </section>
 
-<!-- ============ FINISH ============ -->
-<section class="sec">
-  <div class="wrap">
-    <div class="finish slab reveal" id="finish">
-      <p class="eyebrow">Where you are</p>
-      <h2 id="finish-title">Five steps between you and your first recovered job.</h2>
-      <p class="lede" id="finish-text">Pick up at the first step that is not ticked. Everything you have done so far is saved on this device.</p>
-      <a href="#step-1" class="btn btn-primary btn-lg" id="finish-cta">Go to step one</a>
-      <p class="mono" id="help-slot"></p>
+<!-- ============ 3. YOUR VOICE: pricing and knowledge ============ -->
+<section class="slide" id="s3" data-label="Your voice" aria-labelledby="h-s3">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Video 3 of 5</p>
+        <h2 class="title rise" id="h-s3" tabindex="-1">Teach the AI to <span class="sheen">sound like you</span>.</h2>
+        <p class="lede rise">Your voice agent calls every enquiry inside 60 seconds, and it can only quote what you tell it. Prices by vehicle size, what each package includes, where you travel, and what it must never say.</p>
+        <div class="video rise" data-video="2"></div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="A customer asks for a price and the voice agent answers with your own prices">
+          <span class="art-tag">Incoming enquiry &middot; answered in 0:42</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <g class="pop d1">
+              <rect class="f-card s-c" x="36" y="58" width="290" height="62" rx="20"/>
+              <text class="t" x="58" y="83">Customer</text>
+              <text class="tb" x="58" y="105" style="font-size:14px">How much to coat a Tahoe?</text>
+            </g>
+            <g class="pop d3">
+              <rect class="f-a" x="120" y="136" width="344" height="86" rx="20"/>
+              <text class="t" x="142" y="161">Your voice agent</text>
+              <text class="tb" x="142" y="185" style="font-size:14px;fill:var(--on-ink)">Our 3 year coating on a full size SUV</text>
+              <text class="tb" x="142" y="205" style="font-size:14px;fill:var(--on-ink)">starts at $1,850. Tuesday or Thursday?</text>
+            </g>
+            <g transform="translate(44 262)"><g class="pop d4">
+              <g class="f-hi">
+                <rect class="bar-anim" x="0" y="20" width="9" height="40" rx="4.5"/>
+                <rect class="bar-anim" x="17" y="6" width="9" height="68" rx="4.5" style="animation-delay:.15s"/>
+                <rect class="bar-anim" x="34" y="16" width="9" height="48" rx="4.5" style="animation-delay:.3s"/>
+                <rect class="bar-anim" x="51" y="0" width="9" height="80" rx="4.5" style="animation-delay:.45s"/>
+                <rect class="bar-anim" x="68" y="14" width="9" height="52" rx="4.5" style="animation-delay:.6s"/>
+                <rect class="bar-anim" x="85" y="24" width="9" height="32" rx="4.5" style="animation-delay:.75s"/>
+                <rect class="bar-anim" x="102" y="10" width="9" height="60" rx="4.5" style="animation-delay:.9s"/>
+                <rect class="bar-anim" x="119" y="22" width="9" height="36" rx="4.5" style="animation-delay:1.05s"/>
+              </g>
+            </g></g>
+            <g class="pop d5">
+              <rect class="f-card s-c" x="204" y="248" width="260" height="104" rx="18"/>
+              <text class="t" x="224" y="274">Pulled from your form</text>
+              <circle class="f-hi" cx="230" cy="296" r="4"/><text class="t ta" x="242" y="300">Price by vehicle size</text>
+              <circle class="f-hi" cx="230" cy="318" r="4"/><text class="t ta" x="242" y="322">Coating tiers</text>
+              <circle class="f-hi" cx="230" cy="340" r="4"/><text class="t ta" x="242" y="344">Days you work</text>
+            </g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">About 20 min</span></div>
+          <p><strong>Fill in the pricing and knowledge form.</strong> Price list in front of you. If a price depends on the car, say what it depends on.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#form-voice">Open the form <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="2" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've sent it</button>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="formwrap slab" id="form-voice">
+      <div class="formbar"><span class="mono">Pricing and knowledge form</span><a data-form-link="voice" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-form="voice"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. YOUR LIST AND ACCESS ============ -->
+<section class="slide" id="s4" data-label="Your list" aria-labelledby="h-s4">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Video 4 of 5</p>
+        <h2 class="title rise" id="h-s4" tabindex="-1">Hand over the list. <span class="sheen">It's the fastest money.</span></h2>
+        <p class="lede rise">People who already paid you, and people who already asked for a price. That list is where the first recovered jobs come from, before a cent of ad spend.</p>
+        <div class="video rise" data-video="3"></div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="Your messy list gets sorted into unclosed quotes, past customers and coating owners">
+          <span class="art-tag">Your list, sorted</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <g class="pop d1">
+              <rect class="f-card s-c" x="40" y="86" width="150" height="46" rx="12" transform="rotate(-6 115 109)"/>
+              <rect class="f-card s-c" x="46" y="124" width="150" height="46" rx="12" transform="rotate(4 121 147)"/>
+              <rect class="f-card s-c" x="36" y="164" width="150" height="46" rx="12" transform="rotate(-3 111 187)"/>
+              <rect class="f-card s-c" x="44" y="204" width="150" height="46" rx="12" transform="rotate(5 119 227)"/>
+              <rect class="f-card s-c" x="38" y="244" width="150" height="46" rx="12"/>
+              <circle class="f-c" cx="62" cy="267" r="11"/><rect class="f-a" x="82" y="260" width="74" height="7" rx="3.5"/><rect class="f-b" x="82" y="272" width="48" height="6" rx="3" opacity=".6"/>
+              <text class="t" x="40" y="320">Messy is fine</text>
+            </g>
+            <path class="s-b draw" d="M196 190 C 256 190, 268 110, 326 110" fill="none" stroke-width="1.5" style="--len:180"/>
+            <path class="s-b draw" d="M196 200 L 326 200" fill="none" stroke-width="1.5" style="--len:140"/>
+            <path class="s-b draw" d="M196 210 C 256 210, 268 290, 326 290" fill="none" stroke-width="1.5" style="--len:180"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 190 C 256 190, 268 110, 326 110')"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 200 L 326 200');animation-delay:1s"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 210 C 256 210, 268 290, 326 290');animation-delay:2s"/>
+            <g class="pop d3"><rect class="f-a" x="326" y="82" width="146" height="56" rx="16"/><text class="t ti" x="342" y="105" style="opacity:.7">Unclosed quotes</text><text class="tb" x="342" y="126" style="font-size:14px;fill:var(--on-ink)">Worked first</text></g>
+            <g class="pop d4"><rect class="f-card s-c" x="326" y="172" width="146" height="56" rx="16"/><text class="t" x="342" y="195">Past customers</text><text class="tb" x="342" y="216" style="font-size:14px">Reactivated</text></g>
+            <g class="pop d5"><rect class="f-card s-c" x="326" y="262" width="146" height="56" rx="16"/><text class="t" x="342" y="285">Coating owners</text><text class="tb" x="342" y="306" style="font-size:14px">Maintenance due</text></g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">10 to 20 min</span></div>
+          <p><strong>Send your customer and lead list, then give us access.</strong> Both are conditions of the guarantee, and both are below.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#list-how">Show me how <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="3" aria-pressed="false"><span class="box" aria-hidden="true"></span>List and access sent</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="list-how" style="display:grid;gap:14px">
+      <div class="note warn"><strong>Messy is fine. Missing is not.</strong> A spreadsheet with half the emails blank beats a clean one you never send. We clean it, dedupe it and sort it.</div>
+      <div class="cards">
+        <div class="card">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 10h16M9 5v14"/></svg></span>
+          <h4>Booking software</h4>
+          <p>The Customers or Clients list usually has an Export or Download CSV option.</p>
+        </div>
+        <div class="card">
+          <span class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+          <h4>Your phone</h4>
+          <p>iPhone: icloud.com, Contacts, select all, Export vCard. Android: contacts.google.com, Export, Google CSV.</p>
+        </div>
+        <div class="card">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/></svg></span>
+          <h4>DMs and texts</h4>
+          <p>Screenshots of every conversation where someone asked for a price and never booked.</p>
+        </div>
+        <div class="card">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span>
+          <h4>Invoices or a notebook</h4>
+          <p>Photos work. We type it up.</p>
+        </div>
+      </div>
+      <div class="card wide">
+        <div style="display:grid;gap:.35rem"><h4>Send it the private way</h4><p>It is your customers' contact details, so use the upload link rather than email or text.</p></div>
+        <div data-upload></div>
+      </div>
+
+      <div class="head" style="margin-top:16px">
+        <p class="eyebrow">Then give us access</p>
+        <p class="lede">Invite us through each platform's own access settings. You stay the owner, you can remove us any time, and nobody needs your password. Invite: <span data-access></span></p>
+      </div>
+      <div class="cards">
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><h4>Google Business Profile</h4>
+          <ol><li>Search your business on Google while signed in</li><li>Three dot menu, Business Profile settings</li><li>People and access, then Add</li><li>Our address, Manager role</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><h4>Meta: Facebook and Instagram</h4>
+          <ol><li>business.facebook.com, then Settings</li><li>Partners, then Add</li><li>"Give a partner access to your assets"</li><li>Our Business ID: <span data-meta></span></li><li>Share Page, Instagram, ad account and dataset</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><h4>Google Ads</h4>
+          <ol><li>Only if you run it or plan to</li><li>Admin, Access and security, plus button</li><li>Our address, Standard access</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg></span><h4>Website and booking app</h4>
+          <ol><li>Add our address as an admin or staff user</li><li>No website or software? Say so on the call</li></ol></div>
+      </div>
+      <div class="note"><strong>Put a payment method on your ad account now.</strong> Ad spend is billed by Meta or Google straight to your card, never through us. A declined card is the easiest launch delay to avoid.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. KICKOFF CALL ============ -->
+<section class="slide" id="s5" data-label="Kickoff call" aria-labelledby="h-s5">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Video 5 of 5</p>
+        <h2 class="title rise" id="h-s5" tabindex="-1">Book your <span class="sheen">kickoff call</span>.</h2>
+        <p class="lede rise">Forty five minutes with the person building your system. We go through your answers, agree the baseline and the ad spend, and lock the plan so nothing gets built twice.</p>
+        <div class="video rise" data-video="4"></div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="A week of calendar slots with your kickoff call highlighted">
+          <span class="art-tag">Kickoff &middot; 45 min</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <rect class="f-card s-c pop d1" x="46" y="56" width="408" height="300" rx="22"/>
+            <g class="pop d1"><text class="tb" x="74" y="98">This week</text><text class="t" x="426" y="98" text-anchor="end">Pick a slot</text></g>
+            <g class="pop d2" data-calgrid></g>
+            <g class="pop d5">
+              <rect class="f-a" x="216" y="250" width="68" height="42" rx="10"/>
+              <text class="t ti" x="250" y="275" text-anchor="middle" style="font-size:9px">Kickoff</text>
+              <circle class="f-hi blink" cx="282" cy="252" r="7"/>
+            </g>
+            <g class="pop d6">
+              <rect class="f-card s-c" x="290" y="306" width="172" height="44" rx="14"/>
+              <path class="s-hi" d="M308 328l6 6 12-13" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <text class="tb" x="336" y="333" style="font-size:13px">Plan locked</text>
+            </g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">2 min to book</span></div>
+          <p><strong>Pick a time below.</strong> Bring your legal business name and EIN for the business texting registration, and roughly what the last three months brought in, so the baseline is honest.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#cal">Pick a time <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="4" aria-pressed="false"><span class="box" aria-hidden="true"></span>My call is booked</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="formwrap slab" id="cal">
+      <div class="formbar"><span class="mono">Kickoff call</span><a data-cal-link target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-cal></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. GO LIVE ============ -->
+<section class="slide" id="s6" data-label="Go live" aria-labelledby="h-s6">
+  <div class="slide-inner">
+    <div class="split" style="align-items:start">
+      <div class="head">
+        <p class="eyebrow rise">What happens next</p>
+        <h2 class="title rise" id="h-s6" tabindex="-1">We build it <span class="sheen">in this order</span>. On purpose.</h2>
+        <p class="lede rise">Most agencies start with ads. We start with the revenue you already have, so the ads land on a system that catches what they bring in.</p>
+        <div class="summary slab rise" data-summary>
+          <p class="mono">Your progress</p>
+          <h3 data-summary-t></h3>
+          <span class="meter" aria-hidden="true"><i data-summary-bar></i></span>
+          <p style="color:var(--tx-2);font-size:.95rem" data-summary-p></p>
+          <button class="btn btn-primary" type="button" data-summary-go>Go to the next step</button>
+        </div>
+      </div>
+      <div class="art rise" style="aspect-ratio:500/420" role="img" aria-label="Build order over 14 days: dead lead recovery, reactivation, reviews and referrals, instant response, then paid ads last">
+        <span class="art-tag">Days 1 to 14</span>
+        <svg viewBox="0 0 500 420" aria-hidden="true">
+          <g class="t" text-anchor="middle">
+            <text x="176" y="64">Day 1</text><text x="246" y="64">4</text><text x="316" y="64">7</text><text x="386" y="64">10</text><text x="456" y="64">14</text>
+          </g>
+          <g class="s-c" stroke-width="1" stroke-dasharray="2 5">
+            <path d="M176 76V372M246 76V372M316 76V372M386 76V372M456 76V372"/>
+          </g>
+          <text class="tb" x="22" y="112" style="font-size:13px">Dead lead recovery</text>
+          <rect class="f-a grow d1" x="176" y="98" width="150" height="22" rx="11"/>
+          <text class="tb" x="22" y="170" style="font-size:13px">Reactivation</text>
+          <rect class="f-a grow d2" x="226" y="156" width="140" height="22" rx="11" opacity=".8"/>
+          <text class="tb" x="22" y="228" style="font-size:13px">Reviews, referrals</text>
+          <rect class="f-b grow d3" x="260" y="214" width="196" height="22" rx="11"/>
+          <text class="tb" x="22" y="286" style="font-size:13px">60 second response</text>
+          <rect class="f-b grow d4" x="316" y="272" width="110" height="22" rx="11" opacity=".75"/>
+          <text class="tb" x="22" y="344" style="font-size:13px">Paid ads, last</text>
+          <rect class="f-hi grow d5" x="386" y="330" width="70" height="22" rx="11"/>
+          <text class="t pop d6" x="22" y="400">Then: a plain English report on jobs and revenue</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="head">
+      <p class="eyebrow">Your side of the guarantee</p>
+      <h3>Tick these when they are true.</h3>
+      <p class="lede" style="font-size:.95rem">The system books the work. These four decide whether a booking turns into revenue, and each is a condition of the $10,000 in 90 days guarantee.</p>
+    </div>
+    <div class="commit">
+      <label><span class="row"><input type="checkbox" data-commit="cal"><span class="h4">Slots are open</span></span><p>A coating buyer offered a date three weeks out goes to the next shop. Keep real, bookable time free.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="reply"><span class="h4">24 hour replies</span></span><p>Booked calls and quote requests get a human reply within a day. Decide who that is.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="run"><span class="h4">Follow-up stays on</span></span><p>Once the messages are approved they run as built. If something feels off, tell us and we change it.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="cap"><span class="h4">Capacity is real</span></span><p>Hands, products and bay time to actually do the jobs it books.</p></label>
+    </div>
+    <p class="mono" data-help></p>
   </div>
 </section>
 
 </main>
 
-<footer class="foot">
-  <div class="wrap foot-in">
-    <a href="/" class="lockup" style="--h:40px" aria-label="DetailScales home"></a>
-    <span class="mono">&copy; 2026 DetailScales &middot; Client onboarding</span>
-  </div>
-</footer>
+<nav class="botbar" aria-label="Onboarding steps">
+  <button class="btn btn-ghost btn-nav" type="button" data-prev><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="long">Back</span></button>
+  <div class="dots" data-dots></div>
+  <button class="btn btn-primary btn-nav" type="button" data-next><span data-next-lbl>Start</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+</nav>
+
+</div>
 
 <script>
 /* ============================================================
-   Fill these in once. Anything left blank shows a friendly
-   "your onboarding lead will send this" line instead of a
-   broken link, so the page is safe to share before it is done.
+   Everything you edit lives here.
+   Videos: paste an embed URL (YouTube, Loom, Wistia, Vimeo) into
+   the matching slot. Left blank, a branded "coming soon" poster
+   shows instead, so the page is safe to share before they exist.
+   Anything else left blank shows a "your onboarding lead will send
+   this" line rather than a broken link.
    ============================================================ */
 var CONFIG = {
-  // Calendly (or similar) link for the 45 minute kickoff event
-  kickoffUrl: '',
-  // Where the intake form posts. Any webhook that accepts a form post:
-  // GoHighLevel inbound webhook, Zapier catch hook, Make, Formspree.
-  // Left blank, the form downloads the answers as a file instead.
-  intakeEndpoint: '',
-  // A private upload link for the customer list (Drive, Dropbox, OneDrive file request)
-  uploadUrl: '',
-  // The email address clients invite into their platforms
-  accessEmail: '',
-  // Meta Business Portfolio ID clients share assets with
-  metaBusinessId: '',
-  // Shown at the bottom as the help line, e.g. 'Text Zai on (555) 555 5555'
-  helpLine: ''
+  videos: [
+    '', // 1. Welcome        e.g. https://www.loom.com/embed/xxxx
+    '', // 2. Your shop
+    '', // 3. Your voice
+    '', // 4. Your list
+    ''  // 5. Kickoff call
+  ],
+  forms: {
+    core:  'https://form.jotform.com/261743059733057', // Jotform: Client Onboarding (Core)
+    voice: 'https://form.jotform.com/262144572742053'  // Jotform: detailing knowledge questionnaire
+  },
+  calendly: 'https://calendly.com/zaimiana0',
+  uploadUrl: '',       // private upload link for the customer list
+  accessEmail: '',     // address clients invite into their platforms
+  metaBusinessId: '',  // Meta Business Portfolio ID
+  helpLine: ''         // e.g. 'Stuck? Text Zai on (555) 555 5555'
 };
 
 (function(){
+  "use strict";
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var STORE = 'ds-onboarding';
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
 
-  function load(){ try{ return JSON.parse(localStorage.getItem(STORE)) || {}; }catch(e){ return {}; } }
+  var STORE = 'ds-onboarding-deck';
+  var state = (function(){ try{ return JSON.parse(localStorage.getItem(STORE)) || {}; }catch(e){ return {}; } })();
+  state.done = state.done || {}; state.commit = state.commit || {};
   function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
-  var state = load();
-  state.done = state.done || {};
-  state.commit = state.commit || {};
-  state.intake = state.intake || {};
 
   function el(tag, attrs, text){
     var n = document.createElement(tag);
@@ -906,259 +821,227 @@ var CONFIG = {
     if(text) n.textContent = text;
     return n;
   }
-  function pending(slot, text){
-    if(slot) slot.appendChild(el('span', {'class':'pending'}, text));
-  }
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
 
-  /* ---------- personal greeting from the link, ?name=Mike ---------- */
-  var params = new URLSearchParams(location.search);
-  var name = (params.get('name') || '').trim().slice(0, 40);
-  if(name) document.getElementById('greet').textContent = 'Welcome in, ' + name + '.';
+  /* ---------- greeting from the link, ?name=Mike ---------- */
+  var name = (new URLSearchParams(location.search).get('name') || '').trim().slice(0, 40);
+  if(name) $('[data-greet]').textContent = 'Welcome in, ' + name + '.';
 
-  /* ---------- config slots ---------- */
-  var kick = document.getElementById('kickoff-slot');
-  if(CONFIG.kickoffUrl){
-    var wrap = el('div', {'class':'booker'});
-    var frame = el('iframe', {
-      src: CONFIG.kickoffUrl + (CONFIG.kickoffUrl.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1',
-      title: 'Book your kickoff call', loading: 'lazy'
-    });
-    wrap.appendChild(frame);
-    kick.appendChild(wrap);
-    var alt = el('p', {'class':'why-line', style:'margin-top:.7rem'});
-    alt.appendChild(document.createTextNode('Calendar not loading? '));
-    alt.appendChild(el('a', {href: CONFIG.kickoffUrl, target:'_blank', rel:'noopener'}, 'Open it in a new tab'));
-    kick.appendChild(alt);
-  }else{
-    kick.appendChild(el('div', {'class':'note'}, 'Your onboarding lead will send your kickoff booking link directly. Tick this step once the call is in your calendar.'));
-  }
-
-  var up = document.getElementById('upload-slot');
-  if(CONFIG.uploadUrl){
-    up.appendChild(el('a', {'class':'btn btn-primary', href: CONFIG.uploadUrl, target:'_blank', rel:'noopener'}, 'Upload my list'));
-  }else{
-    pending(up, 'Your private upload link comes from your onboarding lead.');
-  }
-
-  var acc = document.getElementById('access-slot');
-  if(CONFIG.accessEmail){
-    acc.appendChild(el('span', {'class':'cfg'}, CONFIG.accessEmail));
-    var copy = el('button', {type:'button', 'class':'done-btn', style:'margin-left:.6rem;padding:.3rem .7rem'}, 'Copy');
-    copy.addEventListener('click', function(){
-      if(navigator.clipboard) navigator.clipboard.writeText(CONFIG.accessEmail).then(function(){ copy.textContent = 'Copied'; });
-    });
-    acc.appendChild(copy);
-  }else{
-    pending(acc, 'sent to you by your onboarding lead');
-  }
-
-  var meta = document.getElementById('meta-slot');
-  if(CONFIG.metaBusinessId) meta.appendChild(el('span', {'class':'cfg'}, CONFIG.metaBusinessId));
-  else pending(meta, 'sent by your onboarding lead');
-
-  if(CONFIG.helpLine) document.getElementById('help-slot').textContent = 'Stuck? ' + CONFIG.helpLine;
-
-  /* ---------- progress ---------- */
-  var steps = [].slice.call(document.querySelectorAll('.step'));
-  var doneBtns = [].slice.call(document.querySelectorAll('[data-done]'));
-
-  function render(){
-    var count = 0, firstOpen = null;
-    steps.forEach(function(s){
-      var n = s.getAttribute('data-step');
-      var d = !!state.done[n];
-      s.classList.toggle('is-done', d);
-      if(d) count++; else if(!firstOpen) firstOpen = s;
-    });
-    doneBtns.forEach(function(b){
-      b.setAttribute('aria-pressed', state.done[b.getAttribute('data-done')] ? 'true' : 'false');
-    });
-    document.getElementById('meter-label').textContent = count + ' of 5 done';
-    document.getElementById('meter-bar').style.width = (count / 5 * 100) + '%';
-
-    var title = document.getElementById('finish-title');
-    var text = document.getElementById('finish-text');
-    var cta = document.getElementById('finish-cta');
-    var box = document.getElementById('finish');
-    box.classList.toggle('is-complete', count === 5);
-    if(count === 5){
-      title.textContent = "That's everything. The build starts now.";
-      text.textContent = 'Every input is covered, so the guarantee is fully on us. Next you will hear from us with your recovery messages to approve. Nothing sends without your sign-off.';
-      cta.hidden = true;
+  /* ---------- videos ---------- */
+  var TITLES = ['Welcome', 'Your shop', 'Your voice', 'Your list', 'Kickoff call'];
+  $$('[data-video]').forEach(function(box){
+    var i = +box.getAttribute('data-video');
+    if(CONFIG.videos[i]){
+      box.setAttribute('data-lazy', CONFIG.videos[i]);
     }else{
-      var left = 5 - count;
-      title.textContent = left === 5
-        ? 'Five steps between you and your first recovered job.'
-        : left + (left === 1 ? ' step' : ' steps') + ' left before we can start the build.';
-      text.textContent = 'Pick up at the first step that is not ticked. Everything you have done so far is saved on this device.';
-      cta.hidden = false;
-      cta.textContent = 'Go to step ' + ['one','two','three','four','five'][+firstOpen.getAttribute('data-step') - 1];
-      cta.setAttribute('href', '#' + firstOpen.id);
+      box.innerHTML =
+        '<div class="video-ph"><span class="brandmark"></span>' +
+        '<span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>' +
+        '<span class="cap"><span>Video ' + (i + 1) + ' of 5 &middot; <b>' + TITLES[i] + '</b></span><span>Coming soon</span></span></div>';
+    }
+  });
+
+  /* ---------- forms and calendar, loaded when their slide opens ---------- */
+  $$('[data-form]').forEach(function(slot){
+    var key = slot.getAttribute('data-form'), url = CONFIG.forms[key];
+    var link = $('[data-form-link="' + key + '"]');
+    if(url){
+      slot.setAttribute('data-lazy-frame', url);
+      if(link) link.href = url;
+    }else{
+      slot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send this form directly.'));
+      if(link) link.remove();
+    }
+  });
+  function calUrl(){
+    var dark = isDark();
+    var p = 'hide_gdpr_banner=1' +
+      '&background_color=' + (dark ? '0c0e12' : 'ffffff') +
+      '&text_color=' + (dark ? 'edeff3' : '14161b') +
+      '&primary_color=' + (dark ? 'd9dfea' : '14161b');
+    return CONFIG.calendly + (CONFIG.calendly.indexOf('?') > -1 ? '&' : '?') + p;
+  }
+  var calSlot = $('[data-cal]'), calLink = $('[data-cal-link]');
+  if(CONFIG.calendly){ calLink.href = CONFIG.calendly; }
+  else{ calSlot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send your kickoff link directly.')); calLink.remove(); }
+
+  function loadLazy(slide){
+    $$('[data-lazy]', slide).forEach(function(box){
+      box.appendChild(el('iframe', {src: box.getAttribute('data-lazy'), title: 'Onboarding video', allow: 'autoplay; fullscreen; picture-in-picture', allowfullscreen: ''}));
+      box.removeAttribute('data-lazy');
+    });
+    $$('[data-lazy-frame]', slide).forEach(function(slot){
+      slot.appendChild(el('iframe', {'class':'formframe', src: slot.getAttribute('data-lazy-frame'), title: 'Onboarding form'}));
+      slot.removeAttribute('data-lazy-frame');
+    });
+    if(slide.contains(calSlot) && CONFIG.calendly && !calSlot.querySelector('iframe')){
+      calSlot.appendChild(el('iframe', {'class':'calframe', src: calUrl(), title: 'Book your kickoff call'}));
     }
   }
 
-  function setDone(n, v){
-    state.done[n] = v; save(); render();
+  /* ---------- config text slots ---------- */
+  function fill(sel, value, fallback, asLink){
+    var slot = $(sel); if(!slot) return;
+    if(value && asLink) slot.appendChild(el('a', {'class':'btn btn-primary', href: value, target:'_blank', rel:'noopener'}, 'Upload my list'));
+    else if(value) slot.appendChild(el('span', {'class':'cfg'}, value));
+    else slot.appendChild(el('span', {'class':'pending'}, fallback));
   }
-  doneBtns.forEach(function(b){
-    b.addEventListener('click', function(){
-      var n = b.getAttribute('data-done');
-      setDone(n, !state.done[n]);
-    });
-  });
+  fill('[data-upload]', CONFIG.uploadUrl, 'Upload link comes from your onboarding lead', true);
+  fill('[data-access]', CONFIG.accessEmail, 'the address your onboarding lead sends you');
+  fill('[data-meta]', CONFIG.metaBusinessId, 'sent by your onboarding lead');
+  if(CONFIG.helpLine) $('[data-help]').textContent = CONFIG.helpLine;
 
-  /* step five completes itself from the four commitments */
-  var commits = [].slice.call(document.querySelectorAll('[data-commit]'));
-  function renderCommits(){
-    var c = commits.filter(function(i){ return i.checked; }).length;
-    document.getElementById('commit-count').textContent = c === 4
-      ? 'All four ticked. Step five is done.'
-      : c + ' of 4 ticked. This step completes itself when all four are.';
-    return c;
-  }
-  commits.forEach(function(i){
-    i.checked = !!state.commit[i.getAttribute('data-commit')];
-    i.addEventListener('change', function(){
-      state.commit[i.getAttribute('data-commit')] = i.checked;
-      setDone('5', renderCommits() === 4);
-    });
-  });
-  renderCommits();
-
-  /* ---------- intake form: autosave, then send ---------- */
-  var form = document.getElementById('intake');
-  var saved = document.getElementById('saved');
-  var status = document.getElementById('intake-status');
-  var sendBtn = document.getElementById('intake-send');
-
-  function collect(){
-    var out = {};
-    [].slice.call(form.elements).forEach(function(f){
-      if(!f.name) return;
-      if(f.type === 'checkbox'){
-        if(!out[f.name]) out[f.name] = [];
-        if(f.checked) out[f.name].push(f.value);
-      }else if(f.type === 'radio'){
-        if(f.checked) out[f.name] = f.value;
-      }else{
-        out[f.name] = f.value.trim();
+  /* ---------- kickoff art: a week of slots ---------- */
+  (function(){
+    var g = $('[data-calgrid]'), ns = 'http://www.w3.org/2000/svg';
+    ['Mon','Tue','Wed','Thu','Fri'].forEach(function(d, c){
+      var t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', 102 + c * 74); t.setAttribute('y', 134); t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('class', 't'); t.textContent = d; g.appendChild(t);
+      for(var r = 0; r < 3; r++){
+        if(c === 2 && r === 2) continue; // the kickoff slot sits here
+        var rect = document.createElementNS(ns, 'rect');
+        rect.setAttribute('x', 68 + c * 74); rect.setAttribute('y', 150 + r * 50);
+        rect.setAttribute('width', 68); rect.setAttribute('height', 42); rect.setAttribute('rx', 10);
+        var busy = (c * 3 + r) % 4 === 0;
+        rect.setAttribute('class', busy ? 'f-c' : 's-c');
+        if(!busy){ rect.setAttribute('fill', 'none'); rect.setAttribute('stroke-width', '1'); rect.setAttribute('stroke-dasharray', '3 4'); }
+        g.appendChild(rect);
       }
     });
-    return out;
-  }
-  function restore(data){
-    [].slice.call(form.elements).forEach(function(f){
-      if(!f.name || !(f.name in data)) return;
-      var v = data[f.name];
-      if(f.type === 'checkbox') f.checked = Array.isArray(v) && v.indexOf(f.value) > -1;
-      else if(f.type === 'radio') f.checked = v === f.value;
-      else f.value = v;
-    });
-  }
-  restore(state.intake);
+  })();
 
-  var saveTimer;
-  form.addEventListener('input', function(){
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(function(){
-      state.intake = collect(); save();
-      saved.textContent = 'Saved on this device';
-    }, 400);
+  /* ---------- deck ---------- */
+  var slides = $$('.slide');
+  var TOTAL = slides.length;
+  var rail = $('[data-rail]'), cur = $('[data-cur]'), lbl = $('[data-lbl]');
+  var prev = $('[data-prev]'), next = $('[data-next]'), nextLbl = $('[data-next-lbl]');
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  $('[data-tot]').textContent = pad(TOTAL);
+  var active = -1, booted = false;
+
+  var dots = slides.map(function(s, i){
+    var b = el('button', {type:'button', 'aria-label': (i + 1) + '. ' + s.getAttribute('data-label'), title: s.getAttribute('data-label')});
+    b.addEventListener('click', function(){ go(i); });
+    $('[data-dots]').appendChild(b);
+    return b;
   });
 
-  function asText(data){
-    var lines = ['DetailScales onboarding: shop details', 'Sent ' + new Date().toLocaleString(), ''];
-    form.querySelectorAll('fieldset').forEach(function(fs){
-      lines.push('== ' + fs.querySelector('legend').textContent.toUpperCase() + ' ==');
-      fs.querySelectorAll('.f').forEach(function(f){
-        var label = (f.querySelector('label, .lbl') || {}).textContent || '';
-        var input = f.querySelector('[name]');
-        if(!input) return;
-        var v = data[input.name];
-        if(Array.isArray(v)) v = v.join(', ');
-        lines.push(label.replace('*','').trim() + ': ' + (v || '-'));
-      });
-      lines.push('');
+  function go(i){
+    i = Math.max(0, Math.min(TOTAL - 1, i));
+    if(i === active) return;
+    slides.forEach(function(s, k){
+      var on = k === i;
+      s.classList.toggle('from-left', !on && k < i);
+      s.classList.toggle('is-active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if('inert' in s) s.inert = !on;
     });
-    return lines.join('\n');
+    active = i;
+    var s = slides[i];
+    s.scrollTop = 0;
+    loadLazy(s);
+    cur.textContent = pad(i + 1);
+    lbl.textContent = '· ' + s.getAttribute('data-label');
+    rail.style.width = ((i + 1) / TOTAL * 100) + '%';
+    dots.forEach(function(d, k){ if(k === i) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
+    prev.disabled = i === 0;
+    nextLbl.textContent = i === 0 ? 'Start' : i === TOTAL - 1 ? 'Back to start' : 'Next: ' + slides[i + 1].getAttribute('data-label');
+    state.last = i; save();
+    if(history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + s.id);
+    if(booted){ var h = $('h2', s); if(h) h.focus({preventScroll:true}); }
+    driftGlow(i);
   }
-
-  function show(msg, kind){
-    status.hidden = false;
-    status.className = 'status ' + kind;
-    status.textContent = msg;
-  }
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var bad = [].slice.call(form.querySelectorAll('[required]')).filter(function(f){
-      if(f.type === 'radio') return !form.querySelector('[name="' + f.name + '"]:checked');
-      return !f.checkValidity();
+  prev.addEventListener('click', function(){ go(active - 1); });
+  next.addEventListener('click', function(){ go(active === TOTAL - 1 ? 0 : active + 1); });
+  $$('[data-go]').forEach(function(b){ b.addEventListener('click', function(){ go(+b.getAttribute('data-go')); }); });
+  $$('[data-scroll]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = $(b.getAttribute('data-scroll')); if(!t) return;
+      slides[active].scrollTo({top: t.offsetTop - 12, behavior: calm ? 'auto' : 'smooth'});
     });
-    if(bad.length){
-      show('A few required answers are missing. They are marked with a star.', 'err');
-      bad[0].focus();
-      return;
-    }
-
-    var data = collect();
-    state.intake = data; save();
-
-    if(!CONFIG.intakeEndpoint){
-      /* no webhook yet: hand the client a file they can send on */
-      var blob = new Blob([asText(data)], {type:'text/plain'});
-      var a = el('a', {href: URL.createObjectURL(blob), download: 'detailscales-shop-details.txt'});
-      document.body.appendChild(a); a.click(); a.remove();
-      show('Your answers downloaded as a file. Send it to your onboarding lead, or bring it to the kickoff call.', 'ok');
-      setDone('2', true);
-      return;
-    }
-
-    /* A form-encoded post is a "simple" request, so it needs no CORS
-       preflight and works with GoHighLevel, Zapier, Make and Formspree
-       alike. no-cors means the reply is unreadable, so a resolved
-       request is treated as sent and the answers stay saved locally. */
-    var body = new URLSearchParams();
-    Object.keys(data).forEach(function(k){
-      body.append(k, Array.isArray(data[k]) ? data[k].join(', ') : data[k]);
-    });
-    body.append('summary', asText(data));
-    body.append('source', 'detailscales-onboarding');
-
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Sending';
-    fetch(CONFIG.intakeEndpoint, {method:'POST', mode:'no-cors', body: body})
-      .then(function(){
-        show('Got it. Your shop details are with us.', 'ok');
-        sendBtn.textContent = 'Sent. Send again if you change anything';
-        setDone('2', true);
-      })
-      .catch(function(){
-        show('That did not go through. Your answers are still saved here, so try again in a minute.', 'err');
-        sendBtn.textContent = 'Send my shop details';
-      })
-      .then(function(){ sendBtn.disabled = false; });
   });
 
-  render();
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || tag === 'select' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if(e.key === 'ArrowRight'){ e.preventDefault(); go(active + 1); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); go(active - 1); }
+  });
+
+  /* horizontal swipe on touch, ignored when the gesture is mostly vertical */
+  var stage = $('[data-stage]'), sx = 0, sy = 0;
+  stage.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) go(active + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
+  window.addEventListener('hashchange', function(){
+    var k = slides.findIndex(function(s){ return '#' + s.id === location.hash; });
+    if(k > -1) go(k);
+  });
+
+  /* ---------- progress: steps 1-4 are ticks, step 5 is the four commitments ---------- */
+  function renderDone(){
+    var firstOpen = null, count = 0;
+    [1,2,3,4].forEach(function(n){
+      var d = !!state.done[n];
+      if(d) count++; else if(firstOpen === null) firstOpen = n;
+      $$('[data-done="' + n + '"]').forEach(function(b){ b.setAttribute('aria-pressed', d ? 'true' : 'false'); });
+      $('[data-roadmap] [data-go="' + n + '"]').classList.toggle('is-done', d);
+      dots[n].classList.toggle('is-done', d);
+    });
+    var allCommit = $$('[data-commit]').every(function(i){ return i.checked; });
+    if(allCommit) count++;
+    $('[data-roadmap] [data-go="5"]').classList.toggle('is-done', allCommit);
+    dots[5].classList.toggle('is-done', allCommit);
+
+    var left = 5 - count, goBtn = $('[data-summary-go]');
+    $('[data-summary]').classList.toggle('is-complete', left === 0);
+    $('[data-summary-bar]').style.width = (count / 5 * 100) + '%';
+    if(left === 0){
+      $('[data-summary-t]').textContent = "That's everything. The build starts now.";
+      $('[data-summary-p]').textContent = 'Every input is covered, so the guarantee is fully on us. Next you hear from us with your recovery messages to approve.';
+      goBtn.hidden = true;
+    }else{
+      $('[data-summary-t]').textContent = count + ' of 5 done. ' + left + (left === 1 ? ' step' : ' steps') + ' to go.';
+      $('[data-summary-p]').textContent = firstOpen !== null
+        ? 'Next up: ' + slides[firstOpen].getAttribute('data-label') + '. Everything so far is saved on this device.'
+        : 'Just the four ticks below. Everything so far is saved on this device.';
+      goBtn.hidden = firstOpen === null;
+      goBtn.onclick = function(){ go(firstOpen); };
+    }
+  }
+  $$('[data-done]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var n = b.getAttribute('data-done');
+      state.done[n] = !state.done[n]; save(); renderDone();
+    });
+  });
+  $$('[data-commit]').forEach(function(i){
+    i.checked = !!state.commit[i.getAttribute('data-commit')];
+    i.addEventListener('change', function(){ state.commit[i.getAttribute('data-commit')] = i.checked; save(); renderDone(); });
+  });
+  renderDone();
 
   /* ---------- theme switch, shared with the main site ---------- */
-  var themeBtn = document.getElementById('theme');
-  function applyTheme(next){
-    document.documentElement.setAttribute('data-theme', next);
-    try{ localStorage.setItem('ds-theme', next); }catch(e){}
-    var m = document.querySelector('meta[name="theme-color"]');
-    if(m) m.setAttribute('content', next === 'dark' ? '#07080B' : '#F7F8FA');
-    themeBtn.setAttribute('aria-label', next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  var themeBtn = $('#theme');
+  function applyTheme(nxt){
+    document.documentElement.setAttribute('data-theme', nxt);
+    try{ localStorage.setItem('ds-theme', nxt); }catch(e){}
+    var m = $('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', nxt === 'dark' ? '#07080B' : '#F7F8FA');
+    themeBtn.setAttribute('aria-label', nxt === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    var f = calSlot.querySelector('iframe'); if(f) f.src = calUrl();
   }
-  applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+  applyTheme(isDark() ? 'dark' : 'light');
   themeBtn.addEventListener('click', function(){
-    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    if(!document.startViewTransition || calm){ applyTheme(next); return; }
-    var r = themeBtn.getBoundingClientRect();
-    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var nxt = isDark() ? 'light' : 'dark';
+    if(!document.startViewTransition || calm){ applyTheme(nxt); return; }
+    var r = themeBtn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     var reach = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
-    var vt = document.startViewTransition(function(){ applyTheme(next); });
+    var vt = document.startViewTransition(function(){ applyTheme(nxt); });
     vt.ready.then(function(){
       document.documentElement.animate(
         {clipPath:['circle(0px at ' + cx + 'px ' + cy + 'px)', 'circle(' + reach + 'px at ' + cx + 'px ' + cy + 'px)']},
@@ -1167,19 +1050,53 @@ var CONFIG = {
     }).catch(function(){});
   });
 
-  /* ---------- reveal on scroll ---------- */
-  if(!calm && 'IntersectionObserver' in window){
-    document.documentElement.classList.add('js-anim');
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.remove('is-pending'); io.unobserve(en.target); }
-      });
-    }, {rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.reveal').forEach(function(r){
-      if(r.getBoundingClientRect().top < innerHeight) return;
-      r.classList.add('is-pending'); io.observe(r);
-    });
+  /* ---------- background: the light moves as the deck advances ---------- */
+  var g1 = $('[data-g1]'), g2 = $('[data-g2]');
+  function driftGlow(i){
+    if(calm) return;
+    var a = i / Math.max(1, TOTAL - 1);
+    g1.style.transform = 'translate(' + (a * 38) + 'vw,' + (Math.sin(a * 3.1) * 12) + 'vh)';
+    g2.style.transform = 'translate(' + (-a * 30) + 'vw,' + (-Math.cos(a * 2.4) * 10) + 'vh)';
   }
+
+  /* ---------- specks of light drifting up, dust in a booth lamp ---------- */
+  (function(){
+    var c = $('[data-specks]');
+    if(!c || calm || !c.getContext) return;
+    var ctx = c.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1), W, H, P = [], raf = 0;
+    var rgb = '', readRgb = function(){ rgb = getComputedStyle(document.documentElement).getPropertyValue('--spark').trim() || '216,224,238'; };
+    function size(){
+      W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr;
+      var n = Math.round(Math.min(70, innerWidth * innerHeight / 22000));
+      P = [];
+      for(var i = 0; i < n; i++) P.push({x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.6 + .4) * dpr, v: (Math.random() * .25 + .08) * dpr, a: Math.random() * .45 + .12, t: Math.random() * 6.28});
+    }
+    function frame(){
+      ctx.clearRect(0, 0, W, H);
+      for(var i = 0; i < P.length; i++){
+        var p = P[i];
+        p.y -= p.v; p.t += .01; p.x += Math.sin(p.t) * .15 * dpr;
+        if(p.y < -10){ p.y = H + 10; p.x = Math.random() * W; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+        ctx.fillStyle = 'rgba(' + rgb + ',' + (p.a * (.6 + .4 * Math.sin(p.t * 2))) + ')';
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    readRgb(); size(); frame();
+    new MutationObserver(readRgb).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+    addEventListener('resize', size, {passive:true});
+    document.addEventListener('visibilitychange', function(){
+      cancelAnimationFrame(raf);
+      if(!document.hidden) frame();
+    });
+  })();
+
+  /* ---------- start where they left off ---------- */
+  var start = slides.findIndex(function(s){ return '#' + s.id === location.hash; });
+  if(start < 0) start = typeof state.last === 'number' ? state.last : 0;
+  go(start);
+  booted = true;
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
