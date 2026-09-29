@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Client Onboarding | DetailScales</title>
+<meta name="description" content="Five steps taking new DetailScales clients from signed to live.">
+<!-- For paying clients only. Kept out of search and out of the sitemap. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#07080B">
+
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem("ds-theme");
+    var dark = saved ? saved === "dark"
+                     : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    if(!dark){
+      var m = document.querySelector("meta[name=theme-color]");
+      if(m) m.setAttribute("content", "#F7F8FA");
+    }
+  }catch(e){
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+})();
+</script>
+
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/icon.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   DetailScales client onboarding. A click-through deck.
+   One slide on screen at a time, Next and Back move it. The page
+   never scrolls: a slide taller than the stage scrolls inside its
+   own area, so nothing runs under the bars.
+   Same material as the landing page: graphite ink, frosted slabs,
+   chrome as the only accent.
+   ============================================================ */
+:root{
+  --void:#F4F6F9; --paper:var(--void); --paper-2:#FFFFFF;
+  --ink:#14161B; --ink-2:#52565E; --ink-3:#6B7079; --on-ink:#FFFFFF;
+  --tx:var(--ink); --tx-2:var(--ink-2); --tx-3:var(--ink-3);
+  --rule:rgba(20,22,27,.18);
+  --line:rgba(20,22,27,.1); --line-2:rgba(20,22,27,.18);
+  --ok:#2F7A4F; --leak:#B0492F;
+  --glow:rgba(63,107,224,.28);
+  --lift:0 1px 2px rgba(20,22,27,.05), 0 16px 40px -14px rgba(20,22,27,.18);
+
+  --slab:linear-gradient(180deg,rgba(255,255,255,.62) 0%,rgba(252,253,255,.46) 100%);
+  --slab-blur:blur(26px) saturate(1.6) brightness(1.06);
+  --slab-rim:rgba(255,255,255,.7);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 1px 0 0 rgba(255,255,255,.6),
+    0 1px 2px rgba(20,22,27,.05),
+    0 24px 54px -20px rgba(20,22,27,.22);
+  --float:linear-gradient(180deg,rgba(255,255,255,.7),rgba(252,253,255,.55));
+  --float-edge:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    0 1px 2px rgba(20,22,27,.05),
+    0 10px 24px -8px rgba(20,22,27,.2);
+  --art-bg:linear-gradient(160deg,#FFFFFF 0%,#EEF1F6 100%);
+  --art-a:#14161B; --art-b:#8A93A1; --art-c:#DDE1E8; --art-hi:#3F6BE0; --art-card:#FFFFFF;
+  --spark:40,52,80;
+
+  --sheen:linear-gradient(100deg,
+      var(--ink) 0%, var(--ink) 26%, #7B828F 40%,
+      #C2C9D4 50%, #7B828F 60%, var(--ink) 74%, var(--ink) 100%);
+
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --gut:clamp(16px,4vw,48px);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --void:#07080B; --paper-2:#F2F4F8;
+  --ink:#EDEFF3; --ink-2:#A6ACB8; --ink-3:#7C8392; --on-ink:#0A0B0E;
+  --rule:rgba(255,255,255,.16);
+  --line:rgba(255,255,255,.1); --line-2:rgba(255,255,255,.18);
+  --ok:#6FD39B; --leak:#FF8163;
+  --glow:rgba(96,140,255,.34);
+  --lift:0 1px 2px rgba(0,0,0,.45), 0 16px 40px -14px rgba(0,0,0,.72);
+
+  --slab:linear-gradient(180deg,rgba(26,31,40,.6) 0%,rgba(13,16,22,.66) 100%);
+  --slab-rim:rgba(255,255,255,.12);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    inset 1px 0 0 rgba(255,255,255,.1),
+    0 1px 2px rgba(0,0,0,.5),
+    0 24px 56px -22px rgba(0,0,0,.78);
+  --float:linear-gradient(180deg,rgba(30,36,48,.66),rgba(15,18,25,.7));
+  --float-edge:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    0 1px 2px rgba(0,0,0,.45),
+    0 10px 24px -8px rgba(0,0,0,.6);
+  --art-bg:linear-gradient(160deg,#141821 0%,#0A0C11 100%);
+  --art-a:#EDEFF3; --art-b:#7C8496; --art-c:#2A303C; --art-hi:#8FB0FF; --art-card:#161A22;
+  --spark:216,224,238;
+
+  --sheen:linear-gradient(100deg,
+      #7C8496 0%, #7C8496 24%, #D8DEEA 42%,
+      #FFFFFF 50%, #D8DEEA 58%, #7C8496 76%, #7C8496 100%);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  margin:0;background:var(--paper);color:var(--tx);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+h2:focus{outline:none}
+/* a slide is a scroll container, so Chrome focuses it on a #s3 link; the heading carries focus instead */
+.slide:focus,.slide:focus-visible{outline:none}
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:#fff;color:#14161B;padding:12px 18px;font-weight:700}
+.skip:focus{left:12px;top:12px}
+
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+h2.title{font-size:clamp(2.1rem,4.8vw,3.9rem);font-weight:800;font-stretch:112%;line-height:.98;letter-spacing:-.035em}
+h3{font-size:1.3rem;font-weight:700;font-stretch:104%;letter-spacing:-.018em;line-height:1.22}
+h4,.h4{font-family:var(--display);font-size:1rem;font-weight:700;font-stretch:104%;letter-spacing:-.01em;line-height:1.3;color:var(--tx)}
+p{margin:0}
+.lede{font-size:clamp(1rem,1.4vw,1.14rem);color:var(--tx-2);max-width:56ch;line-height:1.6}
+.eyebrow{
+  font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--tx-3);display:flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--rule);flex:none}
+.mono{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
+.sheen{
+  background:var(--sheen);background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sweep 7s linear infinite;
+}
+@keyframes sweep{to{background-position:-280% 0}}
+strong{font-weight:600;color:var(--tx)}
+
+/* ---------- app frame ---------- */
+.app{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.glowfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.glowfield i{position:absolute;border-radius:50%;filter:blur(60px);transition:transform 1.4s cubic-bezier(.22,.7,.3,1)}
+.glowfield .g1{width:60vmax;height:60vmax;left:-18vmax;top:-26vmax;background:radial-gradient(circle,var(--glow),transparent 64%)}
+.glowfield .g2{width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;background:radial-gradient(circle,rgba(151,160,174,.3),transparent 66%)}
+canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+.rail{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:var(--line)}
+.rail span{display:block;height:100%;width:0;background:var(--ink);transition:width .6s cubic-bezier(.22,.7,.3,1)}
+
+.topbar{
+  position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
+  padding:calc(12px + env(safe-area-inset-top,0px)) var(--gut) 10px;
+}
+.lockup{
+  --h:32px;height:var(--h);width:calc(var(--h) * 2.6493);flex:none;display:block;
+  background:url("/assets/logo-wordmark.png") no-repeat left center/contain;
+}
+:root[data-theme="dark"] .lockup{background-image:url("/assets/logo-wordmark-dark.png")}
+.step-of{margin-left:auto;display:flex;align-items:center;gap:.45rem;white-space:nowrap;min-width:0}
+.step-of b{font-family:var(--display);font-weight:700;font-stretch:106%;font-size:.95rem;color:var(--tx);letter-spacing:0}
+.step-of .lbl{overflow:hidden;text-overflow:ellipsis}
+@media(max-width:560px){.step-of .lbl{display:none}}
+.theme-btn{
+  display:inline-grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;
+  background:var(--float);border:1px solid var(--slab-rim);color:var(--tx);box-shadow:var(--float-edge);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1);
+}
+.theme-btn:hover{transform:rotate(-12deg)}
+.theme-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-btn .t-sun{display:none}
+:root[data-theme="dark"] .theme-btn .t-sun{display:block}
+:root[data-theme="dark"] .theme-btn .t-moon{display:none}
+
+/* ---------- stage and slides ---------- */
+.stage{position:relative;z-index:1;min-height:0}
+.slide{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+  visibility:hidden;opacity:0;transform:translateX(40px);
+  transition:opacity .45s ease, transform .6s cubic-bezier(.22,.7,.3,1), visibility 0s linear .6s;
+  scrollbar-width:thin;
+}
+.slide.from-left{transform:translateX(-40px)}
+.slide.is-active{visibility:visible;opacity:1;transform:none;transition:opacity .45s ease .05s, transform .6s cubic-bezier(.22,.7,.3,1), visibility 0s}
+.slide-inner{max-width:1240px;margin-inline:auto;padding:clamp(12px,2.4vw,32px) var(--gut) clamp(28px,4vw,56px);display:grid;gap:clamp(22px,3vw,36px)}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(20px,3.4vw,48px);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.head{display:grid;gap:1.1rem;align-content:start}
+.side{display:grid;gap:14px}
+
+/* entrance: blocks in the active slide rise in order */
+.slide .rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .7s cubic-bezier(.22,.7,.3,1)}
+.slide.is-active .rise{opacity:1;transform:none}
+.slide.is-active .rise:nth-child(2){transition-delay:.08s}
+.slide.is-active .rise:nth-child(3){transition-delay:.16s}
+.slide.is-active .rise:nth-child(4){transition-delay:.24s}
+.slide.is-active .rise:nth-child(5){transition-delay:.32s}
+
+.slab{
+  background:var(--slab);
+  backdrop-filter:var(--slab-blur);-webkit-backdrop-filter:var(--slab-blur);
+  border:1px solid var(--slab-rim);border-radius:26px;box-shadow:var(--slab-edge);
+}
+
+/* ---------- visual blocks that sit beside the headline ---------- */
+.art.journey{aspect-ratio:560/380}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{
+  position:relative;overflow:hidden;padding:18px 18px 20px;border-radius:22px;min-height:146px;
+  background:var(--art-bg);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);
+  display:grid;gap:.45rem;align-content:start;
+}
+.tile::after{content:"";position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
+.tile .big{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink);margin-bottom:.35rem;box-shadow:var(--float-edge)}
+.tile .big svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tile p{font-size:.84rem;color:var(--tx-2);line-height:1.45}
+.tile .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
+
+
+.agenda{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,2.4vw,28px);align-items:center;padding:clamp(18px,2.4vw,26px);border-radius:26px;background:var(--art-bg);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge)}
+@media(max-width:520px){.agenda{grid-template-columns:1fr;justify-items:center}}
+.agenda svg{width:clamp(150px,18vw,190px);height:auto;display:block}
+.agenda .seg{transition:stroke-dasharray 1.1s cubic-bezier(.22,.7,.3,1)}
+.agenda ol{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;width:100%}
+.agenda li{display:grid;grid-template-columns:12px 1fr auto;gap:.7rem;align-items:center;font-size:.9rem;color:var(--tx-2);padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.agenda li:last-child{border-bottom:0;padding-bottom:0}
+.agenda li b{font-family:var(--mono);font-weight:500;font-size:.66rem;letter-spacing:.1em;color:var(--tx-3)}
+.agenda li i{width:12px;height:12px;border-radius:4px}
+
+/* ---------- the "one thing" card ---------- */
+.job{padding:clamp(18px,2.4vw,26px);display:grid;gap:.9rem}
+.job-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.job-top .mono{color:var(--tx)}
+.job p{color:var(--tx-2);font-size:.95rem}
+.job-actions{display:flex;flex-wrap:wrap;gap:.7rem 1rem;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);padding:.4rem .7rem;border-radius:999px;border:1px solid var(--line-2);white-space:nowrap}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--display);font-weight:700;font-stretch:104%;font-size:.95rem;letter-spacing:-.01em;
+  padding:.85em 1.4em;border-radius:999px;text-decoration:none;white-space:nowrap;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, opacity .2s ease;
+}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-primary{background:var(--ink);color:var(--on-ink);position:relative;overflow:hidden}
+.btn-primary::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);transition:left .5s ease;
+}
+.btn-primary:hover::after{left:120%}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--lift)}
+:root[data-theme="dark"] .btn-primary{
+  background:linear-gradient(180deg,#F7F9FC 0%,#D9DFEA 100%);color:#0A0B0E;border:1px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(0,0,0,.5),0 14px 30px -12px rgba(0,0,0,.8);
+}
+:root[data-theme="dark"] .btn-primary:hover{box-shadow:inset 0 1px 0 #fff,0 22px 42px -14px rgba(0,0,0,.8),0 0 50px -14px rgba(96,140,255,.5)}
+.btn-ghost{color:var(--tx);border:1px solid var(--line-2);background:var(--float);box-shadow:var(--float-edge)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.check-btn{
+  display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;
+  border:1px solid var(--line-2);font-size:.88rem;color:var(--tx-2);background:var(--float);
+  transition:border-color .2s ease,color .2s ease;
+}
+.check-btn:hover{border-color:var(--ink);color:var(--tx)}
+.check-btn .box{width:17px;height:17px;border-radius:5px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.72rem;line-height:1}
+.check-btn[aria-pressed="true"]{color:var(--ok);border-color:var(--ok)}
+.check-btn[aria-pressed="true"] .box::after{content:"\2713"}
+
+/* ---------- art panels ---------- */
+.art{position:relative;border-radius:26px;overflow:hidden;background:var(--art-bg);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);aspect-ratio:5/4}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.art .t{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:var(--art-b)}
+.art .ta{fill:var(--art-a)}
+.art .ti{fill:var(--on-ink)}
+.art .tb{font-family:var(--display);font-weight:700;font-size:15px;fill:var(--art-a);letter-spacing:-.01em}
+.art .tn{font-family:var(--display);font-weight:800;fill:var(--art-a);letter-spacing:-.03em}
+.art .s-a{stroke:var(--art-a)} .art .s-b{stroke:var(--art-b)} .art .s-c{stroke:var(--art-c)} .art .s-hi{stroke:var(--art-hi)}
+.art .f-a{fill:var(--art-a)} .art .f-b{fill:var(--art-b)} .art .f-c{fill:var(--art-c)} .art .f-hi{fill:var(--art-hi)}
+.art .f-card{fill:var(--art-card)}
+.art-tag{position:absolute;z-index:1;left:18px;top:16px;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3);display:flex;align-items:center;gap:.5rem}
+.art-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 22%,transparent)}
+
+/* draw-on paths and pop-ins, played when the slide becomes active */
+.draw{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 1.6s cubic-bezier(.22,.7,.3,1) .3s}
+.slide.is-active .draw{stroke-dashoffset:0}
+.pop{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.7);transition:opacity .5s ease, transform .6s cubic-bezier(.3,1.5,.5,1)}
+.slide.is-active .pop{opacity:1;transform:none}
+.slide.is-active .d1{transition-delay:.3s}.slide.is-active .d2{transition-delay:.5s}
+.slide.is-active .d3{transition-delay:.7s}.slide.is-active .d4{transition-delay:.9s}
+.slide.is-active .d5{transition-delay:1.1s}.slide.is-active .d6{transition-delay:1.3s}
+.grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);transition:transform 1s cubic-bezier(.22,.7,.3,1)}
+.slide.is-active .grow{transform:none}
+.bar-anim{transform-box:fill-box;transform-origin:center;animation:wave 1.2s ease-in-out infinite}
+@keyframes wave{50%{transform:scaleY(.35)}}
+.flow-dot{animation:travel 3s linear infinite}
+@keyframes travel{from{offset-distance:0%}to{offset-distance:100%}}
+.blink{animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- content bits ---------- */
+.roadmap{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:760px){.roadmap{grid-template-columns:1fr 1fr}}
+.roadmap button{
+  width:100%;height:100%;text-align:left;padding:14px 14px 16px;border-radius:18px;display:grid;gap:.35rem;align-content:start;
+  background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);
+  transition:transform .2s ease,border-color .2s ease;
+}
+.roadmap button:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.roadmap .n{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--tx-3);display:flex;justify-content:space-between}
+.roadmap .n .tick{color:var(--ok);display:none}
+.roadmap .is-done{border-color:color-mix(in srgb,var(--ok) 55%,transparent)}
+.roadmap .is-done .n .tick{display:inline}
+.roadmap small{font-size:.8rem;color:var(--tx-3);line-height:1.4}
+
+.stats{display:flex;flex-wrap:wrap;gap:.6rem}
+.stat{display:inline-flex;align-items:baseline;gap:.5rem;padding:.55rem .95rem;border-radius:999px;background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);font-size:.86rem;color:var(--tx-2)}
+.stat b{font-family:var(--display);font-weight:700;font-stretch:106%;color:var(--tx)}
+
+.formwrap{padding:0;overflow:hidden;border-radius:24px}
+.formbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:14px 18px;border-bottom:1px solid var(--line)}
+.formbar a{font-size:.85rem;color:var(--tx-2)}
+.formframe{display:block;width:100%;height:min(1400px,max(72vh,620px));border:0;background:#fff}
+.calframe{display:block;width:100%;height:min(1000px,max(74vh,660px));border:0}
+.frame-ph{display:grid;place-items:center;min-height:200px;color:var(--tx-3);font-size:.92rem;text-align:center;padding:24px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.card{padding:18px 18px 20px;border-radius:20px;border:1px solid var(--slab-rim);background:var(--float);box-shadow:var(--float-edge);display:grid;gap:.6rem;align-content:start}
+.card ol{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:.88rem;color:var(--tx-2)}
+.card p{font-size:.88rem;color:var(--tx-2)}
+.card .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink)}
+.card .ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card.wide{grid-template-columns:1fr auto;align-items:center;gap:1rem}
+@media(max-width:600px){.card.wide{grid-template-columns:1fr}}
+.note{padding:14px 16px;border-radius:16px;border:1px dashed var(--line-2);font-size:.9rem;color:var(--tx-2)}
+.note.warn{border-style:solid;border-color:color-mix(in srgb,var(--leak) 45%,transparent)}
+.note.warn strong{color:var(--leak)}
+.cfg{font-family:var(--mono);font-size:.82rem;word-break:break-all;color:var(--tx)}
+.pending{color:var(--tx-3);font-style:italic}
+
+.commit{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.commit label{cursor:pointer;display:grid;gap:.5rem;align-content:start;padding:16px 18px;border-radius:20px;border:1px solid var(--slab-rim);background:var(--float);box-shadow:var(--float-edge);transition:border-color .2s ease}
+.commit label:has(input:checked){border-color:var(--ok)}
+.commit .row{display:flex;gap:.65rem;align-items:flex-start}
+.commit input{margin-top:.18rem;width:17px;height:17px;accent-color:var(--ok);flex:none}
+.commit p{font-size:.86rem;color:var(--tx-2)}
+
+.summary{padding:clamp(20px,2.6vw,30px);display:grid;gap:.8rem;justify-items:start}
+.summary.is-complete{box-shadow:var(--slab-edge),0 0 0 1px var(--ok)}
+.summary .meter{width:100%;height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+.summary .meter i{display:block;height:100%;width:0;background:var(--ok);border-radius:6px;transition:width .6s cubic-bezier(.22,.7,.3,1)}
+
+/* ---------- bottom bar ---------- */
+.botbar{
+  position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
+  padding:12px var(--gut) calc(14px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--line);
+  background:var(--slab);backdrop-filter:var(--slab-blur);-webkit-backdrop-filter:var(--slab-blur);
+}
+.dots{display:flex;gap:8px;margin-inline:auto}
+.dots button{width:9px;height:9px;border-radius:9px;background:var(--line-2);transition:width .3s ease, background .3s ease}
+.dots button.is-done{background:var(--ok)}
+.dots button[aria-current="step"]{width:28px;background:var(--ink)}
+@media(max-width:560px){ .btn-nav .long{display:none} .botbar .btn{padding:.8em 1.05em} }
+
+@media (prefers-reduced-motion: reduce){
+  .slide,.slide.is-active,.slide .rise,.draw,.pop,.grow{transition:none!important}
+  .sheen,.bar-anim,.flow-dot,.blink,.spin{animation:none!important}
+  .draw{stroke-dashoffset:0}
+  .pop,.slide .rise{opacity:1;transform:none}
+  .grow{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#s1">Skip to content</a>
+
+<div class="glowfield" aria-hidden="true"><i class="g1" data-g1></i><i class="g2" data-g2></i></div>
+<canvas class="specks" data-specks aria-hidden="true"></canvas>
+<div class="rail" aria-hidden="true"><span data-rail></span></div>
+
+<div class="app">
+
+<header class="topbar">
+  <a href="https://www.detailscales.com/" class="lockup" aria-label="DetailScales home"></a>
+  <span class="step-of mono" aria-live="polite"><b data-cur>01</b> / <span data-tot>06</span><span class="lbl" data-lbl></span></span>
+  <button class="theme-btn" type="button" id="theme" aria-label="Switch to light theme">
+    <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+    <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+  </button>
+</header>
+
+<main class="stage" data-stage>
+
+<!-- ============ 1. WELCOME ============ -->
+<section class="slide" id="s1" data-label="Welcome" aria-labelledby="h-s1">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Client onboarding</p>
+        <h2 class="title rise" id="h-s1" tabindex="-1">Welcome in. Let's get your first <span class="sheen">dead quote booked</span>.</h2>
+        <p class="lede rise">Five steps take you from signed to live. Do them in order, one thing each. This page remembers where you got to, so you can stop and come back.</p>
+        <div class="stats rise">
+          <span class="stat"><b>5</b> steps</span>
+          <span class="stat"><b>~45 min</b> of your time</span>
+          <span class="stat"><b>7 to 14 days</b> to fully live</span>
+        </div>
+      </div>
+      <div class="art journey rise" role="img" aria-label="The road from signed to live: your shop, your voice, your list, kickoff call, go live">
+        <span class="art-tag">Signed to live</span>
+        <svg viewBox="0 0 560 380" aria-hidden="true">
+          <defs>
+            <linearGradient id="roadg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="var(--art-b)"/><stop offset="1" stop-color="var(--art-hi)"/></linearGradient>
+            <radialGradient id="carglow"><stop offset="0" stop-color="var(--art-hi)" stop-opacity=".55"/><stop offset="1" stop-color="var(--art-hi)" stop-opacity="0"/></radialGradient>
+          </defs>
+          <path d="M40 318 C 140 318, 150 236, 240 226 S 360 196, 400 140 S 470 72, 520 66" fill="none" class="s-c" stroke-width="26" stroke-linecap="round"/>
+          <path d="M40 318 C 140 318, 150 236, 240 226 S 360 196, 400 140 S 470 72, 520 66" fill="none" class="s-b" stroke-width="1.4" stroke-dasharray="8 10" opacity=".7"/>
+          <path data-road d="M40 318 C 140 318, 150 236, 240 226 S 360 196, 400 140 S 470 72, 520 66" fill="none" stroke="url(#roadg)" stroke-width="4" stroke-linecap="round" class="draw" pathLength="100" style="--len:100;stroke-dasharray:100"/>
+          <g data-stations></g>
+          <g class="flow-dot" style="offset-path:path('M40 318 C 140 318, 150 236, 240 226 S 360 196, 400 140 S 470 72, 520 66');animation-duration:7s">
+            <circle r="22" fill="url(#carglow)"/>
+            <circle r="6" class="f-hi"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <ol class="roadmap rise" data-roadmap>
+      <li><button type="button" data-go="1"><span class="n">01 <span class="tick">&#10003; done</span></span><span class="h4">Your shop</span><small>Business, ads, access, goals</small></button></li>
+      <li><button type="button" data-go="2"><span class="n">02 <span class="tick">&#10003; done</span></span><span class="h4">Your voice</span><small>A one minute recording</small></button></li>
+      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span></span><span class="h4">Your list</span><small>Past customers, old quotes, access</small></button></li>
+      <li><button type="button" data-go="4"><span class="n">04 <span class="tick">&#10003; done</span></span><span class="h4">Kickoff call</span><small>45 minutes, plan locked</small></button></li>
+      <li><button type="button" data-go="5"><span class="n">05 <span class="tick">&#10003; done</span></span><span class="h4">Go live</span><small>What we build, in order</small></button></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 2. YOUR SHOP: core onboarding form ============ -->
+<section class="slide" id="s2" data-label="Your shop" aria-labelledby="h-s2">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Step 2 of 5</p>
+        <h2 class="title rise" id="h-s2" tabindex="-1">Tell us about <span class="sheen">the shop</span>.</h2>
+        <p class="lede rise">Who you serve, where, what you charge, and what winning looks like in 90 days. This is the brief every ad, message and report gets built from.</p>
+        <div class="tiles rise" aria-label="Have these open before you start">
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span class="k">Have open</span><h4>Your price list</h4><p>Main services and what each one costs.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M8 12h8M12 8v8"/></svg></span><span class="k">Have open</span><h4>Meta IDs</h4><p>Business Manager ID and ad account ID.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 16l-5-5-8 8"/></svg></span><span class="k">Have open</span><h4>Photos and logo</h4><p>Before and afters, logo and brand colours.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="k">Have open</span><h4>Your numbers</h4><p>Monthly revenue, leads a month, how many you close.</p></div>
+        </div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="Your answers become a shop profile that feeds ads, follow-up and reporting">
+          <span class="art-tag">Building your shop profile</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <defs><linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--art-hi)"/><stop offset="1" stop-color="var(--art-b)"/></linearGradient></defs>
+            <g class="pop d1">
+              <rect class="f-card s-c" x="36" y="56" width="272" height="300" rx="20" stroke-width="1"/>
+              <circle class="f-c" cx="78" cy="100" r="22"/>
+              <path class="s-a" d="M68 101l7 7 13-14" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect class="f-a" x="114" y="88" width="124" height="10" rx="5"/>
+              <rect class="f-b" x="114" y="106" width="80" height="8" rx="4" opacity=".6"/>
+            </g>
+            <g class="pop d2">
+              <text class="t" x="58" y="160">Services</text>
+              <rect class="f-c" x="58" y="170" width="78" height="26" rx="13"/><rect class="f-c" x="142" y="170" width="100" height="26" rx="13"/>
+              <text class="t ta" x="72" y="187" style="font-size:9px">Coating</text><text class="t ta" x="156" y="187" style="font-size:9px">Correction</text>
+            </g>
+            <g class="pop d3">
+              <text class="t" x="58" y="226">Service area</text>
+              <circle class="s-hi spin" cx="96" cy="266" r="26" fill="none" stroke-width="1.5" stroke-dasharray="3 5"/>
+              <circle class="f-hi" cx="96" cy="266" r="5"/>
+              <rect class="f-c" x="140" y="250" width="140" height="9" rx="4.5"/><rect class="f-c" x="140" y="268" width="100" height="9" rx="4.5"/>
+            </g>
+            <g class="pop d4">
+              <text class="t" x="58" y="322">Offer</text>
+              <rect class="f-a" x="112" y="309" width="170" height="22" rx="11"/>
+              <text class="t ti" x="126" y="324" style="font-size:9px">Free interior + coating</text>
+            </g>
+            <g class="pop d3">
+              <circle cx="404" cy="134" r="58" fill="none" class="s-c" stroke-width="11"/>
+              <circle cx="404" cy="134" r="58" fill="none" stroke="url(#ringg)" stroke-width="11" stroke-linecap="round" class="draw" pathLength="100" style="--len:100;stroke-dasharray:100" transform="rotate(-90 404 134)"/>
+              <text class="tn" x="404" y="142" text-anchor="middle" font-size="30">15</text>
+              <text class="t" x="404" y="162" text-anchor="middle">minutes</text>
+            </g>
+            <path class="s-b draw" d="M308 250 C 340 250, 344 230, 372 230" fill="none" stroke-width="1.5" style="--len:80"/>
+            <path class="s-b draw" d="M308 272 C 340 272, 344 280, 372 280" fill="none" stroke-width="1.5" style="--len:80"/>
+            <path class="s-b draw" d="M308 294 C 340 294, 344 330, 372 330" fill="none" stroke-width="1.5" style="--len:90"/>
+            <g class="pop d5"><rect class="f-card s-c" x="372" y="214" width="100" height="32" rx="16"/><text class="t ta" x="422" y="234" text-anchor="middle">Ads</text></g>
+            <g class="pop d5"><rect class="f-card s-c" x="372" y="264" width="100" height="32" rx="16"/><text class="t ta" x="422" y="284" text-anchor="middle">Follow-up</text></g>
+            <g class="pop d6"><rect class="f-card s-c" x="372" y="314" width="100" height="32" rx="16"/><text class="t ta" x="422" y="334" text-anchor="middle">Reports</text></g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">About 15 min</span></div>
+          <p><strong>Fill in the onboarding form below.</strong> Quick answers beat perfect ones. Unsure of something? Write "ask me on the call".</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#form-core">Open the form <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="1" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've sent it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="formwrap slab" id="form-core">
+      <div class="formbar"><span class="mono">Client onboarding form</span><a data-form-link="core" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-form="core"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. YOUR VOICE: pricing and knowledge ============ -->
+<section class="slide" id="s3" data-label="Your voice" aria-labelledby="h-s3">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Step 3 of 5</p>
+        <h2 class="title rise" id="h-s3" tabindex="-1">Record <span class="sheen">your voice</span>.</h2>
+        <p class="lede rise">Your voice agent calls every enquiry inside 60 seconds. When it sounds like you, customers hear the owner calling them back, not a call centre. One short script, read on your phone, about a minute.</p>
+        <div class="tiles rise" aria-label="Before you record">
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M3 12h3l3-7 4 14 3-7h5"/></svg></span><span class="k">01 &middot; Quiet room</span><p>No fan, AC or TV running in the background.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span class="k">02 &middot; Phone close</span><p>About a hand's length from your mouth.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/></svg></span><span class="k">03 &middot; Talk, don't read</span><p>Like you're on the phone with a customer.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></span><span class="k">04 &middot; Slip up?</span><p>Just pause and keep going. No need to restart.</p></div>
+        </div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="Your recording becomes the voice your agent calls customers back with">
+          <span class="art-tag">Recording &middot; 0:58</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <g class="pop d1">
+              <rect class="f-card s-c" x="36" y="58" width="290" height="62" rx="20"/>
+              <text class="t" x="58" y="83">New enquiry</text>
+              <text class="tb" x="58" y="105" style="font-size:14px">Hi, looking for a price on a coating</text>
+            </g>
+            <g class="pop d3">
+              <rect class="f-a" x="120" y="136" width="344" height="86" rx="20"/>
+              <text class="t" x="142" y="161">Calling back in your voice</text>
+              <text class="tb" x="142" y="185" style="font-size:14px;fill:var(--on-ink)">"Hey, thanks for reaching out. I'd love</text>
+              <text class="tb" x="142" y="205" style="font-size:14px;fill:var(--on-ink)">to help you out. Sound good?"</text>
+            </g>
+            <g transform="translate(44 262)"><g class="pop d4">
+              <g class="f-hi">
+                <rect class="bar-anim" x="0" y="20" width="9" height="40" rx="4.5"/>
+                <rect class="bar-anim" x="17" y="6" width="9" height="68" rx="4.5" style="animation-delay:.15s"/>
+                <rect class="bar-anim" x="34" y="16" width="9" height="48" rx="4.5" style="animation-delay:.3s"/>
+                <rect class="bar-anim" x="51" y="0" width="9" height="80" rx="4.5" style="animation-delay:.45s"/>
+                <rect class="bar-anim" x="68" y="14" width="9" height="52" rx="4.5" style="animation-delay:.6s"/>
+                <rect class="bar-anim" x="85" y="24" width="9" height="32" rx="4.5" style="animation-delay:.75s"/>
+                <rect class="bar-anim" x="102" y="10" width="9" height="60" rx="4.5" style="animation-delay:.9s"/>
+                <rect class="bar-anim" x="119" y="22" width="9" height="36" rx="4.5" style="animation-delay:1.05s"/>
+              </g>
+            </g></g>
+            <g class="pop d5">
+              <rect class="f-card s-c" x="204" y="248" width="260" height="104" rx="18"/>
+              <text class="t" x="224" y="274">Built from your recording</text>
+              <circle class="f-hi" cx="230" cy="296" r="4"/><text class="t ta" x="242" y="300">Your voice agent</text>
+              <circle class="f-hi" cx="230" cy="318" r="4"/><text class="t ta" x="242" y="322">Your ads</text>
+              <circle class="f-hi" cx="230" cy="340" r="4"/><text class="t ta" x="242" y="344">Your follow-up calls</text>
+            </g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">About 2 min</span></div>
+          <p><strong>Record the script below, in your own words where it feels natural.</strong> Swap in your name and your business, then hit record.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#form-voice">Start recording <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="2" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've recorded it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="formwrap slab" id="form-voice">
+      <div class="formbar"><span class="mono">Record your voice</span><a data-form-link="voice" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-form="voice"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. YOUR LIST AND ACCESS ============ -->
+<section class="slide" id="s4" data-label="Your list" aria-labelledby="h-s4">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Step 4 of 5</p>
+        <h2 class="title rise" id="h-s4" tabindex="-1">Hand over the list. <span class="sheen">It's the fastest money.</span></h2>
+        <p class="lede rise">People who already paid you, and people who already asked for a price. That list is where the first recovered jobs come from, before a cent of ad spend.</p>
+        <div class="tiles rise" aria-label="Where your list probably lives">
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 10h16M9 5v14"/></svg></span><span class="k">Booking software</span><p>The Customers or Clients list usually has an Export or Download CSV option.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span class="k">Your phone</span><p>iPhone: icloud.com, Contacts, Export vCard. Android: contacts.google.com, Export.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/></svg></span><span class="k">DMs and texts</span><p>Screenshots of every chat where someone asked a price and never booked.</p></div>
+          <div class="tile"><span class="big"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span><span class="k">Invoices or a notebook</span><p>Photos work. We type it up.</p></div>
+        </div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="Your messy list gets sorted into unclosed quotes, past customers and coating owners">
+          <span class="art-tag">Your list, sorted</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <g class="pop d1">
+              <rect class="f-card s-c" x="40" y="86" width="150" height="46" rx="12" transform="rotate(-6 115 109)"/>
+              <rect class="f-card s-c" x="46" y="124" width="150" height="46" rx="12" transform="rotate(4 121 147)"/>
+              <rect class="f-card s-c" x="36" y="164" width="150" height="46" rx="12" transform="rotate(-3 111 187)"/>
+              <rect class="f-card s-c" x="44" y="204" width="150" height="46" rx="12" transform="rotate(5 119 227)"/>
+              <rect class="f-card s-c" x="38" y="244" width="150" height="46" rx="12"/>
+              <circle class="f-c" cx="62" cy="267" r="11"/><rect class="f-a" x="82" y="260" width="74" height="7" rx="3.5"/><rect class="f-b" x="82" y="272" width="48" height="6" rx="3" opacity=".6"/>
+              <text class="t" x="40" y="320">Messy is fine</text>
+            </g>
+            <path class="s-b draw" d="M196 190 C 256 190, 268 110, 326 110" fill="none" stroke-width="1.5" style="--len:180"/>
+            <path class="s-b draw" d="M196 200 L 326 200" fill="none" stroke-width="1.5" style="--len:140"/>
+            <path class="s-b draw" d="M196 210 C 256 210, 268 290, 326 290" fill="none" stroke-width="1.5" style="--len:180"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 190 C 256 190, 268 110, 326 110')"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 200 L 326 200');animation-delay:1s"/>
+            <circle class="f-hi flow-dot" r="4.5" style="offset-path:path('M196 210 C 256 210, 268 290, 326 290');animation-delay:2s"/>
+            <g class="pop d3"><rect class="f-a" x="326" y="82" width="146" height="56" rx="16"/><text class="t ti" x="342" y="105" style="opacity:.7">Unclosed quotes</text><text class="tb" x="342" y="126" style="font-size:14px;fill:var(--on-ink)">Worked first</text></g>
+            <g class="pop d4"><rect class="f-card s-c" x="326" y="172" width="146" height="56" rx="16"/><text class="t" x="342" y="195">Past customers</text><text class="tb" x="342" y="216" style="font-size:14px">Reactivated</text></g>
+            <g class="pop d5"><rect class="f-card s-c" x="326" y="262" width="146" height="56" rx="16"/><text class="t" x="342" y="285">Coating owners</text><text class="tb" x="342" y="306" style="font-size:14px">Maintenance due</text></g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">10 to 20 min</span></div>
+          <p><strong>Send your customer and lead list, then give us access.</strong> Both are conditions of the guarantee, and both are below.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#list-how">Show me how <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="3" aria-pressed="false"><span class="box" aria-hidden="true"></span>List and access sent</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="list-how" style="display:grid;gap:14px">
+      <div class="note warn"><strong>Messy is fine. Missing is not.</strong> A spreadsheet with half the emails blank beats a clean one you never send. We clean it, dedupe it and sort it.</div>
+      <div class="card wide">
+        <div style="display:grid;gap:.35rem"><h4>Send it the private way</h4><p>It is your customers' contact details, so use the upload link rather than email or text.</p></div>
+        <div data-upload></div>
+      </div>
+
+      <div class="head" style="margin-top:16px">
+        <p class="eyebrow">Then give us access</p>
+        <p class="lede">Invite us through each platform's own access settings. You stay the owner, you can remove us any time, and nobody needs your password. Invite: <span data-access></span></p>
+      </div>
+      <div class="cards">
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><h4>Google Business Profile</h4>
+          <ol><li>Search your business on Google while signed in</li><li>Three dot menu, Business Profile settings</li><li>People and access, then Add</li><li>Our address, Manager role</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><h4>Meta: Facebook and Instagram</h4>
+          <ol><li>business.facebook.com, then Settings</li><li>Partners, then Add</li><li>"Give a partner access to your assets"</li><li>Our Business ID: <span data-meta></span></li><li>Share Page, Instagram, ad account and dataset</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><h4>Google Ads</h4>
+          <ol><li>Only if you run it or plan to</li><li>Admin, Access and security, plus button</li><li>Our address, Standard access</li></ol></div>
+        <div class="card"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg></span><h4>Website and booking app</h4>
+          <ol><li>Add our address as an admin or staff user</li><li>No website or software? Say so on the call</li></ol></div>
+      </div>
+      <div class="note"><strong>Put a payment method on your ad account now.</strong> Ad spend is billed by Meta or Google straight to your card, never through us. A declined card is the easiest launch delay to avoid.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. KICKOFF CALL ============ -->
+<section class="slide" id="s5" data-label="Kickoff call" aria-labelledby="h-s5">
+  <div class="slide-inner">
+    <div class="split">
+      <div class="head">
+        <p class="eyebrow rise">Step 5 of 5</p>
+        <h2 class="title rise" id="h-s5" tabindex="-1">Book your <span class="sheen">kickoff call</span>.</h2>
+        <p class="lede rise">Forty five minutes with the person building your system. We go through your answers, agree the baseline and the ad spend, and lock the plan so nothing gets built twice.</p>
+        <div class="agenda rise" aria-label="How the 45 minutes are spent">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="78" fill="none" class="s-c" stroke-width="22"/>
+            <g transform="rotate(-90 100 100)" data-donut></g>
+            <text x="100" y="100" text-anchor="middle" style="font-family:var(--display);font-weight:800;font-size:40px;fill:var(--tx);letter-spacing:-.03em">45</text>
+            <text x="100" y="122" text-anchor="middle" style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;fill:var(--tx-3)">MINUTES</text>
+          </svg>
+          <ol data-agenda></ol>
+        </div>
+      </div>
+      <div class="side rise">
+        <div class="art" role="img" aria-label="A week of calendar slots with your kickoff call highlighted">
+          <span class="art-tag">Kickoff &middot; 45 min</span>
+          <svg viewBox="0 0 500 400" aria-hidden="true">
+            <rect class="f-card s-c pop d1" x="46" y="56" width="408" height="300" rx="22"/>
+            <g class="pop d1"><text class="tb" x="74" y="98">This week</text><text class="t" x="426" y="98" text-anchor="end">Pick a slot</text></g>
+            <g class="pop d2" data-calgrid></g>
+            <g class="pop d5">
+              <rect class="f-a" x="216" y="250" width="68" height="42" rx="10"/>
+              <text class="t ti" x="250" y="275" text-anchor="middle" style="font-size:9px">Kickoff</text>
+              <circle class="f-hi blink" cx="282" cy="252" r="7"/>
+            </g>
+            <g class="pop d6">
+              <rect class="f-card s-c" x="290" y="306" width="172" height="44" rx="14"/>
+              <path class="s-hi" d="M308 328l6 6 12-13" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <text class="tb" x="336" y="333" style="font-size:13px">Plan locked</text>
+            </g>
+          </svg>
+        </div>
+        <div class="job slab">
+          <div class="job-top"><span class="mono">Your one job</span><span class="pill">2 min to book</span></div>
+          <p><strong>Pick a time below.</strong> Bring your legal business name and EIN for the business texting registration, and roughly what the last three months brought in, so the baseline is honest.</p>
+          <div class="job-actions">
+            <button class="btn btn-primary" type="button" data-scroll="#cal">Pick a time <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <button class="check-btn" type="button" data-done="4" aria-pressed="false"><span class="box" aria-hidden="true"></span>My call is booked</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="formwrap slab" id="cal">
+      <div class="formbar"><span class="mono">Kickoff call</span><a data-cal-link target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
+      <div data-cal></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. GO LIVE ============ -->
+<section class="slide" id="s6" data-label="Go live" aria-labelledby="h-s6">
+  <div class="slide-inner">
+    <div class="split" style="align-items:start">
+      <div class="head">
+        <p class="eyebrow rise">What happens next</p>
+        <h2 class="title rise" id="h-s6" tabindex="-1">We build it <span class="sheen">in this order</span>. On purpose.</h2>
+        <p class="lede rise">Most agencies start with ads. We start with the revenue you already have, so the ads land on a system that catches what they bring in.</p>
+        <div class="summary slab rise" data-summary>
+          <p class="mono">Your progress</p>
+          <h3 data-summary-t></h3>
+          <span class="meter" aria-hidden="true"><i data-summary-bar></i></span>
+          <p style="color:var(--tx-2);font-size:.95rem" data-summary-p></p>
+          <button class="btn btn-primary" type="button" data-summary-go>Go to the next step</button>
+        </div>
+      </div>
+      <div class="art rise" style="aspect-ratio:500/420" role="img" aria-label="Build order over 14 days: dead lead recovery, reactivation, reviews and referrals, instant response, then paid ads last">
+        <span class="art-tag">Days 1 to 14</span>
+        <svg viewBox="0 0 500 420" aria-hidden="true">
+          <g class="t" text-anchor="middle">
+            <text x="176" y="64">Day 1</text><text x="246" y="64">4</text><text x="316" y="64">7</text><text x="386" y="64">10</text><text x="456" y="64">14</text>
+          </g>
+          <g class="s-c" stroke-width="1" stroke-dasharray="2 5">
+            <path d="M176 76V372M246 76V372M316 76V372M386 76V372M456 76V372"/>
+          </g>
+          <text class="tb" x="22" y="112" style="font-size:13px">Dead lead recovery</text>
+          <rect class="f-a grow d1" x="176" y="98" width="150" height="22" rx="11"/>
+          <text class="tb" x="22" y="170" style="font-size:13px">Reactivation</text>
+          <rect class="f-a grow d2" x="226" y="156" width="140" height="22" rx="11" opacity=".8"/>
+          <text class="tb" x="22" y="228" style="font-size:13px">Reviews, referrals</text>
+          <rect class="f-b grow d3" x="260" y="214" width="196" height="22" rx="11"/>
+          <text class="tb" x="22" y="286" style="font-size:13px">60 second response</text>
+          <rect class="f-b grow d4" x="316" y="272" width="110" height="22" rx="11" opacity=".75"/>
+          <text class="tb" x="22" y="344" style="font-size:13px">Paid ads, last</text>
+          <rect class="f-hi grow d5" x="386" y="330" width="70" height="22" rx="11"/>
+          <text class="t pop d6" x="22" y="400">Then: a plain English report on jobs and revenue</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="head">
+      <p class="eyebrow">Your side of the guarantee</p>
+      <h3>Tick these when they are true.</h3>
+      <p class="lede" style="font-size:.95rem">The system books the work. These four decide whether a booking turns into revenue, and each is a condition of the $10,000 in 90 days guarantee.</p>
+    </div>
+    <div class="commit">
+      <label><span class="row"><input type="checkbox" data-commit="cal"><span class="h4">Slots are open</span></span><p>A coating buyer offered a date three weeks out goes to the next shop. Keep real, bookable time free.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="reply"><span class="h4">24 hour replies</span></span><p>Booked calls and quote requests get a human reply within a day. Decide who that is.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="run"><span class="h4">Follow-up stays on</span></span><p>Once the messages are approved they run as built. If something feels off, tell us and we change it.</p></label>
+      <label><span class="row"><input type="checkbox" data-commit="cap"><span class="h4">Capacity is real</span></span><p>Hands, products and bay time to actually do the jobs it books.</p></label>
+    </div>
+    <p class="mono" data-help></p>
+  </div>
+</section>
+
+</main>
+
+<nav class="botbar" aria-label="Onboarding steps">
+  <button class="btn btn-ghost btn-nav" type="button" data-prev><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="long">Back</span></button>
+  <div class="dots" data-dots></div>
+  <button class="btn btn-primary btn-nav" type="button" data-next><span data-next-lbl>Start</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+</nav>
+
+</div>
+
+<script>
+/* ============================================================
+   Everything you edit lives here.
+   Anything else left blank shows a "your onboarding lead will send
+   this" line rather than a broken link.
+   ============================================================ */
+var CONFIG = {
+  forms: {
+    core:  'https://form.jotform.com/261743059733057', // Jotform: Client Onboarding (Core)
+    voice: 'https://form.jotform.com/262712554359058'  // Jotform: Record Your Voice
+  },
+  calendly: 'https://calendly.com/zaimiana0',
+  uploadUrl: '',       // private upload link for the customer list
+  accessEmail: '',     // address clients invite into their platforms
+  metaBusinessId: '',  // Meta Business Portfolio ID
+  helpLine: ''         // e.g. 'Stuck? Text Zai on (555) 555 5555'
+};
+
+(function(){
+  "use strict";
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+
+  var STORE = 'ds-onboarding-deck';
+  var state = (function(){ try{ return JSON.parse(localStorage.getItem(STORE)) || {}; }catch(e){ return {}; } })();
+  state.done = state.done || {}; state.commit = state.commit || {};
+  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+
+  function el(tag, attrs, text){
+    var n = document.createElement(tag);
+    for(var k in attrs) n.setAttribute(k, attrs[k]);
+    if(text) n.textContent = text;
+    return n;
+  }
+  function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
+
+  /* ---------- forms and calendar, loaded when their slide opens ---------- */
+  $$('[data-form]').forEach(function(slot){
+    var key = slot.getAttribute('data-form'), url = CONFIG.forms[key];
+    var link = $('[data-form-link="' + key + '"]');
+    if(url){
+      slot.setAttribute('data-lazy-frame', url);
+      if(link) link.href = url;
+    }else{
+      slot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send this form directly.'));
+      if(link) link.remove();
+    }
+  });
+  function calUrl(){
+    var dark = isDark();
+    var p = 'hide_gdpr_banner=1' +
+      '&background_color=' + (dark ? '0c0e12' : 'ffffff') +
+      '&text_color=' + (dark ? 'edeff3' : '14161b') +
+      '&primary_color=' + (dark ? 'd9dfea' : '14161b');
+    return CONFIG.calendly + (CONFIG.calendly.indexOf('?') > -1 ? '&' : '?') + p;
+  }
+  var calSlot = $('[data-cal]'), calLink = $('[data-cal-link]');
+  if(CONFIG.calendly){ calLink.href = CONFIG.calendly; }
+  else{ calSlot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send your kickoff link directly.')); calLink.remove(); }
+
+  function loadLazy(slide){
+    $$('[data-lazy-frame]', slide).forEach(function(slot){
+      slot.appendChild(el('iframe', {'class':'formframe', src: slot.getAttribute('data-lazy-frame'), title: 'Onboarding form',
+        allow: 'microphone; camera; geolocation; fullscreen', allowfullscreen: ''}));
+      slot.removeAttribute('data-lazy-frame');
+    });
+    if(slide.contains(calSlot) && CONFIG.calendly && !calSlot.querySelector('iframe')){
+      calSlot.appendChild(el('iframe', {'class':'calframe', src: calUrl(), title: 'Book your kickoff call'}));
+    }
+  }
+
+  window.addEventListener('message', function(e){
+    if(!/(^|\.)jotform\.com$/.test((e.origin || '').replace(/^https?:\/\//, ''))) return;
+    if(typeof e.data !== 'string' || e.data.indexOf('setHeight:') !== 0) return;
+    var parts = e.data.split(':'), h = parseInt(parts[1], 10), id = parts[2];
+    if(!(h > 200) || !id) return;
+    $$('iframe.formframe').forEach(function(f){
+      if(f.src.indexOf(id) > -1) f.style.height = (h + 24) + 'px';
+    });
+  });
+
+  /* ---------- config text slots ---------- */
+  function fill(sel, value, fallback, asLink){
+    var slot = $(sel); if(!slot) return;
+    if(value && asLink) slot.appendChild(el('a', {'class':'btn btn-primary', href: value, target:'_blank', rel:'noopener'}, 'Upload my list'));
+    else if(value) slot.appendChild(el('span', {'class':'cfg'}, value));
+    else slot.appendChild(el('span', {'class':'pending'}, fallback));
+  }
+  fill('[data-upload]', CONFIG.uploadUrl, 'Upload link comes from your onboarding lead', true);
+  fill('[data-access]', CONFIG.accessEmail, 'the address your onboarding lead sends you');
+  fill('[data-meta]', CONFIG.metaBusinessId, 'sent by your onboarding lead');
+  if(CONFIG.helpLine) $('[data-help]').textContent = CONFIG.helpLine;
+
+  /* ---------- welcome art: five stations along the road ---------- */
+  (function(){
+    var road = $('[data-road]'), g = $('[data-stations]'), ns = 'http://www.w3.org/2000/svg';
+    if(!road || !road.getTotalLength) return;
+    var names = ['Your shop','Your voice','Your list','Kickoff','Go live'];
+    var at = [.04, .27, .5, .72, .97];
+    var L = road.getTotalLength();
+    names.forEach(function(n, i){
+      var pt = road.getPointAtLength(L * at[i]);
+      var grp = document.createElementNS(ns, 'g');
+      grp.setAttribute('class', 'pop d' + (i + 1));
+      var above = i % 2 === 1 || i === 4;
+      grp.innerHTML =
+        '<circle cx="' + pt.x + '" cy="' + pt.y + '" r="17" class="f-card s-a" stroke-width="2"/>' +
+        '<text x="' + pt.x + '" y="' + (pt.y + 4) + '" text-anchor="middle" class="t ta" style="font-size:11px">0' + (i + 1) + '</text>' +
+        '<text x="' + Math.min(Math.max(pt.x, 52), 508) + '" y="' + (above ? pt.y - 30 : pt.y + 40) + '" text-anchor="middle" class="tb" style="font-size:13px">' + n + '</text>';
+      g.appendChild(grp);
+    });
+  })();
+
+  /* ---------- kickoff agenda: 45 minutes as a donut ---------- */
+  (function(){
+    var parts = [['Your numbers', 10, 'var(--art-a)'], ['The baseline', 10, 'var(--art-hi)'], ['Ad spend', 10, 'var(--art-b)'],
+                 ['Texting registration', 10, 'color-mix(in srgb,var(--art-hi) 45%,var(--art-c))'], ['Your questions', 5, 'color-mix(in srgb,var(--art-b) 50%,var(--art-c))']];
+    var g = $('[data-donut]'), list = $('[data-agenda]'), ns = 'http://www.w3.org/2000/svg', acc = 0;
+    parts.forEach(function(p){
+      var c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', 100); c.setAttribute('cy', 100); c.setAttribute('r', 78);
+      c.setAttribute('fill', 'none'); c.setAttribute('stroke-width', 22); c.setAttribute('pathLength', 45);
+      c.setAttribute('class', 'seg'); c.style.stroke = p[2];
+      c.style.strokeDasharray = (p[1] - .6) + ' ' + (45 - p[1] + .6);
+      c.style.strokeDashoffset = -acc;
+      acc += p[1];
+      g.appendChild(c);
+      var li = el('li');
+      var sw = el('i'); sw.style.background = p[2];
+      li.appendChild(sw); li.appendChild(el('span', {}, p[0])); li.appendChild(el('b', {}, p[1] + ' min'));
+      list.appendChild(li);
+    });
+  })();
+
+  /* ---------- kickoff art: a week of slots ---------- */
+  (function(){
+    var g = $('[data-calgrid]'), ns = 'http://www.w3.org/2000/svg';
+    ['Mon','Tue','Wed','Thu','Fri'].forEach(function(d, c){
+      var t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', 102 + c * 74); t.setAttribute('y', 134); t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('class', 't'); t.textContent = d; g.appendChild(t);
+      for(var r = 0; r < 3; r++){
+        if(c === 2 && r === 2) continue; // the kickoff slot sits here
+        var rect = document.createElementNS(ns, 'rect');
+        rect.setAttribute('x', 68 + c * 74); rect.setAttribute('y', 150 + r * 50);
+        rect.setAttribute('width', 68); rect.setAttribute('height', 42); rect.setAttribute('rx', 10);
+        var busy = (c * 3 + r) % 4 === 0;
+        rect.setAttribute('class', busy ? 'f-c' : 's-c');
+        if(!busy){ rect.setAttribute('fill', 'none'); rect.setAttribute('stroke-width', '1'); rect.setAttribute('stroke-dasharray', '3 4'); }
+        g.appendChild(rect);
+      }
+    });
+  })();
+
+  /* ---------- deck ---------- */
+  var slides = $$('.slide');
+  var TOTAL = slides.length;
+  var rail = $('[data-rail]'), cur = $('[data-cur]'), lbl = $('[data-lbl]');
+  var prev = $('[data-prev]'), next = $('[data-next]'), nextLbl = $('[data-next-lbl]');
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  $('[data-tot]').textContent = pad(TOTAL);
+  var active = -1, booted = false;
+
+  var dots = slides.map(function(s, i){
+    var b = el('button', {type:'button', 'aria-label': (i + 1) + '. ' + s.getAttribute('data-label'), title: s.getAttribute('data-label')});
+    b.addEventListener('click', function(){ go(i); });
+    $('[data-dots]').appendChild(b);
+    return b;
+  });
+
+  function go(i){
+    i = Math.max(0, Math.min(TOTAL - 1, i));
+    if(i === active) return;
+    slides.forEach(function(s, k){
+      var on = k === i;
+      s.classList.toggle('from-left', !on && k < i);
+      s.classList.toggle('is-active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if('inert' in s) s.inert = !on;
+    });
+    active = i;
+    var s = slides[i];
+    s.scrollTop = 0;
+    loadLazy(s);
+    cur.textContent = pad(i + 1);
+    lbl.textContent = '· ' + s.getAttribute('data-label');
+    rail.style.width = ((i + 1) / TOTAL * 100) + '%';
+    dots.forEach(function(d, k){ if(k === i) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
+    prev.disabled = i === 0;
+    nextLbl.textContent = i === 0 ? 'Start' : i === TOTAL - 1 ? 'Back to start' : 'Next: ' + slides[i + 1].getAttribute('data-label');
+    state.last = i; save();
+    if(history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + s.id);
+    if(booted){ var h = $('h2', s); if(h) h.focus({preventScroll:true}); }
+    driftGlow(i);
+  }
+  prev.addEventListener('click', function(){ go(active - 1); });
+  next.addEventListener('click', function(){ go(active === TOTAL - 1 ? 0 : active + 1); });
+  $$('[data-go]').forEach(function(b){ b.addEventListener('click', function(){ go(+b.getAttribute('data-go')); }); });
+  $$('[data-scroll]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = $(b.getAttribute('data-scroll')); if(!t) return;
+      slides[active].scrollTo({top: t.offsetTop - 12, behavior: calm ? 'auto' : 'smooth'});
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target.tagName || '').toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || tag === 'select' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if(e.key === 'ArrowRight'){ e.preventDefault(); go(active + 1); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); go(active - 1); }
+  });
+
+  /* horizontal swipe on touch, ignored when the gesture is mostly vertical */
+  var stage = $('[data-stage]'), sx = 0, sy = 0;
+  stage.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) go(active + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+
+  window.addEventListener('hashchange', function(){
+    var k = slides.findIndex(function(s){ return '#' + s.id === location.hash; });
+    if(k > -1) go(k);
+  });
+
+  /* ---------- progress: steps 1-4 are ticks, step 5 is the four commitments ---------- */
+  function renderDone(){
+    var firstOpen = null, count = 0;
+    [1,2,3,4].forEach(function(n){
+      var d = !!state.done[n];
+      if(d) count++; else if(firstOpen === null) firstOpen = n;
+      $$('[data-done="' + n + '"]').forEach(function(b){ b.setAttribute('aria-pressed', d ? 'true' : 'false'); });
+      $('[data-roadmap] [data-go="' + n + '"]').classList.toggle('is-done', d);
+      dots[n].classList.toggle('is-done', d);
+    });
+    var allCommit = $$('[data-commit]').every(function(i){ return i.checked; });
+    if(allCommit) count++;
+    $('[data-roadmap] [data-go="5"]').classList.toggle('is-done', allCommit);
+    dots[5].classList.toggle('is-done', allCommit);
+
+    var left = 5 - count, goBtn = $('[data-summary-go]');
+    $('[data-summary]').classList.toggle('is-complete', left === 0);
+    $('[data-summary-bar]').style.width = (count / 5 * 100) + '%';
+    if(left === 0){
+      $('[data-summary-t]').textContent = "That's everything. The build starts now.";
+      $('[data-summary-p]').textContent = 'Every input is covered, so the guarantee is fully on us. Next you hear from us with your recovery messages to approve.';
+      goBtn.hidden = true;
+    }else{
+      $('[data-summary-t]').textContent = count + ' of 5 done. ' + left + (left === 1 ? ' step' : ' steps') + ' to go.';
+      $('[data-summary-p]').textContent = firstOpen !== null
+        ? 'Next up: ' + slides[firstOpen].getAttribute('data-label') + '. Everything so far is saved on this device.'
+        : 'Just the four ticks below. Everything so far is saved on this device.';
+      goBtn.hidden = firstOpen === null;
+      goBtn.onclick = function(){ go(firstOpen); };
+    }
+  }
+  $$('[data-done]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var n = b.getAttribute('data-done');
+      state.done[n] = !state.done[n]; save(); renderDone();
+    });
+  });
+  $$('[data-commit]').forEach(function(i){
+    i.checked = !!state.commit[i.getAttribute('data-commit')];
+    i.addEventListener('change', function(){ state.commit[i.getAttribute('data-commit')] = i.checked; save(); renderDone(); });
+  });
+  renderDone();
+
+  /* ---------- theme switch, shared with the main site ---------- */
+  var themeBtn = $('#theme');
+  function applyTheme(nxt){
+    document.documentElement.setAttribute('data-theme', nxt);
+    try{ localStorage.setItem('ds-theme', nxt); }catch(e){}
+    var m = $('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', nxt === 'dark' ? '#07080B' : '#F7F8FA');
+    themeBtn.setAttribute('aria-label', nxt === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    var f = calSlot.querySelector('iframe'); if(f) f.src = calUrl();
+  }
+  applyTheme(isDark() ? 'dark' : 'light');
+  themeBtn.addEventListener('click', function(){
+    var nxt = isDark() ? 'light' : 'dark';
+    if(!document.startViewTransition || calm){ applyTheme(nxt); return; }
+    var r = themeBtn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var reach = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+    var vt = document.startViewTransition(function(){ applyTheme(nxt); });
+    vt.ready.then(function(){
+      document.documentElement.animate(
+        {clipPath:['circle(0px at ' + cx + 'px ' + cy + 'px)', 'circle(' + reach + 'px at ' + cx + 'px ' + cy + 'px)']},
+        {duration:620, easing:'cubic-bezier(.22,.7,.3,1)', pseudoElement:'::view-transition-new(root)'}
+      );
+    }).catch(function(){});
+  });
+
+  /* ---------- background: the light moves as the deck advances ---------- */
+  var g1 = $('[data-g1]'), g2 = $('[data-g2]');
+  function driftGlow(i){
+    if(calm) return;
+    var a = i / Math.max(1, TOTAL - 1);
+    g1.style.transform = 'translate(' + (a * 38) + 'vw,' + (Math.sin(a * 3.1) * 12) + 'vh)';
+    g2.style.transform = 'translate(' + (-a * 30) + 'vw,' + (-Math.cos(a * 2.4) * 10) + 'vh)';
+  }
+
+  /* ---------- specks of light drifting up, dust in a booth lamp ---------- */
+  (function(){
+    var c = $('[data-specks]');
+    if(!c || calm || !c.getContext) return;
+    var ctx = c.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1), W, H, P = [], raf = 0;
+    var rgb = '', readRgb = function(){ rgb = getComputedStyle(document.documentElement).getPropertyValue('--spark').trim() || '216,224,238'; };
+    function size(){
+      W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr;
+      var n = Math.round(Math.min(70, innerWidth * innerHeight / 22000));
+      P = [];
+      for(var i = 0; i < n; i++) P.push({x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.6 + .4) * dpr, v: (Math.random() * .25 + .08) * dpr, a: Math.random() * .45 + .12, t: Math.random() * 6.28});
+    }
+    function frame(){
+      ctx.clearRect(0, 0, W, H);
+      for(var i = 0; i < P.length; i++){
+        var p = P[i];
+        p.y -= p.v; p.t += .01; p.x += Math.sin(p.t) * .15 * dpr;
+        if(p.y < -10){ p.y = H + 10; p.x = Math.random() * W; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+        ctx.fillStyle = 'rgba(' + rgb + ',' + (p.a * (.6 + .4 * Math.sin(p.t * 2))) + ')';
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    readRgb(); size(); frame();
+    new MutationObserver(readRgb).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+    addEventListener('resize', size, {passive:true});
+    document.addEventListener('visibilitychange', function(){
+      cancelAnimationFrame(raf);
+      if(!document.hidden) frame();
+    });
+  })();
+
+  /* ---------- start where they left off ---------- */
+  var start = slides.findIndex(function(s){ return '#' + s.id === location.hash; });
+  if(start < 0) start = typeof state.last === 'number' ? state.last : 0;
+  go(start);
+  booted = true;
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

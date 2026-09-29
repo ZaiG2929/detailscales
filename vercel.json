@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "^/onboarding/?$",
+      "has": [{ "type": "host", "value": "detailscales.com" }],
+      "status": 308,
+      "headers": { "Location": "https://onboarding.detailscales.com/" }
+    },
+    {
+      "src": "^/onboarding/?$",
+      "has": [{ "type": "host", "value": "www.detailscales.com" }],
+      "status": 308,
+      "headers": { "Location": "https://onboarding.detailscales.com/" }
+    },
+    {
+      "src": "^/$",
+      "has": [{ "type": "host", "value": "onboarding.detailscales.com" }],
+      "dest": "/onboarding/index.html"
+    }
+  ]
+}
