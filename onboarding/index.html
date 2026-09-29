@@ -418,7 +418,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 <div class="app">
 
 <header class="topbar">
-  <a href="/" class="lockup" aria-label="DetailScales home"></a>
+  <a href="https://www.detailscales.com/" class="lockup" aria-label="DetailScales home"></a>
   <span class="step-of mono" aria-live="polite"><b data-cur>01</b> / <span data-tot>06</span><span class="lbl" data-lbl></span></span>
   <button class="theme-btn" type="button" id="theme" aria-label="Switch to light theme">
     <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
@@ -434,7 +434,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
     <div class="split">
       <div class="head">
         <p class="eyebrow rise">Client onboarding</p>
-        <h2 class="title rise" id="h-s1" tabindex="-1"><span data-greet>Welcome in.</span> Let's get your first <span class="sheen">dead quote booked</span>.</h2>
+        <h2 class="title rise" id="h-s1" tabindex="-1">Welcome in. Let's get your first <span class="sheen">dead quote booked</span>.</h2>
         <p class="lede rise">Five steps take you from signed to live. Do them in order, one thing each. This page remembers where you got to, so you can stop and come back.</p>
         <div class="stats rise">
           <span class="stat"><b>5</b> steps</span>
@@ -852,10 +852,6 @@ var CONFIG = {
     return n;
   }
   function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
-
-  /* ---------- greeting from the link, ?name=Mike ---------- */
-  var name = (new URLSearchParams(location.search).get('name') || '').trim().slice(0, 40);
-  if(name) $('[data-greet]').textContent = 'Welcome in, ' + name + '.';
 
   /* ---------- forms and calendar, loaded when their slide opens ---------- */
   $$('[data-form]').forEach(function(slot){
