@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>Confirm Your Call | DetailScales</title>
-<meta name="description" content="Watch this before your DetailScales strategy call: the overview, the four questions every owner asks, and the results so far.">
+<meta name="description" content="Watch this before your DetailScales strategy call: the overview, the four questions every detailer asks, and the results so far.">
 <!-- For people who have booked a call. Kept out of search and out of the sitemap. -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F7F8FA">
@@ -39,7 +39,7 @@
 /* ============================================================
    DetailScales pre-call page. Where Calendly sends people once
    they have booked. One overview video, four answers to the
-   questions every owner asks, then the results.
+   questions every detailer asks, then the results.
    Same material as the landing page and onboarding: graphite
    ink, frosted slabs, chrome as the only accent.
    ============================================================ */
@@ -204,9 +204,6 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .booked b{font-family:var(--display);font-weight:700;font-stretch:104%;color:var(--tx)}
 .hero-video{max-width:1000px;margin-inline:auto;padding:clamp(10px,1.4vw,16px);border-radius:30px}
 .hero-video .vbox{border-radius:20px}
-.hero-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:clamp(18px,2.6vw,26px)}
-.stat{display:inline-flex;align-items:baseline;gap:.5rem;padding:.55rem .95rem;border-radius:999px;background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);font-size:.86rem;color:var(--tx-2)}
-.stat b{font-family:var(--display);font-weight:700;font-stretch:106%;color:var(--tx)}
 
 /* ---------- video box ----------
    A poster until someone presses play, then the player. Nothing from
@@ -242,7 +239,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .vsoon .ring{background:rgba(255,255,255,.08);box-shadow:0 0 0 10px rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.18)}
 .vsoon .ring svg{fill:rgba(255,255,255,.55)}
 .vsoon .mono{color:rgba(237,239,243,.7)}
-.vwarn{position:absolute;left:0;right:0;bottom:0;z-index:3;margin:0;padding:.7rem 1rem;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:rgba(8,10,14,.82)}
+.vwarn{position:absolute;left:0;right:0;bottom:0;z-index:3;display:block;text-decoration:none;margin:0;padding:.7rem 1rem;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:rgba(8,10,14,.82)}
 
 /* ---------- FAQ videos ---------- */
 .faq{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);align-items:start}
@@ -251,10 +248,6 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .qa-head{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start;padding:4px 4px 0}
 .qa-n{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink);font-family:var(--mono);font-size:.74rem;font-weight:500;flex:none;box-shadow:var(--float-edge)}
 .qa-head h3{padding-top:.3rem}
-.qa-body{padding:0 4px 6px;display:grid;gap:.7rem;font-size:.95rem;color:var(--tx-2);line-height:1.6}
-.qa-body ul{margin:0;padding:0;list-style:none;display:grid;gap:.4rem}
-.qa-body li{position:relative;padding-left:1.25rem}
-.qa-body li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--tx)}
 
 /* ---------- results ---------- */
 .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.8vw,18px);margin-bottom:clamp(14px,2vw,22px)}
@@ -269,14 +262,6 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .proof{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
 @media(max-width:820px){.proof{grid-template-columns:1fr}}
 .tcard{padding:clamp(12px,1.6vw,16px);display:grid;gap:14px;align-content:start}
-.tmeta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:0 4px;flex-wrap:wrap}
-.tname{font-family:var(--display);font-weight:700;font-stretch:104%;font-size:1.05rem}
-.tcard dl{margin:0;padding:0 4px 6px;display:grid;gap:.75rem}
-.tcard dt{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tx-3);margin-bottom:.2rem}
-.tcard dd{margin:0;font-size:.93rem;color:var(--tx-2);line-height:1.55}
-.tcard dd.res{color:var(--tx);font-weight:500}
-.vlink{font-family:var(--mono);font-size:.6rem;letter-spacing:.11em;text-transform:uppercase;color:var(--tx-3);border-bottom:1px solid var(--rule);text-decoration:none;white-space:nowrap}
-.vlink:hover{color:var(--tx);border-color:var(--tx)}
 
 .honest{margin-top:clamp(14px,2vw,22px);padding:clamp(20px,2.6vw,30px);display:grid;gap:.8rem;font-size:.98rem;color:var(--tx-2);max-width:none}
 .honest p{max-width:78ch}
@@ -323,68 +308,35 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
   <div class="hero-video slab">
     <div class="vbox" data-video="hero" data-label="Confirm your call"></div>
   </div>
-  <div class="hero-foot">
-    <span class="stat"><b>1</b> video to watch now</span>
-    <span class="stat"><b>4</b> answers below</span>
-    <span class="stat">Then come with <b>3 rough numbers</b></span>
-  </div>
 </section>
 
 <!-- ============ 2. FOUR FAQ VIDEOS ============ -->
 <section class="sec wrap" id="questions" aria-labelledby="h-faq" style="padding-top:clamp(20px,4vw,48px)">
   <div class="sec-head center reveal">
     <p class="eyebrow">Before you ask</p>
-    <h2 id="h-faq">The four questions every owner asks. <span class="sheen">Answered now.</span></h2>
-    <p class="lede">Each one is a short video. The written answer sits under it if you'd rather read.</p>
+    <h2 id="h-faq">The four questions every detailer asks. <span class="sheen">Answered now.</span></h2>
+    <p class="lede">Each one is a short video. Watch them before the call.</p>
   </div>
 
   <div class="faq">
     <article class="qa slab reveal" aria-labelledby="q1">
       <div class="qa-head"><span class="qa-n">01</span><h3 id="q1">What happens on the call, and what should I bring?</h3></div>
       <div class="vbox" data-video="faq1" data-label="What happens on the call and what to bring"></div>
-      <div class="qa-body">
-        <p>We go through your last 90 days: how many people asked for a price, how many you quoted, how many booked, and how big your past customer list is. From that we show you where the money is leaking and what your first 90 days with us would look like.</p>
-        <p><strong>Bring three rough numbers.</strong> Guesses are fine.</p>
-        <ul>
-          <li>Inquiries a month: calls, DMs and forms.</li>
-          <li>Your coating price, and what a regular detail goes for.</li>
-          <li>Where your customer list lives, and about how many names are on it.</li>
-        </ul>
-        <p>If you're not a fit, we'll say so on the call. No pressure to sign anything that day.</p>
-      </div>
     </article>
 
     <article class="qa slab reveal" aria-labelledby="q2">
       <div class="qa-head"><span class="qa-n">02</span><h3 id="q2">What have you done for other detailers?</h3></div>
       <div class="vbox" data-video="faq2" data-label="What we've done for other detailers"></div>
-      <div class="qa-body">
-        <p>We've built this system for other detailing shops. In this video I walk you through what we set up for them, what it brought in, and how fast.</p>
-      </div>
     </article>
 
     <article class="qa slab reveal" aria-labelledby="q3">
       <div class="qa-head"><span class="qa-n">03</span><h3 id="q3">How is this different from every agency that's pitched me?</h3></div>
       <div class="vbox" data-video="faq3" data-label="How this is different"></div>
-      <div class="qa-body">
-        <p>Most agencies start with ads. We start with the money you already have: the people who asked for a quote and never heard back, and the customers who already paid you once.</p>
-        <ul>
-          <li>Unclosed quotes get worked first. Fastest cash in the system.</li>
-          <li>Past customers get brought back by text.</li>
-          <li>Every new inquiry gets a call back inside 60 seconds.</li>
-          <li>Ads go on last, once the follow-up exists to catch what they bring in.</li>
-        </ul>
-        <p>And we only work with detailers.</p>
-      </div>
     </article>
 
     <article class="qa slab reveal" aria-labelledby="q4">
       <div class="qa-head"><span class="qa-n">04</span><h3 id="q4">How does the guarantee work, and how does pricing work?</h3></div>
       <div class="vbox" data-video="faq4" data-label="The guarantee and pricing"></div>
-      <div class="qa-body">
-        <p>If the system doesn't add <strong>$10,000 in revenue within 90 days</strong>, your fee is refunded and we keep working for free until it does.</p>
-        <p>It has conditions, because a guarantee only holds if both sides do their part: your customer list, access to your accounts, replies to booked jobs within 24 hours, room in your calendar, and the agreed ad spend.</p>
-        <p><strong>Pricing</strong> depends on your shop and which parts of the system you need, so we set it on the call once we've seen your numbers. You'll know the exact figure before anything is signed. Ad spend is paid straight to Meta, never through us.</p>
-      </div>
     </article>
   </div>
 </section>
@@ -418,38 +370,18 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
   <div class="proof">
     <article class="tcard slab reveal">
       <div class="vbox portrait" data-wistia="ouexm6gg5c" data-poster="/assets/poster-ouexm6gg5c.jpg" data-len="1:09" data-label="Sirvontes, med spa owner"></div>
-      <div class="tmeta"><span class="tname">Sirvontes</span><a class="vlink" href="https://fast.wistia.net/embed/iframe/ouexm6gg5c" target="_blank" rel="noopener">Open video &#8599;</a></div>
-      <dl>
-        <div><dt>What we did</dt><dd>Ran the ad campaigns, then automated the follow-up across text, email and voice so every inquiry got answered without the front desk.</dd></div>
-        <div><dt>What happened</dt><dd class="res">Monthly revenue went from $20K to $35K inside 60 days, with no new staff hired.</dd></div>
-      </dl>
     </article>
 
     <article class="tcard slab reveal">
       <div class="vbox portrait" data-wistia="bc3vcjiscw" data-poster="/assets/poster-bc3vcjiscw.jpg" data-len="5:11" data-label="Ali, Renoir"></div>
-      <div class="tmeta"><span class="tname">Ali &middot; Renoir</span><a class="vlink" href="https://fast.wistia.net/embed/iframe/bc3vcjiscw" target="_blank" rel="noopener">Open video &#8599;</a></div>
-      <dl>
-        <div><dt>What we did</dt><dd>Built the lead capture and qualification, the appointment setting and the scheduling, with automation running behind it around the clock.</dd></div>
-        <div><dt>What happened</dt><dd class="res">Went from 15 to 28 jobs a month, without adding workload or staff.</dd></div>
-      </dl>
     </article>
 
     <article class="tcard slab reveal">
       <div class="vbox" data-wistia="77l1d9adco" data-poster="/assets/poster-77l1d9adco.jpg" data-len="2:12" data-label="Eric Aumen, unscripted interview"></div>
-      <div class="tmeta"><span class="tname">Eric Aumen</span><a class="vlink" href="https://fast.wistia.net/embed/iframe/77l1d9adco" target="_blank" rel="noopener">Open video &#8599;</a></div>
-      <dl>
-        <div><dt>What we did</dt><dd>Built out his integrations, from simple connections through to custom API work, with progress updates at every stage instead of silence.</dd></div>
-        <div><dt>What happened</dt><dd class="res">An extra $6.25K generated while managing 10+ clients, with operations running smoother.</dd></div>
-      </dl>
     </article>
 
     <article class="tcard slab reveal">
       <div class="vbox" data-wistia="3o2iops5il" data-poster="/assets/poster-3o2iops5il.jpg" data-len="6:09" data-label="Gianmarco, full interview"></div>
-      <div class="tmeta"><span class="tname">Gianmarco &middot; @orukanaman</span><a class="vlink" href="https://fast.wistia.net/embed/iframe/3o2iops5il" target="_blank" rel="noopener">Open video &#8599;</a></div>
-      <dl>
-        <div><dt>What we did</dt><dd>Ran backend operations across his 500,000 follower brand, his car rental business and his agency, including AI voice callers and web chat for his own clients.</dd></div>
-        <div><dt>What happened</dt><dd class="res">Got back 30+ hours he would have spent building systems himself, with three businesses competing for his time.</dd></div>
-      </dl>
     </article>
   </div>
 
@@ -464,7 +396,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
   <div class="close slab reveal">
     <p class="eyebrow">You're all set</p>
     <h2 id="h-close">See you on the call.</h2>
-    <p class="lede">Watched the video and the four answers? Then we can spend the time on your shop.</p>
+    <p class="lede">Watched the videos? Then we can spend the time on your shop.</p>
     <p class="resched"><strong>Can't make it?</strong> Reschedule from the link in your confirmation email instead of skipping. The slot goes to another shop.</p>
   </div>
 </section>
@@ -482,8 +414,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
      Wistia: the code at the end of the media URL, e.g. ouexm6gg5c
      YouTube: the code after watch?v=, e.g. bp8OMymWnvk
      poster is optional, a path or URL to a thumbnail image.
-     Leave a slot empty and it shows "Video coming soon" with the
-     written answer still under it.
+     Leave a slot empty and it shows "Video coming soon".
      ============================================================ */
   var VIDEOS = {
     hero: { wistia: "", youtube: "", poster: "", len: "" },
@@ -620,9 +551,12 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
         stage.replaceChild(btn, player);
         if(current && current.btn === btn) current = null;
         if(!box.querySelector('.vwarn')){
-          var w = document.createElement('p');
+          var w = document.createElement('a');
           w.className = 'vwarn';
-          w.textContent = 'Player blocked here. Open the video in a new tab instead.';
+          w.href = 'https://fast.wistia.net/embed/iframe/' + encodeURIComponent(cfg.wistia);
+          w.target = '_blank';
+          w.rel = 'noopener';
+          w.textContent = 'Player blocked here. Tap to open it in a new tab ↗';
           box.appendChild(w);
         }
       }, 2500);
