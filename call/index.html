@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Before Your Call | DetailScales</title>
+<title>Confirm Your Call | DetailScales</title>
 <meta name="description" content="Watch this before your DetailScales strategy call: the overview, the four questions every owner asks, and the results so far.">
 <!-- For people who have booked a call. Kept out of search and out of the sitemap. -->
 <meta name="robots" content="noindex, nofollow">
@@ -322,11 +322,11 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 <section class="hero wrap" id="watch" aria-labelledby="h-hero">
   <div class="hero-head">
     <p class="booked"><span class="dot" aria-hidden="true"></span><span data-booked>Your strategy call is booked</span></p>
-    <h1 id="h-hero"><span data-hello>You're booked.</span> Watch this <span class="sheen">before we talk</span>.</h1>
+    <h1 id="h-hero"><span data-hello>Watch this video</span> to <span class="sheen">confirm your call</span>.</h1>
     <p class="lede">It covers what we'll look at on your call, how the system works inside a detailing shop, and how to tell if you're a fit. Watch it first and we spend the call on your numbers, not the basics.</p>
   </div>
   <div class="hero-video slab">
-    <div class="vbox" data-video="hero" data-label="Watch before your call"></div>
+    <div class="vbox" data-video="hero" data-label="Confirm your call"></div>
   </div>
   <div class="hero-foot">
     <span class="stat"><b>1</b> video to watch now</span>
@@ -520,7 +520,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
   (function(){
     var q = new URLSearchParams(location.search);
     var first = (q.get('invitee_first_name') || (q.get('invitee_full_name') || '').split(' ')[0] || '').trim();
-    if(first && first.length < 40) $('[data-hello]').textContent = first + ", you're booked.";
+    if(first && first.length < 40) $('[data-hello]').textContent = first + ", watch this video";
     var start = q.get('event_start_time');
     var when = start ? new Date(start) : null;
     if(when && !isNaN(when)){
