@@ -245,7 +245,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .vwarn{position:absolute;left:0;right:0;bottom:0;z-index:3;margin:0;padding:.7rem 1rem;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;background:rgba(8,10,14,.82)}
 
 /* ---------- FAQ videos ---------- */
-.faq{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px)}
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);align-items:start}
 @media(max-width:820px){.faq{grid-template-columns:1fr}}
 .qa{padding:clamp(12px,1.6vw,16px);display:grid;gap:clamp(14px,1.8vw,18px);align-content:start}
 .qa-head{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start;padding:4px 4px 0}
@@ -283,11 +283,6 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 
 /* ---------- close ---------- */
 .close{padding:clamp(26px,3.6vw,44px);display:grid;gap:1.4rem;justify-items:center;text-align:center}
-.ready{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;text-align:left}
-@media(max-width:760px){.ready{grid-template-columns:1fr}}
-.ready li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;padding:16px;border-radius:18px;background:var(--float);border:1px solid var(--slab-rim);box-shadow:var(--float-edge);font-size:.9rem;color:var(--tx-2);line-height:1.45}
-.ready b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--on-ink);font-family:var(--mono);font-size:.7rem;font-weight:500}
-.ready strong{display:block;font-family:var(--display);font-weight:700;font-stretch:104%;margin-bottom:.15rem}
 .resched{font-size:.92rem;color:var(--tx-2);max-width:60ch}
 .resched strong{color:var(--leak)}
 
@@ -345,17 +340,31 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 
   <div class="faq">
     <article class="qa slab reveal" aria-labelledby="q1">
-      <div class="qa-head"><span class="qa-n">01</span><h3 id="q1">What actually happens on this call?</h3></div>
-      <div class="vbox" data-video="faq1" data-label="What happens on the call"></div>
+      <div class="qa-head"><span class="qa-n">01</span><h3 id="q1">What happens on the call, and what should I bring?</h3></div>
+      <div class="vbox" data-video="faq1" data-label="What happens on the call and what to bring"></div>
       <div class="qa-body">
         <p>We go through your last 90 days: how many people asked for a price, how many you quoted, how many booked, and how big your past customer list is. From that we show you where the money is leaking and what your first 90 days with us would look like.</p>
+        <p><strong>Bring three rough numbers.</strong> Guesses are fine.</p>
+        <ul>
+          <li>Inquiries a month: calls, DMs and forms.</li>
+          <li>Your coating price, and what a regular detail goes for.</li>
+          <li>Where your customer list lives, and about how many names are on it.</li>
+        </ul>
         <p>If you're not a fit, we'll say so on the call. No pressure to sign anything that day.</p>
       </div>
     </article>
 
     <article class="qa slab reveal" aria-labelledby="q2">
-      <div class="qa-head"><span class="qa-n">02</span><h3 id="q2">How is this different from every agency that's pitched me?</h3></div>
-      <div class="vbox" data-video="faq2" data-label="How this is different"></div>
+      <div class="qa-head"><span class="qa-n">02</span><h3 id="q2">What have you done for other detailers?</h3></div>
+      <div class="vbox" data-video="faq2" data-label="What we've done for other detailers"></div>
+      <div class="qa-body">
+        <p>We've built this system for other detailing shops. In this video I walk you through what we set up for them, what it brought in, and how fast.</p>
+      </div>
+    </article>
+
+    <article class="qa slab reveal" aria-labelledby="q3">
+      <div class="qa-head"><span class="qa-n">03</span><h3 id="q3">How is this different from every agency that's pitched me?</h3></div>
+      <div class="vbox" data-video="faq3" data-label="How this is different"></div>
       <div class="qa-body">
         <p>Most agencies start with ads. We start with the money you already have: the people who asked for a quote and never heard back, and the customers who already paid you once.</p>
         <ul>
@@ -368,21 +377,13 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
       </div>
     </article>
 
-    <article class="qa slab reveal" aria-labelledby="q3">
-      <div class="qa-head"><span class="qa-n">03</span><h3 id="q3">How does the $10,000 guarantee actually work?</h3></div>
-      <div class="vbox" data-video="faq3" data-label="How the guarantee works"></div>
+    <article class="qa slab reveal" aria-labelledby="q4">
+      <div class="qa-head"><span class="qa-n">04</span><h3 id="q4">How does the guarantee work, and how does pricing work?</h3></div>
+      <div class="vbox" data-video="faq4" data-label="The guarantee and pricing"></div>
       <div class="qa-body">
         <p>If the system doesn't add <strong>$10,000 in revenue within 90 days</strong>, your fee is refunded and we keep working for free until it does.</p>
-        <p>It has conditions, because a guarantee only holds if both sides do their part: your customer list, access to your accounts, replies to booked jobs within 24 hours, room in your calendar, and the agreed ad spend. Your time and ad budget aren't refundable, so we don't call it risk free.</p>
-      </div>
-    </article>
-
-    <article class="qa slab reveal" aria-labelledby="q4">
-      <div class="qa-head"><span class="qa-n">04</span><h3 id="q4">You haven't done this for detailers yet. Why should I trust it?</h3></div>
-      <div class="vbox" data-video="faq4" data-label="Why trust it"></div>
-      <div class="qa-body">
-        <p>Fair question, and we won't pretend otherwise. The system is proven with owners in other trades, on camera, just below. Pointing it at detailing is the new part.</p>
-        <p>That's exactly why the guarantee exists. If it doesn't work in your shop, we carry the cost of that, not you.</p>
+        <p>It has conditions, because a guarantee only holds if both sides do their part: your customer list, access to your accounts, replies to booked jobs within 24 hours, room in your calendar, and the agreed ad spend.</p>
+        <p><strong>Pricing</strong> depends on your shop and which parts of the system you need, so we set it on the call once we've seen your numbers. You'll know the exact figure before anything is signed. Ad spend is paid straight to Meta, never through us.</p>
       </div>
     </article>
   </div>
@@ -392,8 +393,8 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 <section class="sec wrap" id="results" aria-labelledby="h-results">
   <div class="sec-head center reveal">
     <p class="eyebrow">Results</p>
-    <h2 id="h-results">Proven in other trades. <span class="sheen">Now built only for detailing.</span></h2>
-    <p class="lede">Real owners, their own words, unscripted. None of them are detailers, and we say so on purpose.</p>
+    <h2 id="h-results">Real owners. <span class="sheen">Real numbers.</span></h2>
+    <p class="lede">Owners who have run this system, in their own words, unscripted.</p>
   </div>
 
   <div class="nums">
@@ -455,21 +456,15 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
   <div class="honest slab reveal">
     <p class="mono">Where the track record comes from</p>
     <p>DetailScales is built by the team behind BotLeads, who have generated <strong>$145,000 in revenue for clients</strong> running paid acquisition and booking systems for service businesses.</p>
-    <p><strong>The honest position:</strong> the machinery is proven, pointing it at detailing is the new part. When we have detailer numbers worth showing, they go here.</p>
   </div>
 </section>
 
 <!-- ============ CLOSE ============ -->
 <section class="wrap" aria-labelledby="h-close" style="padding-bottom:clamp(40px,6vw,72px)">
   <div class="close slab reveal">
-    <p class="eyebrow">See you on the call</p>
-    <h2 id="h-close">Bring three rough numbers.</h2>
-    <p class="lede">Guesses are fine. They're what turns the call into a plan for your shop.</p>
-    <ol class="ready">
-      <li><b>1</b><span><strong>Inquiries a month</strong>Calls, DMs and forms, roughly.</span></li>
-      <li><b>2</b><span><strong>Your coating price</strong>And what a regular detail goes for.</span></li>
-      <li><b>3</b><span><strong>Your customer list</strong>Where it lives and about how many names.</span></li>
-    </ol>
+    <p class="eyebrow">You're all set</p>
+    <h2 id="h-close">See you on the call.</h2>
+    <p class="lede">Watched the video and the four answers? Then we can spend the time on your shop.</p>
     <p class="resched"><strong>Can't make it?</strong> Reschedule from the link in your confirmation email instead of skipping. The slot goes to another shop.</p>
   </div>
 </section>
