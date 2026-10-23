@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Your Results | JMatt Mobile Detailing</title>
+<meta name="description" content="What the DetailScales system produced for JMatt Mobile Detailing from August to October 2026.">
+<!-- Client report. Kept out of search and out of the sitemap. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F8FA">
+
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem("ds-theme");
+    var dark = saved ? saved === "dark"
+                     : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    if(dark){
+      var m = document.querySelector("meta[name=theme-color]");
+      if(m) m.setAttribute("content", "#07080B");
+    }
+  }catch(e){}
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    document.documentElement.classList.add("anim");
+  }
+})();
+</script>
+
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/icon.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   DetailScales client results. One page that closes the
+   engagement on the numbers: spend in, revenue out, month by
+   month, and what stays with the client.
+   Same material as onboarding: graphite ink, frosted slabs,
+   one blue accent.
+   ============================================================ */
+:root{
+  --void:#F4F6F9; --paper:#FFFFFF;
+  --ink:#14161B; --ink-2:#52565E; --ink-3:#6B7079;
+  --line:rgba(20,22,27,.1); --line-2:rgba(20,22,27,.18);
+  --ok:#2F7A4F;
+  --glow:rgba(63,107,224,.28);
+  --track:#E9EDF5;
+  --brand:#3F6BE0; --brand-soft:#8AA4F0; --muted:#B9C0CC;
+
+  --slab:linear-gradient(180deg,rgba(255,255,255,.72) 0%,rgba(252,253,255,.56) 100%);
+  --slab-rim:rgba(255,255,255,.75);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(20,22,27,.05),
+    0 24px 54px -22px rgba(20,22,27,.22);
+  --spark:40,52,80;
+  --sheen:linear-gradient(100deg,
+      var(--ink) 0%, var(--ink) 26%, #7B828F 40%,
+      #C2C9D4 50%, #7B828F 60%, var(--ink) 74%, var(--ink) 100%);
+
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.22,.8,.28,1);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --void:#07080B; --paper:#11141B;
+  --ink:#EDEFF3; --ink-2:#A6ACB8; --ink-3:#7C8392;
+  --line:rgba(255,255,255,.1); --line-2:rgba(255,255,255,.18);
+  --ok:#6FD39B;
+  --glow:rgba(96,140,255,.3);
+  --track:#1D222C;
+  --brand:#8FB0FF; --brand-soft:#5476E0; --muted:#4A505C;
+
+  --slab:linear-gradient(180deg,rgba(26,31,40,.66) 0%,rgba(13,16,22,.72) 100%);
+  --slab-rim:rgba(255,255,255,.12);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 1px 2px rgba(0,0,0,.5),
+    0 24px 56px -22px rgba(0,0,0,.78);
+  --spark:216,224,238;
+  --sheen:linear-gradient(100deg,
+      #7C8496 0%, #7C8496 24%, #D8DEEA 42%,
+      #FFFFFF 50%, #D8DEEA 58%, #7C8496 76%, #7C8496 100%);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-size-adjust:100%;
+}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0}
+
+.glowfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.glowfield i{position:absolute;border-radius:50%;filter:blur(60px)}
+.glowfield .g1{width:60vmax;height:60vmax;left:-18vmax;top:-26vmax;background:radial-gradient(circle,var(--glow),transparent 64%)}
+.glowfield .g2{width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;background:radial-gradient(circle,rgba(151,160,174,.26),transparent 66%)}
+canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;transition:opacity .4s linear}
+
+.wrap{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 16px 70px}
+
+/* ================= top bar ================= */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--void) 72%,transparent);
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.topbar-inner{max-width:1000px;margin:0 auto;padding:0 16px;height:58px;display:flex;align-items:center;gap:10px}
+.lockup{
+  --h:28px;height:var(--h);width:calc(var(--h) * 2.6493);flex:none;display:block;
+  background:url("/assets/logo-wordmark.png") no-repeat left center/contain;
+}
+:root[data-theme="dark"] .lockup{background-image:url("/assets/logo-wordmark-dark.png")}
+.spacer{flex:1}
+.bartotal{
+  font-family:var(--mono);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;
+  opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.bartotal.show{opacity:1;transform:none}
+.iconbtn,.printbtn{
+  flex:none;height:44px;border-radius:99px;cursor:pointer;
+  background:var(--slab);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);
+}
+.iconbtn{display:inline-grid;place-items:center;width:44px;padding:0}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.iconbtn .t-sun{display:none}
+:root[data-theme="dark"] .iconbtn .t-sun{display:block}
+:root[data-theme="dark"] .iconbtn .t-moon{display:none}
+.printbtn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:0 16px}
+
+/* ================= shared ================= */
+.slab{
+  background:var(--slab);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);
+  backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);
+  border-radius:20px;
+}
+.mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.anim .rise{opacity:0;transform:translateY(16px)}
+.anim .rise.in{animation:rise .65s var(--ease) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.section-head{margin:40px 0 12px}
+h2{font-size:19px;font-weight:700;font-stretch:104%;letter-spacing:-.01em}
+.hint{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-3)}
+.panel{padding:18px 16px}
+
+/* ================= hero ================= */
+.hero{position:relative;overflow:hidden;margin-top:16px;padding:26px 20px 22px}
+.anim .hero::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-soft),var(--brand));
+  transform-origin:left;animation:sweepx 1.2s var(--ease) .15s both;
+}
+@keyframes sweepx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line-2);border-radius:99px;padding:6px 11px;color:var(--ink-2);
+}
+h1{font-size:clamp(28px,7.6vw,50px);font-weight:800;font-stretch:110%;letter-spacing:-.03em;line-height:1.02;margin:0 0 8px}
+.sheen{
+  background:var(--sheen);background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.anim .sheen{animation:sweep 7s linear infinite}
+@keyframes sweep{to{background-position:-280% 0}}
+.period{color:var(--ink-2);font-size:14.5px;margin:0 0 24px}
+
+.total{
+  position:relative;display:inline-block;
+  font-family:var(--display);font-weight:800;font-stretch:120%;
+  font-size:clamp(44px,14vw,118px);line-height:.86;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;margin:0;
+}
+.anim .total.done::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%);
+  background-size:250% 100%;mix-blend-mode:overlay;
+  animation:shine 1.5s var(--ease) 1 forwards;
+}
+@keyframes shine{from{background-position:180% 0}90%{opacity:1}to{background-position:-80% 0;opacity:0}}
+.total-label{margin:14px 0 0}
+
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+.kpi.hi{grid-column:1 / -1}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:14px 12px;background:color-mix(in srgb,var(--paper) 55%,transparent)}
+.kpi b{display:block;font-family:var(--display);font-weight:700;font-stretch:112%;font-size:21px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi small{display:block;margin-top:3px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);line-height:1.35}
+.kpi.hi{background:var(--ink);border-color:var(--ink);color:var(--void)}
+.kpi.hi small{color:color-mix(in srgb,var(--void) 70%,transparent)}
+
+/* ================= in vs out ================= */
+.vs{display:grid;gap:16px}
+.vs .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+.vs .lbl{font-weight:600;font-size:15px}
+.vs .val{font-family:var(--mono);font-weight:600;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:16px;border-radius:99px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);border-radius:99px;background:var(--tone,var(--brand))}
+.anim .bar i{width:0}
+.anim .in .bar i{animation:fill 1.1s var(--ease) forwards;animation-delay:calc(var(--k,0) * 160ms + .1s)}
+@keyframes fill{from{width:0}to{width:var(--w)}}
+.plain{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-2);font-size:15px}
+.plain strong{color:var(--ink);font-weight:600}
+
+/* ================= month by month ================= */
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;height:210px}
+.mcol{display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
+.mcol .amt{font-family:var(--mono);font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;margin-bottom:6px}
+.mcol .col{
+  height:var(--h);border-radius:10px 10px 4px 4px;transform-origin:bottom;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 78%,white),var(--brand));
+}
+/* a month still running: same scale, hatched so it never reads as a final number */
+.mcol.partial .col{
+  background:
+    repeating-linear-gradient(135deg,transparent 0 7px,color-mix(in srgb,var(--paper) 45%,transparent) 7px 11px),
+    linear-gradient(180deg,color-mix(in srgb,var(--brand-soft) 78%,white),var(--brand-soft));
+}
+.anim .mcol .col{transform:scaleY(.03);opacity:0}
+.anim .in .mcol .col{animation:grow .8s var(--ease) forwards;animation-delay:calc(var(--k) * 140ms + .1s)}
+@keyframes grow{0%{opacity:0;transform:scaleY(.04)}55%{opacity:1}100%{opacity:1;transform:scaleY(1)}}
+.mlabels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;text-align:center}
+.mlabels b{display:block;font-size:14px;font-weight:600}
+
+/* ================= what stays ================= */
+.keep{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 14px}
+.item svg{width:22px;height:22px;fill:none;stroke:var(--brand);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block;margin-bottom:12px}
+.item h3{font-size:15px;font-weight:700;font-stretch:104%;line-height:1.25}
+.item p{font-size:13px;color:var(--ink-2);margin-top:4px}
+.item .state{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.item .state::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+
+/* ================= close ================= */
+.close{margin-top:40px;padding:26px 20px}
+.close h2{font-size:clamp(22px,5.6vw,32px);font-weight:800;font-stretch:110%;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.close p{color:var(--ink-2);max-width:58ch}
+.close .sign{margin-top:18px;color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:6px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ================= larger screens ================= */
+@media (min-width:600px){
+  .wrap{padding:0 24px 90px}
+  .topbar-inner{padding:0 24px;height:64px;gap:12px}
+  .lockup{--h:32px}
+  .hero{padding:40px 36px 32px;margin-top:22px;border-radius:26px}
+  .kpis{grid-template-columns:repeat(3,1fr);gap:10px}
+  .kpi.hi{grid-column:auto}
+  .kpi{padding:18px 20px}
+  .kpi b{font-size:27px}
+  .kpi small{font-size:10.5px}
+  .panel{padding:24px}
+  .months{height:250px;gap:18px}
+  .mlabels{gap:18px}
+  .keep{grid-template-columns:repeat(4,1fr);gap:12px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:52px 0 14px}
+  .hint{margin-top:0}
+  .close{padding:36px}
+  footer{flex-direction:row;justify-content:space-between}
+}
+@media (max-width:359px){
+  .kpis{grid-template-columns:1fr}
+  .keep{grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}canvas.specks{display:none}}
+@media print{
+  :root,:root[data-theme="dark"]{
+    --void:#FFFFFF;--paper:#FFFFFF;--ink:#14161B;--ink-2:#52565E;--ink-3:#6B7079;
+    --line:rgba(20,22,27,.14);--track:#E9EDF5;--brand:#3F6BE0;--brand-soft:#8AA4F0;--ok:#2F7A4F;
+  }
+  body{background:#fff !important}
+  canvas.specks,.glowfield,.no-print{display:none !important}
+  .topbar{position:static;background:#fff;backdrop-filter:none}
+  .slab{background:#fff;box-shadow:none;backdrop-filter:none;border:1px solid var(--line)}
+  .sheen{background:none;color:var(--ink)}
+  .kpi.hi{background:#fff;color:var(--ink);border-color:var(--line)}
+  .kpi.hi small{color:var(--ink-3)}
+  .hero,.panel,.item,.close{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="glowfield" aria-hidden="true"><i class="g1"></i><i class="g2"></i></div>
+<canvas class="specks" id="specks" aria-hidden="true"></canvas>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://www.detailscales.com/" class="lockup" aria-label="DetailScales home"></a>
+    <div class="spacer"></div>
+    <span class="bartotal" id="bartotal">$27,325+</span>
+    <button class="iconbtn no-print" type="button" id="theme" aria-label="Switch theme">
+      <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+    </button>
+    <button class="printbtn no-print" type="button" onclick="window.print()">PDF</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero slab rise">
+    <div class="tagrow">
+      <span class="badge">August to October 2026</span>
+      <span class="badge">JMatt Mobile Detailing</span>
+    </div>
+
+    <h1>Your Results: <span class="sheen">August to October 2026</span></h1>
+    <p class="period">Over the last three months, here's what the system produced</p>
+
+    <p class="total" id="total" data-to="27325" data-suffix="+">$27,325+</p>
+    <p class="total-label mono">Revenue booked</p>
+
+    <div class="kpis">
+      <div class="kpi"><b>~$6,000</b><small>Ad spend</small></div>
+      <div class="kpi"><b class="count" data-to="21325" data-prefix="$" data-suffix="+">$21,325+</b><small>Above ad spend</small></div>
+      <div class="kpi hi"><b>~$4.50</b><small>Back for every $1 spent</small></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>What went in, what came back</h2>
+    <span class="hint">August to October 2026</span>
+  </div>
+
+  <section class="panel slab rise">
+    <div class="vs">
+      <div style="--k:0">
+        <div class="top"><span class="lbl">You put in</span><span class="val">~$6,000</span></div>
+        <div class="bar"><i style="--w:22%;--tone:var(--muted)"></i></div>
+      </div>
+      <div style="--k:1">
+        <div class="top"><span class="lbl">You got back</span><span class="val">$27,325+</span></div>
+        <div class="bar"><i style="--w:100%"></i></div>
+      </div>
+    </div>
+    <p class="plain">Put simply: you put in <strong>$6,000</strong> and got over <strong>$27,000 in jobs</strong> back. That's more than <strong>$21,000</strong> in revenue above what you spent on ads.</p>
+  </section>
+
+  <div class="section-head">
+    <h2>Month by month</h2>
+    <span class="hint">revenue booked each month</span>
+  </div>
+
+  <section class="panel slab rise">
+    <div class="months">
+      <div class="mcol" style="--k:0"><span class="amt">$10,125</span><div class="col" style="--h:90.4%"></div></div>
+      <div class="mcol" style="--k:1"><span class="amt">$11,200</span><div class="col" style="--h:100%"></div></div>
+      <div class="mcol partial" style="--k:2"><span class="amt">$6,000+</span><div class="col" style="--h:53.6%"></div></div>
+    </div>
+    <div class="mlabels">
+      <div><b>August</b><span class="mono">Full month</span></div>
+      <div><b>September</b><span class="mono">Full month</span></div>
+      <div><b>October</b><span class="mono">Partial month</span></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Still built, and yours to keep</h2>
+    <span class="hint">a system that now runs on its own</span>
+  </div>
+
+  <div class="keep">
+    <div class="item rise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      <h3>The ads</h3>
+      <p>Campaigns and creative, ready to switch back on.</p>
+      <span class="state">Yours to keep</span>
+    </div>
+    <div class="item rise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></svg>
+      <h3>Follow-up automations</h3>
+      <p>Every lead gets followed up without you chasing it.</p>
+      <span class="state">Yours to keep</span>
+    </div>
+    <div class="item rise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+      <h3>AI voice agent</h3>
+      <p>Calls new inquiries back so none sit waiting.</p>
+      <span class="state">Yours to keep</span>
+    </div>
+    <div class="item rise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>
+      <h3>Reviews and referrals</h3>
+      <p>Workflows that ask happy customers for both.</p>
+      <span class="state">Yours to keep</span>
+    </div>
+  </div>
+
+  <section class="close slab rise">
+    <h2>Thank you for trusting me with your business, Jacob.</h2>
+    <p>If you ever want to turn the ads back on for the spring season, everything is ready to go. One message and we can pick up where we left off.</p>
+    <p class="sign">Zai Miana, DetailScales</p>
+  </section>
+
+  <footer>
+    <span>Prepared by DetailScales for JMatt Mobile Detailing</span>
+    <span>August to October 2026</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var animate = document.documentElement.classList.contains('anim');
+  var fmt = function(n){ return n.toLocaleString('en-US'); };
+  var isDark = function(){ return document.documentElement.getAttribute('data-theme') === 'dark'; };
+
+  /* ---------- theme switch, shared with the main site ---------- */
+  var themeBtn = document.getElementById('theme');
+  function applyTheme(nxt){
+    document.documentElement.setAttribute('data-theme', nxt);
+    try{ localStorage.setItem('ds-theme', nxt); }catch(e){}
+    var m = document.querySelector('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', nxt === 'dark' ? '#07080B' : '#F7F8FA');
+    themeBtn.setAttribute('aria-label', nxt === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+  applyTheme(isDark() ? 'dark' : 'light');
+  themeBtn.addEventListener('click', function(){
+    var nxt = isDark() ? 'light' : 'dark';
+    if(!document.startViewTransition || !animate){ applyTheme(nxt); return; }
+    var r = themeBtn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var reach = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+    var vt = document.startViewTransition(function(){ applyTheme(nxt); });
+    vt.ready.then(function(){
+      document.documentElement.animate(
+        {clipPath:['circle(0px at ' + cx + 'px ' + cy + 'px)', 'circle(' + reach + 'px at ' + cx + 'px ' + cy + 'px)']},
+        {duration:620, easing:'cubic-bezier(.22,.7,.3,1)', pseudoElement:'::view-transition-new(root)'}
+      );
+    }).catch(function(){});
+  });
+
+  /* ---------- specks of light drifting up, thinned once the hero scrolls away ---------- */
+  (function(){
+    var c = document.getElementById('specks');
+    if(!c || !animate || !c.getContext){ if(c) c.style.display = 'none'; return; }
+    var ctx = c.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1), W, H, P = [], raf = 0;
+    var rgb = '', readRgb = function(){ rgb = getComputedStyle(document.documentElement).getPropertyValue('--spark').trim() || '216,224,238'; };
+    function size(){
+      W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr;
+      var n = Math.round(Math.min(70, innerWidth * innerHeight / 22000));
+      P = [];
+      for(var i = 0; i < n; i++) P.push({x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.6 + .4) * dpr, v: (Math.random() * .25 + .08) * dpr, a: Math.random() * .45 + .12, t: Math.random() * 6.28});
+    }
+    function frame(){
+      ctx.clearRect(0, 0, W, H);
+      for(var i = 0; i < P.length; i++){
+        var p = P[i];
+        p.y -= p.v; p.t += .01; p.x += Math.sin(p.t) * .15 * dpr;
+        if(p.y < -10){ p.y = H + 10; p.x = Math.random() * W; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+        ctx.fillStyle = 'rgba(' + rgb + ',' + (p.a * (.6 + .4 * Math.sin(p.t * 2))) + ')';
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    readRgb(); size(); frame();
+    new MutationObserver(readRgb).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+    var rt; addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(size, 200); }, {passive:true});
+    document.addEventListener('visibilitychange', function(){
+      cancelAnimationFrame(raf);
+      if(!document.hidden) frame();
+    });
+    var hero = document.querySelector('.hero');
+    addEventListener('scroll', function(){
+      var p = Math.min(scrollY / (hero.offsetHeight + 160), 1);
+      c.style.opacity = String(1 - p * .72);
+    }, {passive:true});
+  })();
+
+  /* ---------- counters ---------- */
+  function countTo(el){
+    var end = parseFloat(el.dataset.to);
+    var pre = el.dataset.prefix || (el.id === 'total' ? '$' : '');
+    var suf = el.dataset.suffix || '';
+    var dur = 1150, t0 = null;
+    function step(t){
+      if(!t0) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      el.textContent = pre + fmt(Math.round(end * (1 - Math.pow(1 - p, 3)))) + suf;
+      if(p < 1) requestAnimationFrame(step);
+      else if(el.id === 'total') el.classList.add('done');
+    }
+    requestAnimationFrame(step);
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      if(e.target.classList.contains('count')) countTo(e.target);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -30px 0px'});
+
+  if(animate){
+    var total = document.getElementById('total');
+    total.textContent = '$0'; total.classList.add('count');
+    document.querySelectorAll('.count').forEach(function(el){
+      if(el !== total) el.textContent = (el.dataset.prefix || '') + '0';
+    });
+    document.querySelectorAll('.rise, .count').forEach(function(el){ io.observe(el); });
+  }
+
+  var bartotal = document.getElementById('bartotal');
+  new IntersectionObserver(function(es){
+    bartotal.classList.toggle('show', !es[0].isIntersecting);
+  }, {rootMargin:'-70px 0px 0px 0px'}).observe(document.getElementById('total'));
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
