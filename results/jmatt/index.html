@@ -246,6 +246,20 @@ h1{font-size:clamp(28px,7.6vw,50px);font-weight:800;font-stretch:110%;letter-spa
 .item .state{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
 .item .state::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
 
+/* ================= offboarding form ================= */
+.form{margin-top:40px;padding:22px 20px;display:grid;gap:14px}
+.form h2{font-size:clamp(20px,5vw,26px);font-weight:800;font-stretch:108%;letter-spacing:-.02em}
+.form p{color:var(--ink-2);max-width:58ch}
+.cta{
+  justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;
+  border-radius:99px;background:var(--ink);color:var(--void);text-decoration:none;
+  font-family:var(--display);font-weight:700;font-stretch:104%;font-size:15px;
+  transition:transform .2s var(--ease);
+}
+.cta:hover{transform:translateY(-2px)}
+.cta:active{transform:scale(.97)}
+.cta svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
 /* ================= close ================= */
 .close{margin-top:40px;padding:26px 20px}
 .close h2{font-size:clamp(22px,5.6vw,32px);font-weight:800;font-stretch:110%;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
@@ -275,6 +289,8 @@ footer{
   .keep{grid-template-columns:repeat(4,1fr);gap:12px}
   .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:52px 0 14px}
   .hint{margin-top:0}
+  .form{padding:30px 36px;grid-template-columns:1fr auto;align-items:center;column-gap:28px;row-gap:6px}
+  .form .cta{grid-row:1 / span 2;grid-column:2}
   .close{padding:36px}
   footer{flex-direction:row;justify-content:space-between}
 }
@@ -296,6 +312,7 @@ footer{
   .sheen{background:none;color:var(--ink)}
   .kpi.hi{background:#fff;color:var(--ink);border-color:var(--line)}
   .kpi.hi small{color:var(--ink-3)}
+  .cta{background:#fff;color:var(--ink);border:1px solid var(--line)}
   .hero,.panel,.item,.close{break-inside:avoid}
 }
 </style>
@@ -335,7 +352,7 @@ footer{
     <div class="kpis">
       <div class="kpi"><b>~$6,000</b><small>Ad spend</small></div>
       <div class="kpi"><b class="count" data-to="21325" data-prefix="$" data-suffix="+">$21,325+</b><small>Above ad spend</small></div>
-      <div class="kpi hi"><b>~$4.50</b><small>Back for every $1 spent</small></div>
+      <div class="kpi hi"><b>4.5x</b><small>Return on ad spend</small></div>
     </div>
   </section>
 
@@ -407,6 +424,12 @@ footer{
       <span class="state">Yours to keep</span>
     </div>
   </div>
+
+  <section class="form slab rise">
+    <h2>One last step</h2>
+    <p>Please fill out the short offboarding form so we can close everything out properly.</p>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSddiDaziEOu2gTIOx8NFpWkA-AU---NFkMTIkawRP2VTlYnQQ/viewform" target="_blank" rel="noopener">Open the form<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </section>
 
   <section class="close slab rise">
     <h2>Thank you for trusting me with your business, Jacob.</h2>
