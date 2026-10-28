@@ -28,9 +28,14 @@ function configured() {
   return Boolean(env('SUPABASE_URL') && env('SUPABASE_SERVICE_ROLE_KEY'));
 }
 
+/* Works with both kinds of Supabase server key: the legacy service_role
+   JWT goes in apikey and Authorization; the newer sb_secret_ keys are not
+   JWTs and go in apikey only, where Supabase's gateway exchanges them. */
 function sbHeaders(extra) {
   const key = env('SUPABASE_SERVICE_ROLE_KEY');
-  return Object.assign({ apikey: key, Authorization: 'Bearer ' + key }, extra || {});
+  const h = { apikey: key };
+  if (/^eyJ/.test(key)) h.Authorization = 'Bearer ' + key;
+  return Object.assign(h, extra || {});
 }
 
 async function sbFetch(path, init) {
@@ -195,6 +200,6 @@ function slug(s) {
 }
 
 module.exports = {
-  BUCKETS, env, configured, insertRows, updateRow, signedUploadUrl, signedDownloadUrl,
+  BUCKETS, env, configured, sbHeaders, insertRows, updateRow, signedUploadUrl, signedDownloadUrl,
   objectInfo, downloadText, slack, sheets, send, readJson, clip, cleanText, who, validEmail, slug
 };

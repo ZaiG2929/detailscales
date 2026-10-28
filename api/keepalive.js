@@ -9,7 +9,7 @@ module.exports = async function (req, res) {
   if (!L.configured()) return L.send(res, 200, { ok: true, skipped: 'not configured' });
   try {
     await fetch(L.env('SUPABASE_URL').replace(/\/$/, '') + '/rest/v1/onboarding_responses?select=id&limit=1', {
-      headers: { apikey: L.env('SUPABASE_SERVICE_ROLE_KEY'), Authorization: 'Bearer ' + L.env('SUPABASE_SERVICE_ROLE_KEY') }
+      headers: L.sbHeaders()
     });
     return L.send(res, 200, { ok: true });
   } catch (e) {

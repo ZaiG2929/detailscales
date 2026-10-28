@@ -16,18 +16,17 @@ Setup takes about 20 minutes, once. Do the steps in order.
 
 ## 1. Supabase (the database), about 5 minutes
 
-1. Go to [supabase.com](https://supabase.com), sign in, and click **New project**. Free plan is fine. Name it `detailscales-onboarding` and pick the region closest to you.
-2. When it finishes, open **SQL Editor → New query**, paste everything from [`supabase-schema.sql`](supabase-schema.sql), and click **Run**. You should see "Success. No rows returned".
-3. Open **Project Settings → API** and copy two things somewhere safe:
-   - **Project URL** (looks like `https://abcd1234.supabase.co`)
-   - **service_role** key (under Project API keys, click Reveal). **This key is a master password. Only paste it into Vercel, never into the page or Slack.**
+1. Use an existing project or create one at [supabase.com](https://supabase.com) (free plan is fine).
+2. Open **SQL Editor → New query** (`https://supabase.com/dashboard/project/<project-ref>/sql/new`), paste everything from [`supabase-schema.sql`](supabase-schema.sql), and click **Run**. You should see "Success. No rows returned".
+3. Open **Project Settings → API Keys** and copy the **secret** key (`sb_secret_...`). Projects that still show the legacy keys can use the **service_role** key instead; the code accepts either. **This key is a master password. Only paste it into Vercel, never into the page or Slack.**
+4. The Project URL is `https://<project-ref>.supabase.co`.
 
-## 2. Slack (the alerts), about 3 minutes
+## 2. Slack (the alerts), about 2 minutes
 
-1. Create a channel for this, for example `#onboarding`.
-2. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App → From scratch**. Name it `DetailScales Onboarding`, pick your workspace.
-3. In the app, open **Incoming Webhooks**, switch it **On**, click **Add New Webhook to Workspace**, choose `#onboarding`, and **Allow**.
-4. Copy the **Webhook URL** (starts with `https://hooks.slack.com/services/`).
+1. Create the channel, for example `#onboarding`.
+2. Open this pre-filled app link: [create the DetailScales Onboarding Slack app](https://api.slack.com/apps?new_app=1&manifest_json=%7B%22display_information%22%3A%7B%22name%22%3A%22DetailScales%20Onboarding%22%2C%22description%22%3A%22Posts%20new%20client%20onboarding%20answers%2C%20voice%20recordings%20and%20contact%20uploads.%22%2C%22background_color%22%3A%22%2314161b%22%7D%2C%22features%22%3A%7B%22bot_user%22%3A%7B%22display_name%22%3A%22DetailScales%20Onboarding%22%2C%22always_online%22%3Afalse%7D%7D%2C%22oauth_config%22%3A%7B%22scopes%22%3A%7B%22bot%22%3A%5B%22incoming-webhook%22%5D%7D%7D%2C%22settings%22%3A%7B%22org_deploy_enabled%22%3Afalse%2C%22socket_mode_enabled%22%3Afalse%2C%22token_rotation_enabled%22%3Afalse%7D%7D) → pick your workspace → **Next → Create**.
+3. Click **Install to Workspace**, choose `#onboarding`, and **Allow**.
+4. Open **Incoming Webhooks** in the left menu and copy the **Webhook URL** (starts with `https://hooks.slack.com/services/`).
 
 ## 3. Google Sheets (master sheet + one sheet per client), about 7 minutes
 
