@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Your To-Do List | Adonai Auto Spa</title>
+<meta name="description" content="What Adonai Auto Spa needs to do so DetailScales can launch the ads.">
+<!-- Client checklist. Kept out of search and out of the sitemap. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F7F8FA">
+
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem("ds-theme");
+    var dark = saved ? saved === "dark"
+                     : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    if(dark){
+      var m = document.querySelector("meta[name=theme-color]");
+      if(m) m.setAttribute("content", "#07080B");
+    }
+  }catch(e){}
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    document.documentElement.classList.add("anim");
+  }
+})();
+</script>
+
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/icon.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<style>
+/* ============================================================
+   DetailScales client checklist. Everything the client owes
+   before launch, in the order it unblocks the work.
+   Same material as onboarding and results: graphite ink,
+   frosted slabs, one blue accent.
+   ============================================================ */
+:root{
+  --void:#F4F6F9; --paper:#FFFFFF;
+  --ink:#14161B; --ink-2:#52565E; --ink-3:#6B7079;
+  --line:rgba(20,22,27,.1); --line-2:rgba(20,22,27,.18);
+  --ok:#2F7A4F;
+  --glow:rgba(63,107,224,.28);
+  --track:#E9EDF5;
+  --brand:#3F6BE0; --brand-soft:#8AA4F0;
+
+  --slab:linear-gradient(180deg,rgba(255,255,255,.72) 0%,rgba(252,253,255,.56) 100%);
+  --slab-rim:rgba(255,255,255,.75);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(20,22,27,.05),
+    0 24px 54px -22px rgba(20,22,27,.22);
+  --sheen:linear-gradient(100deg,
+      var(--ink) 0%, var(--ink) 26%, #7B828F 40%,
+      #C2C9D4 50%, #7B828F 60%, var(--ink) 74%, var(--ink) 100%);
+
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.22,.8,.28,1);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --void:#07080B; --paper:#11141B;
+  --ink:#EDEFF3; --ink-2:#A6ACB8; --ink-3:#7C8392;
+  --line:rgba(255,255,255,.1); --line-2:rgba(255,255,255,.18);
+  --ok:#6FD39B;
+  --glow:rgba(96,140,255,.3);
+  --track:#1D222C;
+  --brand:#8FB0FF; --brand-soft:#5476E0;
+
+  --slab:linear-gradient(180deg,rgba(26,31,40,.66) 0%,rgba(13,16,22,.72) 100%);
+  --slab-rim:rgba(255,255,255,.12);
+  --slab-edge:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 1px 2px rgba(0,0,0,.5),
+    0 24px 56px -22px rgba(0,0,0,.78);
+  --sheen:linear-gradient(100deg,
+      #7C8496 0%, #7C8496 24%, #D8DEEA 42%,
+      #FFFFFF 50%, #D8DEEA 58%, #7C8496 76%, #7C8496 100%);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-size-adjust:100%;
+}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0}
+
+.glowfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.glowfield i{position:absolute;border-radius:50%;filter:blur(60px)}
+.glowfield .g1{width:60vmax;height:60vmax;left:-18vmax;top:-26vmax;background:radial-gradient(circle,var(--glow),transparent 64%)}
+.glowfield .g2{width:52vmax;height:52vmax;right:-20vmax;bottom:-24vmax;background:radial-gradient(circle,rgba(151,160,174,.26),transparent 66%)}
+
+.wrap{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 16px 70px}
+
+/* ================= top bar ================= */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--void) 72%,transparent);
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.topbar-inner{max-width:760px;margin:0 auto;padding:0 16px;height:58px;display:flex;align-items:center;gap:10px}
+.lockup{
+  --h:28px;height:var(--h);width:calc(var(--h) * 2.6493);flex:none;display:block;
+  background:url("/assets/logo-wordmark.png") no-repeat left center/contain;
+}
+:root[data-theme="dark"] .lockup{background-image:url("/assets/logo-wordmark-dark.png")}
+.spacer{flex:1}
+.barcount{
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap;
+  opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.barcount.show{opacity:1;transform:none}
+.iconbtn{
+  flex:none;display:inline-grid;place-items:center;width:44px;height:44px;padding:0;border-radius:99px;cursor:pointer;
+  background:var(--slab);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);
+}
+.iconbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.iconbtn .t-sun{display:none}
+:root[data-theme="dark"] .iconbtn .t-sun{display:block}
+:root[data-theme="dark"] .iconbtn .t-moon{display:none}
+
+/* ================= shared ================= */
+.slab{
+  background:var(--slab);border:1px solid var(--slab-rim);box-shadow:var(--slab-edge);
+  backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);
+  border-radius:20px;
+}
+.mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.anim .rise{opacity:0;transform:translateY(16px)}
+.anim .rise.in{animation:rise .65s var(--ease) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.section-head{margin:40px 0 12px}
+h2{font-size:19px;font-weight:700;font-stretch:104%;letter-spacing:-.01em}
+.hint{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink-3)}
+
+/* ================= hero ================= */
+.hero{position:relative;overflow:hidden;margin-top:16px;padding:26px 20px 22px}
+.anim .hero::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-soft),var(--brand));
+  transform-origin:left;animation:sweepx 1.2s var(--ease) .15s both;
+}
+@keyframes sweepx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line-2);border-radius:99px;padding:6px 11px;color:var(--ink-2);
+}
+h1{font-size:clamp(28px,7.6vw,46px);font-weight:800;font-stretch:110%;letter-spacing:-.03em;line-height:1.04;margin:0 0 10px}
+.sheen{
+  background:var(--sheen);background-size:280% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.anim .sheen{animation:sweep 7s linear infinite}
+@keyframes sweep{to{background-position:-280% 0}}
+.lede{color:var(--ink-2);font-size:15px;max-width:52ch}
+
+.progress{margin-top:22px}
+.progress .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.progress b{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:26px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.bar{height:12px;border-radius:99px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--brand);transition:width .6s var(--ease)}
+.progress.done .bar i{background:var(--ok)}
+
+/* ================= checklist ================= */
+.list{display:grid;gap:10px}
+.task{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:18px 16px;transition:opacity .3s var(--ease)}
+.check{
+  appearance:none;-webkit-appearance:none;margin:2px 0 0;flex:none;cursor:pointer;
+  width:28px;height:28px;border-radius:9px;border:1.5px solid var(--line-2);background:var(--paper);
+  display:grid;place-items:center;transition:background .2s var(--ease),border-color .2s var(--ease);
+}
+.check::after{
+  content:"";width:11px;height:6px;margin-top:-3px;border:2.2px solid #fff;border-top:0;border-right:0;
+  transform:rotate(-45deg) scale(0);transition:transform .2s var(--ease);
+}
+.check:checked{background:var(--ok);border-color:var(--ok)}
+.check:checked::after{transform:rotate(-45deg) scale(1)}
+.task .num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--brand);text-transform:uppercase}
+.task h3{font-size:17px;font-weight:700;font-stretch:104%;letter-spacing:-.01em;line-height:1.25;margin:3px 0 6px;cursor:pointer}
+.task p{color:var(--ink-2);font-size:14.5px}
+.task p + p{margin-top:6px}
+.task strong{color:var(--ink);font-weight:600}
+.task.first{border-color:color-mix(in srgb,var(--brand) 45%,transparent)}
+.flag{
+  display:inline-block;margin-left:8px;vertical-align:2px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brand);border:1px solid color-mix(in srgb,var(--brand) 45%,transparent);border-radius:99px;padding:3px 8px;
+}
+.task.is-done{opacity:.55}
+.task.is-done h3{text-decoration:line-through;text-decoration-thickness:1.5px}
+.choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.choices span{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  border:1px dashed var(--line-2);border-radius:99px;padding:7px 12px;color:var(--ink);
+}
+
+/* ================= close ================= */
+.close{margin-top:40px;padding:26px 20px}
+.close h2{font-size:clamp(22px,5.6vw,30px);font-weight:800;font-stretch:110%;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.close p{color:var(--ink-2);max-width:58ch}
+.close .sign{margin-top:18px;color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:6px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ================= larger screens ================= */
+@media (min-width:600px){
+  .wrap{padding:0 24px 90px}
+  .topbar-inner{padding:0 24px;height:64px;gap:12px}
+  .lockup{--h:32px}
+  .hero{padding:40px 36px 32px;margin-top:22px;border-radius:26px}
+  .task{padding:22px 24px;gap:18px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:52px 0 14px}
+  .hint{margin-top:0}
+  .close{padding:36px}
+  footer{flex-direction:row;justify-content:space-between}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+@media print{
+  :root,:root[data-theme="dark"]{
+    --void:#FFFFFF;--paper:#FFFFFF;--ink:#14161B;--ink-2:#52565E;--ink-3:#6B7079;
+    --line:rgba(20,22,27,.14);--line-2:rgba(20,22,27,.3);--track:#E9EDF5;--brand:#3F6BE0;--ok:#2F7A4F;
+  }
+  body{background:#fff !important}
+  .glowfield,.no-print{display:none !important}
+  .topbar{position:static;background:#fff;backdrop-filter:none}
+  .slab{background:#fff;box-shadow:none;backdrop-filter:none;border:1px solid var(--line)}
+  .sheen{background:none;color:var(--ink)}
+  .anim .rise{opacity:1;transform:none}
+  .task,.hero,.close{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="glowfield" aria-hidden="true"><i class="g1"></i><i class="g2"></i></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://www.detailscales.com/" class="lockup" aria-label="DetailScales home"></a>
+    <div class="spacer"></div>
+    <span class="barcount" id="barcount" aria-hidden="true">0 / 8 done</span>
+    <button class="iconbtn no-print" type="button" id="theme" aria-label="Switch theme">
+      <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero slab rise">
+    <div class="tagrow">
+      <span class="badge">Adonai Auto Spa</span>
+      <span class="badge">Before launch</span>
+    </div>
+
+    <h1>Your to-do list, <span class="sheen">Fabio</span></h1>
+    <p class="lede">Everything I need from you to launch your ads. Start at the top, because the first item unlocks everything else. Tick each one off as you go.</p>
+
+    <div class="progress" id="progress">
+      <div class="top"><b id="count">0 of 8</b><span class="mono">done</span></div>
+      <div class="bar"><i id="fill"></i></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Needed from you</h2>
+    <span class="hint">from our call on 26 October</span>
+  </div>
+
+  <div class="list" id="list">
+
+    <label class="task first slab rise">
+      <input class="check" type="checkbox" data-id="contacts">
+      <div>
+        <span class="num">01</span><span class="flag">Start here</span>
+        <h3>Send me your customer contacts</h3>
+        <p>Export your phone contacts using the onboarding video, the iPhone one or the Android one. Then send me the file, or drop it in the Google Drive folder I sent you.</p>
+        <p><strong>This comes first.</strong> I use these contacts to start your reactivation campaign before the ads go live.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="contract">
+      <div>
+        <span class="num">02</span>
+        <h3>Sign the agreement</h3>
+        <p>I'll send you the signing link in Slack. It's free, takes about 2 minutes, and you don't need an account.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="instagram">
+      <div>
+        <span class="num">03</span>
+        <h3>Tell me about Instagram</h3>
+        <p>Your ads will show on Instagram as well as Facebook, so Adonai Auto Spa needs an Instagram account. Reply in Slack with one of these:</p>
+        <div class="choices"><span>"Create it for me"</span><span>"I'll create it and give you access"</span></div>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="billing">
+      <div>
+        <span class="num">04</span>
+        <h3>Add a payment method in Facebook</h3>
+        <p>Add your card to the Adonai Auto Spa ad account. You'll find it in <strong>Facebook Business Settings</strong>, under <strong>Billing &amp; payments</strong>.</p>
+        <p>This pays for your <strong>£30 a day</strong> ad budget. Meta charges your card directly. Message me if you'd like a short video showing how.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="videos">
+      <div>
+        <span class="num">05</span>
+        <h3>Upload your photos and videos</h3>
+        <p>Put any photos and videos of your work in the Google Drive folder I sent you on Facebook, including old jobs. I'll use them to make your ads.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="calendar">
+      <div>
+        <span class="num">06</span>
+        <h3>Connect your Google Calendar</h3>
+        <p>It didn't connect on our call. I'll send you a quick video showing how. Once it's connected, bookings go straight into your calendar, and you can block off the times you're not available.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="payments">
+      <div>
+        <span class="num">07</span>
+        <h3>Connect your payment provider</h3>
+        <p>If you use Stripe or something similar, connect it inside the software. This lets your dashboard show what you earn each week.</p>
+      </div>
+    </label>
+
+    <label class="task slab rise">
+      <input class="check" type="checkbox" data-id="slack">
+      <div>
+        <span class="num">08</span>
+        <h3>Keep an eye on Slack</h3>
+        <p>New leads arrive there with their name, phone number, and the service they want. When one comes in, <strong>give them a call as soon as you can</strong>. The faster you call, the more of them book.</p>
+      </div>
+    </label>
+
+  </div>
+
+  <section class="close slab rise">
+    <h2>Stuck on anything?</h2>
+    <p>Message me in Slack and I'll get back to you as soon as I can. Once items 1 to 4 are done, I can launch your ads.</p>
+    <p class="sign">Zai Miana, DetailScales</p>
+  </section>
+
+  <footer>
+    <span>Prepared by DetailScales for Adonai Auto Spa</span>
+    <span>October 2026</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var animate = document.documentElement.classList.contains('anim');
+  var isDark = function(){ return document.documentElement.getAttribute('data-theme') === 'dark'; };
+
+  /* ---------- theme switch, shared with the main site ---------- */
+  var themeBtn = document.getElementById('theme');
+  function applyTheme(nxt){
+    document.documentElement.setAttribute('data-theme', nxt);
+    try{ localStorage.setItem('ds-theme', nxt); }catch(e){}
+    var m = document.querySelector('meta[name="theme-color"]');
+    if(m) m.setAttribute('content', nxt === 'dark' ? '#07080B' : '#F7F8FA');
+    themeBtn.setAttribute('aria-label', nxt === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+  applyTheme(isDark() ? 'dark' : 'light');
+  themeBtn.addEventListener('click', function(){ applyTheme(isDark() ? 'light' : 'dark'); });
+
+  /* ---------- ticks, remembered on this device only ---------- */
+  var KEY = 'ds-todo-adonai';
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }catch(e){}
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check'));
+  var count = document.getElementById('count'), fill = document.getElementById('fill');
+  var progress = document.getElementById('progress'), barcount = document.getElementById('barcount');
+
+  function render(){
+    var done = 0;
+    boxes.forEach(function(b){
+      b.closest('.task').classList.toggle('is-done', b.checked);
+      if(b.checked) done++;
+    });
+    count.textContent = done + ' of ' + boxes.length;
+    barcount.textContent = done + ' / ' + boxes.length + ' done';
+    fill.style.width = (done / boxes.length * 100) + '%';
+    progress.classList.toggle('done', done === boxes.length);
+  }
+  boxes.forEach(function(b){
+    b.checked = !!saved[b.dataset.id];
+    b.addEventListener('change', function(){
+      saved[b.dataset.id] = b.checked;
+      try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){}
+      render();
+    });
+  });
+  render();
+
+  /* ---------- entrance ---------- */
+  if(animate){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
+  }
+
+  new IntersectionObserver(function(es){
+    barcount.classList.toggle('show', !es[0].isIntersecting);
+  }, {rootMargin:'-70px 0px 0px 0px'}).observe(progress);
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
