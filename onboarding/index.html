@@ -415,6 +415,93 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .summary .meter{width:100%;height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
 .summary .meter i{display:block;height:100%;width:0;background:var(--ok);border-radius:6px;transition:width .6s cubic-bezier(.22,.7,.3,1)}
 
+/* ---------- built-in forms: questions, recorder, uploads ---------- */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+[hidden]{display:none!important}
+.onb-meter{display:block;height:3px;background:var(--line)}
+.onb-meter i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s ease}
+.onb{display:grid;gap:10px;padding:clamp(12px,2vw,20px)}
+.onb-sec{border:1px solid var(--line);border-radius:18px;background:var(--float);box-shadow:var(--float-edge);overflow:hidden}
+.onb-sec>summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;list-style:none}
+.onb-sec>summary::-webkit-details-marker{display:none}
+.onb-sec .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--mono);font-size:.7rem;border:1px solid var(--line-2);transition:background .3s ease,color .3s ease}
+.onb-sec.is-complete .n{background:var(--ok);border-color:var(--ok);color:#fff}
+.onb-sec .cnt{margin-left:auto;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--tx-3);white-space:nowrap}
+.onb-sec .chev{width:16px;height:16px;flex:none;fill:none;stroke:var(--tx-3);stroke-width:2;transition:transform .25s ease}
+.onb-sec[open] .chev{transform:rotate(180deg)}
+.onb-body{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;padding:4px 16px 18px}
+@media(max-width:700px){.onb-body{grid-template-columns:1fr}}
+.f{display:grid;gap:.4rem;align-content:start}
+.f.wide{grid-column:1/-1}
+.f .lbl{font-size:.88rem;font-weight:500;color:var(--tx)}
+.f .req{color:var(--leak)}
+.f small{font-size:.78rem;color:var(--tx-3);line-height:1.4}
+.onb input[type=text],.onb input[type=email],.onb input[type=tel],.onb input[type=url],.onb select,.onb textarea,
+.who input,.up textarea{
+  width:100%;font:inherit;font-size:.95rem;color:var(--tx);padding:.7rem .85rem;border-radius:12px;
+  border:1px solid var(--line-2);background:var(--art-bg);transition:border-color .18s ease,box-shadow .18s ease;
+}
+.onb textarea,.up textarea{min-height:84px;resize:vertical;line-height:1.5}
+.onb input:focus,.onb select:focus,.onb textarea:focus,.who input:focus,.up textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 14%,transparent)}
+.onb .is-invalid,.who .is-invalid{border-color:var(--leak)!important}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chips span{display:inline-block;padding:.45rem .85rem;border-radius:999px;border:1px solid var(--line-2);font-size:.86rem;color:var(--tx-2);background:var(--art-bg);transition:all .16s ease}
+.chips input:checked+span{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.chips input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.send-row{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;padding-top:6px}
+.status{font-size:.92rem;color:var(--tx-2)}
+.status.ok{color:var(--ok)} .status.err{color:var(--leak)}
+.saved-note{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--tx-3)}
+
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.who{grid-template-columns:1fr}}
+.who label{display:grid;gap:.35rem;font-size:.8rem;color:var(--tx-3);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.who input{font-family:var(--body);letter-spacing:0;text-transform:none}
+
+.rec,.up{display:grid;gap:16px;padding:clamp(14px,2.2vw,22px)}
+.rec-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch}
+@media(max-width:860px){.rec-grid{grid-template-columns:1fr}}
+.script{padding:18px 20px;border-radius:20px;background:var(--art-bg);border:1px solid var(--slab-rim);display:grid;gap:.7rem;align-content:start}
+.script p{font-size:1.08rem;line-height:1.75;color:var(--tx)}
+.script mark{background:color-mix(in srgb,var(--art-hi) 22%,transparent);color:var(--tx);padding:.05em .3em;border-radius:5px}
+.recorder{position:relative;display:grid;justify-items:center;align-content:center;gap:.7rem;padding:20px;border-radius:20px;overflow:hidden;
+  background:radial-gradient(90% 80% at 50% 0%,color-mix(in srgb,var(--art-hi) 22%,transparent),transparent 65%),var(--art-bg);border:1px solid var(--slab-rim)}
+.rec-wave{width:100%;height:90px;display:block}
+.rec-time{font-family:var(--mono);font-size:1.6rem;letter-spacing:.06em;color:var(--tx)}
+.rec-btn{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#F7F9FC,#D9DFEA);
+  box-shadow:0 0 0 8px color-mix(in srgb,var(--leak) 16%,transparent),0 18px 40px -12px rgba(0,0,0,.6);transition:transform .2s ease}
+.rec-btn:hover{transform:scale(1.05)}
+.rec-btn .dot{width:30px;height:30px;border-radius:50%;background:#E0483A;transition:border-radius .25s ease,width .25s ease,height .25s ease}
+.rec-btn.is-on{animation:recpulse 1.6s ease-in-out infinite}
+.rec-btn.is-on .dot{width:26px;height:26px;border-radius:6px}
+@keyframes recpulse{50%{box-shadow:0 0 0 16px color-mix(in srgb,var(--leak) 10%,transparent),0 18px 40px -12px rgba(0,0,0,.6)}}
+.rec-hint{font-size:.88rem;color:var(--tx-2);text-align:center}
+.recorder audio{width:100%;max-width:340px}
+.rec-file{font-size:.84rem;color:var(--tx-3);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rec-file input{display:none}
+.consent{display:flex;gap:.7rem;align-items:flex-start;font-size:.92rem;color:var(--tx-2);cursor:pointer}
+.consent input{width:18px;height:18px;margin-top:.15rem;accent-color:var(--ok);flex:none}
+
+.drop{position:relative;display:grid;justify-items:center;gap:.5rem;text-align:center;padding:clamp(24px,4vw,40px) 18px;border-radius:22px;cursor:pointer;
+  border:2px dashed color-mix(in srgb,var(--art-hi) 55%,var(--line-2));background:radial-gradient(80% 90% at 50% 0%,color-mix(in srgb,var(--art-hi) 16%,transparent),transparent 70%),var(--art-bg);transition:border-color .2s ease,transform .2s ease}
+.drop:hover,.drop.is-over{border-color:var(--art-hi);transform:translateY(-2px)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop-ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--ink);color:var(--on-ink)}
+.drop-ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.up-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.up-list li{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--float)}
+.up-list .ext{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;background:var(--art-bg);border:1px solid var(--line-2);grid-row:span 2}
+.up-list .nm{font-size:.9rem;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.up-list .meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--tx-3)}
+.up-list .x{grid-row:span 2;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2);color:var(--tx-3)}
+.up-list .x:hover{border-color:var(--leak);color:var(--leak)}
+.up-list .bar{grid-column:2;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.up-list .bar i{display:block;height:100%;width:0;background:var(--art-hi);transition:width .2s ease}
+.up-list li.is-done .bar i{background:var(--ok)}
+.up-list li.is-error .meta{color:var(--leak)}
+
 /* ---------- bottom bar ---------- */
 .botbar{
   position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
@@ -568,8 +655,17 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
       </div>
     </div>
     <div class="formwrap slab" id="form-core">
-      <div class="formbar"><span class="mono">Client onboarding form</span><a data-form-link="core" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
-      <div data-form="core"></div>
+      <div class="formbar"><span class="mono">Onboarding questions</span><span class="mono" data-onb-count></span></div>
+      <span class="onb-meter" aria-hidden="true"><i data-onb-bar></i></span>
+      <form class="onb" data-onb novalidate>
+        <div data-onb-sections></div>
+        <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="send-row">
+          <button class="btn btn-primary" type="submit" data-onb-send>Send my answers</button>
+          <span class="status" data-onb-status role="status"></span>
+        </div>
+        <p class="saved-note">Your answers save on this device as you type, so you can stop and come back.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -636,8 +732,30 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
       </div>
     </div>
     <div class="formwrap slab" id="form-voice">
-      <div class="formbar"><span class="mono">Record your voice</span><a data-form-link="voice" target="_blank" rel="noopener">Open in a new tab &#8599;</a></div>
-      <div data-form="voice"></div>
+      <div class="formbar"><span class="mono">Record your voice</span><span class="mono" data-rec-state>Ready</span></div>
+      <div class="rec">
+        <div class="who" data-who></div>
+        <div class="rec-grid">
+          <div class="script">
+            <span class="mono">Your script &middot; read it out loud</span>
+            <p>Hey, this is <mark data-fill="owner">[your name]</mark> from <mark data-fill="business">[your business]</mark>. Thanks for reaching out to us. I wanted to personally follow up because we got your request, and I'd love to help you out. Most of our customers come to us because they want the job done right the first time, without the hassle. So here's what happens next: we'll ask you a couple of quick questions, find a time that works for you, and get you booked in. Sound good? Great. If you've got any questions at all, just ask. We're here to help, and we'll take care of you.</p>
+          </div>
+          <div class="recorder">
+            <canvas class="rec-wave" data-wave aria-hidden="true"></canvas>
+            <div class="rec-time" data-rec-time>0:00</div>
+            <button class="rec-btn" type="button" data-rec-btn aria-label="Start recording"><span class="dot"></span></button>
+            <p class="rec-hint" data-rec-hint>Tap to start. Tap again when you're done.</p>
+            <audio controls data-rec-audio hidden></audio>
+            <button class="check-btn" type="button" data-rec-again hidden>Record again</button>
+            <label class="rec-file">Or upload a voice memo instead<input type="file" accept="audio/*,.m4a,.mp3,.wav,.aac,.ogg,.webm" data-rec-file></label>
+          </div>
+        </div>
+        <label class="consent"><input type="checkbox" data-rec-consent> <span>I give DetailScales permission to use this recording for my business's ads and AI voice agent.</span></label>
+        <div class="send-row">
+          <button class="btn btn-primary" type="button" data-rec-send disabled>Send my recording</button>
+          <span class="status" data-rec-status role="status"></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -720,9 +838,23 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
         </div>
       </div>
       <div class="note warn"><strong>Messy is fine. Missing is not.</strong> A spreadsheet with half the emails blank beats a clean one you never send. We clean it, dedupe it and sort it.</div>
-      <div class="card wide">
-        <div style="display:grid;gap:.35rem"><h4>Send it the private way</h4><p>It is your customers' contact details, so use the upload link rather than email or text.</p></div>
-        <div data-upload></div>
+      <div class="formwrap slab" id="upload-contacts">
+        <div class="formbar"><span class="mono">Upload your contacts</span><span class="mono">Private &middot; only DetailScales sees these</span></div>
+        <div class="up">
+          <div class="who" data-who></div>
+          <label class="drop" data-drop>
+            <input type="file" multiple data-up-input accept=".vcf,.vcard,.csv,.tsv,.txt,.xls,.xlsx,.numbers,.pdf,image/*">
+            <span class="drop-ico"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
+            <span class="h4">Drop your contact files here, or tap to choose</span>
+            <span class="mono">Phone exports, spreadsheets, screenshots, photos &middot; up to 45 MB each</span>
+          </label>
+          <ul class="up-list" data-up-list></ul>
+          <label class="f"><span class="lbl">Anything we should know? (optional)</span><textarea data-up-note rows="2" placeholder="e.g. The ones tagged VIP are coating customers. The notebook photos are last year's quotes."></textarea></label>
+          <div class="send-row">
+            <button class="btn btn-primary" type="button" data-up-send disabled>Send my contacts</button>
+            <span class="status" data-up-status role="status"></span>
+          </div>
+        </div>
       </div>
 
       <div class="head" style="margin-top:16px">
@@ -887,12 +1019,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
    this" line rather than a broken link.
    ============================================================ */
 var CONFIG = {
-  forms: {
-    core:  'https://form.jotform.com/261743059733057', // Jotform: Client Onboarding (Core)
-    voice: 'https://form.jotform.com/262712554359058'  // Jotform: Record Your Voice
-  },
   calendly: 'https://calendly.com/zaimiana0',
-  uploadUrl: '',       // private upload link for the customer list
   metaBusinessId: '4355775974654336',  // DetailScales Meta Business Portfolio ID
   helpLine: ''         // e.g. 'Stuck? Text Zai on (555) 555 5555'
 };
@@ -916,18 +1043,7 @@ var CONFIG = {
   }
   function isDark(){ return document.documentElement.getAttribute('data-theme') === 'dark'; }
 
-  /* ---------- forms and calendar, loaded when their slide opens ---------- */
-  $$('[data-form]').forEach(function(slot){
-    var key = slot.getAttribute('data-form'), url = CONFIG.forms[key];
-    var link = $('[data-form-link="' + key + '"]');
-    if(url){
-      slot.setAttribute('data-lazy-frame', url);
-      if(link) link.href = url;
-    }else{
-      slot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send this form directly.'));
-      if(link) link.remove();
-    }
-  });
+  /* ---------- calendar, loaded when its slide opens ---------- */
   function calUrl(){
     var dark = isDark();
     var p = 'hide_gdpr_banner=1' +
@@ -941,25 +1057,10 @@ var CONFIG = {
   else{ calSlot.appendChild(el('div', {'class':'frame-ph'}, 'Your onboarding lead will send your kickoff link directly.')); calLink.remove(); }
 
   function loadLazy(slide){
-    $$('[data-lazy-frame]', slide).forEach(function(slot){
-      slot.appendChild(el('iframe', {'class':'formframe', src: slot.getAttribute('data-lazy-frame'), title: 'Onboarding form',
-        allow: 'microphone; camera; geolocation; fullscreen', allowfullscreen: ''}));
-      slot.removeAttribute('data-lazy-frame');
-    });
     if(slide.contains(calSlot) && CONFIG.calendly && !calSlot.querySelector('iframe')){
       calSlot.appendChild(el('iframe', {'class':'calframe', src: calUrl(), title: 'Book your kickoff call'}));
     }
   }
-
-  window.addEventListener('message', function(e){
-    if(!/(^|\.)jotform\.com$/.test((e.origin || '').replace(/^https?:\/\//, ''))) return;
-    if(typeof e.data !== 'string' || e.data.indexOf('setHeight:') !== 0) return;
-    var parts = e.data.split(':'), h = parseInt(parts[1], 10), id = parts[2];
-    if(!(h > 200) || !id) return;
-    $$('iframe.formframe').forEach(function(f){
-      if(f.src.indexOf(id) > -1) f.style.height = (h + 24) + 'px';
-    });
-  });
 
   $$('[data-yt]').forEach(function(box){
     var btn = $('.vid-play', box);
@@ -980,7 +1081,6 @@ var CONFIG = {
     else if(value) slot.appendChild(el('span', {'class':'cfg'}, value));
     else slot.appendChild(el('span', {'class':'pending'}, fallback));
   }
-  fill('[data-upload]', CONFIG.uploadUrl, 'Upload link comes from your onboarding lead', true);
   fill('[data-meta]', CONFIG.metaBusinessId, 'sent by your onboarding lead');
   (function(){
     var big = $('[data-meta-big]'), btn = $('[data-copy-meta]');
@@ -1176,6 +1276,8 @@ var CONFIG = {
     i.addEventListener('change', function(){ state.commit[i.getAttribute('data-commit')] = i.checked; save(); renderDone(); });
   });
   renderDone();
+  /* lets the built-in forms below tick their step once they have sent */
+  window.DSOnboarding = { markDone: function(n){ state.done[n] = true; save(); renderDone(); } };
 
   /* ---------- theme switch, shared with the main site ---------- */
   var themeBtn = $('#theme');
@@ -1249,6 +1351,426 @@ var CONFIG = {
   if(start < 0) start = typeof state.last === 'number' ? state.last : 0;
   go(start);
   booted = true;
+})();
+</script>
+<script>
+/* ============================================================
+   Built-in forms: the onboarding questions (step 2), the voice
+   recording (step 3) and the contact upload (step 4).
+   Everything goes to /api, which saves to Supabase and passes it
+   on to Slack and Google Sheets. One email ties the three together.
+   ============================================================ */
+(function(){
+  "use strict";
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+  var hook = window.DSOnboarding || { markDone: function(){} };
+
+  function load(k, d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } }
+  function keep(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  /* one id per browser, so a client who changes their email is still linked */
+  var clientId = load('ds-client-id', '');
+  if(!clientId){
+    clientId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    keep('ds-client-id', clientId);
+  }
+
+  /* answers live in one store; the name and email boxes on steps 3 and 4 share it */
+  var A = load('ds-onb-answers', {});
+  function setAnswer(id, v, from){
+    A[id] = v; keep('ds-onb-answers', A);
+    $$('[data-ans="' + id + '"]').forEach(function(inp){ if(inp !== from && inp.type !== 'radio') inp.value = v; });
+    $$('[data-fill="' + id + '"]').forEach(function(m){ m.textContent = v || (id === 'owner' ? '[your name]' : '[your business]'); });
+  }
+  function who(){ return { business: (A.business || '').trim(), owner: (A.owner || '').trim(), email: (A.email || '').trim(), clientId: clientId }; }
+  function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+  async function api(path, body){
+    var r, j = {};
+    try{
+      r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    }catch(e){ throw new Error('No connection. Your answers are saved here, so try again in a minute.'); }
+    try{ j = await r.json(); }catch(e){}
+    if(!r.ok){
+      throw new Error(r.status === 503 || r.status === 404
+        ? 'Sending is not switched on yet. Everything you entered is saved on this device, so nothing is lost.'
+        : (j.error || 'Something went wrong. Try again in a minute.'));
+    }
+    return j;
+  }
+
+  var EXT_TYPES = { m4a:'audio/mp4', mp4:'audio/mp4', mp3:'audio/mpeg', wav:'audio/wav', aac:'audio/aac', ogg:'audio/ogg', webm:'audio/webm',
+    vcf:'text/vcard', vcard:'text/vcard', csv:'text/csv', tsv:'text/tab-separated-values', txt:'text/plain', pdf:'application/pdf' };
+  function ext(name){ var m = /\.([a-z0-9]+)$/i.exec(name || ''); return m ? m[1].toLowerCase() : ''; }
+  function typeOf(file){ return file.type || EXT_TYPES[ext(file.name)] || 'application/octet-stream'; }
+
+  /* ask the server for a one-time link, then send the file straight to storage */
+  async function upload(kind, file, onProgress){
+    var w = who();
+    var r = await api('/api/upload-url', { kind: kind, name: file.name, type: typeOf(file), size: file.size, email: w.email, business: w.business, clientId: clientId });
+    await new Promise(function(ok, fail){
+      var x = new XMLHttpRequest();
+      x.open('PUT', r.url);
+      x.setRequestHeader('x-upsert', 'false');
+      x.upload.onprogress = function(e){ if(e.lengthComputable && onProgress) onProgress(e.loaded / e.total); };
+      x.onload = function(){ x.status < 300 ? ok() : fail(new Error('Upload failed (' + x.status + '). Try again.')); };
+      x.onerror = function(){ fail(new Error('Upload failed. Check your connection and try again.')); };
+      var fd = new FormData();
+      fd.append('cacheControl', '3600');
+      fd.append('', new File([file], file.name, { type: typeOf(file) }));
+      x.send(fd);
+    });
+    return r.path;
+  }
+
+  function status(el, msg, kind){ el.textContent = msg || ''; el.className = 'status' + (kind ? ' ' + kind : ''); }
+
+  /* name and email boxes for steps 3 and 4 */
+  $$('[data-who]').forEach(function(box){
+    box.innerHTML =
+      '<label>Business name<input type="text" data-ans="business" autocomplete="organization"></label>' +
+      '<label>Your name<input type="text" data-ans="owner" autocomplete="name"></label>' +
+      '<label>Email<input type="email" data-ans="email" autocomplete="email"></label>';
+  });
+  function checkWho(scope){
+    var w = who(), bad = null;
+    $$('[data-ans]', scope).forEach(function(i){ i.classList.remove('is-invalid'); });
+    if(!w.business) bad = $('[data-ans="business"]', scope);
+    else if(!validEmail(w.email)) bad = $('[data-ans="email"]', scope);
+    if(bad){ bad.classList.add('is-invalid'); bad.focus(); return false; }
+    return true;
+  }
+
+  /* ============================================================
+     STEP 2: onboarding questions
+     ============================================================ */
+  var CH = function(){ return [].slice.call(arguments); };
+  var SECTIONS = [
+    { t: 'You', f: [
+      ['owner', 'Full legal name', 'text', 1], ['email', 'Email', 'email', 1], ['phone', 'Phone number', 'tel', 1],
+      ['reach', 'Best way to reach you', CH('Call', 'Text', 'Email', 'WhatsApp')],
+      ['timezone', 'Time zone', CH('Eastern', 'Central', 'Mountain', 'Pacific', 'Other')] ] },
+    { t: 'Your business', f: [
+      ['business', 'Business name', 'text', 1], ['address', 'Business address', 'text'],
+      ['years', 'Years in business', 'text'], ['booking_now', 'How do customers book you today?', 'text'],
+      ['facebook', 'Facebook page link', 'url'], ['instagram', 'Instagram link or handle', 'text'],
+      ['services', 'What services do you offer?', 'area', 1], ['top_services', 'Top 2 or 3 services you most want to book', 'area'],
+      ['ticket', 'Average ticket, or a typical job price', 'text'] ] },
+    { t: 'Where to advertise', f: [
+      ['city', 'Primary city or location to target', 'text', 1], ['radius', 'Radius around it', CH('10 miles', '15 miles', '25 miles', '40 miles', '50+ miles')],
+      ['focus_areas', 'Neighborhoods or areas to focus on', 'area'], ['exclude_areas', 'Areas to exclude, places you don’t serve', 'area'],
+      ['where', 'Where do you do the work?', CH('At the customer’s location', 'At my shop', 'Both')] ] },
+    { t: 'Your ideal customer', f: [
+      ['best_customer', 'Who is your best type of customer?', 'area'], ['problem', 'What problem are they solving when they call you?', 'area'],
+      ['dont_want', 'Any customer types you don’t want?', 'area'] ] },
+    { t: 'Offer and pricing', f: [
+      ['offer', 'Do you have a promo or offer we can run?', 'area'], ['pricing', 'Pricing for your main services', 'area'],
+      ['seasons', 'Busiest and slowest times of year', 'text'] ] },
+    { t: 'Accounts and tools', f: [
+      ['meta_bm', 'Meta Business Manager ID', 'text'], ['meta_ad', 'Meta ad account ID', 'text'],
+      ['fb_partner', 'Shared partner access with us on Facebook? (step 4)', CH('Yes', 'Not yet', 'I need help')],
+      ['ig_connected', 'Is your Instagram connected to your Facebook page?', CH('Yes', 'No', 'Not sure')],
+      ['pixel', 'Is a Meta pixel installed on your website?', CH('Yes', 'No', 'Not sure')],
+      ['website', 'Website or landing page', 'url'], ['dns', 'Who controls your domain and DNS?', 'text'],
+      ['calendar', 'Calendar or booking tool', 'text'], ['crm', 'CRM or lead management system', 'text'],
+      ['leads_go', 'Where do leads go right now when someone enquires?', 'text'],
+      ['reports_access', 'Who else on your team should see reports?', 'text'] ] },
+    { t: 'Capacity and numbers', f: [
+      ['close_rate', 'Roughly what percentage of quotes do you close?', 'text'], ['capacity', 'Jobs you can handle per week at full capacity', 'text'],
+      ['after_lead', 'What happens right after a new lead comes in?', 'area'], ['responder', 'Who answers new enquiries, and how fast?', 'text'],
+      ['ad_spend', 'Current monthly ad spend, and on which platforms', 'text'] ] },
+    { t: 'How we talk about you', f: [
+      ['always_say', 'What should we always say or mention?', 'area'], ['never_say', 'What should we never say?', 'area'],
+      ['no_claims', 'Claims or guarantees you can’t make', 'text'], ['competitors', 'Competitors we should never name', 'text'],
+      ['tone', 'Tone', CH('Friendly and casual', 'Professional', 'Premium')],
+      ['brand', 'Link to your logo and brand colours', 'url'], ['photos', 'Link to your before and after photos', 'url'],
+      ['reviews', 'Link to your best reviews', 'url'], ['approver', 'Who approves ads before they go live?', 'text'] ] },
+    { t: 'What success looks like', f: [
+      ['one_number', 'The one number that would tell you this is working', 'text'],
+      ['revenue', 'Monthly revenue now from the services we’re promoting', 'text'],
+      ['leads', 'Roughly how many leads a month you get now', 'text'],
+      ['tried', 'What you’ve tried before for leads, and why it didn’t work', 'area'],
+      ['success_90', 'What success looks like 90 days from now', 'area'] ] }
+  ];
+  var FIELDS = [];
+  SECTIONS.forEach(function(sec){ sec.f.forEach(function(f){ FIELDS.push({ id: f[0], label: f[1], kind: f[2], req: !!f[3], section: sec.t }); }); });
+
+  var form = $('[data-onb]'), host = $('[data-onb-sections]');
+  if(form && host){
+    var CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+    host.innerHTML = SECTIONS.map(function(sec, si){
+      var body = sec.f.map(function(f){
+        var id = f[0], label = esc(f[1]), kind = f[2], req = f[3] ? ' <span class="req">*</span>' : '';
+        if(Array.isArray(kind)){
+          return '<div class="f wide" role="group" aria-label="' + label + '"><span class="lbl">' + label + req + '</span><div class="chips">' +
+            kind.map(function(c){ return '<label><input type="radio" name="' + id + '" value="' + esc(c) + '" data-ans="' + id + '"><span>' + esc(c) + '</span></label>'; }).join('') +
+            '</div></div>';
+        }
+        var ctl = kind === 'area'
+          ? '<textarea id="q-' + id + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + '></textarea>'
+          : '<input id="q-' + id + '" type="' + kind + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + (kind === 'email' ? ' autocomplete="email"' : kind === 'tel' ? ' autocomplete="tel"' : '') + '>';
+        return '<div class="f' + (kind === 'area' ? ' wide' : '') + '"><label class="lbl" for="q-' + id + '">' + label + req + '</label>' + ctl + '</div>';
+      }).join('');
+      return '<details class="onb-sec"' + (si === 0 ? ' open' : '') + ' data-sec="' + si + '"><summary><span class="n">' + (si + 1) + '</span><span class="h4">' + esc(sec.t) + '</span><span class="cnt" data-sec-cnt></span>' + CHEV + '</summary><div class="onb-body">' + body + '</div></details>';
+    }).join('');
+  }
+
+  /* restore saved answers into every box that shares them */
+  $$('[data-ans]').forEach(function(inp){
+    var id = inp.getAttribute('data-ans');
+    if(inp.type === 'radio') inp.checked = A[id] === inp.value;
+    else if(A[id]) inp.value = A[id];
+    inp.addEventListener(inp.type === 'radio' ? 'change' : 'input', function(){
+      inp.classList.remove('is-invalid');
+      setAnswer(id, inp.value, inp);
+      countAnswers();
+      refreshSends();
+    });
+  });
+  setAnswer('owner', A.owner || ''); setAnswer('business', A.business || '');
+
+  function countAnswers(){
+    var total = 0;
+    $$('.onb-sec').forEach(function(sec, si){
+      var fs = SECTIONS[si].f, done = fs.filter(function(f){ return (A[f[0]] || '').trim(); }).length;
+      total += done;
+      $('[data-sec-cnt]', sec).textContent = done + ' / ' + fs.length;
+      sec.classList.toggle('is-complete', done === fs.length);
+    });
+    var c = $('[data-onb-count]'); if(c) c.textContent = total + ' of ' + FIELDS.length + ' answered';
+    var b = $('[data-onb-bar]'); if(b) b.style.width = (total / FIELDS.length * 100) + '%';
+  }
+  countAnswers();
+
+  if(form){
+    var send = $('[data-onb-send]'), st = $('[data-onb-status]');
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var missing = FIELDS.filter(function(f){ return f.req && !(A[f.id] || '').trim(); });
+      if(!missing.length && !validEmail((A.email || '').trim())) missing = [FIELDS.filter(function(f){ return f.id === 'email'; })[0]];
+      if(missing.length){
+        var inp = $('#q-' + missing[0].id);
+        var sec = inp && inp.closest('details'); if(sec) sec.open = true;
+        if(inp){ inp.classList.add('is-invalid'); inp.focus(); }
+        status(st, missing.length === 1 ? 'One answer is still needed: ' + missing[0].label + '.' : missing.length + ' answers marked * are still needed.', 'err');
+        return;
+      }
+      send.disabled = true; send.textContent = 'Sending…'; status(st, '');
+      try{
+        var w = who();
+        await api('/api/submit', {
+          type: 'onboarding', business: w.business, owner: w.owner, email: w.email, clientId: clientId,
+          company_website: form.company_website.value,
+          answers: FIELDS.map(function(f){ return { id: f.id, section: f.section, label: f.label, value: (A[f.id] || '').trim() }; })
+        });
+        status(st, 'Got it. Your answers are with us. Change anything and send again whenever you like.', 'ok');
+        send.textContent = 'Send updates';
+        hook.markDone(1);
+      }catch(err){
+        status(st, err.message, 'err');
+        send.textContent = 'Send my answers';
+      }
+      send.disabled = false;
+    });
+  }
+
+  /* ============================================================
+     STEP 3: voice recording
+     ============================================================ */
+  var rec = { blob: null, duration: 0, mime: '' };
+  var recBtn = $('[data-rec-btn]'), recTime = $('[data-rec-time]'), recHint = $('[data-rec-hint]'), recAudio = $('[data-rec-audio]');
+  var recAgain = $('[data-rec-again]'), recFile = $('[data-rec-file]'), recConsent = $('[data-rec-consent]');
+  var recSend = $('[data-rec-send]'), recStatus = $('[data-rec-status]'), recState = $('[data-rec-state]');
+  var wave = $('[data-wave]');
+  var media = null, stream = null, chunks = [], t0 = 0, tick = 0, analyser = null, actx = null, raf = 0;
+  var MAX_SECONDS = 180;
+
+  function fmt(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+
+  /* idle: a slow shimmer; recording: the live level of the mic */
+  function drawWave(){
+    if(!wave) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1), w = wave.clientWidth, h = wave.clientHeight;
+    if(wave.width !== w * dpr){ wave.width = w * dpr; wave.height = h * dpr; }
+    var ctx = wave.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    var bars = Math.max(24, Math.floor(w / 9)), data = null;
+    if(analyser){ data = new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(data); }
+    var color = getComputedStyle(document.documentElement).getPropertyValue('--art-hi').trim() || '#3F6BE0';
+    ctx.fillStyle = color;
+    var now = performance.now() / 600;
+    for(var i = 0; i < bars; i++){
+      var v = data ? data[Math.floor(i / bars * data.length * .7)] / 255 : (.08 + .06 * Math.sin(now + i * .45));
+      var bh = Math.max(4, v * h * .95), x = i * (w / bars) + 2, bw = Math.max(3, w / bars - 4);
+      ctx.globalAlpha = data ? .95 : .45;
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(x, (h - bh) / 2, bw, bh, bw / 2); else ctx.rect(x, (h - bh) / 2, bw, bh);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(drawWave);
+  }
+  if(wave && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) drawWave();
+
+  function pickMime(){
+    if(!window.MediaRecorder || !MediaRecorder.isTypeSupported) return '';
+    return ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].filter(function(t){ return MediaRecorder.isTypeSupported(t); })[0] || '';
+  }
+
+  async function startRec(){
+    if(!navigator.mediaDevices || !window.MediaRecorder){
+      status(recStatus, 'This browser can’t record. Use “upload a voice memo” below instead.', 'err'); return;
+    }
+    try{ stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); }
+    catch(e){ status(recStatus, 'We couldn’t use your microphone. Allow it in your browser settings, or upload a voice memo instead.', 'err'); return; }
+    var mime = pickMime();
+    media = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+    chunks = [];
+    media.ondataavailable = function(e){ if(e.data && e.data.size) chunks.push(e.data); };
+    media.onstop = function(){
+      var type = (media.mimeType || mime || 'audio/webm').split(';')[0];
+      setRecording(new Blob(chunks, { type: type }), (performance.now() - t0) / 1000, type);
+      stream.getTracks().forEach(function(t){ t.stop(); });
+      if(actx){ actx.close(); actx = null; analyser = null; }
+    };
+    try{
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      actx.createMediaStreamSource(stream).connect(analyser);
+    }catch(e){ analyser = null; }
+    media.start(250);
+    t0 = performance.now();
+    recBtn.classList.add('is-on'); recBtn.setAttribute('aria-label', 'Stop recording');
+    recHint.textContent = 'Recording. Read the script, then tap to stop.';
+    recState.textContent = 'Recording';
+    recAudio.hidden = true; recAgain.hidden = true; status(recStatus, '');
+    tick = setInterval(function(){
+      var s = (performance.now() - t0) / 1000;
+      recTime.textContent = fmt(s);
+      if(s >= MAX_SECONDS) stopRec();
+    }, 250);
+  }
+  function stopRec(){
+    clearInterval(tick);
+    if(media && media.state !== 'inactive') media.stop();
+    recBtn.classList.remove('is-on'); recBtn.setAttribute('aria-label', 'Start recording');
+  }
+  function setRecording(blob, seconds, type){
+    rec.blob = blob; rec.duration = seconds; rec.mime = type;
+    recAudio.src = URL.createObjectURL(blob); recAudio.hidden = false;
+    recAgain.hidden = false; recBtn.hidden = true;
+    recTime.textContent = fmt(seconds);
+    recHint.textContent = 'Have a listen. Happy with it? Tick the box and send it.';
+    recState.textContent = 'Recorded';
+    refreshSends();
+  }
+  if(recBtn){
+    recBtn.addEventListener('click', function(){ media && media.state === 'recording' ? stopRec() : startRec(); });
+    recAgain.addEventListener('click', function(){
+      rec.blob = null; recAudio.hidden = true; recAgain.hidden = true; recBtn.hidden = false;
+      recTime.textContent = '0:00'; recHint.textContent = 'Tap to start. Tap again when you’re done.'; recState.textContent = 'Ready';
+      refreshSends();
+    });
+    recFile.addEventListener('change', function(){
+      var f = recFile.files[0]; if(!f) return;
+      if(!/^audio\//.test(typeOf(f))){ status(recStatus, 'That doesn’t look like an audio file.', 'err'); return; }
+      var probe = new Audio(); probe.preload = 'metadata';
+      probe.onloadedmetadata = function(){ setRecording(f, isFinite(probe.duration) ? probe.duration : 0, typeOf(f)); };
+      probe.onerror = function(){ setRecording(f, 0, typeOf(f)); };
+      probe.src = URL.createObjectURL(f);
+    });
+    recConsent.addEventListener('change', refreshSends);
+    recSend.addEventListener('click', async function(){
+      if(!checkWho($('#form-voice'))){ status(recStatus, 'Add your business name and email first.', 'err'); return; }
+      recSend.disabled = true; recSend.textContent = 'Uploading…'; status(recStatus, '');
+      try{
+        var w = who(), extn = { 'audio/webm':'webm', 'audio/mp4':'m4a', 'audio/ogg':'ogg', 'audio/mpeg':'mp3', 'audio/wav':'wav', 'audio/aac':'aac', 'audio/x-m4a':'m4a' }[rec.mime] || 'webm';
+        var name = rec.blob.name || ('voice-' + (w.business || 'client').toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.' + extn);
+        var file = new File([rec.blob], name, { type: rec.mime || 'audio/webm' });
+        var path = await upload('voice', file, function(p){ recSend.textContent = 'Uploading ' + Math.round(p * 100) + '%'; });
+        recSend.textContent = 'Saving…';
+        await api('/api/submit', { type: 'voice', path: path, mime: file.type, duration: rec.duration, consent: true,
+          business: w.business, owner: w.owner, email: w.email, clientId: clientId });
+        status(recStatus, 'Got it. Your recording is with us.', 'ok');
+        recSend.textContent = 'Sent';
+        recState.textContent = 'Sent';
+        hook.markDone(2);
+      }catch(err){
+        status(recStatus, err.message, 'err');
+        recSend.textContent = 'Send my recording'; recSend.disabled = false;
+      }
+    });
+  }
+
+  /* ============================================================
+     STEP 4: contact files
+     ============================================================ */
+  var items = [];
+  var upInput = $('[data-up-input]'), upList = $('[data-up-list]'), upSend = $('[data-up-send]'), upStatus = $('[data-up-status]'), drop = $('[data-drop]');
+  function size(b){ return b > 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB'; }
+  function renderList(){
+    upList.innerHTML = items.map(function(it, i){
+      var cls = it.state === 'done' ? 'is-done' : it.state === 'error' ? 'is-error' : '';
+      var meta = it.state === 'error' ? it.error : it.state === 'done' ? 'Uploaded' : it.state === 'up' ? 'Uploading ' + Math.round(it.p * 100) + '%' : size(it.file.size);
+      return '<li class="' + cls + '"><span class="ext">' + esc(ext(it.file.name) || 'file') + '</span><span class="nm">' + esc(it.file.name) + '</span>' +
+        (it.state === 'up' || it.state === 'done' ? '<span></span>' : '<button class="x" type="button" data-rm="' + i + '" aria-label="Remove ' + esc(it.file.name) + '">&times;</button>') +
+        '<span class="meta">' + esc(meta) + '</span><span class="bar"><i style="width:' + (it.state === 'done' ? 100 : Math.round(it.p * 100)) + '%"></i></span></li>';
+    }).join('');
+    $$('[data-rm]', upList).forEach(function(b){ b.addEventListener('click', function(){ items.splice(+b.getAttribute('data-rm'), 1); renderList(); refreshSends(); }); });
+  }
+  function addFiles(list){
+    [].slice.call(list || []).forEach(function(f){
+      if(f.size > 45 * 1024 * 1024){ status(upStatus, f.name + ' is over 45 MB. Split it or send a CSV export instead.', 'err'); return; }
+      if(f.size === 0) return;
+      items.push({ file: f, state: 'ready', p: 0 });
+    });
+    renderList(); refreshSends();
+  }
+  if(upInput){
+    upInput.addEventListener('change', function(){ addFiles(upInput.files); upInput.value = ''; });
+    ['dragenter', 'dragover'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('is-over'); }); });
+    ['dragleave', 'drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('is-over'); }); });
+    drop.addEventListener('drop', function(e){ addFiles(e.dataTransfer && e.dataTransfer.files); });
+    upSend.addEventListener('click', async function(){
+      if(!checkWho($('#upload-contacts'))){ status(upStatus, 'Add your business name and email first.', 'err'); return; }
+      upSend.disabled = true; status(upStatus, '');
+      try{
+        for(var i = 0; i < items.length; i++){
+          var it = items[i];
+          if(it.state === 'done') continue;
+          it.state = 'up'; it.p = 0; renderList();
+          try{
+            it.path = await upload('contacts', it.file, function(p){ it.p = p; renderList(); });
+            it.state = 'done';
+          }catch(err){ it.state = 'error'; it.error = err.message; renderList(); throw err; }
+          renderList();
+        }
+        upSend.textContent = 'Reading your contacts…';
+        var w = who();
+        var out = await api('/api/submit', {
+          type: 'contacts', business: w.business, owner: w.owner, email: w.email, clientId: clientId,
+          note: $('[data-up-note]').value,
+          files: items.map(function(it){ return { path: it.path, name: it.file.name, size: it.file.size, type: typeOf(it.file) }; })
+        });
+        var msg = 'Got it. ' + (out.contacts ? 'We read ' + out.contacts.toLocaleString() + ' contacts' : 'We have your files') +
+          ' from ' + out.files + (out.files === 1 ? ' file' : ' files') + '.' +
+          (out.unread ? ' ' + out.unread + (out.unread === 1 ? ' file' : ' files') + ' (photos or PDFs) will be typed up by hand.' : '');
+        status(upStatus, msg, 'ok');
+        items = []; renderList(); $('[data-up-note]').value = '';
+        upSend.textContent = 'Send more files';
+      }catch(err){
+        status(upStatus, err.message, 'err');
+        upSend.textContent = 'Send my contacts';
+      }
+      refreshSends();
+    });
+  }
+
+  function refreshSends(){
+    if(recSend && recSend.textContent !== 'Sent') recSend.disabled = !(rec.blob && recConsent.checked);
+    if(upSend) upSend.disabled = !items.length;
+  }
+  refreshSends();
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
