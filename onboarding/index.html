@@ -502,6 +502,27 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .up-list li.is-done .bar i{background:var(--ok)}
 .up-list li.is-error .meta{color:var(--leak)}
 
+/* ---------- step lock: the next step opens once this one is received ---------- */
+.sent-chip{display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;border:1px dashed var(--line-2);font-size:.88rem;color:var(--tx-3)}
+.sent-chip .box{width:17px;height:17px;border-radius:5px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.72rem;line-height:1}
+.sent-chip.is-sent{color:var(--ok);border:1px solid var(--ok)}
+.sent-chip.is-sent .box::after{content:"\2713"}
+.btn-nav.is-locked{opacity:.62}
+.btn-nav.is-locked:hover{transform:none;box-shadow:none}
+.btn-nav .lock{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:none}
+.btn-nav.is-locked .lock{display:block}
+.btn-nav.is-locked .chev{display:none}
+.dots button.is-locked{opacity:.35;cursor:not-allowed}
+.roadmap button.is-locked{opacity:.55;cursor:not-allowed}
+.roadmap button.is-locked:hover{transform:none}
+.roadmap .lock-tag{display:none;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
+.roadmap button.is-locked .lock-tag{display:block}
+.formwrap.is-nudge{animation:nudge 1.4s ease}
+@keyframes nudge{0%,100%{box-shadow:var(--slab-edge)}30%,70%{box-shadow:var(--slab-edge),0 0 0 3px var(--leak)}}
+.gate-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;
+  max-width:min(92vw,520px);padding:.75rem 1.1rem;border-radius:14px;background:var(--ink);color:var(--on-ink);font-size:.9rem;line-height:1.4;
+  box-shadow:var(--lift);text-align:center}
+
 /* ---------- bottom bar ---------- */
 .botbar{
   position:relative;z-index:50;display:flex;align-items:center;gap:1rem;
@@ -579,10 +600,10 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 
     <ol class="roadmap rise" data-roadmap>
       <li><button type="button" data-go="1"><span class="n">01 <span class="tick">&#10003; done</span></span><span class="h4">Your shop</span><small>Business, ads, access, goals</small></button></li>
-      <li><button type="button" data-go="2"><span class="n">02 <span class="tick">&#10003; done</span></span><span class="h4">Your voice</span><small>A one minute recording</small></button></li>
-      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span></span><span class="h4">Your list</span><small>Past customers, old quotes, Facebook access</small></button></li>
-      <li><button type="button" data-go="4"><span class="n">04 <span class="tick">&#10003; done</span></span><span class="h4">Kickoff call</span><small>45 minutes, plan locked</small></button></li>
-      <li><button type="button" data-go="5"><span class="n">05 <span class="tick">&#10003; done</span></span><span class="h4">Go live</span><small>What we build, in order</small></button></li>
+      <li><button type="button" data-go="2"><span class="n">02 <span class="tick">&#10003; done</span><span class="lock-tag">Locked</span></span><span class="h4">Your voice</span><small>A one minute recording</small></button></li>
+      <li><button type="button" data-go="3"><span class="n">03 <span class="tick">&#10003; done</span><span class="lock-tag">Locked</span></span><span class="h4">Your list</span><small>Past customers, old quotes, Facebook access</small></button></li>
+      <li><button type="button" data-go="4"><span class="n">04 <span class="tick">&#10003; done</span><span class="lock-tag">Locked</span></span><span class="h4">Kickoff call</span><small>45 minutes, plan locked</small></button></li>
+      <li><button type="button" data-go="5"><span class="n">05 <span class="tick">&#10003; done</span><span class="lock-tag">Locked</span></span><span class="h4">Go live</span><small>What we build, in order</small></button></li>
     </ol>
   </div>
 </section>
@@ -649,7 +670,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
           <p><strong>Fill in the onboarding form below.</strong> Quick answers beat perfect ones. Unsure of something? Write "ask me on the call".</p>
           <div class="job-actions">
             <button class="btn btn-primary" type="button" data-scroll="#form-core">Open the form <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
-            <button class="check-btn" type="button" data-done="1" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've sent it</button>
+            <span class="sent-chip" data-sent="1" role="status"><span class="box" aria-hidden="true"></span><span data-sent-txt>Not sent yet</span></span>
           </div>
         </div>
       </div>
@@ -726,7 +747,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
           <p><strong>Record the script below, in your own words where it feels natural.</strong> Swap in your name and your business, then hit record.</p>
           <div class="job-actions">
             <button class="btn btn-primary" type="button" data-scroll="#form-voice">Start recording <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
-            <button class="check-btn" type="button" data-done="2" aria-pressed="false"><span class="box" aria-hidden="true"></span>I've recorded it</button>
+            <span class="sent-chip" data-sent="2" role="status"><span class="box" aria-hidden="true"></span><span data-sent-txt>Not sent yet</span></span>
           </div>
         </div>
       </div>
@@ -804,7 +825,7 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
           <p><strong>Send your customer and lead list, then give us access.</strong> Both are conditions of the guarantee, and both are below.</p>
           <div class="job-actions">
             <button class="btn btn-primary" type="button" data-scroll="#list-how">Show me how <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
-            <button class="check-btn" type="button" data-done="3" aria-pressed="false"><span class="box" aria-hidden="true"></span>List and access sent</button>
+            <span class="sent-chip" data-sent="3" role="status"><span class="box" aria-hidden="true"></span><span data-sent-txt>Not sent yet</span></span>
           </div>
         </div>
       </div>
@@ -1004,10 +1025,11 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 
 </main>
 
+<div class="gate-toast" data-gate-toast role="alert" hidden></div>
 <nav class="botbar" aria-label="Onboarding steps">
   <button class="btn btn-ghost btn-nav" type="button" data-prev><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="long">Back</span></button>
   <div class="dots" data-dots></div>
-  <button class="btn btn-primary btn-nav" type="button" data-next><span data-next-lbl>Start</span><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+  <button class="btn btn-primary btn-nav" type="button" data-next><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span data-next-lbl>Start</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
 </nav>
 
 </div>
@@ -1179,8 +1201,58 @@ var CONFIG = {
     return b;
   });
 
+  /* Steps 2, 3 and 4 each have to reach the server before the next one
+     opens. Keys are slide indexes; only a confirmed send sets them. */
+  state.sent = state.sent || {};
+  var GATES = {
+    1: { what: 'your answers',      target: '#form-core',       btn: 'Send your answers first' },
+    2: { what: 'your recording',    target: '#form-voice',      btn: 'Send your recording first' },
+    3: { what: 'your contact list', target: '#upload-contacts', btn: 'Send your contact list first' }
+  };
+  function firstLocked(){
+    for(var g = 1; g <= 3; g++) if(!state.sent[g]) return g;
+    return TOTAL;   // nothing left to send
+  }
+  var toast = $('[data-gate-toast]'), toastT = 0;
+  function nudge(g){
+    var gate = GATES[g], t = $(gate.target);
+    if(g !== active){ go(g); }
+    if(t){
+      slides[g].scrollTo({ top: t.offsetTop - 12, behavior: calm ? 'auto' : 'smooth' });
+      t.classList.remove('is-nudge'); void t.offsetWidth; t.classList.add('is-nudge');
+    }
+    toast.textContent = 'Send ' + gate.what + ' below first. The next step opens as soon as we have it.';
+    toast.hidden = false;
+    clearTimeout(toastT); toastT = setTimeout(function(){ toast.hidden = true; }, 4200);
+  }
+  function renderLocks(){
+    var lock = firstLocked();
+    dots.forEach(function(d, k){
+      var locked = k > lock;
+      d.classList.toggle('is-locked', locked);
+      if(locked) d.setAttribute('aria-disabled', 'true'); else d.removeAttribute('aria-disabled');
+    });
+    $$('[data-roadmap] [data-go]').forEach(function(b){ b.classList.toggle('is-locked', +b.getAttribute('data-go') > lock); });
+    [1, 2, 3].forEach(function(n){
+      var c = $('[data-sent="' + n + '"]'); if(!c) return;
+      c.classList.toggle('is-sent', !!state.sent[n]);
+      $('[data-sent-txt]', c).textContent = state.sent[n] ? 'Received' : 'Not sent yet';
+    });
+    var blocked = active === lock && active < TOTAL - 1;
+    next.classList.toggle('is-locked', blocked);
+    if(active > -1){
+      nextLbl.textContent = blocked ? GATES[active].btn
+        : active === 0 ? 'Start' : active === TOTAL - 1 ? 'Back to start' : 'Next: ' + slides[active + 1].getAttribute('data-label');
+    }
+  }
+
   function go(i){
     i = Math.max(0, Math.min(TOTAL - 1, i));
+    if(i === active) return;
+    // moving forward past an unsent step: open that step and point at its form
+    var lock = firstLocked();
+    if(i > lock && booted){ nudge(lock); return; }
+    if(i > lock) i = lock;
     if(i === active) return;
     slides.forEach(function(s, k){
       var on = k === i;
@@ -1198,8 +1270,8 @@ var CONFIG = {
     rail.style.width = ((i + 1) / TOTAL * 100) + '%';
     dots.forEach(function(d, k){ if(k === i) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current'); });
     prev.disabled = i === 0;
-    nextLbl.textContent = i === 0 ? 'Start' : i === TOTAL - 1 ? 'Back to start' : 'Next: ' + slides[i + 1].getAttribute('data-label');
     state.last = i; save();
+    renderLocks();
     if(history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + s.id);
     if(booted){ var h = $('h2', s); if(h) h.focus({preventScroll:true}); }
     driftGlow(i);
@@ -1238,7 +1310,7 @@ var CONFIG = {
   function renderDone(){
     var firstOpen = null, count = 0;
     [1,2,3,4].forEach(function(n){
-      var d = !!state.done[n];
+      var d = n < 4 ? !!state.sent[n] : !!state.done[n];
       if(d) count++; else if(firstOpen === null) firstOpen = n;
       $$('[data-done="' + n + '"]').forEach(function(b){ b.setAttribute('aria-pressed', d ? 'true' : 'false'); });
       $('[data-roadmap] [data-go="' + n + '"]').classList.toggle('is-done', d);
@@ -1276,8 +1348,11 @@ var CONFIG = {
     i.addEventListener('change', function(){ state.commit[i.getAttribute('data-commit')] = i.checked; save(); renderDone(); });
   });
   renderDone();
-  /* lets the built-in forms below tick their step once they have sent */
-  window.DSOnboarding = { markDone: function(n){ state.done[n] = true; save(); renderDone(); } };
+  /* the built-in forms below call this once the server confirms a send,
+     which is what opens the next step */
+  window.DSOnboarding = {
+    markSent: function(n){ state.sent[n] = true; state.done[n] = true; save(); renderDone(); renderLocks(); }
+  };
 
   /* ---------- theme switch, shared with the main site ---------- */
   var themeBtn = $('#theme');
@@ -1364,7 +1439,7 @@ var CONFIG = {
   "use strict";
   var $ = function(s, r){ return (r || document).querySelector(s); };
   var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
-  var hook = window.DSOnboarding || { markDone: function(){} };
+  var hook = window.DSOnboarding || { markSent: function(){} };
 
   function load(k, d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } }
   function keep(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -1567,7 +1642,7 @@ var CONFIG = {
         });
         status(st, 'Got it. Your answers are with us. Change anything and send again whenever you like.', 'ok');
         send.textContent = 'Send updates';
-        hook.markDone(1);
+        hook.markSent(1);
       }catch(err){
         status(st, err.message, 'err');
         send.textContent = 'Send my answers';
@@ -1694,7 +1769,7 @@ var CONFIG = {
         status(recStatus, 'Got it. Your recording is with us.', 'ok');
         recSend.textContent = 'Sent';
         recState.textContent = 'Sent';
-        hook.markDone(2);
+        hook.markSent(2);
       }catch(err){
         status(recStatus, err.message, 'err');
         recSend.textContent = 'Send my recording'; recSend.disabled = false;
@@ -1756,6 +1831,7 @@ var CONFIG = {
           ' from ' + out.files + (out.files === 1 ? ' file' : ' files') + '.' +
           (out.unread ? ' ' + out.unread + (out.unread === 1 ? ' file' : ' files') + ' (photos or PDFs) will be typed up by hand.' : '');
         status(upStatus, msg, 'ok');
+        hook.markSent(3);
         items = []; renderList(); $('[data-up-note]').value = '';
         upSend.textContent = 'Send more files';
       }catch(err){
