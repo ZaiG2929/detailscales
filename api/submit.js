@@ -57,7 +57,7 @@ async function onboarding(body, w, res) {
     id: L.cleanText(a.id, 60),
     section: L.cleanText(a.section, 80),
     label: L.cleanText(a.label, 200),
-    value: L.cleanText(a.value, 4000)
+    value: L.cleanText(a.value, 12000)
   })).filter(a => a.id && a.label);
   if (!answers.length) return L.send(res, 400, { error: 'No answers came through' });
 
@@ -81,9 +81,11 @@ async function onboarding(body, w, res) {
         ['Target area', [by.city, by.radius].filter(Boolean).join(', ')], ['Services', by.services],
         ['Most want to book', by.top_services], ['Average ticket', by.ticket],
         ['Monthly revenue (promoted services)', by.revenue], ['Leads a month', by.leads],
-        ['Current ad spend', by.ad_spend], ['Success in 90 days', by.success_90]
+        ['Current ad spend', by.ad_spend], ['Success in 90 days', by.success_90],
+        ['Deposit', by.deposit], ['How the AI should book', by.booking_mode]
       ],
-      sheetUrl ? ['See every answer', sheetUrl] : null
+      sheetUrl ? ['See every answer', sheetUrl] : null,
+      by.price_sheet ? '*Price sheet*\n```' + by.price_sheet + '```' : ''
     )
   });
   const errors = Object.assign({}, s.errors, d.errors);

@@ -150,7 +150,7 @@ p{margin:0}
 strong{font-weight:600;color:var(--tx)}
 
 /* ---------- app frame ---------- */
-.app{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.app{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr)}
 .glowfield{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .glowfield i{position:absolute;border-radius:50%;filter:blur(60px);transition:transform 1.4s cubic-bezier(.22,.7,.3,1)}
 .glowfield .g1{width:60vmax;height:60vmax;left:-18vmax;top:-26vmax;background:radial-gradient(circle,var(--glow),transparent 64%)}
@@ -502,12 +502,58 @@ canvas.specks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;
 .up-list li.is-done .bar i{background:var(--ok)}
 .up-list li.is-error .meta{color:var(--leak)}
 
+/* ---------- services and prices builder ---------- */
+.onb-body>.wide{grid-column:1/-1}
+/* grid and flex children default to their content's width; let the form shrink to the screen */
+.onb,.onb *,.split>*,.slide-inner>*{min-width:0}
+.onb .hp{width:1px!important}
+.sec-note{font-size:.9rem;color:var(--tx-2);max-width:70ch}
+.pricing{display:grid;grid-template-columns:1fr;gap:16px}
+.svc{display:grid;gap:12px;padding:16px;border-radius:18px;border:1px solid var(--line-2);background:var(--art-bg)}
+.svc-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem}
+.svc-head small{font-size:.8rem;color:var(--tx-3)}
+.svc-name{flex:1 1 260px}
+.star{position:relative;cursor:pointer}
+.star input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.star span{display:inline-block;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line-2);font-size:.82rem;color:var(--tx-2);transition:all .16s ease}
+.star input:checked+span{background:#E8B931;border-color:#E8B931;color:#14161B}
+.star input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.pkg{display:grid;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--float)}
+.pkg-top{display:flex;justify-content:space-between;align-items:center}
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.pkg-grid .wide,.pkg-grid .f.wide{grid-column:1/-1}
+@media(max-width:700px){.pkg-grid{grid-template-columns:1fr}}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.sizes{grid-template-columns:1fr}}
+.toggle{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--tx);cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--ok)}
+.money{position:relative;display:block}
+.money .cur{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:.82rem;color:var(--tx-3);pointer-events:none}
+.money input{padding-left:2.9rem!important}
+.pricing input[type=text],.pricing textarea{width:100%;font:inherit;font-size:.95rem;color:var(--tx);padding:.65rem .8rem;border-radius:12px;border:1px solid var(--line-2);background:var(--paper)}
+.pricing textarea{min-height:64px;resize:vertical;line-height:1.5;margin-top:.5rem}
+.pricing input:focus,.pricing textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 14%,transparent)}
+.pkg .x,.addon .x{width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2);color:var(--tx-3);flex:none}
+.pkg .x:hover,.addon .x:hover{border-color:var(--leak);color:var(--leak)}
+.add-btn{justify-self:start;padding:.55rem 1rem;border-radius:999px;border:1px dashed var(--line-2);font-size:.86rem;color:var(--tx-2)}
+.add-btn:hover{border-color:var(--ink);color:var(--tx)}
+.addon{display:grid;grid-template-columns:1.2fr .7fr 1.4fr auto;gap:8px;align-items:center}
+@media(max-width:700px){.addon{grid-template-columns:1fr 1fr auto}.addon input:nth-of-type(3){grid-column:1/3}}
+.price-preview{display:grid;gap:.6rem;padding:16px 18px;border-radius:18px;border:1px solid color-mix(in srgb,var(--art-hi) 55%,transparent);
+  background:radial-gradient(90% 120% at 0% 0%,color-mix(in srgb,var(--art-hi) 14%,transparent),transparent 60%),var(--art-bg)}
+.price-preview pre{margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.8rem;line-height:1.65;color:var(--tx)}
+.is-invalid-box{outline:2px solid var(--leak);outline-offset:4px;border-radius:14px}
+
 /* ---------- step lock: the next step opens once this one is received ---------- */
 .sent-chip{display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-radius:999px;border:1px dashed var(--line-2);font-size:.88rem;color:var(--tx-3)}
 .sent-chip .box{width:17px;height:17px;border-radius:5px;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.72rem;line-height:1}
 .sent-chip.is-sent{color:var(--ok);border:1px solid var(--ok)}
 .sent-chip.is-sent .box::after{content:"\2713"}
 .btn-nav.is-locked{opacity:.62}
+/* the bottom bar must never be wider than the screen */
+.botbar .btn-nav{min-width:0;flex-shrink:1}
+.botbar [data-next-lbl]{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dots{flex-shrink:0}
 .btn-nav.is-locked:hover{transform:none;box-shadow:none}
 .btn-nav .lock{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:none}
 .btn-nav.is-locked .lock{display:block}
@@ -1205,9 +1251,9 @@ var CONFIG = {
      opens. Keys are slide indexes; only a confirmed send sets them. */
   state.sent = state.sent || {};
   var GATES = {
-    1: { what: 'your answers',      target: '#form-core',       btn: 'Send your answers first' },
-    2: { what: 'your recording',    target: '#form-voice',      btn: 'Send your recording first' },
-    3: { what: 'your contact list', target: '#upload-contacts', btn: 'Send your contact list first' }
+    1: { what: 'your answers',      target: '#form-core',       btn: 'Send your answers first',      short: 'Send answers' },
+    2: { what: 'your recording',    target: '#form-voice',      btn: 'Send your recording first',    short: 'Send recording' },
+    3: { what: 'your contact list', target: '#upload-contacts', btn: 'Send your contact list first', short: 'Send your list' }
   };
   function firstLocked(){
     for(var g = 1; g <= 3; g++) if(!state.sent[g]) return g;
@@ -1241,8 +1287,11 @@ var CONFIG = {
     var blocked = active === lock && active < TOTAL - 1;
     next.classList.toggle('is-locked', blocked);
     if(active > -1){
-      nextLbl.textContent = blocked ? GATES[active].btn
-        : active === 0 ? 'Start' : active === TOTAL - 1 ? 'Back to start' : 'Next: ' + slides[active + 1].getAttribute('data-label');
+      // phones get the short labels so the bar fits beside the dots
+      var narrow = window.matchMedia('(max-width: 520px)').matches;
+      nextLbl.textContent = blocked ? (narrow ? GATES[active].short : GATES[active].btn)
+        : active === 0 ? 'Start' : active === TOTAL - 1 ? (narrow ? 'Restart' : 'Back to start')
+        : narrow ? 'Next' : 'Next: ' + slides[active + 1].getAttribute('data-label');
     }
   }
 
@@ -1522,39 +1571,52 @@ var CONFIG = {
      STEP 2: onboarding questions
      ============================================================ */
   var CH = function(){ return [].slice.call(arguments); };
+  var MULTI = function(){ return { multi: [].slice.call(arguments) }; };
+  /* [id, label, kind, required, placeholder]. kind: text, email, tel, url,
+     area, CH(...) for pick-one chips, MULTI(...) for pick-any chips.
+     A section with `custom` is drawn by its own builder below. */
   var SECTIONS = [
     { t: 'You', f: [
       ['owner', 'Full legal name', 'text', 1], ['email', 'Email', 'email', 1], ['phone', 'Phone number', 'tel', 1],
       ['reach', 'Best way to reach you', CH('Call', 'Text', 'Email', 'WhatsApp')],
-      ['timezone', 'Time zone', CH('Eastern', 'Central', 'Mountain', 'Pacific', 'Other')] ] },
+      ['timezone', 'Time zone', CH('Eastern', 'Central', 'Mountain', 'Pacific', 'UK', 'Other'), 1] ] },
     { t: 'Your business', f: [
-      ['business', 'Business name', 'text', 1], ['address', 'Business address', 'text'],
-      ['years', 'Years in business', 'text'], ['booking_now', 'How do customers book you today?', 'text'],
-      ['facebook', 'Facebook page link', 'url'], ['instagram', 'Instagram link or handle', 'text'],
-      ['services', 'What services do you offer?', 'area', 1], ['top_services', 'Top 2 or 3 services you most want to book', 'area'],
-      ['ticket', 'Average ticket, or a typical job price', 'text'] ] },
+      ['business', 'Business name', 'text', 1], ['address', 'Business address', 'text', 1],
+      ['where', 'Where do you do the work?', CH('At the customer’s location (mobile)', 'At my shop', 'Both'), 1],
+      ['years', 'Years in business', 'text'], ['booking_now', 'How do customers book you today?', 'text', 0, 'e.g. They text me, or book on my website'],
+      ['website', 'Website or landing page', 'url'], ['facebook', 'Facebook page link', 'url'], ['instagram', 'Instagram link or handle', 'text'] ] },
+    { t: 'Services and prices', custom: 'pricing' },
+    { t: 'Booking and policies', f: [
+      ['hours', 'Which days and hours do you work?', 'text', 1, 'e.g. Mon to Sat, 8am to 6pm'],
+      ['lead_time', 'How far ahead are you usually booked?', 'text', 0, 'e.g. About a week, coatings two weeks'],
+      ['booking_mode', 'How should the AI book new customers?', CH('Straight into my calendar', 'A free inspection first, then I quote', 'Straight in for small jobs, inspection first for coating and correction'), 1],
+      ['dropoff', 'Drop-off and collection: how does it work? Do you offer a courtesy car or a lift?', 'area'],
+      ['mobile_needs', 'Mobile jobs: do you need the customer’s water or power? Any travel fee or distance limit?', 'area'],
+      ['deposit', 'Do you take a deposit? If yes, how much?', 'text', 1, 'e.g. $100 for coatings, none for details'],
+      ['cancellation', 'Cancellation and rescheduling policy', 'area'],
+      ['payment', 'Payment methods you accept', MULTI('Cash', 'Card', 'Bank transfer', 'Zelle, Venmo or Cash App', 'Finance or pay in instalments')] ] },
     { t: 'Where to advertise', f: [
-      ['city', 'Primary city or location to target', 'text', 1], ['radius', 'Radius around it', CH('10 miles', '15 miles', '25 miles', '40 miles', '50+ miles')],
-      ['focus_areas', 'Neighborhoods or areas to focus on', 'area'], ['exclude_areas', 'Areas to exclude, places you don’t serve', 'area'],
-      ['where', 'Where do you do the work?', CH('At the customer’s location', 'At my shop', 'Both')] ] },
+      ['city', 'Primary city or location to target', 'text', 1], ['radius', 'Radius around it', CH('5 miles', '10 miles', '15 miles', '25 miles', '40+ miles'), 1],
+      ['focus_areas', 'Neighborhoods or areas to focus on', 'area'], ['exclude_areas', 'Areas to exclude, places you don’t serve', 'area'] ] },
     { t: 'Your ideal customer', f: [
       ['best_customer', 'Who is your best type of customer?', 'area'], ['problem', 'What problem are they solving when they call you?', 'area'],
       ['dont_want', 'Any customer types you don’t want?', 'area'] ] },
-    { t: 'Offer and pricing', f: [
-      ['offer', 'Do you have a promo or offer we can run?', 'area'], ['pricing', 'Pricing for your main services', 'area'],
+    { t: 'Offer and seasons', f: [
+      ['offer', 'Do you have a promo or offer we can run?', 'area', 0, 'e.g. Free interior with any coating this month'],
       ['seasons', 'Busiest and slowest times of year', 'text'] ] },
     { t: 'Accounts and tools', f: [
       ['meta_bm', 'Meta Business Manager ID', 'text'], ['meta_ad', 'Meta ad account ID', 'text'],
-      ['fb_partner', 'Shared partner access with us on Facebook? (step 4)', CH('Yes', 'Not yet', 'I need help')],
+      ['fb_partner', 'Shared partner access with us on Facebook? (step 4)', CH('Yes', 'Not yet', 'I need help'), 1],
       ['ig_connected', 'Is your Instagram connected to your Facebook page?', CH('Yes', 'No', 'Not sure')],
       ['pixel', 'Is a Meta pixel installed on your website?', CH('Yes', 'No', 'Not sure')],
-      ['website', 'Website or landing page', 'url'], ['dns', 'Who controls your domain and DNS?', 'text'],
+      ['dns', 'Who controls your domain and DNS?', 'text'],
       ['calendar', 'Calendar or booking tool', 'text'], ['crm', 'CRM or lead management system', 'text'],
       ['leads_go', 'Where do leads go right now when someone enquires?', 'text'],
       ['reports_access', 'Who else on your team should see reports?', 'text'] ] },
     { t: 'Capacity and numbers', f: [
-      ['close_rate', 'Roughly what percentage of quotes do you close?', 'text'], ['capacity', 'Jobs you can handle per week at full capacity', 'text'],
-      ['after_lead', 'What happens right after a new lead comes in?', 'area'], ['responder', 'Who answers new enquiries, and how fast?', 'text'],
+      ['ticket', 'Average ticket, or a typical job price', 'text', 1], ['close_rate', 'Roughly what percentage of quotes do you close?', 'text'],
+      ['capacity', 'Jobs you can handle per week at full capacity', 'text', 1],
+      ['after_lead', 'What happens right after a new lead comes in?', 'area'], ['responder', 'Who answers new enquiries, and how fast?', 'text', 1],
       ['ad_spend', 'Current monthly ad spend, and on which platforms', 'text'] ] },
     { t: 'How we talk about you', f: [
       ['always_say', 'What should we always say or mention?', 'area'], ['never_say', 'What should we never say?', 'area'],
@@ -1563,33 +1625,254 @@ var CONFIG = {
       ['brand', 'Link to your logo and brand colours', 'url'], ['photos', 'Link to your before and after photos', 'url'],
       ['reviews', 'Link to your best reviews', 'url'], ['approver', 'Who approves ads before they go live?', 'text'] ] },
     { t: 'What success looks like', f: [
-      ['one_number', 'The one number that would tell you this is working', 'text'],
+      ['one_number', 'The one number that would tell you this is working', 'text', 1],
       ['revenue', 'Monthly revenue now from the services we’re promoting', 'text'],
-      ['leads', 'Roughly how many leads a month you get now', 'text'],
+      ['leads', 'Roughly how many leads a month you get now', 'text', 1],
       ['tried', 'What you’ve tried before for leads, and why it didn’t work', 'area'],
       ['success_90', 'What success looks like 90 days from now', 'area'] ] }
   ];
   var FIELDS = [];
-  SECTIONS.forEach(function(sec){ sec.f.forEach(function(f){ FIELDS.push({ id: f[0], label: f[1], kind: f[2], req: !!f[3], section: sec.t }); }); });
+  SECTIONS.forEach(function(sec){ (sec.f || []).forEach(function(f){ FIELDS.push({ id: f[0], label: f[1], kind: f[2], req: !!f[3], section: sec.t }); }); });
+
+  /* ---------- services and prices: the builder ---------- */
+  var CATALOG = [
+    { key: 'coating',     name: 'Ceramic coating',        eg: 'e.g. 3-year coating', coat: true },
+    { key: 'correction',  name: 'Paint correction',       eg: 'e.g. 1-step enhancement' },
+    { key: 'full',        name: 'Full detail',            eg: 'e.g. Signature full detail' },
+    { key: 'interior',    name: 'Interior detail',        eg: 'e.g. Interior deep clean' },
+    { key: 'exterior',    name: 'Exterior detail or wash', eg: 'e.g. Wash and sealant' },
+    { key: 'maintenance', name: 'Maintenance plan',       eg: 'e.g. Bi-weekly wash' },
+    { key: 'ppf',         name: 'Paint protection film',  eg: 'e.g. Full front' },
+    { key: 'tint',        name: 'Window tint',            eg: 'e.g. Full car, ceramic film' },
+    { key: 'other',       name: 'Something else',         eg: 'e.g. Headlight restoration', custom: true }
+  ];
+  var BYKEY = {}; CATALOG.forEach(function(c){ BYKEY[c.key] = c; });
+  var SIZES = [['car', 'Car or sedan', 'Car'], ['suv', 'SUV or crossover', 'SUV'], ['truck', 'Truck, van or 3-row', 'Truck/van']];
+  var PRICE_UP = ['Heavy swirls or scratches', 'Very dirty interior', 'Pet hair', 'Stains or smells', 'Oversized or lifted vehicle', 'Long travel distance'];
+  var CURRENCIES = ['$', '£', '€', 'CA$', 'AU$'];
+
+  var P = load('ds-onb-pricing', null) || { currency: '$', services: {}, addons: [], price_up: [], price_up_note: '' };
+  function keepP(){ keep('ds-onb-pricing', P); }
+  function newPkg(){ return { name: '', type: 'fixed', bysize: false, price: '', car: '', suv: '', truck: '', duration: '', includes: '', years: '', product: '' }; }
+  function activeServices(){ return CATALOG.filter(function(c){ return P.services[c.key] && P.services[c.key].on; }); }
+  function svcName(c){ return c.custom ? ((P.services[c.key].name || '').trim() || 'Other service') : c.name; }
+  function hasPrice(p){ return p.bysize ? SIZES.some(function(s){ return (p[s[0]] || '').trim(); }) : !!(p.price || '').trim(); }
+  /* 1200 -> $1,200 and 40-80 -> $40–$80; anything wordier is left as typed */
+  function money(v){
+    v = String(v || '').trim(); if(!v) return '';
+    var one = function(n){ var x = Number(n.replace(/[,\s]/g, '')); return isFinite(x) && n.trim() ? P.currency + x.toLocaleString('en-US', { maximumFractionDigits: 2 }) : n; };
+    var range = /^(\d[\d,.]*)\s*(?:-|–|to)\s*(\d[\d,.]*)$/.exec(v);
+    if(range) return one(range[1]) + '–' + one(range[2]);
+    return /^\d[\d,.\s]*$/.test(v) ? one(v) : v;
+  }
+  function pkgPrice(p){
+    var from = p.type === 'from' ? 'from ' : '';
+    if(p.bysize){
+      var parts = SIZES.filter(function(s){ return (p[s[0]] || '').trim(); }).map(function(s){ return s[2] + ' ' + money(p[s[0]]); });
+      return parts.length ? from + parts.join(' / ') : '';
+    }
+    return p.price ? from + money(p.price) : '';
+  }
+  var QUOTE = { set: 'Set price, quote straight away', photos: 'Photos first, then a final price', inspect: 'Inspection first, then a final price' };
+
+  function serviceText(c){
+    var S = P.services[c.key];
+    var real = S.packages.filter(function(p){ return (p.name || '').trim() || hasPrice(p); });
+    var lines = real.map(function(p, i){
+      var bits = [pkgPrice(p) || 'price not given'];
+      if(c.coat && (p.years || '').trim()) bits.push(p.years.trim() + (/\d$/.test(p.years.trim()) ? ' years protection' : ''));
+      if(c.coat && (p.product || '').trim()) bits.push(p.product.trim());
+      if((p.duration || '').trim()) bits.push(p.duration.trim());
+      var label = (p.name || '').trim() || (real.length > 1 ? 'Package ' + (i + 1) : '');
+      return '• ' + (label ? label + ': ' : '') + bits.join(' · ') +
+        ((p.includes || '').trim() ? '\n   Includes: ' + p.includes.trim().replace(/\s*\n\s*/g, '; ') : '');
+    });
+    if(S.quote) lines.push('   Quoting: ' + QUOTE[S.quote]);
+    return lines.join('\n');
+  }
+  function addonText(){
+    return P.addons.filter(function(a){ return (a.name || '').trim(); }).map(function(a){
+      return '• ' + a.name.trim() + (a.price ? ': ' + money(a.price) : '') + ((a.note || '').trim() ? ' (' + a.note.trim() + ')' : '');
+    }).join('\n');
+  }
+  function priceUpText(){
+    var list = P.price_up.slice();
+    return list.join(', ') + ((P.price_up_note || '').trim() ? (list.length ? '. ' : '') + P.price_up_note.trim() : '');
+  }
+  function priceSheet(){
+    var out = activeServices().map(function(c){
+      return svcName(c).toUpperCase() + (P.services[c.key].top ? '  ★ most wants to book' : '') + '\n' + (serviceText(c) || '• No packages yet');
+    });
+    var a = addonText(); if(a) out.push('ADD-ONS\n' + a);
+    var u = priceUpText(); if(u) out.push('PRICE GOES UP FOR\n' + u);
+    return out.join('\n\n');
+  }
+  /* what's still missing, in the order a client would fix it */
+  function pricingProblems(){
+    var on = activeServices();
+    if(!on.length) return [{ msg: 'Pick the services you offer under Services and prices.', at: '[data-svc-pick]' }];
+    var probs = [];
+    on.forEach(function(c){
+      var S = P.services[c.key];
+      if(c.custom && !(S.name || '').trim()) probs.push({ msg: 'Name your other service.', at: '[data-svc-card="' + c.key + '"]' });
+      if(!S.packages.some(hasPrice)) probs.push({ msg: 'Add at least one price for ' + svcName(c) + '.', at: '[data-svc-card="' + c.key + '"]' });
+    });
+    if(!on.some(function(c){ return P.services[c.key].top; })) probs.push({ msg: 'Star the 2 or 3 services you most want to book.', at: '[data-svc-card]' });
+    return probs;
+  }
+  function pricingAnswers(){
+    var sec = 'Services and prices', on = activeServices();
+    var out = [
+      { id: 'services', section: sec, label: 'Services offered', value: on.map(svcName).join(', ') },
+      { id: 'top_services', section: sec, label: 'Top 2 or 3 services you most want to book', value: on.filter(function(c){ return P.services[c.key].top; }).map(svcName).join(', ') }
+    ];
+    on.forEach(function(c){ out.push({ id: 'svc_' + c.key, section: sec, label: svcName(c) + ': packages and prices', value: serviceText(c) }); });
+    out.push({ id: 'addons', section: sec, label: 'Add-ons and prices', value: addonText() });
+    out.push({ id: 'price_up', section: sec, label: 'What pushes the price up', value: priceUpText() });
+    out.push({ id: 'price_sheet', section: sec, label: 'Full price sheet', value: priceSheet() });
+    out.push({ id: 'pricing_json', section: sec, label: 'Pricing (structured data)', value: JSON.stringify({
+      currency: P.currency,
+      services: on.map(function(c){ var S = P.services[c.key]; return { service: svcName(c), key: c.key, most_wanted: !!S.top, quoting: S.quote || '', packages: S.packages.filter(function(p){ return (p.name || '').trim() || hasPrice(p); }) }; }),
+      addons: P.addons.filter(function(a){ return (a.name || '').trim(); }),
+      price_up: P.price_up, price_up_note: P.price_up_note
+    }) });
+    return out;
+  }
+
+  function priceInput(attrs, val, ph){
+    return '<span class="money"><span class="cur">' + esc(P.currency) + '</span><input type="text" inputmode="decimal" ' + attrs + ' value="' + esc(val || '') + '" placeholder="' + esc(ph || '0') + '"></span>';
+  }
+  function renderPricing(){
+    var box = $('[data-pricing]'); if(!box) return;
+    var on = activeServices();
+    var html = '';
+    html += '<div class="f wide" role="group" aria-label="Currency"><span class="lbl">Currency</span><div class="chips">' +
+      CURRENCIES.map(function(c){ return '<label><input type="radio" name="p-currency" value="' + esc(c) + '" data-scope="root" data-p="currency"' + (P.currency === c ? ' checked' : '') + '><span>' + esc(c) + '</span></label>'; }).join('') + '</div></div>';
+    html += '<div class="f wide" role="group" aria-label="Services you offer" data-svc-pick><span class="lbl">Which services do you offer? <span class="req">*</span></span>' +
+      '<small>Tick each one. A box opens for its packages and prices.</small><div class="chips">' +
+      CATALOG.map(function(c){ var S = P.services[c.key]; return '<label><input type="checkbox" value="' + c.key + '" data-scope="svc-on"' + (S && S.on ? ' checked' : '') + '><span>' + esc(c.name) + '</span></label>'; }).join('') + '</div></div>';
+
+    on.forEach(function(c){
+      var S = P.services[c.key], k = c.key;
+      html += '<div class="svc wide" data-svc-card="' + k + '"><div class="svc-head">' +
+        (c.custom ? '<input type="text" class="svc-name" data-scope="svc" data-svc="' + k + '" data-p="name" value="' + esc(S.name || '') + '" placeholder="Name this service, e.g. Headlight restoration" aria-label="Service name">'
+                  : '<span class="h4">' + esc(c.name) + '</span>') +
+        '<label class="star"><input type="checkbox" data-scope="svc" data-svc="' + k + '" data-p="top"' + (S.top ? ' checked' : '') + '><span>★ One I most want to book</span></label></div>';
+      S.packages.forEach(function(p, i){
+        var at = 'data-svc="' + k + '" data-i="' + i + '" data-scope="pkg"';
+        html += '<div class="pkg"><div class="pkg-top"><span class="mono">' + (S.packages.length > 1 ? 'Package ' + (i + 1) : 'Price') + '</span>' +
+          (S.packages.length > 1 ? '<button type="button" class="x" data-act="rm-pkg" data-svc="' + k + '" data-i="' + i + '" aria-label="Remove package ' + (i + 1) + '">&times;</button>' : '') + '</div>' +
+          '<div class="pkg-grid">' +
+          '<label class="f"><span class="lbl">Package name</span><input type="text" ' + at + ' data-p="name" value="' + esc(p.name) + '" placeholder="' + esc(c.eg) + '"></label>' +
+          '<div class="f"><span class="lbl">Price type</span><div class="chips">' +
+            '<label><input type="radio" name="pt-' + k + '-' + i + '" value="fixed" ' + at + ' data-p="type"' + (p.type !== 'from' ? ' checked' : '') + '><span>Fixed price</span></label>' +
+            '<label><input type="radio" name="pt-' + k + '-' + i + '" value="from" ' + at + ' data-p="type"' + (p.type === 'from' ? ' checked' : '') + '><span>Starts from</span></label></div></div>' +
+          '<label class="toggle wide"><input type="checkbox" ' + at + ' data-p="bysize"' + (p.bysize ? ' checked' : '') + '><span>The price changes with vehicle size</span></label>' +
+          (p.bysize
+            ? '<div class="sizes wide">' + SIZES.map(function(s){ return '<label class="f"><span class="lbl">' + s[1] + '</span>' + priceInput(at + ' data-p="' + s[0] + '"', p[s[0]]) + '</label>'; }).join('') + '</div>'
+            : '<label class="f"><span class="lbl">Price</span>' + priceInput(at + ' data-p="price"', p.price) + '</label>') +
+          '<label class="f"><span class="lbl">How long it takes</span><input type="text" ' + at + ' data-p="duration" value="' + esc(p.duration) + '" placeholder="e.g. 4 hours, or 2 days"></label>' +
+          (c.coat ? '<label class="f"><span class="lbl">Years of protection</span><input type="text" ' + at + ' data-p="years" value="' + esc(p.years) + '" placeholder="e.g. 5"></label>' +
+                    '<label class="f"><span class="lbl">Product or brand</span><input type="text" ' + at + ' data-p="product" value="' + esc(p.product) + '" placeholder="e.g. Gtechniq Crystal Serum"></label>' : '') +
+          '<label class="f wide"><span class="lbl">What’s included</span><textarea ' + at + ' data-p="includes" rows="2" placeholder="e.g. Wash, decontamination, 1-step polish, coating on paint and wheels">' + esc(p.includes) + '</textarea></label>' +
+          '</div></div>';
+      });
+      html += '<button type="button" class="add-btn" data-act="add-pkg" data-svc="' + k + '">+ Add another package</button>' +
+        '<div class="f"><span class="lbl">Before giving a final price, you need</span><div class="chips">' +
+        Object.keys(QUOTE).map(function(q){ return '<label><input type="radio" name="q-' + k + '" value="' + q + '" data-scope="svc" data-svc="' + k + '" data-p="quote"' + (S.quote === q ? ' checked' : '') + '><span>' + { set: 'Nothing, it’s a set price', photos: 'Photos first', inspect: 'An inspection first' }[q] + '</span></label>'; }).join('') +
+        '</div></div></div>';
+    });
+
+    html += '<div class="svc wide"><div class="svc-head"><span class="h4">Add-ons</span><small>Extras you charge for on top of a package</small></div>' +
+      P.addons.map(function(a, i){
+        var at = 'data-scope="addon" data-i="' + i + '"';
+        return '<div class="addon"><input type="text" ' + at + ' data-p="name" value="' + esc(a.name) + '" placeholder="e.g. Pet hair removal" aria-label="Add-on name">' +
+          priceInput(at + ' data-p="price"', a.price) +
+          '<input type="text" ' + at + ' data-p="note" value="' + esc(a.note) + '" placeholder="Which cars or any notes" aria-label="Add-on notes">' +
+          '<button type="button" class="x" data-act="rm-addon" data-i="' + i + '" aria-label="Remove add-on">&times;</button></div>';
+      }).join('') +
+      '<button type="button" class="add-btn" data-act="add-addon">+ Add an add-on</button></div>';
+
+    html += '<div class="f wide" role="group" aria-label="What pushes the price up"><span class="lbl">What pushes the price up?</span><div class="chips">' +
+      PRICE_UP.map(function(u){ return '<label><input type="checkbox" value="' + esc(u) + '" data-scope="priceup"' + (P.price_up.indexOf(u) > -1 ? ' checked' : '') + '><span>' + esc(u) + '</span></label>'; }).join('') +
+      '</div><textarea data-scope="root" data-p="price_up_note" rows="2" placeholder="Roughly how much for each? e.g. Pet hair +$40 to $80, heavy swirls move a 1-step to a 2-step">' + esc(P.price_up_note) + '</textarea></div>';
+
+    html += '<div class="price-preview wide"><span class="mono">How your AI will quote you</span><pre data-price-preview></pre></div>';
+    box.innerHTML = html;
+    updatePreview();
+  }
+  function updatePreview(){
+    var pre = $('[data-price-preview]');
+    if(pre) pre.textContent = priceSheet() || 'Pick your services above and your price sheet builds itself here.';
+  }
+  function onPricingEdit(t, structural){
+    var scope = t.getAttribute('data-scope'); if(!scope) return;
+    var k = t.getAttribute('data-svc'), i = +t.getAttribute('data-i'), f = t.getAttribute('data-p');
+    var val = t.type === 'checkbox' ? t.checked : t.value;
+    if(scope === 'root') P[f] = val;
+    else if(scope === 'svc-on'){
+      var key = t.value;
+      P.services[key] = P.services[key] || { on: false, name: '', top: false, quote: '', packages: [] };
+      P.services[key].on = t.checked;
+      if(t.checked && !P.services[key].packages.length) P.services[key].packages.push(newPkg());
+    }
+    else if(scope === 'priceup'){
+      P.price_up = P.price_up.filter(function(u){ return u !== t.value; });
+      if(t.checked) P.price_up.push(t.value);
+    }
+    else if(scope === 'svc') P.services[k][f] = val;
+    else if(scope === 'pkg') P.services[k].packages[i][f] = val;
+    else if(scope === 'addon') P.addons[i][f] = val;
+    keepP();
+    if(structural) renderPricing(); else updatePreview();
+    countAnswers();
+  }
+  function wirePricing(){
+    var box = $('[data-pricing]'); if(!box) return;
+    box.addEventListener('input', function(e){ if(e.target.type !== 'checkbox' && e.target.type !== 'radio') onPricingEdit(e.target, false); });
+    box.addEventListener('change', function(e){
+      var t = e.target;
+      if(t.type !== 'checkbox' && t.type !== 'radio') return;
+      // currency, services and the size toggle change the layout; the rest only the preview
+      var structural = t.getAttribute('data-scope') === 'svc-on' || t.getAttribute('data-p') === 'bysize' || t.getAttribute('data-p') === 'currency';
+      onPricingEdit(t, structural);
+    });
+    box.addEventListener('click', function(e){
+      var b = e.target.closest('[data-act]'); if(!b) return;
+      var act = b.getAttribute('data-act'), k = b.getAttribute('data-svc'), i = +b.getAttribute('data-i');
+      if(act === 'add-pkg') P.services[k].packages.push(newPkg());
+      if(act === 'rm-pkg') P.services[k].packages.splice(i, 1);
+      if(act === 'add-addon') P.addons.push({ name: '', price: '', note: '' });
+      if(act === 'rm-addon') P.addons.splice(i, 1);
+      keepP(); renderPricing(); countAnswers();
+      if(act === 'add-pkg'){ var card = $('[data-svc-card="' + k + '"]'); var last = card && $$('.pkg', card).pop(); if(last) $('input', last).focus(); }
+      if(act === 'add-addon'){ var rows = $$('.addon', box); if(rows.length) $('input', rows[rows.length - 1]).focus(); }
+    });
+  }
 
   var form = $('[data-onb]'), host = $('[data-onb-sections]');
   if(form && host){
     var CHEV = '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
     host.innerHTML = SECTIONS.map(function(sec, si){
-      var body = sec.f.map(function(f){
-        var id = f[0], label = esc(f[1]), kind = f[2], req = f[3] ? ' <span class="req">*</span>' : '';
-        if(Array.isArray(kind)){
-          return '<div class="f wide" role="group" aria-label="' + label + '"><span class="lbl">' + label + req + '</span><div class="chips">' +
-            kind.map(function(c){ return '<label><input type="radio" name="' + id + '" value="' + esc(c) + '" data-ans="' + id + '"><span>' + esc(c) + '</span></label>'; }).join('') +
+      var body = sec.custom
+        ? '<p class="sec-note wide">These are the prices your AI quotes and your ads lean on, so the more exact, the fewer wrong quotes. Add only the packages you actually sell.</p><div class="pricing wide" data-pricing></div>'
+        : sec.f.map(function(f){
+        var id = f[0], label = esc(f[1]), kind = f[2], req = f[3] ? ' <span class="req">*</span>' : '', ph = f[4] ? ' placeholder="' + esc(f[4]) + '"' : '';
+        if(Array.isArray(kind) || (kind && kind.multi)){
+          var multi = !Array.isArray(kind), opts = multi ? kind.multi : kind;
+          return '<div class="f wide" role="group" aria-label="' + label + '" id="q-' + id + '" tabindex="-1"><span class="lbl">' + label + req + (multi ? ' <small>(pick any)</small>' : '') + '</span><div class="chips">' +
+            opts.map(function(c){ return '<label><input type="' + (multi ? 'checkbox' : 'radio') + '" name="' + id + '" value="' + esc(c) + '" ' + (multi ? 'data-multi="' : 'data-ans="') + id + '"><span>' + esc(c) + '</span></label>'; }).join('') +
             '</div></div>';
         }
         var ctl = kind === 'area'
-          ? '<textarea id="q-' + id + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + '></textarea>'
-          : '<input id="q-' + id + '" type="' + kind + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + (kind === 'email' ? ' autocomplete="email"' : kind === 'tel' ? ' autocomplete="tel"' : '') + '>';
+          ? '<textarea id="q-' + id + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + ph + '></textarea>'
+          : '<input id="q-' + id + '" type="' + kind + '" data-ans="' + id + '"' + (f[3] ? ' required' : '') + ph + (kind === 'email' ? ' autocomplete="email"' : kind === 'tel' ? ' autocomplete="tel"' : '') + '>';
         return '<div class="f' + (kind === 'area' ? ' wide' : '') + '"><label class="lbl" for="q-' + id + '">' + label + req + '</label>' + ctl + '</div>';
       }).join('');
       return '<details class="onb-sec"' + (si === 0 ? ' open' : '') + ' data-sec="' + si + '"><summary><span class="n">' + (si + 1) + '</span><span class="h4">' + esc(sec.t) + '</span><span class="cnt" data-sec-cnt></span>' + CHEV + '</summary><div class="onb-body">' + body + '</div></details>';
     }).join('');
+    renderPricing();
+    wirePricing();
   }
 
   /* restore saved answers into every box that shares them */
@@ -1604,18 +1887,35 @@ var CONFIG = {
       refreshSends();
     });
   });
+  /* pick-any chips are stored as a comma list */
+  $$('[data-multi]').forEach(function(inp){
+    var id = inp.getAttribute('data-multi');
+    inp.checked = (A[id] || '').split(', ').indexOf(inp.value) > -1;
+    inp.addEventListener('change', function(){
+      setAnswer(id, $$('[data-multi="' + id + '"]').filter(function(i){ return i.checked; }).map(function(i){ return i.value; }).join(', '), inp);
+      countAnswers();
+    });
+  });
   setAnswer('owner', A.owner || ''); setAnswer('business', A.business || '');
 
   function countAnswers(){
-    var total = 0;
+    var total = 0, pricingOk = !pricingProblems().length;
     $$('.onb-sec').forEach(function(sec, si){
+      var cnt = $('[data-sec-cnt]', sec);
+      if(SECTIONS[si].custom){
+        var n = activeServices().filter(function(c){ return P.services[c.key].packages.some(hasPrice); }).length;
+        cnt.textContent = n ? n + (n === 1 ? ' service priced' : ' services priced') : 'Not started';
+        sec.classList.toggle('is-complete', pricingOk);
+        if(pricingOk) total++;
+        return;
+      }
       var fs = SECTIONS[si].f, done = fs.filter(function(f){ return (A[f[0]] || '').trim(); }).length;
       total += done;
-      $('[data-sec-cnt]', sec).textContent = done + ' / ' + fs.length;
+      cnt.textContent = done + ' / ' + fs.length;
       sec.classList.toggle('is-complete', done === fs.length);
     });
-    var c = $('[data-onb-count]'); if(c) c.textContent = total + ' of ' + FIELDS.length + ' answered';
-    var b = $('[data-onb-bar]'); if(b) b.style.width = (total / FIELDS.length * 100) + '%';
+    var c = $('[data-onb-count]'); if(c) c.textContent = total + ' of ' + (FIELDS.length + 1) + ' answered';
+    var b = $('[data-onb-bar]'); if(b) b.style.width = (total / (FIELDS.length + 1) * 100) + '%';
   }
   countAnswers();
 
@@ -1623,22 +1923,38 @@ var CONFIG = {
     var send = $('[data-onb-send]'), st = $('[data-onb-status]');
     form.addEventListener('submit', async function(e){
       e.preventDefault();
+      // fields first, in form order, so the client is sent to the earliest gap
       var missing = FIELDS.filter(function(f){ return f.req && !(A[f.id] || '').trim(); });
       if(!missing.length && !validEmail((A.email || '').trim())) missing = [FIELDS.filter(function(f){ return f.id === 'email'; })[0]];
+      var pricingSec = SECTIONS.map(function(s){ return !!s.custom; }).indexOf(true);
+      var firstMissingSec = missing.length ? SECTIONS.map(function(s){ return s.t; }).indexOf(missing[0].section) : 99;
+      var probs = pricingProblems();
+      if(probs.length && pricingSec <= firstMissingSec){
+        var psec = $$('.onb-sec')[pricingSec]; psec.open = true;
+        var spot = $(probs[0].at, psec); if(spot){ spot.scrollIntoView({ block: 'center', behavior: 'smooth' }); spot.classList.add('is-invalid-box'); setTimeout(function(){ spot.classList.remove('is-invalid-box'); }, 1600); }
+        status(st, probs[0].msg + (probs.length + missing.length > 1 ? ' Then ' + (probs.length + missing.length - 1) + ' more to go.' : ''), 'err');
+        return;
+      }
       if(missing.length){
         var inp = $('#q-' + missing[0].id);
         var sec = inp && inp.closest('details'); if(sec) sec.open = true;
         if(inp){ inp.classList.add('is-invalid'); inp.focus(); }
-        status(st, missing.length === 1 ? 'One answer is still needed: ' + missing[0].label + '.' : missing.length + ' answers marked * are still needed.', 'err');
+        status(st, missing.length + probs.length === 1 ? 'One answer is still needed: ' + missing[0].label + '.' : (missing.length + probs.length) + ' answers marked * are still needed. First: ' + missing[0].label + '.', 'err');
         return;
       }
       send.disabled = true; send.textContent = 'Sending…'; status(st, '');
       try{
         var w = who();
+        // answers in form order, with the price builder's answers where its section sits
+        var answers = [];
+        SECTIONS.forEach(function(sec){
+          if(sec.custom){ answers = answers.concat(pricingAnswers()); return; }
+          sec.f.forEach(function(f){ answers.push({ id: f[0], section: sec.t, label: f[1], value: (A[f[0]] || '').trim() }); });
+        });
         await api('/api/submit', {
           type: 'onboarding', business: w.business, owner: w.owner, email: w.email, clientId: clientId,
           company_website: form.company_website.value,
-          answers: FIELDS.map(function(f){ return { id: f.id, section: f.section, label: f.label, value: (A[f.id] || '').trim() }; })
+          answers: answers
         });
         status(st, 'Got it. Your answers are with us. Change anything and send again whenever you like.', 'ok');
         send.textContent = 'Send updates';
