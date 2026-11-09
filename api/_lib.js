@@ -110,7 +110,7 @@ function encodePath(path) {
 
 /* ---------- Slack ---------- */
 
-async function slack(text, fields, link) {
+async function slack(text, fields, link, more) {
   const url = env('SLACK_WEBHOOK_URL');
   if (!url) return { skipped: true };
   const blocks = [{ type: 'section', text: { type: 'mrkdwn', text: text } }];
@@ -120,6 +120,11 @@ async function slack(text, fields, link) {
       type: 'section',
       fields: pairs.slice(i, i + 10).map(f => ({ type: 'mrkdwn', text: '*' + f[0] + '*\n' + clip(String(f[1]), 280) }))
     });
+  }
+  if (more) {
+    // Slack caps a section at 3000 characters; keep a closing fence if it was cut
+    let t = more.length > 2900 ? more.slice(0, 2880) + '\n…' + (more.indexOf('```') > -1 ? '```' : '') : more;
+    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: t } });
   }
   if (link) {
     blocks.push({ type: 'actions', elements: [{ type: 'button', text: { type: 'plain_text', text: link[0] }, url: link[1] }] });
